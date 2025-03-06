@@ -34,6 +34,7 @@ CSRF_COOKIE_SECURE = True
 # Application definition
 PROJECT_APPS = [
     'fashionShop.accounts',
+    'fashionShop.common',
 ]
 
 INSTALLED_APPS = [
@@ -59,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'django.middleware.locale.LocaleMiddleware',
 
     'allauth.account.middleware.AccountMiddleware',
 ]
@@ -171,18 +174,26 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 
 LOGIN_REDIRECT_URL = reverse_lazy('test')
+LOGOUT_REDIRECT_URL = reverse_lazy('test')
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EET'
 
 USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('bg', 'Bulgarian'),
+]
+LOCALE_PATHS = [
+    BASE_DIR / 'locale'
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
