@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+<p>Hello, {{ request.user.profile }}</p>
+
+<h1>{{ greeting }}</h1>
+
+<p>Number: {{ number }}</p>
+
+<p>Date: {{ current_date|date:"SHORT_DATE_FORMAT" }}</p>
+
+<form action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        <option value="en">English</option>
+        <option value="bg">Bulgarian</option>
+    </select>
+    <input type="submit" value="Change Language">
+</form>
+
+</body>
+</html>
