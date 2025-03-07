@@ -12,7 +12,7 @@
 
 <p>Number: {{ number }}</p>
 
-<p>Date: {{ current_date }}</p>
+<p>Date: {{ current_date|date:"SHORT_DATE_FORMAT" }}</p>
 
 <form action="{% url 'set_language' %}" method="post">
     {% csrf_token %}
