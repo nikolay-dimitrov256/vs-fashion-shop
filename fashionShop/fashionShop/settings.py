@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    "crispy_forms",
+    "crispy_bootstrap4",
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
@@ -84,6 +87,9 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 WSGI_APPLICATION = 'fashionShop.wsgi.application'
 
@@ -154,7 +160,6 @@ AUTHENTICATION_BACKENDS = [
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
-            'profile',
             'email',
         ],
         'AUTH_PARAMS': {

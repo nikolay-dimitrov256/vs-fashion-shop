@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/custom_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container first-container">
+    <div class="w-md-50 mx-auto">
+        <form method="post">
+
+            {% csrf_token %}
+            {% crispy form %}
+
+            <button type="submit" class="newsletter_submit_btn">Register</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
