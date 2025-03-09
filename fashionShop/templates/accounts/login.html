@@ -1,0 +1,38 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/custom_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container first-container">
+
+    <form method="post" action="">
+
+        {% csrf_token %}
+<!--        {% crispy form %}-->
+        {{ form.as_div }}
+        <button type="submit" class="btn btn-success btn-lg mt-3">Sign in</button>
+    </form>
+
+    <p class="lead mt-4">Don't have an account?</p>
+    <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+    <p class="lead mt-4">or sign in with Google:</p>
+    
+    <form action="{% provider_login_url 'google' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" style="background: white; border: none; cursor: pointer; margin-left: -4px;">
+            <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" 
+                 alt="Sign in with Google" style="width: 200px;">
+        </button>
+    </form>
+
+</div>
+
+{% endblock %}

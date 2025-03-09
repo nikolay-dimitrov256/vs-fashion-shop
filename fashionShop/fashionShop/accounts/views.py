@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -28,6 +29,16 @@ class AppUserRegisterView(CreateView):
         login(self.request, self.object)
 
         return response
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home')
+
+        return super().dispatch(request, *args, **kwargs)
+
+
+class AppUserLoginView(LoginView):
+    template_name = 'accounts/login.html'
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:

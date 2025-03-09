@@ -178,8 +178,8 @@ ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 
-LOGIN_REDIRECT_URL = reverse_lazy('test')
-LOGOUT_REDIRECT_URL = reverse_lazy('test')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
+LOGOUT_REDIRECT_URL = reverse_lazy('home')
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

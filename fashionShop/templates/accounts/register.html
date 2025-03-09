@@ -11,13 +11,13 @@
 {% block content %}
 
 <div class="container first-container">
-    <div class="w-md-50 mx-auto">
-        <form method="post">
+    <div>
+        <form class="px-lg-5" method="post">
 
             {% csrf_token %}
             {% crispy form %}
 
-            <button type="submit" class="newsletter_submit_btn">Register</button>
+            <button type="submit" class="btn btn-success btn-lg">Register</button>
         </form>
     </div>
 </div>
