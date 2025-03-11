@@ -35,6 +35,8 @@
 										<span class="fi fi-bg"></span>
 									{% elif request.LANGUAGE_CODE == 'en' %}
 										<span class="fi fi-gb"></span>
+									{% else %}
+										<span class="fi fi-bg"></span>
 									{% endif %}
 									<i class="fa fa-angle-down"></i>
 								</a>
@@ -128,24 +130,37 @@
 			</li>
 			<li class="menu_item has-children">
 				<a href="#">
-					English
+				{% if request.LANGUAGE_CODE == 'bg' %}
+					<span class="fi fi-bg"></span>
+				{% elif request.LANGUAGE_CODE == 'en' %}
+					<span class="fi fi-gb"></span>
+				{% else %}
+					<span class="fi fi-bg"></span>
+				{% endif %}
 					<i class="fa fa-angle-down"></i>
 				</a>
 				<ul class="menu_selection">
-					<li><a href="#">French</a></li>
-					<li><a href="#">Italian</a></li>
-					<li><a href="#">German</a></li>
-					<li><a href="#">Spanish</a></li>
+					<li><a href="#" onclick="changeLanguage('bg')"><span class="fi fi-bg"></span></a></li>
+					<li><a href="#" onclick="changeLanguage('en')"><span class="fi fi-gb"></span></a></li>
 				</ul>
 			</li>
 			<li class="menu_item has-children">
 				<a href="#">
-					My Account
+				{% if request.user.is_authenticated %}
+					{{ request.user.email }}
+				{% else %}
+					{% trans 'Anonymous' %}
+				{% endif %}
 					<i class="fa fa-angle-down"></i>
 				</a>
 				<ul class="menu_selection">
-					<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-					<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+				{% if request.user.is_authenticated %}
+					<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>{% trans 'My Account' %}</a></li>
+					<li><a href="#" onclick="document.getElementById('logout-form').submit()"><i class="fa fa-sign-out" aria-hidden="true"></i>{% trans 'Log out' %}</a></li>
+				{% else %}
+					<li><a href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>{% trans 'Sign In' %}</a></li>
+					<li><a href="{% url 'register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>{% trans 'Register' %}</a></li>
+				{% endif %}
 				</ul>
 			</li>
 			<li class="menu_item"><a href="#">home</a></li>
