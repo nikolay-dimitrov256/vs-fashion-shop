@@ -1,3 +1,4 @@
+{% load i18n %}
 
 <!-- Header -->
 <header class="header trans_300">
@@ -30,33 +31,35 @@
 							</li>
 							<li class="language">
 								<a href="#">
-									English
+									{% if request.LANGUAGE_CODE == 'bg' %}
+										<span class="fi fi-bg"></span>
+									{% elif request.LANGUAGE_CODE == 'en' %}
+										<span class="fi fi-gb"></span>
+									{% endif %}
 									<i class="fa fa-angle-down"></i>
 								</a>
 								<ul class="language_selection">
-									<li><a href="#">French</a></li>
-									<li><a href="#">Italian</a></li>
-									<li><a href="#">German</a></li>
-									<li><a href="#">Spanish</a></li>
+									<li><a href="#" onclick="changeLanguage('bg')"><span class="fi fi-bg"></span></a></li>
+									<li><a href="#" onclick="changeLanguage('en')"><span class="fi fi-gb"></span></a></li>
 								</ul>
 							</li>
 							<li class="account">
 								
 								<a href="#">
 									{% if request.user.is_authenticated %}
-									{{ request.user.email }}
+										{{ request.user.email }}
 									{% else %}
-									Anonymous
+										{% trans 'Anonymous' %}
 									{% endif %}
 									<i class="fa fa-angle-down"></i>
 								</a>
 								<ul class="account_selection">
 									{% if request.user.is_authenticated %}
-									<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>My Account</a></li>
-									<li><a href="#" onclick="document.getElementById('logout-form').submit()"><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</a></li>
+									<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>{% trans 'My Account' %}</a></li>
+									<li><a href="#" onclick="document.getElementById('logout-form').submit()"><i class="fa fa-sign-out" aria-hidden="true"></i>{% trans 'Log out' %}</a></li>
 									{% else %}
-									<li><a href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-									<li><a href="{% url 'register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+									<li><a href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>{% trans 'Sign In' %}</a></li>
+									<li><a href="{% url 'register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>{% trans 'Register' %}</a></li>
 									{% endif %}
 								</ul>
 							</li>
@@ -158,3 +161,16 @@
 <form action="{% url 'logout' %}" method="post" id="logout-form">
 	{% csrf_token %}
 </form>
+
+<form action="{% url 'set_language' %}" method="post" id="language-form">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+	<input id="language-input" type="hidden" name="language" value="">
+</form>
+
+<script>
+	function changeLanguage(language) {
+		document.getElementById('language-input').value = language;
+		document.getElementById('language-form').submit();
+	}
+</script>

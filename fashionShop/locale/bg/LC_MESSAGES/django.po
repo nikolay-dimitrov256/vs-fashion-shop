@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-07 08:49+0200\n"
+"POT-Creation-Date: 2025-03-11 13:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: fashionShop/accounts/models.py:11
 msgid "email address"
 msgstr "имейл адрес"
@@ -27,7 +28,8 @@ msgstr "сатус поддръжка"
 
 #: fashionShop/accounts/models.py:15
 msgid "Designates whether the user can log into this admin site."
-msgstr "Определя дали потребителят може да влезе в този администраторски панел."
+msgstr ""
+"Определя дали потребителят може да влезе в този администраторски панел."
 
 #: fashionShop/accounts/models.py:18
 msgid "active"
@@ -37,7 +39,9 @@ msgstr "активен"
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
-msgstr "Определя дали потребителят следва да бъде третиран, като активен. Махнете отметката, вместо да триете акаунта."
+msgstr ""
+"Определя дали потребителят следва да бъде третиран, като активен. Махнете "
+"отметката, вместо да триете акаунта."
 
 #: fashionShop/accounts/models.py:25
 msgid "date joined"
@@ -59,6 +63,26 @@ msgstr "име"
 msgid "last name"
 msgstr "фамилия"
 
-#: fashionShop/common/views.py:8
+#: fashionShop/common/views.py:9
 msgid "Welcome to my online store"
 msgstr "Добре дошли в моя онлайн магазин!"
+
+#: templates/common/header.html:50
+msgid "Anonymous"
+msgstr "Анонимен"
+
+#: templates/common/header.html:56
+msgid "My Account"
+msgstr "Моят Акаунт"
+
+#: templates/common/header.html:57
+msgid "Log out"
+msgstr "Изход"
+
+#: templates/common/header.html:59
+msgid "Sign In"
+msgstr "Вход"
+
+#: templates/common/header.html:60
+msgid "Register"
+msgstr "Регистрация"
