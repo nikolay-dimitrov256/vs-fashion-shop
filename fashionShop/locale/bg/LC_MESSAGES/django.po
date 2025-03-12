@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-11 13:37+0200\n"
+"POT-Creation-Date: 2025-03-12 16:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,8 +28,7 @@ msgstr "сатус поддръжка"
 
 #: fashionShop/accounts/models.py:15
 msgid "Designates whether the user can log into this admin site."
-msgstr ""
-"Определя дали потребителят може да влезе в този администраторски панел."
+msgstr "Определя дали потребителят може да влезе в този администраторски панел."
 
 #: fashionShop/accounts/models.py:18
 msgid "active"
@@ -67,22 +66,46 @@ msgstr "фамилия"
 msgid "Welcome to my online store"
 msgstr "Добре дошли в моя онлайн магазин!"
 
-#: templates/common/header.html:50
+#: fashionShop/items/models.py:86
+msgid "item"
+msgstr "продукт"
+
+#: fashionShop/items/models.py:87
+msgid "items"
+msgstr "продукти"
+
+#: fashionShop/items/models.py:135
+msgid "category"
+msgstr "категория"
+
+#: fashionShop/items/models.py:136
+msgid "categories"
+msgstr "категории"
+
+#: fashionShop/items/models.py:155
+msgid "subcategory"
+msgstr "субкатегория"
+
+#: fashionShop/items/models.py:156
+msgid "subcategories"
+msgstr "субкатегории"
+
+#: templates/common/header.html:54 templates/common/header.html:152
 msgid "Anonymous"
 msgstr "Анонимен"
 
-#: templates/common/header.html:56
+#: templates/common/header.html:60 templates/common/header.html:158
 msgid "My Account"
 msgstr "Моят Акаунт"
 
-#: templates/common/header.html:57
+#: templates/common/header.html:61 templates/common/header.html:159
 msgid "Log out"
 msgstr "Изход"
 
-#: templates/common/header.html:59
+#: templates/common/header.html:63 templates/common/header.html:161
 msgid "Sign In"
 msgstr "Вход"
 
-#: templates/common/header.html:60
+#: templates/common/header.html:64 templates/common/header.html:162
 msgid "Register"
 msgstr "Регистрация"

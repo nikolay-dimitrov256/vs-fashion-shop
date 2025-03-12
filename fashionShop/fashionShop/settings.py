@@ -35,6 +35,7 @@ CSRF_COOKIE_SECURE = True
 PROJECT_APPS = [
     'fashionShop.accounts',
     'fashionShop.common',
+    'fashionShop.items',
 ]
 
 INSTALLED_APPS = [
@@ -53,6 +54,8 @@ INSTALLED_APPS = [
 
     "crispy_forms",
     "crispy_bootstrap4",
+
+    'modeltranslation',
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
