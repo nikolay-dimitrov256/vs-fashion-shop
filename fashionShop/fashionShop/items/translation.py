@@ -1,6 +1,6 @@
 from modeltranslation.translator import register, TranslationOptions
 
-from fashionShop.items.models import Item, Category, SubCategory
+from fashionShop.items.models import Item, Category, SubCategory, ColorGroup
 
 
 @register(Item)
@@ -15,4 +15,9 @@ class CategoryTranslationOptions(TranslationOptions):
 
 @register(SubCategory)
 class SubCategoryTranslationOptions(TranslationOptions):
+    fields = ['name']
+
+
+@register(ColorGroup)
+class ColorGroupTranslationOptions(TranslationOptions):
     fields = ['name']

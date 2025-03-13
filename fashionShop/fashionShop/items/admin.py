@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from fashionShop.items.models import Item, Category, SubCategory
+from fashionShop.items.models import Item, Category, SubCategory, Style
 
 
 @admin.register(Item)
@@ -15,4 +15,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(SubCategory)
 class SubCategoryAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Style)
+class StyleAdmin(admin.ModelAdmin):
     pass

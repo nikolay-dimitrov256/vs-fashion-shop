@@ -72,6 +72,14 @@ class Item(models.Model):
         blank=True,
     )
 
+    color_group = models.ForeignKey(
+        to='ColorGroup',
+        on_delete=models.SET_NULL,
+        related_name='items',
+        null=True,
+        blank=True,
+    )
+
     sizes = models.ManyToManyField(
         to='Size',
         through='Stock',
@@ -80,7 +88,11 @@ class Item(models.Model):
 
     linked_items = models.ManyToManyField(
         to='Item',
-        null=True,
+        blank=True,
+    )
+
+    style = models.ManyToManyField(
+        to='Style',
         blank=True,
     )
 
@@ -169,6 +181,30 @@ class Pattern(models.Model):
     name = models.CharField(
         max_length=100,
         unique=True,
+    )
+
+    class Meta:
+        verbose_name = _('pattern')
+        verbose_name_plural = _('patterns')
+
+    def __str__(self):
+        return self.name
+
+
+class ColorGroup(models.Model):
+    name = models.CharField(
+        max_length=20,
+        unique=True,
+    )
+
+    color_code = models.CharField(
+        max_length=10,
+    )
+
+
+class Style(models.Model):
+    name = models.CharField(
+        max_length=20,
     )
 
     def __str__(self):
