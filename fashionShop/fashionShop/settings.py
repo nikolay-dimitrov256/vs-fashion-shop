@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
 
     'modeltranslation',
+
+    'admin_extra_buttons',
 ] + PROJECT_APPS
 
 MIDDLEWARE = [

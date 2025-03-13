@@ -29,6 +29,7 @@ class Item(models.Model):
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
+        default=0,
     )
 
     discount_price = models.DecimalField(
@@ -105,7 +106,7 @@ class Item(models.Model):
         verbose_name_plural = _('items')
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f'{self.item_number}-{transliterate(self.name)}')
+        self.slug = slugify(f'{self.item_number}-{transliterate(self.name_bg)}')
 
         if self.sub_category:
             self.category = self.sub_category.category

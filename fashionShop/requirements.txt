@@ -5,6 +5,7 @@ charset-normalizer==3.4.1
 crispy-bootstrap4==2024.10
 cryptography==44.0.2
 Django==5.1.6
+django-admin-extra-buttons==1.5.8
 django-allauth==65.4.1
 django-crispy-forms==2.3
 django-modeltranslation==0.19.12
