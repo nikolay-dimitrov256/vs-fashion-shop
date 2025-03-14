@@ -1,4 +1,9 @@
-from fashionShop.items.models import Item, Category, ColorGroup
+from _decimal import Decimal
+
+import requests
+
+from fashionShop.items.models import Item, Category, ColorGroup, Size, Stock
+from fashionShop.settings import BISOFT_API_URL
 
 
 def parse_and_save_items(data: list):
@@ -8,10 +13,10 @@ def parse_and_save_items(data: list):
         item.name_en = bisoft_item['name_en']
         item.description_bg = bisoft_item['description_bg']
         item.description_en = bisoft_item['description_en']
-        item.price = bisoft_item['item_number__stores__price_2']
+        #item.price = Decimal(bisoft_item['item_number__stores__price_2'])
 
-        if 0 < bisoft_item['item_number__stores__price_3'] < item.price:
-            item.discount_price = bisoft_item['item_number__stores__price_3']
+        # if 0 < bisoft_item['item_number__stores__price_3'] < bisoft_item['item_number__stores__price_2']:
+        #     item.discount_price = Decimal(bisoft_item['item_number__stores__price_3'])
 
         item.content_bg = bisoft_item['content_bg']
         item.content_eb = bisoft_item['content_en']
@@ -32,5 +37,32 @@ def parse_and_save_items(data: list):
             if bisoft_linked_item:
                 linked_item, created = Item.objects.get_or_create(item_number=bisoft_linked_item)
                 item.linked_items.add(linked_item)
+
+        item.save()
+
+
+def update_prices_and_stock():
+    response = requests.get(f'{BISOFT_API_URL}items/prices-stock/')
+    data = response.json()
+
+    items = Item.objects.filter(deleted=False)
+
+    for bisoft_item in data:
+        item = items.filter(item_number=bisoft_item['item_number']).first()
+
+        if not item:
+            continue
+
+        item.price = bisoft_item['item_number__stores__price_2']
+        if 0 < bisoft_item['item_number__stores__price_3'] < bisoft_item['item_number__stores__price_2']:
+            item.discount_price = bisoft_item['item_number__stores__price_3']
+
+        for bisoft_size, quantity in bisoft_item['stock'].items():
+            size, created = Size.objects.get_or_create(size=bisoft_size)
+
+            stock, created = Stock.objects.get_or_create(item=item, size=size)
+
+            stock.quantity = quantity
+            stock.save()
 
         item.save()
