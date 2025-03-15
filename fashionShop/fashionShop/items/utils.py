@@ -29,6 +29,14 @@ def parse_and_save_items(data: list):
             color_group, created = ColorGroup.objects.get_or_create(name_en=bisoft_item['color_group_en'])
             item.color_group = color_group
 
+        item.save()
+
+    for bisoft_item in data:
+        item = Item.objects.filter(item_number=bisoft_item['item_number']).first()
+
+        if not Item:
+            continue
+
         bisoft_linked_items = [
             bisoft_item['add_1'], bisoft_item['add_2'], bisoft_item['add_3'],
             bisoft_item['add_4'], bisoft_item['add_5']
@@ -36,10 +44,9 @@ def parse_and_save_items(data: list):
 
         for bisoft_linked_item in bisoft_linked_items:
             if bisoft_linked_item:
-                linked_item, created = Item.objects.get_or_create(item_number=bisoft_linked_item)
-                item.linked_items.add(linked_item)
-
-        item.save()
+                linked_item = Item.objects.filter(item_number=bisoft_linked_item).first()
+                if linked_item:
+                    item.linked_items.add(linked_item)
 
 
 def update_prices_and_stock():

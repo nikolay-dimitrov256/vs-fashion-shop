@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-12 16:45+0200\n"
+"POT-Creation-Date: 2025-03-15 10:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,8 @@ msgstr "сатус поддръжка"
 
 #: fashionShop/accounts/models.py:15
 msgid "Designates whether the user can log into this admin site."
-msgstr "Определя дали потребителят може да влезе в този администраторски панел."
+msgstr ""
+"Определя дали потребителят може да влезе в този администраторски панел."
 
 #: fashionShop/accounts/models.py:18
 msgid "active"
@@ -66,29 +67,65 @@ msgstr "фамилия"
 msgid "Welcome to my online store"
 msgstr "Добре дошли в моя онлайн магазин!"
 
-#: fashionShop/items/models.py:86
+#: fashionShop/items/models.py:105
 msgid "item"
 msgstr "продукт"
 
-#: fashionShop/items/models.py:87
+#: fashionShop/items/models.py:106
 msgid "items"
 msgstr "продукти"
 
-#: fashionShop/items/models.py:135
+#: fashionShop/items/models.py:130
+msgid "size"
+msgstr "размер"
+
+#: fashionShop/items/models.py:131
+msgid "sizes"
+msgstr "размери"
+
+#: fashionShop/items/models.py:151 fashionShop/items/models.py:152
+msgid "stock"
+msgstr "наличност"
+
+#: fashionShop/items/models.py:165
 msgid "category"
 msgstr "категория"
 
-#: fashionShop/items/models.py:136
+#: fashionShop/items/models.py:166
 msgid "categories"
 msgstr "категории"
 
-#: fashionShop/items/models.py:155
+#: fashionShop/items/models.py:185
 msgid "subcategory"
-msgstr "субкатегория"
+msgstr "подкатегория"
 
-#: fashionShop/items/models.py:156
+#: fashionShop/items/models.py:186
 msgid "subcategories"
-msgstr "субкатегории"
+msgstr "подкатегории"
+
+#: fashionShop/items/models.py:199
+msgid "pattern"
+msgstr "кройка"
+
+#: fashionShop/items/models.py:200
+msgid "patterns"
+msgstr "кройки"
+
+#: fashionShop/items/models.py:217
+msgid "color group"
+msgstr "цветова група"
+
+#: fashionShop/items/models.py:218
+msgid "color groups"
+msgstr "цветови групи"
+
+#: fashionShop/items/models.py:230
+msgid "style"
+msgstr "стил"
+
+#: fashionShop/items/models.py:231
+msgid "styles"
+msgstr "стилове"
 
 #: templates/common/header.html:54 templates/common/header.html:152
 msgid "Anonymous"

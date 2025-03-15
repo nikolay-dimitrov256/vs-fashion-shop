@@ -5,7 +5,7 @@ from admin_extra_buttons.api import ExtraButtonsMixin, button, confirm_action, l
 from admin_extra_buttons.utils import HttpResponseRedirectToReferrer
 import requests
 
-from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock
+from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock, ColorGroup
 from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock
 from fashionShop.settings import BISOFT_API_URL, BISOFT_API_KEY
 
@@ -21,10 +21,11 @@ class StockInline(admin.StackedInline):
 @admin.register(Item)
 class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
     list_display = ['item_number', 'name', 'price', 'discount_price']
-    list_filter = ['category']
+    list_filter = ['category', 'color_group']
     ordering = ['item_number']
     inlines = [StockInline]
     readonly_fields = ['slug']
+    search_fields = ['item_number', 'name']
 
     @button(visible=lambda self: self.context["request"].user.is_superuser,
             change_form=True,
@@ -74,11 +75,6 @@ class SizeAdmin(admin.ModelAdmin):
     pass
 
 
-# @admin.register(Stock)
-# class StockAdmin(admin.ModelAdmin):
-#     list_display = ['item__item_number', 'size__size', 'quantity']
-#     ordering = ['item__item_number', 'size__size']
-#     search_fields = ['item__item_number']
-#     readonly_fields = ['size']
-
-
+@admin.register(ColorGroup)
+class ColorGroupAdmin(admin.ModelAdmin):
+    pass

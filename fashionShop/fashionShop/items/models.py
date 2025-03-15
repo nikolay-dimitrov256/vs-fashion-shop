@@ -126,6 +126,10 @@ class Size(models.Model):
     def __str__(self):
         return self.size
 
+    class Meta:
+        verbose_name = _('size')
+        verbose_name_plural = _('sizes')
+
 
 class Stock(models.Model):
     item = models.ForeignKey(
@@ -144,6 +148,8 @@ class Stock(models.Model):
 
     class Meta:
         unique_together = [['item', 'size']]
+        verbose_name = _('stock')
+        verbose_name_plural = _('stock')
 
     def __str__(self):
         return str(self.item)
@@ -207,6 +213,10 @@ class ColorGroup(models.Model):
         max_length=10,
     )
 
+    class Meta:
+        verbose_name = _('color group')
+        verbose_name_plural = _('color groups')
+
     def __str__(self):
         return self.name
 
@@ -215,6 +225,10 @@ class Style(models.Model):
     name = models.CharField(
         max_length=20,
     )
+
+    class Meta:
+        verbose_name = _('style')
+        verbose_name_plural = _('styles')
 
     def __str__(self):
         return self.name
