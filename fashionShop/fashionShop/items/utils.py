@@ -1,6 +1,7 @@
 from _decimal import Decimal
 
 import requests
+import json
 
 from fashionShop.items.models import Item, Category, ColorGroup, Size, Stock
 from fashionShop.settings import BISOFT_API_URL
@@ -42,10 +43,14 @@ def parse_and_save_items(data: list):
 
 
 def update_prices_and_stock():
-    response = requests.get(f'{BISOFT_API_URL}items/prices-stock/')
-    data = response.json()
-
     items = Item.objects.filter(deleted=False)
+
+    params = {
+        'items': json.dumps(list(items.values_list('item_number', flat=True)))
+    }
+
+    response = requests.get(f'{BISOFT_API_URL}items/prices-stock/', params=params)
+    data = response.json()
 
     for bisoft_item in data:
         item = items.filter(item_number=bisoft_item['item_number']).first()
@@ -53,9 +58,9 @@ def update_prices_and_stock():
         if not item:
             continue
 
-        item.price = bisoft_item['item_number__stores__price_2']
-        if 0 < bisoft_item['item_number__stores__price_3'] < bisoft_item['item_number__stores__price_2']:
-            item.discount_price = bisoft_item['item_number__stores__price_3']
+        item.price = bisoft_item['stores__price_2']
+        if 0 < bisoft_item['stores__price_3'] < bisoft_item['stores__price_2']:
+            item.discount_price = bisoft_item['stores__price_3']
 
         for bisoft_size, quantity in bisoft_item['stock'].items():
             size, created = Size.objects.get_or_create(size=bisoft_size)

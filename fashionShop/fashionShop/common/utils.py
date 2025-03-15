@@ -8,4 +8,5 @@ CYRILLIC_TO_LATIN = {
 
 
 def transliterate(text):
+    text = text or ''
     return ''.join(CYRILLIC_TO_LATIN.get(ch, ch) for ch in text.lower())
