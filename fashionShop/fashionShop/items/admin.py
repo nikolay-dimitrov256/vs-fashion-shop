@@ -7,7 +7,7 @@ import requests
 
 from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock
 from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock
-from fashionShop.settings import BISOFT_API_URL
+from fashionShop.settings import BISOFT_API_URL, BISOFT_API_KEY
 
 
 class StockInline(admin.StackedInline):
@@ -30,7 +30,10 @@ class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
             change_form=True,
             html_attrs={'style': 'background-color:#88FF88;color:black'})
     def load_items(self, request):
-        response = requests.get(f'{BISOFT_API_URL}items/initial-items')
+        params = {
+            'key': BISOFT_API_KEY
+        }
+        response = requests.get(f'{BISOFT_API_URL}items/initial-items', params=params)
         data = response.json()
 
         parse_and_save_items(data)

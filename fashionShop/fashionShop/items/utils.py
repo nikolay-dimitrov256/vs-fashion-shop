@@ -4,7 +4,7 @@ import requests
 import json
 
 from fashionShop.items.models import Item, Category, ColorGroup, Size, Stock
-from fashionShop.settings import BISOFT_API_URL
+from fashionShop.settings import BISOFT_API_URL, BISOFT_API_KEY
 
 
 def parse_and_save_items(data: list):
@@ -46,6 +46,7 @@ def update_prices_and_stock():
     items = Item.objects.filter(deleted=False)
 
     params = {
+        'key': BISOFT_API_KEY,
         'items': json.dumps(list(items.values_list('item_number', flat=True)))
     }
 
