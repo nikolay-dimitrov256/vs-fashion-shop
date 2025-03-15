@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from decouple import config
 from django.urls import reverse_lazy
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,6 +39,7 @@ PROJECT_APPS = [
     'fashionShop.accounts',
     'fashionShop.common',
     'fashionShop.items',
+    'fashionShop.pictures',
 ]
 
 INSTALLED_APPS = [
@@ -58,6 +62,9 @@ INSTALLED_APPS = [
     'modeltranslation',
 
     'admin_extra_buttons',
+
+    'cloudinary',
+    'cloudinary_storage',
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
@@ -222,3 +229,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 BISOFT_API_URL = 'http://127.0.0.1:8001/'
 BISOFT_API_KEY = 'lol_key'
+
+cloudinary.config(
+    cloud_name=config('CLOUDINARY_CLOUD_NAME'),
+    api_key=config('CLOUDINARY_API_KEY'),
+    api_secret=config('CLOUDINARY_API_SECRET'),
+    secure=True,  # Ensures image urls are https
+)
+MEDIA_URL = '/media/'

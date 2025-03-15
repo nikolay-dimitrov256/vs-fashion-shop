@@ -7,6 +7,7 @@ import requests
 
 from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock, ColorGroup
 from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock
+from fashionShop.pictures.admin import PictureInline
 from fashionShop.settings import BISOFT_API_URL, BISOFT_API_KEY
 
 
@@ -23,7 +24,7 @@ class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
     list_display = ['item_number', 'name', 'price', 'discount_price']
     list_filter = ['category', 'color_group']
     ordering = ['item_number']
-    inlines = [StockInline]
+    inlines = [PictureInline, StockInline]
     readonly_fields = ['slug']
     search_fields = ['item_number', 'name']
 
