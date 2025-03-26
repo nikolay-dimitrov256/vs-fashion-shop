@@ -26,4 +26,5 @@ urlpatterns = [
         path('social/', include('allauth.urls'))
     ]),
     ),
+    path('items/', include('fashionShop.items.urls')),
 ]

@@ -22,7 +22,7 @@ class Picture(models.Model):
     )
 
     class Meta:
-        ordering = ['is_main']
+        ordering = ['-is_main', '-created_at']
 
     def save(self, *args, **kwargs):
         if self.is_main:
