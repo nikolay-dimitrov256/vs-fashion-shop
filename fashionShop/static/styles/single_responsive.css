@@ -64,10 +64,10 @@
 	{
 		height: 110px;
 	}
-	.single_product_image
+	/* .single_product_image
 	{
 		height: 436px;
-	}
+	} */
 }
 
 /************
@@ -116,7 +116,7 @@
 	.single_product_image
 	{
 		margin-bottom: 15px;
-		height: 785px;
+		/* height: 785px; */
 	}
 	.single_product_thumbnails
 	{
@@ -229,10 +229,10 @@
 	{
 		margin-bottom: 111px;
 	}
-	.single_product_image
+	/* .single_product_image
 	{
 		height: 576px;
-	}
+	} */
 	.benefit_col
 	{
 		margin-bottom: 15px;
@@ -266,10 +266,10 @@
 		right: -100%;
 		width: 100%;
 	}
-	.single_product_image
+	/* .single_product_image
 	{
 		height: calc((100vw - 30px) / 0.86);
-	}
+	} */
 	.single_product_thumbnails ul li
 	{
 		width: 80px;
