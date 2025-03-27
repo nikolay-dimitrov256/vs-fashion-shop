@@ -15,7 +15,7 @@ class StockInline(admin.StackedInline):
     model = Stock
     fields = ['size', 'quantity']
     ordering = ['size__size']
-    readonly_fields = ['size']
+    # readonly_fields = ['size']
     can_delete = False
 
 

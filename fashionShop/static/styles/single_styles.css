@@ -1610,3 +1610,23 @@ section
 {
 	color: #fe4c50;
 }
+
+.sizes {
+	margin-top: 3em;
+}
+
+.size {
+	color: #fff;
+	background-color: #1e1e27;
+	padding: 0.8em 1em;
+	margin-right: 1em;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.1s ease-in;
+}
+
+.size:hover,
+.size.selected {
+	color: #fff;
+	background-color: #fe4c50;
+}

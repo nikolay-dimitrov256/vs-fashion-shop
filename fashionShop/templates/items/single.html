@@ -69,8 +69,11 @@
             <div class="product_details">
                 <div class="product_details_title">
                     <h2>{{ object.name }}</h2>
+                    <p># {{ object.item_number }}</p>
                     <p>{{ object.description }}</p>
+
                 </div>
+                <p>Състав: {{ object.content }}</p>
 <!--                <div class="free_delivery d-flex flex-row align-items-center justify-content-center">-->
 <!--                    <span class="ti-truck"></span><span>free delivery</span>-->
 <!--                </div>-->
@@ -95,6 +98,11 @@
 <!--                        <li style="background: #60b3f3"></li>-->
 <!--                    </ul>-->
 <!--                </div>-->
+                <div class="sizes d-flex flex-wrap">
+                    {% for size in object.sizes.all %}
+                    <div class="size">{{ size.size }}</div>
+                    {% endfor %}
+                </div>
                 <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
                     <span>Quantity:</span>
                     <div class="quantity_selector">

@@ -34,6 +34,7 @@ jQuery(document).ready(function($)
 	var menuActive = false;
 	var hamburgerClose = $('.hamburger_close');
 	var fsOverlay = $('.fs_menu_overlay');
+	const sizesDivElement = document.querySelector('.sizes');
 
 	setHeader();
 
@@ -53,6 +54,21 @@ jQuery(document).ready(function($)
 	initStarRating();
 	initFavorite();
 	initTabs();
+	initSizes();
+
+	/*
+
+	Set Sizes
+
+	*/
+	
+	function initSizes() {
+		const sizesElements = sizesDivElement.querySelectorAll('.size');
+		sizesElements.forEach(sizeElement => sizeElement.addEventListener('click', () => {
+			sizesElements.forEach(element => element.classList.remove('selected'));
+			sizeElement.classList.add('selected');
+		}));
+	}
 
 	/* 
 
