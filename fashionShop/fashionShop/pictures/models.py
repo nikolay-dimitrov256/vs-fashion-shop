@@ -11,6 +11,15 @@ class Picture(models.Model):
         default=False,
     )
 
+    is_detail = models.BooleanField(
+        default=False,
+    )
+
+    description = models.TextField(
+        null=True,
+        blank=True,
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -22,7 +31,7 @@ class Picture(models.Model):
     )
 
     class Meta:
-        ordering = ['-is_main', '-created_at']
+        ordering = ['-is_main', 'is_detail', '-created_at']
 
     def save(self, *args, **kwargs):
         if self.is_main:

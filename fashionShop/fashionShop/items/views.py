@@ -11,5 +11,6 @@ class ItemDetailView(DetailView):
     def get_object(self, queryset=None):
         item = super().get_object(queryset)
         item.main_picture = item.pictures.first()
+        item.detail_pictures = item.pictures.filter(is_detail=True)
 
         return item

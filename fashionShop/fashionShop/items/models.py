@@ -129,6 +129,7 @@ class Size(models.Model):
     class Meta:
         verbose_name = _('size')
         verbose_name_plural = _('sizes')
+        ordering = ['size']
 
 
 class Stock(models.Model):

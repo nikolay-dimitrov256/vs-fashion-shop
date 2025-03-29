@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-15 10:36+0200\n"
+"POT-Creation-Date: 2025-03-28 11:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,47 +83,47 @@ msgstr "размер"
 msgid "sizes"
 msgstr "размери"
 
-#: fashionShop/items/models.py:151 fashionShop/items/models.py:152
+#: fashionShop/items/models.py:152 fashionShop/items/models.py:153
 msgid "stock"
 msgstr "наличност"
 
-#: fashionShop/items/models.py:165
+#: fashionShop/items/models.py:166
 msgid "category"
 msgstr "категория"
 
-#: fashionShop/items/models.py:166
+#: fashionShop/items/models.py:167
 msgid "categories"
 msgstr "категории"
 
-#: fashionShop/items/models.py:185
+#: fashionShop/items/models.py:186
 msgid "subcategory"
 msgstr "подкатегория"
 
-#: fashionShop/items/models.py:186
+#: fashionShop/items/models.py:187
 msgid "subcategories"
 msgstr "подкатегории"
 
-#: fashionShop/items/models.py:199
+#: fashionShop/items/models.py:200
 msgid "pattern"
 msgstr "кройка"
 
-#: fashionShop/items/models.py:200
+#: fashionShop/items/models.py:201
 msgid "patterns"
 msgstr "кройки"
 
-#: fashionShop/items/models.py:217
+#: fashionShop/items/models.py:218
 msgid "color group"
 msgstr "цветова група"
 
-#: fashionShop/items/models.py:218
+#: fashionShop/items/models.py:219
 msgid "color groups"
 msgstr "цветови групи"
 
-#: fashionShop/items/models.py:230
+#: fashionShop/items/models.py:231
 msgid "style"
 msgstr "стил"
 
-#: fashionShop/items/models.py:231
+#: fashionShop/items/models.py:232
 msgid "styles"
 msgstr "стилове"
 
@@ -146,3 +146,11 @@ msgstr "Вход"
 #: templates/common/header.html:64 templates/common/header.html:162
 msgid "Register"
 msgstr "Регистрация"
+
+#: templates/items/single.html:146 templates/items/single.html:162
+msgid "Details"
+msgstr "Детайли"
+
+#: templates/items/single.html:147 templates/items/single.html:197
+msgid "Additional Information"
+msgstr "Допълнителна информация"

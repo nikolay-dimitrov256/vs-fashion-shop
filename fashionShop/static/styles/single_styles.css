@@ -50,7 +50,7 @@ COLOR PALETTE
 }
 body
 {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'system-ui', 'Poppins', sans-serif;
 	font-size: 14px;
 	line-height: 23px;
 	font-weight: 400;
@@ -72,7 +72,7 @@ ul
 }
 p
 {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'system-ui', 'Poppins', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	font-weight: 500;
@@ -131,7 +131,7 @@ h5{font-size: 16px;}
 h6{font-size: 14px;}
 h1, h2, h3, h4, h5, h6
 {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'system-ui', 'Poppins', sans-serif;
 	color: #282828;
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
@@ -1202,6 +1202,7 @@ section
 {
 	width: 100%;
 	display: none;
+	padding-inline: 3em;
 }
 .tab_container.active
 {
@@ -1214,11 +1215,20 @@ section
 
 .desc_col
 {
-
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
+.desc_col.desc-reversed {
+	flex-direction: row-reverse;
+}
+.desc_col:nth-child(n+3) {
+	margin-top: -12em;
+}
+
 .tab_title
 {
-	margin-bottom: 98px;
+	/* margin-bottom: 98px; */
 }
 .tab_title h4
 {
@@ -1229,6 +1239,12 @@ section
 .tab_text_block
 {
 	margin-bottom: 133px;
+	margin-left: 4em;
+	margin-right: 3em;
+}
+.desc-reversed .tab_text_block {
+	margin-left: 3em;
+	margin-right: 4em;
 }
 .tab_text_block p
 {
@@ -1237,7 +1253,7 @@ section
 }
 .tab_image
 {
-	width: 100%;
+	max-width: 25em;
 	margin-bottom: 131px;
 }
 .tab_image img
@@ -1620,6 +1636,7 @@ section
 	background-color: #1e1e27;
 	padding: 0.8em 1em;
 	margin-right: 1em;
+	margin-bottom: 1em;
 	font-weight: 500;
 	cursor: pointer;
 	transition: all 0.1s ease-in;
@@ -1629,4 +1646,17 @@ section
 .size.selected {
 	color: #fff;
 	background-color: #fe4c50;
+}
+
+.size-guide {
+	max-width: 2000px;
+	margin-top: 3em;
+	padding-top: 1em;
+	border-top: 1px solid #ebebeb;
+}
+
+.size-guide img {
+	display: block;
+	width: 100%;
+	height: auto;
 }

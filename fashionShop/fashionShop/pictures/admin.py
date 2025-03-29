@@ -21,7 +21,7 @@ class PictureInline(admin.StackedInline):
     model = Picture
     can_delete = True
     extra = 1
-    fields = ['image', 'is_main', 'image_preview']
+    fields = ['image', 'image_preview', 'is_main', 'is_detail', 'description_bg', 'description_en']
     readonly_fields = ['image_preview', 'created_at']
 
     def image_preview(self, obj):
