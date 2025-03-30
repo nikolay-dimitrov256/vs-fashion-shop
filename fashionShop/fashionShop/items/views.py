@@ -14,6 +14,10 @@ class ItemDetailView(DetailView):
         item = super().get_object(queryset)
         item.main_picture = item.pictures.first()
         item.detail_pictures = item.pictures.filter(is_detail=True)
+        if item.description:
+            item.description = item.description.split(';')
+            if len(item.description) == 1:
+                item.description = item.description[0].split('\n')
 
         return item
 
@@ -24,11 +28,6 @@ class ItemDetailView(DetailView):
             Item.objects
             .filter(pattern=self.object.pattern)
             .exclude(item_number=self.object.item_number)
-            .annotate(main_picture=Subquery(
-                Picture.objects
-                .filter(item=OuterRef('item_number'))
-                .values('image')[:1]
-            ))
         )
 
         return context

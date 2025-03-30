@@ -1,0 +1,37 @@
+<div class="owl-item product_slider_item">
+    <div class="product-item">
+        <div
+            {% if item.is_discounted %}
+            class="product discount"
+            {% else %}
+            class="product"
+            {% endif %}
+        >
+            <a href="{% url 'item-details' item.pk %}" class="product_image">
+                <img src="{{ item.pictures.all.first.image.url }}" alt="{{ item.name }}">
+            </a>
+            <div
+                {% if item.is_discounted %}
+                class="favorite favorite_left"
+                {% else %}
+                class="favorite"
+                {% endif %}
+            ></div>
+            {% if item.is_discounted %}
+                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }} лв</span></div>
+            {% elif item.is_new %}
+                <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+            {% endif %}
+            <div class="product_info">
+                <h6 class="product_name"><a href="{% url 'item-details' item.pk %}">{{ item.name }}</a></h6>
+                <div class="product_price">
+                    {% if item.is_discounted %}
+                    {{ item.discount_price }} лв<span>{{ item.price }} лв</span>
+                    {% else %}
+                    {{ item.price }} лв
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

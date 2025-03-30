@@ -68,7 +68,16 @@
                 <div class="product_details_title">
                     <h2>{{ object.name }}</h2>
                     <p># {{ object.item_number }}</p>
-                    <p>{{ object.description }}</p>
+<!--                    <p>{{ object.description }}</p>-->
+                    {% if object.description and object.description|length > 1 %}
+                        <ul class="item_description">
+                            {% for line in object.description %}
+                            <li>{{ line }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% elif object.description %}
+                        <p>{{ object.description|first }}</p>
+                    {% endif %}
 
                 </div>
                 <p>Състав: {{ object.content }}</p>
@@ -133,43 +142,7 @@
                     <div class="owl-carousel owl-theme product_slider">
 
                         {% for item in other_colors %}
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item">
-                                    <div
-                                        {% if item.is_discounted %}
-                                        class="product discount"
-                                        {% else %}
-                                        class="product"
-                                        {% endif %}
-                                    >
-                                        <div class="product_image">
-                                            <img src="{{ item.main_picture.url }}" alt="{{ item.name }}">
-                                        </div>
-                                        <div
-                                            {% if item.is_discounted %}
-                                            class="favorite favorite_left"
-                                            {% else %}
-                                            class="favorite"
-                                            {% endif %}
-                                        ></div>
-                                        {% if item.is_discounted %}
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }} лв</span></div>
-                                        {% elif item.is_new %}
-                                            <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
-                                        {% endif %}
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="{% url 'item-details' item.pk %}">{{ item.name }}</a></h6>
-                                            <div class="product_price">
-                                                {% if item.is_discounted %}
-                                                {{ item.discount_price }} лв<span>{{ item.price }} лв</span>
-                                                {% else %}
-                                                {{ item.price }} лв
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include 'items/item-card.html' with item=item %}
                         {% endfor %}
                     </div>
                     <!-- Slider Navigation -->
@@ -185,11 +158,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 
 <div class="container">
     <div class="size-guide">
@@ -272,6 +240,40 @@
         </div>
     </div>
 
+</div>
+
+<!-- Linked Items -->
+
+<div class="linked_items">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>{% trans 'Complete your vision:' %}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product_slider_container">
+                    <div class="owl-carousel owl-theme product_slider">
+
+                        {% for item in object.linked_items.all %}
+                            {% include 'items/item-card.html' with item=item %}
+                        {% endfor %}
+                    </div>
+                    <!-- Slider Navigation -->
+
+                    <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </div>
+                    <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Benefit -->
