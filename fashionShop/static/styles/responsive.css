@@ -79,7 +79,8 @@
 	}
 	.product
 	{
-		height: 320px;
+		/* height: 320px; */
+		height: auto;
 	}
 	.timer li
 	{
@@ -322,11 +323,13 @@
 	.product-item
 	{
 		width: 33.333333333333%;
-		height: 345px;
+		/* height: 345px; */
+		height: auto;
 	}
 	.product
 	{
-		height: 305px;
+		/* height: 305px; */
+		height: auto;
 	}
 	.grid_sorting_button
 	{
@@ -341,7 +344,8 @@
 	}
 	.product_slider_item .product-item
 	{
-		height: 380px;
+		/* height: 380px; */
+		height: auto;
 	}
 	.benefit_col
 	{
@@ -379,7 +383,8 @@
 	}
 	.product
 	{
-		height: 380px;
+		/* height: 380px; */
+		height: auto;
 	}
 	.blog_item
 	{

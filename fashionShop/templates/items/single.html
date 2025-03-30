@@ -12,6 +12,8 @@
 {% endblock %}
 
 {% block styles %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">  Added for carousel-->
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}"> <!-- Added for carousel-->
 <link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/single_styles.css' %}">
@@ -50,16 +52,11 @@
                                         {% endif %}
                                     ><img src="{{ picture.image.url }}" alt="" data-image="{{ picture.image.url }}"></li>
                                 {% endfor %}
-
-<!--                                <li><img src="{% static 'images/single_1_thumb.jpg' %}" alt="" data-image="{% static 'images/single_1.jpg' %}"></li>-->
-<!--                                <li class="active"><img src="{% static 'images/single_2_thumb.jpg' %}" alt="" data-image="{% static 'images/single_2.jpg' %}"></li>-->
-<!--                                <li><img src="{% static 'images/single_3_thumb.jpg' %}" alt="" data-image="{% static 'images/single_3.jpg' %}"></li>-->
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-9 image_col order-lg-2 order-1">
                         <div class="single_product_image">
-<!--                            <div class="single_product_image_background" style="background-image:url({{ object.main_picture.image.url }})"></div>-->
                             <img src="{{ object.main_picture.image.url }}" alt="focus-picture">
                         </div>
                     </div>
@@ -78,7 +75,7 @@
 <!--                <div class="free_delivery d-flex flex-row align-items-center justify-content-center">-->
 <!--                    <span class="ti-truck"></span><span>free delivery</span>-->
 <!--                </div>-->
-                {% if object.discount_price %}
+                {% if object.is_discounted %}
                     <div class="original_price">{{ object.price }} лв.</div>
                     <div class="product_price">{{ object.discount_price }} лв</div>
                 {% else %}
@@ -117,8 +114,84 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Other Colors -->
+
+<div class="other_colors">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>{% trans 'This model in other colors:' %}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product_slider_container">
+                    <div class="owl-carousel owl-theme product_slider">
+
+                        {% for item in other_colors %}
+                            <div class="owl-item product_slider_item">
+                                <div class="product-item">
+                                    <div
+                                        {% if item.is_discounted %}
+                                        class="product discount"
+                                        {% else %}
+                                        class="product"
+                                        {% endif %}
+                                    >
+                                        <div class="product_image">
+                                            <img src="{{ item.main_picture.url }}" alt="{{ item.name }}">
+                                        </div>
+                                        <div
+                                            {% if item.is_discounted %}
+                                            class="favorite favorite_left"
+                                            {% else %}
+                                            class="favorite"
+                                            {% endif %}
+                                        ></div>
+                                        {% if item.is_discounted %}
+                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }} лв</span></div>
+                                        {% elif item.is_new %}
+                                            <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+                                        {% endif %}
+                                        <div class="product_info">
+                                            <h6 class="product_name"><a href="{% url 'item-details' item.pk %}">{{ item.name }}</a></h6>
+                                            <div class="product_price">
+                                                {% if item.is_discounted %}
+                                                {{ item.discount_price }} лв<span>{{ item.price }} лв</span>
+                                                {% else %}
+                                                {{ item.price }} лв
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Slider Navigation -->
+
+                    <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </div>
+                    <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+
+
+
+
+<div class="container">
     <div class="size-guide">
         <img
         {% if request.LANGUAGE_CODE == 'bg' %}
@@ -130,8 +203,6 @@
         {% endif %}
         >
     </div>
-
-
 </div>
 
 <!-- Tabs -->
@@ -145,7 +216,6 @@
                     <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
                         <li class="tab active" data-active-tab="tab_1"><span>{% trans 'Details' %}</span></li>
                         <li class="tab" data-active-tab="tab_2"><span>{% trans 'Additional Information' %}</span></li>
-<!--                        <li class="tab" data-active-tab="tab_3"><span>Reviews (2)</span></li>-->
                     </ul>
                 </div>
             </div>
@@ -154,7 +224,6 @@
             <div class="col">
 
                 <!-- Tab Description -->
-
 
                 <div id="tab_1" class="tab_container active">
                     <div >
@@ -165,64 +234,23 @@
                     {% if forloop.counter|divisibleby:2 %}
                         <div class="desc_col desc-reversed">
                             <div class="tab_text_block">
-<!--                                <h2>Pocket cotton sweatshirt</h2>-->
                                 <p>{{ detail_picture.description }}</p>
                             </div>
                             <div class="tab_image">
                                 <img src="{{ detail_picture.image.url }}" alt="">
                             </div>
-<!--                            <div class="tab_text_block">-->
-<!--                                <h2>Pocket cotton sweatshirt</h2>-->
-<!--                                <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>-->
-<!--                            </div>-->
-<!--                            <div class="tab_image desc_last">-->
-<!--                                <img src="{% static 'images/desc_3.jpg' %}" alt="">-->
-<!--                            </div>-->
                         </div>
                     {% else %}
                         <div class="desc_col">
                             <div class="tab_text_block">
-<!--                                <h2>Pocket cotton sweatshirt</h2>-->
                                 <p>{{ detail_picture.description }}</p>
                             </div>
                             <div class="tab_image">
                                 <img src="{{ detail_picture.image.url }}" alt="">
                             </div>
-<!--                            <div class="tab_text_block">-->
-<!--                                <h2>Pocket cotton sweatshirt</h2>-->
-<!--                                <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>-->
-<!--                            </div>-->
                         </div>
                     {% endif %}
                     {% endfor %}
-<!--                        <div class="col-lg-5 desc_col">-->
-<!--                            <div class="tab_title">-->
-<!--                                <h4>{% trans 'Details' %}</h4>-->
-<!--                            </div>-->
-<!--                            <div class="tab_text_block">-->
-<!--                                <h2>Pocket cotton sweatshirt</h2>-->
-<!--                                <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>-->
-<!--                            </div>-->
-<!--                            <div class="tab_image">-->
-<!--                                <img src="{% static 'images/desc_1.jpg' %}" alt="">-->
-<!--                            </div>-->
-<!--                            <div class="tab_text_block">-->
-<!--                                <h2>Pocket cotton sweatshirt</h2>-->
-<!--                                <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-5 offset-lg-2 desc_col">-->
-<!--                            <div class="tab_image">-->
-<!--                                <img src="{% static 'images/desc_2.jpg' %}" alt="">-->
-<!--                            </div>-->
-<!--                            <div class="tab_text_block">-->
-<!--                                <h2>Pocket cotton sweatshirt</h2>-->
-<!--                                <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>-->
-<!--                            </div>-->
-<!--                            <div class="tab_image desc_last">-->
-<!--                                <img src="{% static 'images/desc_3.jpg' %}" alt="">-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </div>
                 </div>
 
@@ -237,96 +265,6 @@
                             <p>COLOR:<span>Gold, Red</span></p>
                             <p>SIZE:<span>L,M,XL</span></p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Tab Reviews -->
-
-                <div id="tab_3" class="tab_container">
-                    <div class="row">
-
-                        <!-- User Reviews -->
-
-                        <div class="col-lg-6 reviews_col">
-                            <div class="tab_title reviews_title">
-                                <h4>Reviews (2)</h4>
-                            </div>
-
-                            <!-- User Review -->
-
-                            <div class="user_review_container d-flex flex-column flex-sm-row">
-                                <div class="user">
-                                    <div class="user_pic"></div>
-                                    <div class="user_rating">
-                                        <ul class="star_rating">
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="review">
-                                    <div class="review_date">27 Aug 2016</div>
-                                    <div class="user_name">Brandon William</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
-
-                            <!-- User Review -->
-
-                            <div class="user_review_container d-flex flex-column flex-sm-row">
-                                <div class="user">
-                                    <div class="user_pic"></div>
-                                    <div class="user_rating">
-                                        <ul class="star_rating">
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="review">
-                                    <div class="review_date">27 Aug 2016</div>
-                                    <div class="user_name">Brandon William</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Add Review -->
-
-                        <div class="col-lg-6 add_review_col">
-
-                            <div class="add_review">
-                                <form id="review_form" action="post">
-                                    <div>
-                                        <h1>Add Review</h1>
-                                        <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-                                        <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
-                                    </div>
-                                    <div>
-                                        <h1>Your Rating:</h1>
-                                        <ul class="user_star_rating">
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                        </ul>
-                                        <textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
-                                    </div>
-                                    <div class="text-left text-sm-right">
-                                        <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-
                     </div>
                 </div>
 
@@ -383,6 +321,7 @@
 {% endblock %}
 
 {% block scripts %}
+<!-- <script src="{% static 'js/custom.js' %}"></script>  Added for carousel-->
 <script src="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
 <script src="{% static 'js/single_custom.js' %}"></script>
 {% endblock %}

@@ -1,5 +1,8 @@
+from datetime import timedelta, datetime
+
 from django.db import models
 from django.utils.text import slugify
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from fashionShop.common.utils import transliterate
@@ -112,6 +115,27 @@ class Item(models.Model):
             self.category = self.sub_category.category
 
         super().save(*args, **kwargs)
+
+    @property
+    def is_discounted(self):
+        if self.discount_price and 0 < self.discount_price < self.price:
+            return True
+
+        return False
+
+    @property
+    def is_new(self):
+        if datetime.today().date() - self.created_at < timedelta(days=90):
+            return True
+
+        return False
+
+    @property
+    def discount(self):
+        if not self.discount_price:
+            return None
+
+        return int(self.price - self.discount_price)
 
     def __str__(self):
         return str(self.item_number)

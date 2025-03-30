@@ -36,6 +36,8 @@ class Picture(models.Model):
     def save(self, *args, **kwargs):
         if self.is_main:
             Picture.objects.filter(item=self.item, is_main=True).exclude(id=self.id).update(is_main=False)
+        elif not Picture.objects.filter(item=self.item).exists():  # This is the first picture we upload
+            self.is_main = True
 
         super().save(*args, **kwargs)
 

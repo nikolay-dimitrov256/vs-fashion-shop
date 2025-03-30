@@ -10,7 +10,8 @@
 {
     display: none;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    height: auto;
     -webkit-tap-highlight-color: transparent;
     /* position relative and z-index fix webkit rendering fonts issue */
     position: relative;
@@ -21,7 +22,8 @@
     position: relative;
     -ms-touch-action: pan-Y;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    height: auto;
     -moz-backface-visibility: hidden;
     /* fix firefox animation glitch */
 }
@@ -39,7 +41,8 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    height: auto;
     /* fix for flashing background */
     -webkit-transform: translate3d(0px, 0px, 0px);
 }
@@ -58,7 +61,8 @@
     position: relative;
     min-height: 1px;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    height: auto;
     float: left;
     -webkit-backface-visibility: hidden;
     -webkit-tap-highlight-color: transparent;
@@ -194,7 +198,8 @@
 .owl-carousel .owl-video-wrapper
 {
     position: relative;
-    height: 100%;
+    /* height: 100%; */
+    height: auto;
     background: #000;
 }
 
@@ -229,7 +234,8 @@
 .owl-carousel .owl-video-tn
 {
     opacity: 0;
-    height: 100%;
+    /* height: 100%; */
+    height: auto;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -240,6 +246,7 @@
 {
     position: relative;
     z-index: 1;
-    height: 100%;
+    /* height: 100%; */
+    height: auto;
     width: 100%;
 }

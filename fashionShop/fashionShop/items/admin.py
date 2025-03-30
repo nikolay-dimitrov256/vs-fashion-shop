@@ -5,7 +5,7 @@ from admin_extra_buttons.api import ExtraButtonsMixin, button, confirm_action, l
 from admin_extra_buttons.utils import HttpResponseRedirectToReferrer
 import requests
 
-from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock, ColorGroup
+from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock, ColorGroup, Pattern
 from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock
 from fashionShop.pictures.admin import PictureInline
 from fashionShop.settings import BISOFT_API_URL, BISOFT_API_KEY
@@ -78,4 +78,9 @@ class SizeAdmin(admin.ModelAdmin):
 
 @admin.register(ColorGroup)
 class ColorGroupAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Pattern)
+class PatternAdmin(admin.ModelAdmin):
     pass
