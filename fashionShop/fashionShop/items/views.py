@@ -2,9 +2,9 @@ from pprint import pprint
 
 from django.db.models import OuterRef, Subquery, Prefetch
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
-from fashionShop.items.models import Item
+from fashionShop.items.models import Item, ColorGroup
 from fashionShop.pictures.models import Picture
 
 
@@ -51,3 +51,37 @@ class ItemDetailView(DetailView):
         )
 
         return context
+
+
+class ItemsListView(ListView):
+    model = Item
+    template_name = 'items/category.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        context['colors'] = ColorGroup.objects.all()
+        context['paginate_by'] = self.get_paginate_by(self.queryset)
+
+        return context
+
+    def get_queryset(self):
+        items = (
+            Item.objects
+            .prefetch_related(
+                Prefetch(
+                    'pictures',
+                    queryset=Picture.objects.all()[:1],  # Only fetch the first image
+                    to_attr='main_picture_list'
+                )
+            )
+            .exclude(deleted=True)
+        )
+
+        return items
+
+    def get_paginate_by(self, queryset):
+        paginate_by = self.request.GET.get('show', 12)
+
+        return paginate_by
+

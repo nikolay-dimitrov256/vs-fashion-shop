@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-30 19:32+0300\n"
+"POT-Creation-Date: 2025-04-01 09:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,6 +146,10 @@ msgstr "Вход"
 #: templates/common/header.html:64 templates/common/header.html:162
 msgid "Register"
 msgstr "Регистрация"
+
+#: templates/items/category.html:189
+msgid "see more"
+msgstr "виж повече"
 
 #: templates/items/single.html:135
 msgid "This model in other colors:"

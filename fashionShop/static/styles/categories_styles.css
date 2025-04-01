@@ -1012,6 +1012,7 @@ section
 	text-align: center;
 	border: solid 1px #ecedee;
 	margin-right: 16px;
+	margin-left: 31px;
 }
 .product_sorting_container_bottom .pages .page_current
 {
@@ -1085,17 +1086,20 @@ section
 {
 	margin-right: 14px;
 }
-.page_next
+.page_next,
+.page_previous
 {
 	display: inline-block;
 	line-height: 40px;
 	cursor: pointer;
 }
-.page_next:hover i
+.page_next:hover i,
+.page_previous:hover i
 {
 	color: #b5aec4;
 }
-.page_next i
+.page_next i,
+.page_previous i
 {
 	font-size: 18px;
 	color: #51545f;

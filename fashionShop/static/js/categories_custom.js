@@ -55,6 +55,7 @@ jQuery(document).ready(function($)
 	initIsotopeFiltering();
 	initPriceSlider();
 	initCheckboxes();
+	initPagination();
 
 	/* 
 
@@ -347,16 +348,16 @@ jQuery(document).ready(function($)
 	        });
 
 	        // Show only a selected number of items
-	        sortNums.each(function()
-	        {
-	        	$(this).on('click', function()
-	        	{
-	        		var numSortingText = $(this).text();
-					var numFilter = ':nth-child(-n+' + numSortingText + ')';
-	        		$('.num_sorting_text').text($(this).text());
-    				$('.product-grid').isotope({filter: numFilter });
-	        	});
-	        });	
+	        // sortNums.each(function()
+	        // {
+	        // 	$(this).on('click', function()
+	        // 	{
+	        // 		var numSortingText = $(this).text();
+			// 		var numFilter = ':nth-child(-n+' + numSortingText + ')';
+	        // 		$('.num_sorting_text').text($(this).text());
+    		// 		$('.product-grid').isotope({filter: numFilter });
+	        // 	});
+	        // });	
 
 	        // Filter based on the price range slider
 	        filterButton.on('click', function()
@@ -449,4 +450,18 @@ jQuery(document).ready(function($)
     		}
     	};
     }
+
+	function initPagination() {
+		const paginationFormElement = document.getElementById('pagination_form');
+		const paginateByInputElement = document.getElementById('paginate_by');
+		const selectPagesLiElements = document.querySelectorAll('.num_sorting_btn');
+
+		selectPagesLiElements.forEach(element => {
+			element.addEventListener('click', () => {
+				let paginateBy = element.querySelector('span').textContent;
+				paginateByInputElement.value = paginateBy;
+				paginationFormElement.submit();
+			});
+		});
+	}
 });
