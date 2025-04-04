@@ -55,7 +55,7 @@ jQuery(document).ready(function($)
 	initFixProductBorder();
 	initIsotopeFiltering();
 	initPriceSlider();
-	// initCheckboxes(colorForm);
+	//initCheckboxes(colorForm);
 	initPagination();
 
 	/* 

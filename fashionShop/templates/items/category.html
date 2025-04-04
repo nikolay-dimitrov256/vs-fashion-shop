@@ -39,19 +39,6 @@
 						<li><a href="#">Shop</a></li>
 					</ul>
 				</div>
-				<div class="sidebar_section">
-					<div class="sidebar_title">
-						<h5>Product Category</h5>
-					</div>
-					<ul class="sidebar_categories">
-						<li><a href="#">Men</a></li>
-						<li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Women</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li><a href="#">New Arrivals</a></li>
-						<li><a href="#">Collection</a></li>
-						<li><a href="#">Shop</a></li>
-					</ul>
-				</div>
 				{% endblock %}
 
 				<!-- Price Range Filtering -->
@@ -72,6 +59,7 @@
 						<h5>Sizes</h5>
 					</div>
 					<form class="filter_form" id="size_select">
+						<input type="checkbox" class="show_toggle" id="size_toggle" style="display: none;">
 						{% for key, value in query_params.lists %}
 							{% if key != 'size' %}
 								{% for element in value %}
@@ -81,7 +69,7 @@
 						{% endfor %}
 <!--						<input name="show" type="hidden" value="{{ paginate_by }}">-->
 						{% for size in sizes %}
-						<label><input type="checkbox" name="size" value="{{ size }}"
+						<label class="box_label"><input type="checkbox" name="size" value="{{ size }}"
 							{% for key, value in query_params.lists %}
 								{% if key == 'size' and size in value %}
 								checked
@@ -89,7 +77,10 @@
 							{% endfor %}
 						> {{ size }}</label>
 						{% endfor %}
-						<button>Filter</button>
+						<label class="show_more" for="size_toggle">
+							<span><span>+</span>Show More</span>
+						</label>
+						<button class="list_filter_button">Filter</button>
 					</form>
 <!--					<ul class="checkboxes">-->
 <!--						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>S</span></li>-->
@@ -106,6 +97,7 @@
 						<h5>Color</h5>
 					</div>
 					<form class="filter_form" id="color_select">
+						<input type="checkbox" class="show_toggle" id="color_toggle" style="display: none;">
 						{% for key, value in query_params.lists %}
 							{% if key != 'color' %}
 								{% for element in value %}
@@ -115,7 +107,7 @@
 						{% endfor %}
 <!--						<input name="show" type="hidden" value="{{ paginate_by }}">-->
 						{% for color in colors %}
-						<label><input type="checkbox" name="color" value="{{ color.name_en }}"
+						<label class="box_label"><input type="checkbox" name="color" value="{{ color.name_en }}"
 							{% for key, value in query_params.lists %}
 								{% if key == 'color' and color.name_en in value %}
 								checked
@@ -123,7 +115,10 @@
 							{% endfor %}
 						> {{ color.name }}</label>
 						{% endfor %}
-						<button>Filter</button>
+						<label class="show_more" for="color_toggle">
+							<span><span>+</span>Show More</span>
+						</label>
+						<button class="list_filter_button">Filter</button>
 						{% comment %}
 						<ul class="checkboxes">
 							<li data-color=""
@@ -165,11 +160,7 @@
 <!--							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>-->
 						</ul>
 					</form>
-					<div class="show_more">
-						<span><span>+</span>Show More</span>
-					</div>
 				</div>
-
 			</div>
 
 			<!-- Main Content -->

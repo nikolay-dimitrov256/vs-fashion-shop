@@ -1278,7 +1278,7 @@ section
 }
 .show_more
 {
-	display: inline-block;
+	display: block;
 	cursor: pointer;
 }
 .show_more span
@@ -1729,8 +1729,21 @@ section
 
 }
 
+.filter_form .show_more {
+	padding: 0;
+	margin-bottom: 0.5em;
+}
+
 .filter_form label {
     display: block;
+	cursor: pointer;
+	margin: 0;
+	padding-block: 0.5em;
+	transition: all 0.2s ease;
+}
+
+.filter_form label:hover {
+	background-color: #ffe0e1;
 }
 
 .filter_form input[type="checkbox"]:checked {
@@ -1738,3 +1751,27 @@ section
     accent-color: #fe4c50;
 }
 
+.list_filter_button {
+	display: block;
+	background-color: #fe4c50;
+	color: #fff;
+	border: none;
+	font-weight: 500;
+	letter-spacing: 1px;
+	padding: 0.5em 1.5em;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.list_filter_button:hover,
+.list_filter_button:active {
+	background-color: #FE7C7F;
+}
+
+.filter_form .box_label:nth-of-type(n+6) {
+	display: none;
+}
+
+.show_toggle:checked ~ .box_label {
+	display: block;
+}
