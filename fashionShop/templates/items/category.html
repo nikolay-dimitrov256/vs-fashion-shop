@@ -71,13 +71,33 @@
 					<div class="sidebar_title">
 						<h5>Sizes</h5>
 					</div>
-					<ul class="checkboxes">
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>S</span></li>
-						<li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>M</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>L</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XL</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XXL</span></li>
-					</ul>
+					<form class="filter_form" id="size_select">
+						{% for key, value in query_params.lists %}
+							{% if key != 'size' %}
+								{% for element in value %}
+								<input type="hidden" name="{{ key }}" value="{{ element }}">
+								{% endfor %}
+							{% endif %}
+						{% endfor %}
+<!--						<input name="show" type="hidden" value="{{ paginate_by }}">-->
+						{% for size in sizes %}
+						<label><input type="checkbox" name="size" value="{{ size }}"
+							{% for key, value in query_params.lists %}
+								{% if key == 'size' and size in value %}
+								checked
+								{% endif %}
+							{% endfor %}
+						> {{ size }}</label>
+						{% endfor %}
+						<button>Filter</button>
+					</form>
+<!--					<ul class="checkboxes">-->
+<!--						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>S</span></li>-->
+<!--						<li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>M</span></li>-->
+<!--						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>L</span></li>-->
+<!--						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XL</span></li>-->
+<!--						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XXL</span></li>-->
+<!--					</ul>-->
 				</div>
 
 				<!-- Color -->
@@ -86,8 +106,14 @@
 						<h5>Color</h5>
 					</div>
 					<form class="filter_form" id="color_select">
-<!--						<input data-form="color_select" type="hidden" name="color" id="selected_color" value="{{ color }}">-->
-						<input name="show" type="hidden" value="{{ paginate_by }}">
+						{% for key, value in query_params.lists %}
+							{% if key != 'color' %}
+								{% for element in value %}
+								<input type="hidden" name="{{ key }}" value="{{ element }}">
+								{% endfor %}
+							{% endif %}
+						{% endfor %}
+<!--						<input name="show" type="hidden" value="{{ paginate_by }}">-->
 						{% for color in colors %}
 						<label><input type="checkbox" name="color" value="{{ color.name_en }}"
 							{% for key, value in query_params.lists %}

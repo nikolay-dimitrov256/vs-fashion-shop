@@ -4,7 +4,7 @@ from django.db.models import OuterRef, Subquery, Prefetch, Q
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from fashionShop.items.models import Item, ColorGroup
+from fashionShop.items.models import Item, ColorGroup, Stock, Size
 from fashionShop.pictures.models import Picture
 
 
@@ -61,6 +61,7 @@ class ItemsListView(ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
 
         context['colors'] = ColorGroup.objects.all()
+        context['sizes'] = Size.objects.filter(items__isnull=False).values_list('size', flat=True).distinct()
         context['paginate_by'] = self.get_paginate_by(self.queryset)
         #context['available_colors'] = ColorGroup.objects.all()
         #context['color'] = self.request.GET.get('color', '')
@@ -94,9 +95,9 @@ class ItemsListView(ListView):
         if selected_colors:
             items = items.filter(color_group__name_en__in=selected_colors)
 
-        # queried_sizes = self.request.GET.get('sizes', '').split(',')
-        # if queried_sizes[0]:
-        #     items = items.filter(sizes__size__in=queried_sizes)
+        selected_sizes = self.request.GET.getlist('size')
+        if selected_sizes:
+            items = items.filter(sizes__size__in=selected_sizes)
 
         return items
 
