@@ -1234,6 +1234,10 @@ section
 {
 	height: 40px;
 	line-height: 40px;
+	cursor: pointer;
+}
+.checkboxes li:hover {
+	background-color: #ffe0e1;
 }
 .checkboxes li.active i
 {

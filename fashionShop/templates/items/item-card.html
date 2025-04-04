@@ -7,7 +7,7 @@
             class="product"
             {% endif %}
         >
-            <a href="{% url 'item-details' item.pk %}" class="product_image">
+            <a href="{% url 'item-details' item.slug %}" class="product_image">
                 <img src="{{ item.pictures.all.first.image.url }}" alt="{{ item.name }}">
             </a>
             <div
@@ -23,7 +23,7 @@
                 <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
             {% endif %}
             <div class="product_info">
-                <h6 class="product_name"><a href="{% url 'item-details' item.pk %}">{{ item.name }}</a></h6>
+                <h6 class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></h6>
                 <div class="product_price">
                     {% if item.is_discounted %}
                     {{ item.discount_price }} лв<span>{{ item.price }} лв</span>

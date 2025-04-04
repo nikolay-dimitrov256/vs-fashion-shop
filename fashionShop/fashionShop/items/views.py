@@ -1,6 +1,6 @@
 from pprint import pprint
 
-from django.db.models import OuterRef, Subquery, Prefetch
+from django.db.models import OuterRef, Subquery, Prefetch, Q
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
@@ -13,7 +13,7 @@ class ItemDetailView(DetailView):
     template_name = 'items/single.html'
 
     def get_object(self, queryset=None):
-        #item = super().get_object(queryset)
+        # item = super().get_object(queryset)
         item = (
             Item.objects
             .select_related('category', 'sub_category', 'pattern', 'color_group')
@@ -28,7 +28,7 @@ class ItemDetailView(DetailView):
                 #     to_attr='other_colors'
                 # )
             )
-            .get(pk=self.kwargs['pk'])
+            .get(slug=self.kwargs['slug'])
         )
 
         item.detail_pictures = item.pictures.filter(is_detail=True)
@@ -62,7 +62,14 @@ class ItemsListView(ListView):
 
         context['colors'] = ColorGroup.objects.all()
         context['paginate_by'] = self.get_paginate_by(self.queryset)
+        #context['available_colors'] = ColorGroup.objects.all()
+        #context['color'] = self.request.GET.get('color', '')
 
+        query_params = self.request.GET.copy()
+        if 'page' in query_params:
+            del query_params['page']
+        context['query_params'] = query_params
+        print(query_params)
         return context
 
     def get_queryset(self):
@@ -78,10 +85,22 @@ class ItemsListView(ListView):
             .exclude(deleted=True)
         )
 
+        # color = self.request.GET.get('color', '')
+        # if color:
+        #     color_query = Q(color_group__name_en__icontains=color.lower().strip())
+        #     items = items.filter(color_query)
+
+        selected_colors = self.request.GET.getlist('color')
+        if selected_colors:
+            items = items.filter(color_group__name_en__in=selected_colors)
+
+        # queried_sizes = self.request.GET.get('sizes', '').split(',')
+        # if queried_sizes[0]:
+        #     items = items.filter(sizes__size__in=queried_sizes)
+
         return items
 
     def get_paginate_by(self, queryset):
         paginate_by = self.request.GET.get('show', 12)
 
         return paginate_by
-

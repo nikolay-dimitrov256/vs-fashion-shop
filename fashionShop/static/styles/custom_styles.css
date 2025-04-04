@@ -11,3 +11,31 @@
     width: 8rem;
 }
 
+.logo_container {
+    width: 10em;
+    & {
+        @media (max-width: 479px) {
+            width: 8em;
+        }
+    }
+}
+
+.logo_container a {
+    display: block;
+    width: 100%;
+}
+
+.logo_container img
+{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.filter_form {
+
+}
+
+.filter_form label {
+    display: block;
+}
