@@ -1724,3 +1724,17 @@ section
 {
 	color: #fe4c50;
 }
+
+.filter_form {
+
+}
+
+.filter_form label {
+    display: block;
+}
+
+.filter_form input[type="checkbox"]:checked {
+    border: none;
+    accent-color: #fe4c50;
+}
+
