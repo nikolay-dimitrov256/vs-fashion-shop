@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static %}
+{% load shipping %}
 
 <!-- Header -->
 <header class="header trans_300">
@@ -10,7 +11,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					<div class="top_nav_left">free shipping on all u.s orders over $50</div>
+					<div class="top_nav_left">{% trans 'free shipping on all orders over' %} {% free_shipping_string request %}</div>
 				</div>
 				<div class="col-md-6 text-right">
 					<div class="top_nav_right">
@@ -20,14 +21,12 @@
 
 							<li class="currency">
 								<a href="#">
-									usd
+									{{ request.session.currency|default:'bgn' }}
 									<i class="fa fa-angle-down"></i>
 								</a>
 								<ul class="currency_selection">
-									<li><a href="#">cad</a></li>
-									<li><a href="#">aud</a></li>
-									<li><a href="#">eur</a></li>
-									<li><a href="#">gbp</a></li>
+									<li><a href="#" onclick="changeCurrency('BGN')">bgn</a></li>
+									<li><a href="#" onclick="changeCurrency('EUR')">eur</a></li>
 								</ul>
 							</li>
 							<li class="language">
@@ -184,9 +183,21 @@
 	<input id="language-input" type="hidden" name="language" value="">
 </form>
 
+<form action="{% url 'set-currency' %}" method="post" id="currency-form">
+	{% csrf_token %}
+	<input name="next" type="hidden" value="{{ request.get_full_path }}">
+	<input id="currency-input" type="hidden" name="currency" value="">
+</form>
+
 <script>
 	function changeLanguage(language) {
 		document.getElementById('language-input').value = language;
 		document.getElementById('language-form').submit();
+	}
+
+	function changeCurrency(currency) {
+	console.log(currency);
+	document.getElementById('currency-input').value = currency;
+	document.getElementById('currency-form').submit();
 	}
 </script>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-01 09:45+0300\n"
+"POT-Creation-Date: 2025-04-06 18:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,10 +62,6 @@ msgstr "име"
 #: fashionShop/accounts/models.py:56
 msgid "last name"
 msgstr "фамилия"
-
-#: fashionShop/common/views.py:9
-msgid "Welcome to my online store"
-msgstr "Добре дошли в моя онлайн магазин!"
 
 #: fashionShop/items/models.py:108
 msgid "item"
@@ -127,6 +123,18 @@ msgstr "стил"
 msgid "styles"
 msgstr "стилове"
 
+#: fashionShop/settings.py:243
+msgid "lv"
+msgstr "лв"
+
+#: fashionShop/settings.py:244
+msgid "EUR"
+msgstr "EUR"
+
+#: templates/common/header.html:14
+msgid "free shipping on all orders over"
+msgstr "безплатна доставка за всички поръчки над"
+
 #: templates/common/header.html:54 templates/common/header.html:152
 msgid "Anonymous"
 msgstr "Анонимен"
@@ -147,7 +155,11 @@ msgstr "Вход"
 msgid "Register"
 msgstr "Регистрация"
 
-#: templates/items/category.html:189
+#: templates/items/category.html:34
+msgid "Elegant"
+msgstr "Елегантни"
+
+#: templates/items/category.html:210
 msgid "see more"
 msgstr "виж повече"
 
@@ -166,3 +178,6 @@ msgstr "Допълнителна информация"
 #: templates/items/single.html:252
 msgid "Complete your vision:"
 msgstr "Подходящи комбинации:"
+
+#~ msgid "Welcome to my online store"
+#~ msgstr "Добре дошли в моя онлайн магазин!"

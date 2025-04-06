@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from decouple import config
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -237,3 +238,12 @@ cloudinary.config(
     secure=True,  # Ensures image urls are https
 )
 MEDIA_URL = '/media/'
+
+CURRENCY_NAMES = {
+    'BGN': _('lv'),
+    'EUR': _('EUR')
+}
+FREE_DELIVERY_THRESHOLD = {
+    'BGN': 150,
+    'EUR': 75,
+}

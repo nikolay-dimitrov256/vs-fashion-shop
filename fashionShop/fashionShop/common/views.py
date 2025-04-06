@@ -1,18 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 
+from fashionShop import settings
 
-def home(request):
-    context = {
-        'greeting': _('Welcome to my online store'),
-        'number': 12342342.69,
-        'current_date': timezone.now(),
-        'redirect_to': request.path
-    }
 
-    return render(request, 'common/test.html', context)
+def set_currency(request):
+    if request.method == 'POST':
+        currency = request.POST.get('currency')
+        request.session['currency'] = currency
+
+    next_page = request.POST.get('next', 'home')
+
+    return redirect(next_page)
 
 
 class HomeView(TemplateView):
