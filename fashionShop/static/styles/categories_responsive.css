@@ -161,6 +161,15 @@
 		margin-top: 20px;
 		margin-bottom: 65px;
 	}
+	.filter_form {
+		display: flex;
+		flex-wrap: wrap;
+		/* gap: 1em; */
+		align-content: flex-start;
+	}
+	.filter_form label {
+		margin-right: 1em;
+	}
 }
 
 /************

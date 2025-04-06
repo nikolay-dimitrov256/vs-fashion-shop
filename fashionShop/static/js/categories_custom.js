@@ -35,7 +35,6 @@ jQuery(document).ready(function($)
 	var menuActive = false;
 	var hamburgerClose = $('.hamburger_close');
 	var fsOverlay = $('.fs_menu_overlay');
-	const colorForm = document.getElementById('color_select');
 
 	setHeader();
 
@@ -54,8 +53,8 @@ jQuery(document).ready(function($)
 	initFavorite();
 	initFixProductBorder();
 	initIsotopeFiltering();
-	initPriceSlider();
-	//initCheckboxes(colorForm);
+	// initPriceSlider();
+	initCheckboxes();
 	initPagination();
 
 	/* 
@@ -412,113 +411,22 @@ jQuery(document).ready(function($)
 
 	*/
 
-    function initCheckboxes(form)
+    function initCheckboxes()
     {
-		// For this function to work properly, the input element where the values are stored
-		// should have a propety data-form = form.id
-		// Also the li elements should have a property in the format data-<name of input element>
+		const filterForms = document.querySelectorAll('.filter_form');
+		filterForms.forEach(form => {
+			const showToggleElement = form.querySelector('.show_toggle');
+			const showMoreDivElement = form.querySelector('.show_more');
+			const showLessHiddenDivElement = form.querySelector('.show_less');
 
-		// const hiddenInputElement = form.querySelector(`input[data-form="${form.id}"]`);
+			showToggleElement.addEventListener('click', ()=>{
+				const spanElementToHide = showMoreDivElement.querySelector('span');
+				const spanElementToShow = showLessHiddenDivElement.querySelector('span');
 
-    	if($('.checkboxes li').length)
-    	{
-    		var boxes = $('.checkboxes li');
-			// const colorInputElement = document.getElementById('selected_color');
-			
-			
-    		boxes.each(function()
-    		{
-    			var box = $(this);
-				const liElementValue = box[0].getAttribute(`data-${hiddenInputElement.name}`);
-				
-    			box.on('click', function()
-    			{
-    				if(box.hasClass('active'))
-    				{
-    					box.find('i').removeClass('fa-square');
-    					box.find('i').addClass('fa-square-o');
-    					box.toggleClass('active');
-						// if (box[0].getAttribute(`data-${hiddenInputElement.name}`)) {
-						// 	console.log('trying to uncheck');
-							
-						// 	hiddenInputElement.value = hiddenInputElement
-						// 											.value
-						// 											.split(',')
-						// 											.remove(box[0].getAttribute(`data-${hiddenInputElement.name}`))
-						// 											.join(',');
-						// } else {
-						// 	console.log('undecided');
-							
-						// }
-    				}
-    				else
-    				{
-    					box.find('i').removeClass('fa-square-o');
-    					box.find('i').addClass('fa-square');
-    					box.toggleClass('active');
-
-						// If the li element is not 'all' and the input element has a value
-						// if (liElementValue && hiddenInputElement.value) {
-						// 	console.log('trying to check');							
-						// 	clearCheckboxes(liElementValue); // Clear the 'all' checkbox
-						// 	console.log(hiddenInputElement.value);	
-						// 	const valueAsArray = hiddenInputElement.value.split(',')
-						// 	valueAsArray.push(liElementValue);						
-						// 	hiddenInputElement.value = valueAsArray.join(',');
-						// } else if (liElementValue) {
-						// 	// If the li element in not 'all' and the input element has no value
-						// 	clearCheckboxes(liElementValue); // Clear the 'all' checkbox
-						// 	hiddenInputElement.value = liElementValue;
-						// } else {
-						// 	// If the li element is 'all'
-						// 	console.log('trying to clear');
-							
-						// 	clearCheckboxes('');
-						// 	hiddenInputElement.value = '';
-						// }
-    				}
-    				// box.toggleClass('active');
-					form.submit();
-    			});
-    		});
-
-    		if($('.show_more').length)
-    		{
-    			var checkboxes = $('.checkboxes');
-
-    			$('.show_more').on('click', function()
-    			{
-    				checkboxes.toggleClass('active');
-    			});
-    		}
-    	};
-
-		function clearCheckboxes(boxValue) {
-			const checkboxes = form.querySelectorAll('li');
-			
-			// If a box with a value is clicked
-			if(boxValue) {
-				// Clear the first checkbox, which should be 'all'
-				checkboxes[0].classList.remove('active');
-				checkboxes[0].querySelector('i').classList.remove('fa-square');
-				if(!checkboxes[0].querySelector('i').classList.contains('fa-square-o')){
-					checkboxes[0].querySelector('i').classList.add('fa-square-o');
-				}
-				
-				return;
-			}
-			
-			// If the 'all' checkbox is clicked, clear all others
-			checkboxes.forEach(box, ()=>{
-				if(box.getAttribute(`data-${hiddenInputElement.name}`)) {
-					box.classList.remove('active');
-					box.querySelector('i').classList.remove('fa-square');
-					if(!box.querySelector('i').classList.contains('fa-square-o')){
-						box.querySelector('i').classList.add('fa-square-o');
-					}
-				}
+				showMoreDivElement.append(spanElementToShow);
+				showLessHiddenDivElement.append(spanElementToHide);
 			});
-		}
+		});
     }
 
 	function initPagination() {
