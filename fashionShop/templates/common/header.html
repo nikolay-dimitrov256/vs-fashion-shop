@@ -79,16 +79,36 @@
 			<div class="row">
 				<div class="col-lg-12 text-right">
 					<div class="logo_container">
-						<a href="#"><img src="{% static 'images/logo.png' %}" alt="logo"></span></a>
+						<a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="logo"></span></a>
 					</div>
 					<nav class="navbar">
 						<ul class="navbar_menu">
-							<li><a href="#">home</a></li>
-							<li><a href="#">shop</a></li>
-							<li><a href="#">promotion</a></li>
-							<li><a href="#">pages</a></li>
-							<li><a href="#">blog</a></li>
-							<li><a href="contact.html">contact</a></li>
+							<li><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
+							<li class="has-dropdown">
+								<a href="#" data-toggle="dropdown"
+								   onclick="document.querySelector('.dropdown').classList.toggle('show');"
+								>
+									{% trans 'categories' %} <i class="fa fa-angle-down"></i>
+								</a>
+								<ul class="dropdown">
+									<li><a href="#">{% trans 'pants' %}</a></li>
+									<li><a href="#">{% trans 'skirts' %}</a></li>
+									<li><a href="#">{% trans 'dresses' %}</a></li>
+									<li><a href="#">{% trans 'shirts' %}</a></li>
+									<li><a href="#">{% trans 'blouses' %}</a></li>
+									<li><a href="#">{% trans 'blazers' %}</a></li>
+									<li><a href="#">{% trans 'suits' %}</a></li>
+									<li><a href="#">{% trans 'jackets' %}</a></li>
+									<li><a href="#">{% trans 'vests' %}</a></li>
+									<li><a href="#">{% trans 'tunics' %}</a></li>
+									<li><a href="#">{% trans 'coats' %}</a></li>
+								</ul>
+							</li>
+							<li><a href="#">{% trans 'new' %}</a></li>
+							<li><a href="#">{% trans 'bestsellers' %}</a></li>
+							<li><a href="#">{% trans 'sale' %}</a></li>
+<!--							<li><a href="#">{% trans 'our shops' %}</a></li>-->
+<!--							<li><a href="#">{% trans 'contacts' %}</a></li>-->
 						</ul>
 						<ul class="navbar_user">
 							<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
@@ -118,14 +138,12 @@
 		<ul class="menu_top_nav">
 			<li class="menu_item has-children">
 				<a href="#">
-					usd
+					{{ request.session.currency|default:'bgn' }}
 					<i class="fa fa-angle-down"></i>
 				</a>
 				<ul class="menu_selection">
-					<li><a href="#">cad</a></li>
-					<li><a href="#">aud</a></li>
-					<li><a href="#">eur</a></li>
-					<li><a href="#">gbp</a></li>
+					<li><a href="#" onclick="changeCurrency('BGN')">bgn</a></li>
+					<li><a href="#" onclick="changeCurrency('EUR')">eur</a></li>
 				</ul>
 			</li>
 			<li class="menu_item has-children">
@@ -163,12 +181,12 @@
 				{% endif %}
 				</ul>
 			</li>
-			<li class="menu_item"><a href="#">home</a></li>
-			<li class="menu_item"><a href="#">shop</a></li>
-			<li class="menu_item"><a href="#">promotion</a></li>
-			<li class="menu_item"><a href="#">pages</a></li>
-			<li class="menu_item"><a href="#">blog</a></li>
-			<li class="menu_item"><a href="#">contact</a></li>
+			<li class="menu_item"><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
+			<li class="menu_item"><a href="#">{% trans 'new' %}</a></li>
+			<li class="menu_item"><a href="#">{% trans 'categories' %}</a></li>
+			<li class="menu_item"><a href="#">{% trans 'sale' %}</a></li>
+			<li class="menu_item"><a href="#">{% trans 'our shops' %}</a></li>
+			<li class="menu_item"><a href="#">{% trans 'contacts' %}</a></li>
 		</ul>
 	</div>
 </div>
