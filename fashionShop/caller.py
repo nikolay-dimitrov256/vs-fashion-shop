@@ -1,9 +1,9 @@
 import requests
 
-url = 'https://vilistil.com/vs/item/10003'
+url = 'https://vilistil.com/vs/cat/dresses'
 
 response = requests.get(url)
 
 data = response.json()
 
-print(response.status_code)
+print(data)

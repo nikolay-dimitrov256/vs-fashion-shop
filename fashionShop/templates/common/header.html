@@ -135,59 +135,77 @@
 <div class="hamburger_menu">
 	<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
 	<div class="hamburger_menu_content text-right">
-		<ul class="menu_top_nav">
-			<li class="menu_item has-children">
-				<a href="#">
-					{{ request.session.currency|default:'bgn' }}
-					<i class="fa fa-angle-down"></i>
-				</a>
-				<ul class="menu_selection">
-					<li><a href="#" onclick="changeCurrency('BGN')">bgn</a></li>
-					<li><a href="#" onclick="changeCurrency('EUR')">eur</a></li>
-				</ul>
-			</li>
-			<li class="menu_item has-children">
-				<a href="#">
-				{% if request.LANGUAGE_CODE == 'bg' %}
-					<span class="fi fi-bg"></span>
-				{% elif request.LANGUAGE_CODE == 'en' %}
-					<span class="fi fi-gb"></span>
-				{% else %}
-					<span class="fi fi-bg"></span>
-				{% endif %}
-					<i class="fa fa-angle-down"></i>
-				</a>
-				<ul class="menu_selection">
-					<li><a href="#" onclick="changeLanguage('bg')"><span class="fi fi-bg"></span></a></li>
-					<li><a href="#" onclick="changeLanguage('en')"><span class="fi fi-gb"></span></a></li>
-				</ul>
-			</li>
-			<li class="menu_item has-children">
-				<a href="#">
-				{% if request.user.is_authenticated %}
-					{{ request.user.email }}
-				{% else %}
-					{% trans 'Anonymous' %}
-				{% endif %}
-					<i class="fa fa-angle-down"></i>
-				</a>
-				<ul class="menu_selection">
-				{% if request.user.is_authenticated %}
-					<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>{% trans 'My Account' %}</a></li>
-					<li><a href="#" onclick="document.getElementById('logout-form').submit()"><i class="fa fa-sign-out" aria-hidden="true"></i>{% trans 'Log out' %}</a></li>
-				{% else %}
-					<li><a href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>{% trans 'Sign In' %}</a></li>
-					<li><a href="{% url 'register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>{% trans 'Register' %}</a></li>
-				{% endif %}
-				</ul>
-			</li>
-			<li class="menu_item"><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
-			<li class="menu_item"><a href="#">{% trans 'new' %}</a></li>
-			<li class="menu_item"><a href="#">{% trans 'categories' %}</a></li>
-			<li class="menu_item"><a href="#">{% trans 'sale' %}</a></li>
-			<li class="menu_item"><a href="#">{% trans 'our shops' %}</a></li>
-			<li class="menu_item"><a href="#">{% trans 'contacts' %}</a></li>
-		</ul>
+		<nav class="mobile_nav">
+			<ul class="menu_top_nav">
+				<li class="menu_item has-children">
+					<a href="#">
+						{{ request.session.currency|default:'bgn' }}
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+						<li><a href="#" onclick="changeCurrency('BGN')">bgn</a></li>
+						<li><a href="#" onclick="changeCurrency('EUR')">eur</a></li>
+					</ul>
+				</li>
+				<li class="menu_item has-children">
+					<a href="#">
+					{% if request.LANGUAGE_CODE == 'bg' %}
+						<span class="fi fi-bg"></span>
+					{% elif request.LANGUAGE_CODE == 'en' %}
+						<span class="fi fi-gb"></span>
+					{% else %}
+						<span class="fi fi-bg"></span>
+					{% endif %}
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+						<li><a href="#" onclick="changeLanguage('bg')"><span class="fi fi-bg"></span></a></li>
+						<li><a href="#" onclick="changeLanguage('en')"><span class="fi fi-gb"></span></a></li>
+					</ul>
+				</li>
+				<li class="menu_item has-children">
+					<a href="#">
+					{% if request.user.is_authenticated %}
+						{{ request.user.email }}
+					{% else %}
+						{% trans 'Anonymous' %}
+					{% endif %}
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+					{% if request.user.is_authenticated %}
+						<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>{% trans 'My Account' %}</a></li>
+						<li><a href="#" onclick="document.getElementById('logout-form').submit()"><i class="fa fa-sign-out" aria-hidden="true"></i>{% trans 'Log out' %}</a></li>
+					{% else %}
+						<li><a href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>{% trans 'Sign In' %}</a></li>
+						<li><a href="{% url 'register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>{% trans 'Register' %}</a></li>
+					{% endif %}
+					</ul>
+				</li>
+				<li class="menu_item"><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
+				<li class="menu_item has-children">
+					<a href="#" onclick="document.querySelector('.mobile_dropdown').classList.toggle('show');">
+					{% trans 'categories' %} <i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection mobile_dropdown">
+						<li><a href="#">{% trans 'pants' %}</a></li>
+						<li><a href="#">{% trans 'skirts' %}</a></li>
+						<li><a href="#">{% trans 'dresses' %}</a></li>
+						<li><a href="#">{% trans 'shirts' %}</a></li>
+						<li><a href="#">{% trans 'blouses' %}</a></li>
+						<li><a href="#">{% trans 'blazers' %}</a></li>
+						<li><a href="#">{% trans 'suits' %}</a></li>
+						<li><a href="#">{% trans 'jackets' %}</a></li>
+						<li><a href="#">{% trans 'vests' %}</a></li>
+						<li><a href="#">{% trans 'tunics' %}</a></li>
+						<li><a href="#">{% trans 'coats' %}</a></li>
+					</ul>
+				</li>
+				<li class="menu_item"><a href="#">{% trans 'new' %}</a></li>
+				<li class="menu_item"><a href="#">{% trans 'bestsellers' %}</a></li>
+				<li class="menu_item"><a href="#">{% trans 'sale' %}</a></li>
+			</ul>
+		</nav>
 	</div>
 </div>
 

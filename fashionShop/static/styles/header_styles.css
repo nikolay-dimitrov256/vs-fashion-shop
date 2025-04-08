@@ -8,19 +8,17 @@
 }
 
 .dropdown {
-    padding-inline-start: 0;
-    unicode-bidi: unset;
     text-align: center;
     display: block;
     position: absolute;
     top: -200vh;
     opacity: 0;
     background-color: #fff;
-    /* transition: all 0.3s ease-in-out; */
+    /* transition: all 0.3s ease; */
 }
 
 .dropdown.show {
-    top: calc(100% + 1.1rem);
+    top: calc(100% + 1.15rem);
     opacity: 1;
 }
 
@@ -32,4 +30,16 @@
 
 .dropdown li a {
     padding-block: 0.8em;
+}
+
+.mobile_nav > ul > li > a {
+    font-weight: 600;
+}
+
+.mobile_nav li a {
+    letter-spacing: 0.5px;
+}
+
+.hamburger_menu.active {
+    overflow: auto;
 }
