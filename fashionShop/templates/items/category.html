@@ -17,8 +17,10 @@
 
 			<div class="breadcrumbs d-flex flex-row align-items-center">
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+					{% block breadcrumbs %}
+					<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
+					<li class="active"><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
+					{% endblock %}
 				</ul>
 			</div>
 
@@ -28,15 +30,31 @@
 				{% block categories %}
 				<div class="sidebar_section">
 					<div class="sidebar_title">
-						<h5>Styles</h5>
+						<h5>{% trans 'styles'|capfirst %}</h5>
 					</div>
 					<ul class="sidebar_categories">
-						<li><a href="#">{% trans 'Elegant' %}</a></li>
-						<li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Women</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li><a href="#">New Arrivals</a></li>
-						<li><a href="#">Collection</a></li>
-						<li><a href="#">Shop</a></li>
+						<li class="active"><a href="{% url 'all-items' %}"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>{% trans 'elegant'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'official'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'office'|capfirst %}</a></li>
+					</ul>
+				</div>
+				<div class="sidebar_section">
+					<div class="sidebar_title">
+						<h5>{% trans 'categories'|capfirst %}</h5>
+					</div>
+					<ul class="sidebar_categories">
+						<li class="active"><a href="{% url 'all-items' %}"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>{% trans 'all'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'pants'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'skirts'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'dresses'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'shirts'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'blouses'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'tunics'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'blazers'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'suits'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'jackets'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'coats'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'vests'|capfirst %}</a></li>
 					</ul>
 				</div>
 				{% endblock %}

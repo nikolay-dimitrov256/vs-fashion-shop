@@ -164,11 +164,28 @@
 	.filter_form {
 		display: flex;
 		flex-wrap: wrap;
-		/* gap: 1em; */
 		align-content: flex-start;
 	}
 	.filter_form label {
 		margin-right: 1em;
+	}
+	.sidebar_categories {
+		display: flex;
+		/* gap: 1em; */
+		flex-wrap: wrap;
+	}
+	.sidebar_categories li {
+		margin-right: 1em;
+	}
+	.breadcrumbs {
+		margin-bottom: 1em;
+	}
+	.sidebar_section {
+		margin-bottom: 1em;
+		padding-bottom: 1em;
+	}
+	.product-grid {
+		margin-top: 1.5em;
 	}
 }
 

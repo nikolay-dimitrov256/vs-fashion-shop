@@ -91,7 +91,7 @@
 									{% trans 'categories' %} <i class="fa fa-angle-down"></i>
 								</a>
 								<ul class="dropdown">
-									<li><a href="#">{% trans 'all' %}</a></li>
+									<li><a href="{% url 'all-items' %}">{% trans 'all' %}</a></li>
 									<li><a href="#">{% trans 'pants' %}</a></li>
 									<li><a href="#">{% trans 'skirts' %}</a></li>
 									<li><a href="#">{% trans 'dresses' %}</a></li>
@@ -189,7 +189,7 @@
 					{% trans 'categories' %} <i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="menu_selection mobile_dropdown">
-						<li><a href="#">{% trans 'all' %}</a></li>
+						<li><a href="{% url 'all-items' %}">{% trans 'all' %}</a></li>
 						<li><a href="#">{% trans 'pants' %}</a></li>
 						<li><a href="#">{% trans 'skirts' %}</a></li>
 						<li><a href="#">{% trans 'dresses' %}</a></li>

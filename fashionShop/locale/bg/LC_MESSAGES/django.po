@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-07 13:23+0300\n"
+"POT-Creation-Date: 2025-04-08 16:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,8 +87,8 @@ msgstr "наличност"
 msgid "category"
 msgstr "категория"
 
-#: fashionShop/items/models.py:191 templates/common/header.html:88
-#: templates/common/header.html:180
+#: fashionShop/items/models.py:191 templates/common/header.html:91
+#: templates/common/header.html:189
 msgid "categories"
 msgstr "категории"
 
@@ -136,87 +136,95 @@ msgstr "EUR"
 msgid "free shipping on all orders over"
 msgstr "безплатна доставка за всички поръчки над"
 
-#: templates/common/header.html:54 templates/common/header.html:164
+#: templates/common/header.html:54 templates/common/header.html:172
 msgid "Anonymous"
 msgstr "Анонимен"
 
-#: templates/common/header.html:60 templates/common/header.html:170
+#: templates/common/header.html:60 templates/common/header.html:178
 msgid "My Account"
 msgstr "Моят Акаунт"
 
-#: templates/common/header.html:61 templates/common/header.html:171
+#: templates/common/header.html:61 templates/common/header.html:179
 msgid "Log out"
 msgstr "Изход"
 
-#: templates/common/header.html:63 templates/common/header.html:173
+#: templates/common/header.html:63 templates/common/header.html:181
 msgid "Sign In"
 msgstr "Вход"
 
-#: templates/common/header.html:64 templates/common/header.html:174
+#: templates/common/header.html:64 templates/common/header.html:182
 msgid "Register"
 msgstr "Регистрация"
 
-#: templates/common/header.html:86 templates/common/header.html:178
+#: templates/common/header.html:86 templates/common/header.html:186
 msgid "home"
 msgstr "начало"
 
-#: templates/common/header.html:87 templates/common/header.html:179
-msgid "new"
-msgstr "ново"
+#: templates/common/header.html:94 templates/common/header.html:192
+msgid "all"
+msgstr "всички"
 
-#: templates/common/header.html:90
+#: templates/common/header.html:95 templates/common/header.html:193
 msgid "pants"
 msgstr "панталони"
 
-#: templates/common/header.html:91
+#: templates/common/header.html:96 templates/common/header.html:194
 msgid "skirts"
 msgstr "поли"
 
-#: templates/common/header.html:92
+#: templates/common/header.html:97 templates/common/header.html:195
 msgid "dresses"
 msgstr "рокли"
 
-#: templates/common/header.html:93
+#: templates/common/header.html:98 templates/common/header.html:196
 msgid "shirts"
 msgstr "ризи"
 
-#: templates/common/header.html:94
+#: templates/common/header.html:99 templates/common/header.html:197
 msgid "blouses"
 msgstr "блузи"
 
-#: templates/common/header.html:95
-msgid "blazers"
-msgstr "сака"
-
-#: templates/common/header.html:96
-msgid "suits"
-msgstr "костюми"
-
-#: templates/common/header.html:97
-msgid "jackets"
-msgstr "якета"
-
-#: templates/common/header.html:98
-msgid "vests"
-msgstr "елеци"
-
-#: templates/common/header.html:99
+#: templates/common/header.html:100 templates/common/header.html:198
 msgid "tunics"
 msgstr "туники"
 
-#: templates/common/header.html:100
+#: templates/common/header.html:101 templates/common/header.html:199
+msgid "blazers"
+msgstr "сака"
+
+#: templates/common/header.html:102 templates/common/header.html:200
+msgid "suits"
+msgstr "костюми"
+
+#: templates/common/header.html:103 templates/common/header.html:201
+msgid "jackets"
+msgstr "якета"
+
+#: templates/common/header.html:104 templates/common/header.html:202
 msgid "coats"
 msgstr "манта"
 
-#: templates/common/header.html:103 templates/common/header.html:181
+#: templates/common/header.html:105 templates/common/header.html:203
+msgid "vests"
+msgstr "елеци"
+
+#: templates/common/header.html:108 templates/common/header.html:206
+msgid "new"
+msgstr "ново"
+
+#: templates/common/header.html:109 templates/common/header.html:207
+msgid "bestsellers"
+msgstr "най-продавани"
+
+#: templates/common/header.html:110 templates/common/header.html:208
 msgid "sale"
 msgstr "намалени"
 
-#: templates/common/header.html:104 templates/common/header.html:182
+#: templates/common/header.html:111
 msgid "our shops"
 msgstr "нашите магазини"
 
-#: templates/common/header.html:105 templates/common/header.html:183
+#: templates/common/header.html:112
 msgid "contacts"
 msgstr "контакти"
 
@@ -242,7 +250,7 @@ msgstr "Допълнителна информация"
 
 #: templates/items/single.html:252
 msgid "Complete your vision:"
-msgstr "Подходящи комбинации:"
+msgstr "Подходящи съчетания:"
 
 #~ msgid "Welcome to my online store"
 #~ msgstr "Добре дошли в моя онлайн магазин!"
