@@ -19,7 +19,8 @@
 				<ul>
 					{% block breadcrumbs %}
 					<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
-					<li class="active"><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
+					<li><a href="{% url 'all-items' %}">{% trans 'clothes'|capfirst %}</a></li>
+					<li class="active"><a href="{% url 'jackets' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'jackets'|capfirst %}</a></li>
 					{% endblock %}
 				</ul>
 			</div>
@@ -33,28 +34,15 @@
 						<h5>{% trans 'styles'|capfirst %}</h5>
 					</div>
 					<ul class="sidebar_categories">
-						<li><a href="#">{% trans 'elegant'|capfirst %}</a></li>
-						<li><a href="#">{% trans 'official'|capfirst %}</a></li>
-						<li><a href="#">{% trans 'office'|capfirst %}</a></li>
+						<li><a href="#">{% trans 'elegant jackets'|capfirst %}</a></li>
 					</ul>
 				</div>
 				<div class="sidebar_section">
 					<div class="sidebar_title">
-						<h5>{% trans 'categories'|capfirst %}</h5>
+						<h5>{% trans 'sub categories'|capfirst %}</h5>
 					</div>
 					<ul class="sidebar_categories">
-						<li class="active"><a href="{% url 'all-items' %}"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>{% trans 'all'|capfirst %}</a></li>
-						<li><a href="{% url 'pants' %}">{% trans 'pants'|capfirst %}</a></li>
-						<li><a href="{% url 'skirts' %}">{% trans 'skirts'|capfirst %}</a></li>
-						<li><a href="{% url 'dresses' %}">{% trans 'dresses'|capfirst %}</a></li>
-						<li><a href="{% url 'shirts' %}">{% trans 'shirts'|capfirst %}</a></li>
-						<li><a href="{% url 'blouses' %}">{% trans 'blouses'|capfirst %}</a></li>
-						<li><a href="{% url 'tunics' %}">{% trans 'tunics'|capfirst %}</a></li>
-						<li><a href="{% url 'blazers' %}">{% trans 'blazers'|capfirst %}</a></li>
-						<li><a href="{% url 'suits' %}">{% trans 'suits'|capfirst %}</a></li>
-						<li><a href="{% url 'jackets' %}">{% trans 'jackets'|capfirst %}</a></li>
-						<li><a href="{% url 'coats' %}">{% trans 'coats'|capfirst %}</a></li>
-						<li><a href="{% url 'vests' %}">{% trans 'vests'|capfirst %}</a></li>
+
 					</ul>
 				</div>
 				{% endblock %}

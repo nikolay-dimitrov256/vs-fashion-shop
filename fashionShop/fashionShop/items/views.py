@@ -4,7 +4,7 @@ from django.db.models import OuterRef, Subquery, Prefetch, Q
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from fashionShop.items.models import Item, ColorGroup, Stock, Size
+from fashionShop.items.models import Item, ColorGroup, Stock, Size, SubCategory
 from fashionShop.pictures.models import Picture
 
 
@@ -63,14 +63,12 @@ class ItemsListView(ListView):
         context['colors'] = ColorGroup.objects.all()
         context['sizes'] = Size.objects.filter(items__isnull=False).values_list('size', flat=True).distinct()
         context['paginate_by'] = self.get_paginate_by(self.queryset)
-        #context['available_colors'] = ColorGroup.objects.all()
-        #context['color'] = self.request.GET.get('color', '')
 
         query_params = self.request.GET.copy()
         if 'page' in query_params:
             del query_params['page']
         context['query_params'] = query_params
-        print(query_params)
+
         return context
 
     def get_queryset(self):
@@ -86,11 +84,6 @@ class ItemsListView(ListView):
             .exclude(deleted=True)
         )
 
-        # color = self.request.GET.get('color', '')
-        # if color:
-        #     color_query = Q(color_group__name_en__icontains=color.lower().strip())
-        #     items = items.filter(color_query)
-
         selected_colors = self.request.GET.getlist('color')
         if selected_colors:
             items = items.filter(color_group__name_en__in=selected_colors)
@@ -105,3 +98,124 @@ class ItemsListView(ListView):
         paginate_by = self.request.GET.get('show', 12)
 
         return paginate_by
+
+
+class PantsListView(ItemsListView):
+    template_name = 'items/pants.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='pants')
+
+        return items
+
+
+class SkirtsListView(ItemsListView):
+    template_name = 'items/skirts.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='skirts')
+
+        return items
+
+
+class DressesListView(ItemsListView):
+    template_name = 'items/dresses.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='dresses')
+
+        return items
+
+
+class ShirtsListView(ItemsListView):
+    template_name = 'items/shirts.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='shirts')
+
+        return items
+
+
+class BlousesListView(ItemsListView):
+    template_name = 'items/blouses.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='blouses')
+
+        return items
+
+
+class TunicsListView(ItemsListView):
+    template_name = 'items/tunics.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='tunics')
+
+        return items
+
+
+class BlazersListView(ItemsListView):
+    template_name = 'items/blazers.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='blazers')
+
+        return items
+
+
+class SuitsListView(ItemsListView):
+    template_name = 'items/suits.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='suits')
+
+        return items
+
+
+class JacketsListView(ItemsListView):
+    template_name = 'items/jackets.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='jackets')
+
+        return items
+
+
+class CoatsListView(ItemsListView):
+    template_name = 'items/coats.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='coats')
+
+        return items
+
+
+class VestsListView(ItemsListView):
+    template_name = 'items/vests.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='vests')
+
+        return items
