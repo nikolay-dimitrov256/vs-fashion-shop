@@ -1,0 +1,38 @@
+@media only screen and (max-width: 991px) {
+    .footer_nav_container {
+        height: 130px;
+        margin-top: 0;
+    }
+
+    .footer_social {
+        height: 130px;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .footer_nav_container
+	{
+		height: auto;
+		margin-top: 65px;
+	}
+	.footer_social
+	{
+		height: auto;
+		margin-top: 20px;
+		margin-bottom: 65px;
+	}
+}
+
+@media only screen and (max-width: 479px) {
+    .footer_nav_container
+	{
+		margin-top: 35px;
+	}
+
+    .footer_social
+	{
+		margin-top: 5px;
+		margin-bottom: 30px;
+	}
+}
