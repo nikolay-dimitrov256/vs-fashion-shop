@@ -52,6 +52,10 @@ class Item(models.Model):
         blank=True,
     )
 
+    is_bestseller = models.BooleanField(
+        default=False,
+    )
+
     category = models.ForeignKey(
         to='Category',
         on_delete=models.SET_NULL,
