@@ -34,7 +34,7 @@ class HomeView(TemplateView):
             .prefetch_related(
                 Prefetch(
                     'pictures',
-                    queryset=Picture.objects.all(),  # Only fetch the first image
+                    queryset=Picture.objects.all(),
                     to_attr='pictures_list'
                 )
             )
@@ -46,11 +46,11 @@ class HomeView(TemplateView):
             .prefetch_related(
                 Prefetch(
                     'pictures',
-                    queryset=Picture.objects.all()[:1],  # Only fetch the first image
-                    to_attr='main_picture_list'
+                    queryset=Picture.objects.all(),
+                    to_attr='pictures_list'
                 )
             )
-            .filter(is_bestseller=True)
+            .filter(is_bestseller=True)[:10]
         )
 
         return context

@@ -1697,7 +1697,6 @@ section
 {
 	/* width: 20%; */
 	/* height: 380px; */
-	height: auto;
 	cursor: pointer;
 }
 .product-item::after

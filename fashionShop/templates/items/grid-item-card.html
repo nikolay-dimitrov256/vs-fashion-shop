@@ -1,0 +1,28 @@
+{% load i18n %}
+
+<div class="product-item">
+    <div class="product discount product_filter">
+        <a href="{% url 'item-details' item.slug %}" class="product_image">
+            <img src="{{ item.pictures_list.0.image.url }}" alt="{{ item.name }}">
+        </a>
+        {% if item.is_discounted %}
+        <div class="favorite favorite_left"></div>
+        {% else %}
+        <div class="favorite"></div>
+        {% endif %}
+        {% if item.is_discounted %}
+        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }}лв</span></div>
+        {% elif item.is_new %}
+        <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>{% trans 'new' %}</span></div>
+        {% endif %}
+        <div class="product_info">
+            <h6 class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></h6>
+            {% if item.is_discounted %}
+            <div class="product_price">{{ item.discount_price }}лв<span>{{ item.price }}лв</span></div>
+            {% else %}
+            <div class="product_price">{{ item.price }}лв</div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="red_button add_to_cart_button"><a href="{% url 'item-details' item.slug %}">{% trans 'see more' %}</a></div>
+</div>
