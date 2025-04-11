@@ -43,6 +43,7 @@ class HomeView(TemplateView):
         )
         context['bestsellers'] = (
             Item.objects
+            .exclude(deleted=True)
             .prefetch_related(
                 Prefetch(
                     'pictures',

@@ -57,6 +57,7 @@
     font-size: 18px;
 }
 
+/* Fixes the positioning on the main banner elements */
 .main_slider_content {
     text-align: right;
     width: 100%;
@@ -65,5 +66,5 @@
 .main_slider_content h1 {
     width: 50%;
     margin-left: auto;
-    /* float: right; */
 }
+/* Fixes the positioning on the main banner elements */
