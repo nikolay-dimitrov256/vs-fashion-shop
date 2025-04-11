@@ -309,7 +309,7 @@ msgstr "най-продавани"
 
 #: templates/common/header.html:114 templates/common/header.html:146
 msgid "sale"
-msgstr "намалени"
+msgstr "промоции"
 
 #: templates/common/home.html:35 templates/items/category.html:36
 #| msgid "Elegant"

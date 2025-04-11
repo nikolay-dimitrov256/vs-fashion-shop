@@ -87,6 +87,7 @@
 							<li><a href="{% url 'dresses' %}">{% trans 'dresses' %}</a></li>
 							<li><a href="{% url 'blazers' %}">{% trans 'blazers' %}</a></li>
 							<li><a href="{% url 'shirts' %}">{% trans 'shirts' %}</a></li>
+							<li><a href="{% url 'pants' %}">{% trans 'pants' %}</a></li>
 							<li class="has-dropdown">
 								<a href="#" data-toggle="dropdown"
 								   onclick="document.querySelector('.dropdown').classList.toggle('show');"
@@ -110,7 +111,6 @@
 								</ul>
 							</li>
 							<li><a href="#">{% trans 'new' %}</a></li>
-							<li><a href="#">{% trans 'bestsellers' %}</a></li>
 							<li><a href="#">{% trans 'sale' %}</a></li>
 						</ul>
 						<ul class="navbar_user">
@@ -142,8 +142,6 @@
 			<ul class="menu_top_nav">
 				<li class="menu_item"><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
 				<li class="menu_item"><a href="#">{% trans 'new' %}</a></li>
-				<li class="menu_item"><a href="#">{% trans 'bestsellers' %}</a></li>
-				<li class="menu_item"><a href="#">{% trans 'sale' %}</a></li>
 <!--				<li class="menu_item">-->
 <!--					<a href="#" onclick="document.querySelector('.mobile_dropdown').classList.toggle('show');">-->
 <!--					{% trans 'categories' %} <i class="fa fa-angle-down"></i>-->
@@ -161,6 +159,7 @@
 				<li class="menu_item"><a href="{% url 'vests' %}">{% trans 'vests' %}</a></li>
 				<li class="menu_item"><a href="{% url 'skirts' %}">{% trans 'skirts' %}</a></li>
 				<li class="menu_item"><a href="{% url 'all-items' %}">{% trans 'all clothes' %}</a></li>
+				<li class="menu_item"><a href="#">{% trans 'sale' %}</a></li>
 <!--					</ul>-->
 <!--				</li>-->
 				<li class="menu_item has-children">
