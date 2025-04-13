@@ -92,11 +92,11 @@ class Item(models.Model):
         blank=True,
     )
 
-    # sizes = models.ManyToManyField(
-    #     to=Size,
-    #     through=Stock,
-    #     related_name='items'
-    # )
+    sizes = models.ManyToManyField(
+        to=Size,
+        through='Stock',
+        related_name='items'
+    )
 
     linked_items = models.ManyToManyField(
         to='Item',
@@ -152,3 +152,32 @@ class Item(models.Model):
 
     def __str__(self):
         return str(self.item_number)
+
+
+class Stock(models.Model):
+    item = models.ForeignKey(
+        to=Item,
+        on_delete=models.CASCADE,
+    )
+
+    store = models.ForeignKey(
+        to='stores.Store',
+        on_delete=models.CASCADE,
+    )
+
+    size = models.ForeignKey(
+        to=Size,
+        on_delete=models.CASCADE,
+    )
+
+    quantity = models.IntegerField(
+        default=0
+    )
+
+    class Meta:
+        unique_together = [['item', 'store', 'size']]
+        verbose_name = _('stock')
+        verbose_name_plural = _('stock')
+
+    def __str__(self):
+        return f'{str(self.item)} - {self.size.size}'

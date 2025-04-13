@@ -1,3 +1,4 @@
+import time
 from pprint import pprint
 
 from django.contrib import admin
@@ -6,7 +7,7 @@ from admin_extra_buttons.utils import HttpResponseRedirectToReferrer
 import requests
 
 from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock, ColorGroup, Pattern
-from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock
+from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock, load_items_from_bisoft
 from fashionShop.pictures.admin import PictureInline
 from fashionShop.settings import BISOFT_API_URL, BISOFT_API_KEY
 
@@ -32,15 +33,13 @@ class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
             change_form=True,
             html_attrs={'style': 'background-color:#88FF88;color:black'})
     def load_items(self, request):
-        params = {
-            'key': BISOFT_API_KEY
-        }
-        response = requests.get(f'{BISOFT_API_URL}items/initial-items', params=params)
-        data = response.json()
+        start = time.time()
 
-        parse_and_save_items(data)
+        load_items_from_bisoft()
 
-        self.message_user(request, 'items loaded')
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
         # Optional: returns HttpResponse
         return HttpResponseRedirectToReferrer(request)
 
