@@ -1,11 +1,15 @@
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
 from django.db import models
 from django.utils.text import slugify
-from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from fashionShop.common.utils import transliterate
+from fashionShop.items.models.categories import Category, SubCategory
+from fashionShop.items.models.colors import ColorGroup
+from fashionShop.items.models.pattern import Pattern
+from fashionShop.items.models.size import Size
+from fashionShop.items.models.style import Style
 
 
 class Item(models.Model):
@@ -57,7 +61,7 @@ class Item(models.Model):
     )
 
     category = models.ForeignKey(
-        to='Category',
+        to=Category,
         on_delete=models.SET_NULL,
         related_name='items',
         null=True,
@@ -65,7 +69,7 @@ class Item(models.Model):
     )
 
     sub_category = models.ForeignKey(
-        to='SubCategory',
+        to=SubCategory,
         on_delete=models.SET_NULL,
         related_name='items',
         null=True,
@@ -73,7 +77,7 @@ class Item(models.Model):
     )
 
     pattern = models.ForeignKey(
-        to='Pattern',
+        to=Pattern,
         on_delete=models.SET_NULL,
         related_name='items',
         null=True,
@@ -81,18 +85,18 @@ class Item(models.Model):
     )
 
     color_group = models.ForeignKey(
-        to='ColorGroup',
+        to=ColorGroup,
         on_delete=models.SET_NULL,
         related_name='items',
         null=True,
         blank=True,
     )
 
-    sizes = models.ManyToManyField(
-        to='Size',
-        through='Stock',
-        related_name='items'
-    )
+    # sizes = models.ManyToManyField(
+    #     to=Size,
+    #     through=Stock,
+    #     related_name='items'
+    # )
 
     linked_items = models.ManyToManyField(
         to='Item',
@@ -100,7 +104,7 @@ class Item(models.Model):
     )
 
     style = models.ManyToManyField(
-        to='Style',
+        to=Style,
         blank=True,
     )
 
@@ -119,6 +123,11 @@ class Item(models.Model):
             self.category = self.sub_category.category
 
         super().save(*args, **kwargs)
+
+    def get_available_sizes(self):
+        available_sizes = Size.objects.filter(stock__item=self, stock__quantity__gt=0)
+
+        return available_sizes.distinct()
 
     @property
     def is_discounted(self):
@@ -143,121 +152,3 @@ class Item(models.Model):
 
     def __str__(self):
         return str(self.item_number)
-
-
-class Size(models.Model):
-    size = models.CharField(
-        max_length=15,
-        primary_key=True,
-    )
-
-    def __str__(self):
-        return self.size
-
-    class Meta:
-        verbose_name = _('size')
-        verbose_name_plural = _('sizes')
-        ordering = ['size']
-
-
-class Stock(models.Model):
-    item = models.ForeignKey(
-        to=Item,
-        on_delete=models.CASCADE,
-    )
-
-    size = models.ForeignKey(
-        to=Size,
-        on_delete=models.CASCADE,
-    )
-
-    quantity = models.IntegerField(
-        default=0
-    )
-
-    class Meta:
-        unique_together = [['item', 'size']]
-        verbose_name = _('stock')
-        verbose_name_plural = _('stock')
-
-    def __str__(self):
-        return str(self.item)
-
-
-class Category(models.Model):
-    name = models.CharField(
-        max_length=20,
-        blank=True
-    )
-
-    class Meta:
-        verbose_name = _('category')
-        verbose_name_plural = _('categories')
-
-    def __str__(self):
-        return self.name
-
-
-class SubCategory(models.Model):
-    name = models.CharField(
-        max_length=50,
-        blank=True
-    )
-
-    category = models.ForeignKey(
-        to=Category,
-        on_delete=models.CASCADE,
-        related_name='sub_categories',
-    )
-
-    class Meta:
-        verbose_name = _('subcategory')
-        verbose_name_plural = _('subcategories')
-
-    def __str__(self):
-        return self.name
-
-
-class Pattern(models.Model):
-    name = models.CharField(
-        max_length=100,
-        unique=True,
-    )
-
-    class Meta:
-        verbose_name = _('pattern')
-        verbose_name_plural = _('patterns')
-
-    def __str__(self):
-        return self.name
-
-
-class ColorGroup(models.Model):
-    name = models.CharField(
-        max_length=20,
-        unique=True,
-    )
-
-    color_code = models.CharField(
-        max_length=10,
-    )
-
-    class Meta:
-        verbose_name = _('color group')
-        verbose_name_plural = _('color groups')
-
-    def __str__(self):
-        return self.name
-
-
-class Style(models.Model):
-    name = models.CharField(
-        max_length=20,
-    )
-
-    class Meta:
-        verbose_name = _('style')
-        verbose_name_plural = _('styles')
-
-    def __str__(self):
-        return self.name

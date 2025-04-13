@@ -18,7 +18,7 @@ class ItemDetailView(DetailView):
             Item.objects
             .select_related('category', 'sub_category', 'pattern', 'color_group')
             .prefetch_related(
-                'sizes',
+                # 'sizes',
                 'linked_items',
                 'linked_items__pictures',
                 'pictures',
@@ -61,7 +61,7 @@ class ItemsListView(ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
 
         context['colors'] = ColorGroup.objects.all()
-        context['sizes'] = Size.objects.filter(items__isnull=False).values_list('size', flat=True).distinct()
+        context['sizes'] = Stock.objects.values_list('size', flat=True).distinct()
         context['paginate_by'] = self.get_paginate_by(self.queryset)
 
         query_params = self.request.GET.copy()

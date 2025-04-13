@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from fashionShop.common.models import Address
+
+
+@admin.register(Address)
+class AddressAdmin(admin.ModelAdmin):
+    pass

@@ -41,6 +41,7 @@ PROJECT_APPS = [
     'fashionShop.common',
     'fashionShop.items',
     'fashionShop.pictures',
+    'fashionShop.stores',
 ]
 
 INSTALLED_APPS = [
@@ -228,7 +229,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-BISOFT_API_URL = 'http://127.0.0.1:8001/'
+BISOFT_API_URL = 'https://vilistil.com/vs/'
 BISOFT_API_KEY = 'lol_key'
 
 cloudinary.config(
