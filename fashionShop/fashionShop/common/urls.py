@@ -7,5 +7,6 @@ urlpatterns = [
     path('single/', views.SingleView.as_view(), name='single'),
     path('categories/', views.CategoryView.as_view(), name='categories'),
     path('contact/', views.ContactView.as_view(), name='contact'),
+    path('contact-message/', views.ContactMessageView.as_view(), name='contact-message')
     # path('set-currency/', views.set_currency, name='set-currency')
 ]

@@ -79,3 +79,26 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.author
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(
+        max_length=50,
+    )
+
+    email = models.EmailField(
+        max_length=50,
+        null=True,
+        blank=True,
+    )
+
+    phone = models.CharField(
+        max_length=15,
+        null=True,
+        blank=True,
+    )
+
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name

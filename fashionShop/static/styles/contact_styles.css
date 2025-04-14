@@ -964,11 +964,11 @@ section
 {
 	font-size: 16px;
 	font-weight: 400;
-	margin-bottom: 0px;
+	margin-bottom: 0.5em;
 }
 .contact_contents div
 {
-	margin-top: 22px;
+	margin-top: 2em;
 }
 .contact_contents div:first-of-type
 {
