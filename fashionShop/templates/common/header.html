@@ -18,7 +18,7 @@
 						<ul class="top_nav_menu">
 
 							<!-- Currency / Language / My Account -->
-
+							{% comment %}
 							<li class="currency">
 								<a href="#">
 									{{ request.session.currency|default:'bgn' }}
@@ -29,6 +29,7 @@
 									<li><a href="#" onclick="changeCurrency('EUR')">eur</a></li>
 								</ul>
 							</li>
+							{% endcomment %}
 							<li class="language">
 								<a href="#">
 									{% if request.LANGUAGE_CODE == 'bg' %}
@@ -142,11 +143,6 @@
 			<ul class="menu_top_nav">
 				<li class="menu_item"><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
 				<li class="menu_item"><a href="#">{% trans 'new' %}</a></li>
-<!--				<li class="menu_item">-->
-<!--					<a href="#" onclick="document.querySelector('.mobile_dropdown').classList.toggle('show');">-->
-<!--					{% trans 'categories' %} <i class="fa fa-angle-down"></i>-->
-<!--					</a>-->
-<!--					<ul class="menu_selection mobile_dropdown">-->
 				<li class="menu_item"><a href="{% url 'dresses' %}">{% trans 'dresses' %}</a></li>
 				<li class="menu_item"><a href="{% url 'blazers' %}">{% trans 'blazers' %}</a></li>
 				<li class="menu_item"><a href="{% url 'pants' %}">{% trans 'pants' %}</a></li>
@@ -160,8 +156,7 @@
 				<li class="menu_item"><a href="{% url 'skirts' %}">{% trans 'skirts' %}</a></li>
 				<li class="menu_item"><a href="{% url 'all-items' %}">{% trans 'all clothes' %}</a></li>
 				<li class="menu_item"><a href="#">{% trans 'sale' %}</a></li>
-<!--					</ul>-->
-<!--				</li>-->
+				{% comment %}
 				<li class="menu_item has-children">
 					<a href="#">
 						{{ request.session.currency|default:'bgn' }}
@@ -172,6 +167,7 @@
 						<li><a href="#" onclick="changeCurrency('EUR')">eur</a></li>
 					</ul>
 				</li>
+				{% endcomment %}
 				<li class="menu_item has-children">
 					<a href="#">
 					{% if request.LANGUAGE_CODE == 'bg' %}
@@ -221,22 +217,23 @@
     <input name="next" type="hidden" value="{{ request.get_full_path }}">
 	<input id="language-input" type="hidden" name="language" value="">
 </form>
-
+{% comment %}
 <form action="{% url 'set-currency' %}" method="post" id="currency-form">
 	{% csrf_token %}
 	<input name="next" type="hidden" value="{{ request.get_full_path }}">
 	<input id="currency-input" type="hidden" name="currency" value="">
 </form>
-
+{% endcomment %}
 <script>
 	function changeLanguage(language) {
 		document.getElementById('language-input').value = language;
 		document.getElementById('language-form').submit();
 	}
-
+{% comment %}
 	function changeCurrency(currency) {
 	console.log(currency);
 	document.getElementById('currency-input').value = currency;
 	document.getElementById('currency-form').submit();
 	}
+{% endcomment %}
 </script>

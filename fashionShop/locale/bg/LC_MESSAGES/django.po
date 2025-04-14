@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 16:13+0300\n"
+"POT-Creation-Date: 2025-04-14 14:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,78 +63,120 @@ msgstr "име"
 msgid "last name"
 msgstr "фамилия"
 
-#: fashionShop/items/models.py:108
-msgid "item"
-msgstr "продукт"
+#: fashionShop/common/choices.py:6
+#, fuzzy
+#| msgid "made in Bulgaria"
+msgid "Bulgaria"
+msgstr "произведено в България"
 
-#: fashionShop/items/models.py:109
-msgid "items"
-msgstr "продукти"
+#: fashionShop/common/models.py:9
+msgid "country"
+msgstr "страна"
 
-#: fashionShop/items/models.py:154
-msgid "size"
-msgstr "размер"
+#: fashionShop/common/models.py:16
+msgid "province"
+msgstr "област"
 
-#: fashionShop/items/models.py:155
-msgid "sizes"
-msgstr "размери"
+#: fashionShop/common/models.py:21
+msgid "town"
+msgstr "населено място"
 
-#: fashionShop/items/models.py:176 fashionShop/items/models.py:177
-msgid "stock"
-msgstr "наличност"
+#: fashionShop/common/models.py:26
+msgid "postal code"
+msgstr ""
 
-#: fashionShop/items/models.py:190
+#: fashionShop/common/models.py:31
+msgid "street"
+msgstr "улица"
+
+#: fashionShop/common/models.py:38
+msgid "number"
+msgstr "номер"
+
+#: fashionShop/common/models.py:45
+msgid "building"
+msgstr "блок"
+
+#: fashionShop/common/models.py:52
+msgid "entrance"
+msgstr "вход"
+
+#: fashionShop/common/models.py:59
+msgid "apartment"
+msgstr "апартамент"
+
+#: fashionShop/items/models/categories.py:12
 msgid "category"
 msgstr "категория"
 
-#: fashionShop/items/models.py:191 templates/common/header.html:95
-#: templates/common/header.html:149 templates/items/category.html:43
+#: fashionShop/items/models/categories.py:13 templates/common/header.html:98
+#: templates/items/category.html:43
 msgid "categories"
 msgstr "категории"
 
-#: fashionShop/items/models.py:210
+#: fashionShop/items/models/categories.py:32
 msgid "subcategory"
 msgstr "подкатегория"
 
-#: fashionShop/items/models.py:211
+#: fashionShop/items/models/categories.py:33
 msgid "subcategories"
 msgstr "подкатегории"
 
-#: fashionShop/items/models.py:224
-msgid "pattern"
-msgstr "кройка"
-
-#: fashionShop/items/models.py:225
-msgid "patterns"
-msgstr "кройки"
-
-#: fashionShop/items/models.py:242
+#: fashionShop/items/models/colors.py:16
 msgid "color group"
 msgstr "цветова група"
 
-#: fashionShop/items/models.py:243
+#: fashionShop/items/models/colors.py:17
 msgid "color groups"
 msgstr "цветови групи"
 
-#: fashionShop/items/models.py:255
+#: fashionShop/items/models/item.py:116
+msgid "item"
+msgstr "продукт"
+
+#: fashionShop/items/models/item.py:117
+msgid "items"
+msgstr "продукти"
+
+#: fashionShop/items/models/item.py:180 fashionShop/items/models/item.py:181
+msgid "stock"
+msgstr "наличност"
+
+#: fashionShop/items/models/pattern.py:12
+msgid "pattern"
+msgstr "кройка"
+
+#: fashionShop/items/models/pattern.py:13
+msgid "patterns"
+msgstr "кройки"
+
+#: fashionShop/items/models/size.py:15
+msgid "size"
+msgstr "размер"
+
+#: fashionShop/items/models/size.py:16
+msgid "sizes"
+msgstr "размери"
+
+#: fashionShop/items/models/style.py:11
 msgid "style"
 msgstr "стил"
 
-#: fashionShop/items/models.py:256 templates/items/blazers.html:34
-#: templates/items/blouses.html:34 templates/items/category.html:33
-#: templates/items/coats.html:34 templates/items/dresses.html:34
-#: templates/items/jackets.html:34 templates/items/pants.html:34
-#: templates/items/shirts.html:34 templates/items/skirts.html:34
-#: templates/items/suits.html:34 templates/items/tunics.html:34
-#: templates/items/vests.html:34
+#: fashionShop/items/models/style.py:12 templates/items/blazers.html:14
+#: templates/items/blouses.html:14 templates/items/category.html:33
+#: templates/items/coats.html:14 templates/items/dresses.html:14
+#: templates/items/jackets.html:14 templates/items/pants.html:14
+#: templates/items/shirts.html:14 templates/items/skirts.html:14
+#: templates/items/suits.html:14 templates/items/tunics.html:14
+#: templates/items/vests.html:14
 msgid "styles"
 msgstr "стилове"
 
-#: fashionShop/settings.py:243
+#: fashionShop/settings.py:244
 msgid "lv"
 msgstr "лв"
 
-#: fashionShop/settings.py:244
+#: fashionShop/settings.py:245
 msgid "EUR"
 msgstr "EUR"
 
@@ -159,18 +201,16 @@ msgid "free shipping*"
 msgstr "безплатна доставка*"
 
 #: templates/common/benefit.html:32
-#| msgid "free shipping on all orders over"
 msgid "*Free shipping on all orders over"
 msgstr "*безплатна доставка за всички поръчки над"
 
 #: templates/common/benefit.html:40
-msgid "14 days return"
-msgstr "Връщане до 14 дни"
+msgid "Order with phone number"
+msgstr "Поръчка с телефонен номер"
 
 #: templates/common/benefit.html:41
-msgid "You can ask for refund 14 days after delivery"
-msgstr ""
-"Можете да поискате замяна, или връщане на парите до 14 дни от доставката"
+msgid "You can order with just your phone number. No registration necessary."
+msgstr "Може да поръчате с телефонен номер. Регистрацията не е задължителна."
 
 #: templates/common/footer.html:34
 msgid "About us"
@@ -208,111 +248,108 @@ msgstr "Политика за поверителност"
 msgid "free shipping on all orders over"
 msgstr "безплатна доставка за всички поръчки над"
 
-#: templates/common/header.html:54 templates/common/header.html:197
+#: templates/common/header.html:56 templates/common/header.html:194
 msgid "Anonymous"
 msgstr "Анонимен"
 
-#: templates/common/header.html:60 templates/common/header.html:203
+#: templates/common/header.html:62 templates/common/header.html:200
 msgid "My Account"
 msgstr "Моят Акаунт"
 
-#: templates/common/header.html:61 templates/common/header.html:204
+#: templates/common/header.html:63 templates/common/header.html:201
 msgid "Log out"
 msgstr "Изход"
 
-#: templates/common/header.html:63 templates/common/header.html:206
+#: templates/common/header.html:65 templates/common/header.html:203
 msgid "Sign In"
 msgstr "Вход"
 
-#: templates/common/header.html:64 templates/common/header.html:207
+#: templates/common/header.html:66 templates/common/header.html:204
 msgid "Register"
 msgstr "Регистрация"
 
-#: templates/common/header.html:86 templates/common/header.html:143
-#: templates/items/blazers.html:21 templates/items/blouses.html:21
-#: templates/items/category.html:21 templates/items/coats.html:21
-#: templates/items/dresses.html:21 templates/items/jackets.html:21
-#: templates/items/pants.html:21 templates/items/shirts.html:21
-#: templates/items/skirts.html:21 templates/items/suits.html:21
-#: templates/items/tunics.html:21 templates/items/vests.html:21
+#: templates/common/header.html:88 templates/common/header.html:145
+#: templates/items/blazers.html:6 templates/items/blouses.html:6
+#: templates/items/category.html:21 templates/items/coats.html:6
+#: templates/items/dresses.html:6 templates/items/jackets.html:6
+#: templates/items/pants.html:6 templates/items/shirts.html:6
+#: templates/items/skirts.html:6 templates/items/suits.html:6
+#: templates/items/tunics.html:6 templates/items/vests.html:6
 msgid "home"
 msgstr "начало"
 
-#: templates/common/header.html:87 templates/common/header.html:98
-#: templates/common/header.html:152 templates/items/category.html:49
-#: templates/items/dresses.html:23
+#: templates/common/header.html:89 templates/common/header.html:101
+#: templates/common/header.html:147 templates/items/category.html:49
+#: templates/items/dresses.html:8
 msgid "dresses"
 msgstr "рокли"
 
-#: templates/common/header.html:88 templates/common/header.html:99
-#: templates/common/header.html:153 templates/items/blazers.html:23
+#: templates/common/header.html:90 templates/common/header.html:102
+#: templates/common/header.html:148 templates/items/blazers.html:8
 #: templates/items/category.html:53
 msgid "blazers"
 msgstr "сака"
 
-#: templates/common/header.html:89 templates/common/header.html:101
-#: templates/common/header.html:155 templates/items/category.html:50
+#: templates/common/header.html:91 templates/common/header.html:104
+#: templates/common/header.html:150 templates/items/category.html:50
 msgid "shirts"
 msgstr "ризи"
 
-#: templates/common/header.html:100 templates/common/header.html:154
-#: templates/items/category.html:47 templates/items/pants.html:23
+#: templates/common/header.html:92 templates/common/header.html:103
+#: templates/common/header.html:149 templates/items/category.html:47
+#: templates/items/pants.html:8
 msgid "pants"
 msgstr "панталони"
 
-#: templates/common/header.html:102 templates/common/header.html:156
-#: templates/items/blouses.html:23 templates/items/category.html:51
+#: templates/common/header.html:105 templates/common/header.html:151
+#: templates/items/blouses.html:8 templates/items/category.html:51
 msgid "blouses"
 msgstr "блузи"
 
-#: templates/common/header.html:103 templates/common/header.html:157
-#: templates/items/category.html:52 templates/items/tunics.html:23
+#: templates/common/header.html:106 templates/common/header.html:152
+#: templates/items/category.html:52 templates/items/tunics.html:8
 msgid "tunics"
 msgstr "туники"
 
-#: templates/common/header.html:104 templates/common/header.html:158
-#: templates/items/category.html:54 templates/items/suits.html:23
+#: templates/common/header.html:107 templates/common/header.html:153
+#: templates/items/category.html:54 templates/items/suits.html:8
 msgid "suits"
 msgstr "костюми"
 
-#: templates/common/header.html:105 templates/common/header.html:159
-#: templates/items/category.html:55 templates/items/jackets.html:23
+#: templates/common/header.html:108 templates/common/header.html:154
+#: templates/items/category.html:55 templates/items/jackets.html:8
 msgid "jackets"
 msgstr "якета"
 
-#: templates/common/header.html:106 templates/common/header.html:160
-#: templates/items/category.html:56 templates/items/coats.html:23
+#: templates/common/header.html:109 templates/common/header.html:155
+#: templates/items/category.html:56 templates/items/coats.html:8
 msgid "coats"
 msgstr "манта"
 
-#: templates/common/header.html:107 templates/common/header.html:161
-#: templates/items/category.html:57 templates/items/vests.html:23
+#: templates/common/header.html:110 templates/common/header.html:156
+#: templates/items/category.html:57 templates/items/vests.html:8
 msgid "vests"
 msgstr "елеци"
 
-#: templates/common/header.html:108 templates/common/header.html:162
-#: templates/items/category.html:48 templates/items/skirts.html:23
+#: templates/common/header.html:111 templates/common/header.html:157
+#: templates/items/category.html:48 templates/items/skirts.html:8
 msgid "skirts"
 msgstr "поли"
 
-#: templates/common/header.html:109 templates/common/header.html:163
+#: templates/common/header.html:112 templates/common/header.html:158
 msgid "all clothes"
 msgstr "всички дрехи"
 
-#: templates/common/header.html:112 templates/common/header.html:144
+#: templates/common/header.html:115 templates/common/header.html:146
+#: templates/items/grid-item-card.html:16
 msgid "new"
 msgstr "ново"
 
-#: templates/common/header.html:113 templates/common/header.html:145
-msgid "bestsellers"
-msgstr "най-продавани"
-
-#: templates/common/header.html:114 templates/common/header.html:146
+#: templates/common/header.html:116 templates/common/header.html:159
 msgid "sale"
 msgstr "промоции"
 
 #: templates/common/home.html:35 templates/items/category.html:36
-#| msgid "Elegant"
 msgid "elegant"
 msgstr "елегантни"
 
@@ -324,48 +361,50 @@ msgstr "офис"
 msgid "official"
 msgstr "официални"
 
-#: templates/items/blazers.html:22 templates/items/blouses.html:22
-#: templates/items/category.html:22 templates/items/coats.html:22
-#: templates/items/dresses.html:22 templates/items/jackets.html:22
-#: templates/items/pants.html:22 templates/items/shirts.html:22
-#: templates/items/skirts.html:22 templates/items/suits.html:22
-#: templates/items/tunics.html:22 templates/items/vests.html:22
+#: templates/common/home.html:68
+msgid "New Arrivals"
+msgstr "Нови Предложения"
+
+#: templates/common/home.html:148
+#, fuzzy
+#| msgid "bestsellers"
+msgid "Best Sellers"
+msgstr "най-продавани"
+
+#: templates/items/blazers.html:7 templates/items/blouses.html:7
+#: templates/items/category.html:22 templates/items/coats.html:7
+#: templates/items/dresses.html:7 templates/items/jackets.html:7
+#: templates/items/pants.html:7 templates/items/shirts.html:7
+#: templates/items/single.html:33 templates/items/skirts.html:7
+#: templates/items/suits.html:7 templates/items/tunics.html:7
+#: templates/items/vests.html:7
 msgid "clothes"
 msgstr "дрехи"
 
-#: templates/items/blazers.html:37
+#: templates/items/blazers.html:17
 #, fuzzy
 #| msgid "blazers"
 msgid "elegant blazers"
 msgstr "елегантни сака"
 
-#: templates/items/blazers.html:38
+#: templates/items/blazers.html:18
 #, fuzzy
 #| msgid "blazers"
 msgid "office blazers"
 msgstr "офис сака"
 
-#: templates/items/blazers.html:43 templates/items/blouses.html:42
-#: templates/items/coats.html:42 templates/items/dresses.html:43
-#: templates/items/jackets.html:42 templates/items/pants.html:43
-#: templates/items/shirts.html:43 templates/items/skirts.html:43
-#: templates/items/suits.html:44 templates/items/tunics.html:42
-#: templates/items/vests.html:42
+#: templates/items/blazers.html:23 templates/items/blouses.html:22
+#: templates/items/coats.html:22 templates/items/dresses.html:23
+#: templates/items/jackets.html:22 templates/items/pants.html:23
+#: templates/items/shirts.html:23 templates/items/skirts.html:23
+#: templates/items/suits.html:24 templates/items/tunics.html:22
+#: templates/items/vests.html:22
 #, fuzzy
 #| msgid "subcategories"
 msgid "sub categories"
 msgstr "подкатегории"
 
-#: templates/items/blazers.html:217 templates/items/blouses.html:216
-#: templates/items/category.html:228 templates/items/coats.html:216
-#: templates/items/dresses.html:217 templates/items/jackets.html:216
-#: templates/items/pants.html:217 templates/items/shirts.html:217
-#: templates/items/skirts.html:217 templates/items/suits.html:218
-#: templates/items/tunics.html:216 templates/items/vests.html:216
-msgid "see more"
-msgstr "виж повече"
-
-#: templates/items/blouses.html:37
+#: templates/items/blouses.html:17
 #, fuzzy
 #| msgid "blouses"
 msgid "elegant blouses"
@@ -375,107 +414,122 @@ msgstr "елегантни блузи"
 msgid "all"
 msgstr "всички"
 
-#: templates/items/coats.html:37
+#: templates/items/category.html:233 templates/items/grid-item-card.html:27
+msgid "see more"
+msgstr "виж повече"
+
+#: templates/items/coats.html:17
 #, fuzzy
 #| msgid "Elegant"
 msgid "elegant coats"
 msgstr "елегантни манта"
 
-#: templates/items/dresses.html:37
+#: templates/items/dresses.html:17
 #, fuzzy
 #| msgid "dresses"
 msgid "elegant dresses"
 msgstr "елегантни рокли"
 
-#: templates/items/dresses.html:38
+#: templates/items/dresses.html:18
 #, fuzzy
 #| msgid "dresses"
 msgid "official dresses"
 msgstr "официални рокли"
 
-#: templates/items/jackets.html:37
+#: templates/items/jackets.html:17
 #, fuzzy
 #| msgid "jackets"
 msgid "elegant jackets"
 msgstr "елегантни якета"
 
-#: templates/items/pants.html:37
+#: templates/items/pants.html:17
 #, fuzzy
 #| msgid "Elegant"
 msgid "elegant pants"
 msgstr "елегантни панталони"
 
-#: templates/items/pants.html:38
+#: templates/items/pants.html:18
 msgid "office pants"
 msgstr "офис панталони"
 
-#: templates/items/pants.html:46
+#: templates/items/pants.html:26
 msgid "cigarette pants"
 msgstr "панталони цигара"
 
-#: templates/items/shirts.html:23
+#: templates/items/shirts.html:8
 msgid "women\\"
 msgstr "дамски"
 
-#: templates/items/shirts.html:37
+#: templates/items/shirts.html:17
 #, fuzzy
 #| msgid "shirts"
 msgid "elegant shirts"
 msgstr "елегантни ризи"
 
-#: templates/items/shirts.html:38
+#: templates/items/shirts.html:18
 #, fuzzy
 #| msgid "shirts"
 msgid "office shirts"
 msgstr "офис ризи"
 
-#: templates/items/single.html:135
+#: templates/items/single.html:32
+msgid "Home"
+msgstr "Начало"
+
+#: templates/items/single.html:139
 msgid "This model in other colors:"
 msgstr "Други цветове от този модел:"
 
-#: templates/items/single.html:185 templates/items/single.html:199
+#: templates/items/single.html:189 templates/items/single.html:203
 msgid "Details"
 msgstr "Детайли"
 
-#: templates/items/single.html:186 templates/items/single.html:231
+#: templates/items/single.html:190 templates/items/single.html:235
 msgid "Additional Information"
 msgstr "Допълнителна информация"
 
-#: templates/items/single.html:252
+#: templates/items/single.html:256
 msgid "Complete your vision:"
 msgstr "Подходящи съчетания:"
 
-#: templates/items/skirts.html:37
+#: templates/items/skirts.html:17
 #, fuzzy
 #| msgid "skirts"
 msgid "elegant skirts"
 msgstr "елегантни поли"
 
-#: templates/items/skirts.html:38
+#: templates/items/skirts.html:18
 #, fuzzy
 #| msgid "skirts"
 msgid "office skirts"
 msgstr "офис поли"
 
-#: templates/items/suits.html:37
+#: templates/items/suits.html:17
 #, fuzzy
 #| msgid "Elegant"
 msgid "elegant suits"
 msgstr "Елегантни костюми"
 
-#: templates/items/suits.html:38
+#: templates/items/suits.html:18
 msgid "office suits"
 msgstr "офис костюми"
 
-#: templates/items/suits.html:39
+#: templates/items/suits.html:19
 msgid "official suits"
 msgstr "официални костюми"
 
-#: templates/items/tunics.html:37
+#: templates/items/tunics.html:17
 #, fuzzy
 #| msgid "tunics"
 msgid "elegant tunics"
 msgstr "елегантни туники"
+
+#~ msgid "14 days return"
+#~ msgstr "Връщане до 14 дни"
+
+#~ msgid "You can ask for refund 14 days after delivery"
+#~ msgstr ""
+#~ "Можете да поискате замяна, или връщане на парите до 14 дни от доставката"
 
 #~ msgid "Welcome to my online store"
 #~ msgstr "Добре дошли в моя онлайн магазин!"

@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from django.db.models import OuterRef, Subquery, Prefetch, Q
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView

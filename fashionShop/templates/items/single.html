@@ -29,9 +29,13 @@
 
             <div class="breadcrumbs d-flex flex-row align-items-center">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
-                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
+                    <li><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
+                    <li><a href="{% url 'all-items' %}">{% trans 'clothes'|capfirst %}</a></li>
+                    <li><a href="{% url object.category.name_en %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{ object.category.name|capfirst }}</a></li>
+                    {% if object.sub_category %}
+                    <li><a href="{% url object.sub_category.name_en %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{ object.sub_category.name|capfirst }}</a></li>
+                    {% endif %}
+                    <li class="active"><a href="{% url 'item-details' object.slug %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{ object.name|lower|capfirst }}</a></li>
                 </ul>
             </div>
 
