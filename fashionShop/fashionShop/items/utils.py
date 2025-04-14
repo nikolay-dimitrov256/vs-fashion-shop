@@ -122,6 +122,8 @@ def load_items_from_bisoft():
 
     # Get store
     store = Store.objects.filter(id=0).first()
+    if store is None:
+        return None
 
     # Load color groups
     check_and_create_color_groups()
@@ -149,8 +151,9 @@ def load_items_from_bisoft():
     sizes_map = {s.size: s for s in all_sizes}
 
     # Get all items to be modified
-    existing_items = list(Item.objects.all())
-    existing_items_ids = {it.item_number for it in existing_items}
+    existing_items_list = list(Item.objects.all())
+    # existing_items_ids = {it.item_number for it in existing_items_list}
+    existing_items_map = {it.item_number: it for it in existing_items_list}
 
     # Get all items to be created
     new_items_list = []
@@ -160,30 +163,31 @@ def load_items_from_bisoft():
         item['item_number'] = int(item['item_number'])
         group_color_id = item.get('group_color', 0)
         color_group_name = BISOFT_COLOR_GROUPS.get(group_color_id, '')
+        color_group = color_group_map.get(color_group_name, None)
         category = category_map.get(item['category'], None)
 
-        if item['item_number'] in existing_items_ids:  # The item exists
-            existing_item = next((it for it in existing_items if it.item_number == item['item_number']), None)
+        if item['item_number'] in existing_items_map:  # The item exists
+            # existing_item = next((it for it in existing_items_list if it.item_number == item['item_number']), None)
+            existing_item = existing_items_map.get(item['item_number'])
             existing_item.name_bg = item['name_bg']
             existing_item.name_en = item['name_en']
-            existing_item.slug = slugify(f'{item['item_number']}-{transliterate(item['name_bg'])}')
+            existing_item.slug = slugify(f"{item['item_number']}-{transliterate(item['name_bg'])}")
             existing_item.description_bg = item['description_bg'] if '=' not in item['description_bg'] else ''
             existing_item.description_en = item['description_en'] if '=' not in item['description_en'] else ''
             existing_item.price = item['price']
             existing_item.discount_price = item['sale_price']
             existing_item.content_bg = item['content_bg']
             existing_item.content_en = item['content_en']
+
             existing_item.category = category
+            existing_item.color_group = color_group
 
-            if color_group_name:
-                existing_item.color_group = color_group_map.get(color_group_name, None)
-
-        else: # The item is new
+        else:  # The item is new
             item_data = {
                 'item_number': item['item_number'],
                 'name_bg': item['name_bg'],
                 'name_en': item['name_en'],
-                'slug': slugify(f'{item['item_number']}-{transliterate(item['name_bg'])}'),
+                'slug': slugify(f"{item['item_number']}-{transliterate(item['name_bg'])}"),
                 'description_bg': item['description_bg'] if '=' not in item['description_bg'] else '',
                 'description_en': item['description_en'] if '=' not in item['description_en'] else '',
                 'price': item['price'],
@@ -193,15 +197,13 @@ def load_items_from_bisoft():
             }
             new_item = Item(**item_data)
             new_item.category = category
-
-            if color_group_name:
-                new_item.color_group = color_group_map.get(color_group_name, None)
+            new_item.color_group = color_group
 
             new_items_list.append(new_item)
 
     # Modify existing items
     Item.objects.bulk_update(
-        list(existing_items),
+        existing_items_list,
         ['name_bg', 'name_en', 'slug', 'description_bg', 'description_en', 'price', 'discount_price',
          'content_bg', 'content_en', 'color_group', 'category']
     )
