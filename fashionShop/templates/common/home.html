@@ -2,6 +2,15 @@
 {% load static %}
 {% load i18n %}
 
+{% block title %}
+{% trans 'Online store for women\'s fashion Vili Style' %}
+{% endblock %}
+
+{% block meta %}
+<meta name="title" content="Онлайн магазин за дамска мода | Вили Стил">
+<meta name="description" content="Colo Shop Template">
+{% endblock %}
+
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
