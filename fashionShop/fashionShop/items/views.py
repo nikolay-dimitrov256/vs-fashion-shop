@@ -1,7 +1,7 @@
 from pprint import pprint
 
 from django.db.models import OuterRef, Subquery, Prefetch, Q
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 
 from fashionShop.items.models import Item, ColorGroup, Stock, Size, SubCategory
@@ -14,21 +14,20 @@ class ItemDetailView(DetailView):
 
     def get_object(self, queryset=None):
         # item = super().get_object(queryset)
-        item = (
+        item = get_object_or_404(
             Item.objects
             .select_related('category', 'sub_category', 'pattern', 'color_group')
             .prefetch_related(
-                # 'sizes',
                 'linked_items',
                 'linked_items__pictures',
                 'pictures',
-                # Prefetch(
-                #     'pattern__items',
-                #     queryset=Item.objects.exclude(pk=self.kwargs['pk']),
-                #     to_attr='other_colors'
-                # )
-            )
-            .get(slug=self.kwargs['slug'])
+                Prefetch(
+                    'pattern__items',
+                    queryset=Item.objects.exclude(Q(slug=self.kwargs['slug']) | Q(deleted=True)),
+                    to_attr='other_colors'
+                )
+            ),
+            slug=self.kwargs['slug']
         )
 
         item.detail_pictures = item.pictures.filter(is_detail=True)
@@ -42,12 +41,11 @@ class ItemDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['other_colors'] = (
-            Item.objects
-            .select_related('pattern')
-            .prefetch_related('pictures')
-            .filter(pattern=self.object.pattern)
-            .exclude(item_number=self.object.item_number)
+        context['available_sizes'] = (
+            Stock.objects
+            .filter(item=self.object, quantity__gt=0)
+            .values_list('size', flat=True)
+            .distinct()
         )
 
         return context
@@ -61,7 +59,7 @@ class ItemsListView(ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
 
         context['colors'] = ColorGroup.objects.all()
-        context['sizes'] = Stock.objects.values_list('size', flat=True).distinct()
+        context['sizes'] = Stock.objects.values_list('size', flat=True).order_by('size').distinct()
         context['paginate_by'] = self.get_paginate_by(self.queryset)
 
         query_params = self.request.GET.copy()
@@ -90,7 +88,10 @@ class ItemsListView(ListView):
 
         selected_sizes = self.request.GET.getlist('size')
         if selected_sizes:
-            items = items.filter(sizes__size__in=selected_sizes)
+            items = items.filter(
+                stock__quantity__gt=0,
+                stock__size__size__in=selected_sizes
+            )
 
         return items
 

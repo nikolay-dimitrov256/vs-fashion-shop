@@ -106,8 +106,8 @@
 <!--                    </ul>-->
 <!--                </div>-->
                 <div class="sizes d-flex flex-wrap">
-                    {% for size in object.sizes.all %}
-                    <div class="size">{{ size.size }}</div>
+                    {% for size in available_sizes %}
+                    <div class="size">{{ size }}</div>
                     {% endfor %}
                 </div>
                 <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
@@ -141,7 +141,7 @@
                 <div class="product_slider_container">
                     <div class="owl-carousel owl-theme product_slider">
 
-                        {% for item in other_colors %}
+                        {% for item in object.other_colors %}
                             {% include 'items/item-card.html' with item=item %}
                         {% endfor %}
                     </div>

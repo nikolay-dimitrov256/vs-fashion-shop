@@ -163,6 +163,7 @@ class Stock(models.Model):
     store = models.ForeignKey(
         to='stores.Store',
         on_delete=models.CASCADE,
+        default=0,
     )
 
     size = models.ForeignKey(
