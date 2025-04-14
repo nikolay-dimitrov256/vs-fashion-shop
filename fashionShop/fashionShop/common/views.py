@@ -1,4 +1,5 @@
 from datetime import timedelta
+from random import sample
 
 from django.db.models import Prefetch
 from django.shortcuts import render, redirect
@@ -8,6 +9,7 @@ from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 
 from fashionShop import settings
+from fashionShop.common.models import Feedback
 from fashionShop.items.models import Item
 from fashionShop.pictures.models import Picture
 
@@ -53,6 +55,9 @@ class HomeView(TemplateView):
             )
             .filter(is_bestseller=True)[:10]
         )
+        all_feedback = list(Feedback.objects.all())
+        feedback_sample = sample(all_feedback, 4)
+        context['feedback'] = feedback_sample
 
         return context
 

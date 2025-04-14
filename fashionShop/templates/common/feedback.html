@@ -1,0 +1,26 @@
+{% load i18n %}
+
+<div class="feed-back">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>{% trans 'Customers feedback' %}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="product-grid feedback">
+                    {% for message in feedback %}
+                    <div class="quote">
+                        <p class="author">{{ message.author }}</p>
+                        <p class="message">{{ message.comment }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

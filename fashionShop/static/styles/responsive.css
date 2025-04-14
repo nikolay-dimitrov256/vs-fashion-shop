@@ -261,6 +261,12 @@
 		margin-top: 20px;
 		margin-bottom: 65px;
 	}
+	.feedback {
+		display: block;
+	}
+	.quote {
+		margin-bottom: 1em;
+	}
 }
 
 /************
