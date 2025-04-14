@@ -1,262 +1,29 @@
-{% extends 'common/base.html' %}
+{% extends 'items/category.html' %}
 {% load static %}
 {% load i18n %}
 
-{% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/categories_styles.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/categories_responsive.css' %}">
+{% block breadcrumbs %}
+<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
+<li><a href="{% url 'all-items' %}">{% trans 'clothes'|capfirst %}</a></li>
+<li class="active"><a href="{% url 'blazers' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'blazers'|capfirst %}</a></li>
 {% endblock %}
 
-{% block content %}
-<div class="container product_section_container">
-	<div class="row">
-		<div class="col product_section clearfix">
-
-			<!-- Breadcrumbs -->
-
-			<div class="breadcrumbs d-flex flex-row align-items-center">
-				<ul>
-					{% block breadcrumbs %}
-					<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
-					<li><a href="{% url 'all-items' %}">{% trans 'clothes'|capfirst %}</a></li>
-					<li class="active"><a href="{% url 'blazers' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'blazers'|capfirst %}</a></li>
-					{% endblock %}
-				</ul>
-			</div>
-
-			<!-- Sidebar -->
-
-			<div class="sidebar">
-				{% block categories %}
-				<div class="sidebar_section">
-					<div class="sidebar_title">
-						<h5>{% trans 'styles'|capfirst %}</h5>
-					</div>
-					<ul class="sidebar_categories">
-						<li><a href="#">{% trans 'elegant blazers'|capfirst %}</a></li>
-						<li><a href="#">{% trans 'office blazers'|capfirst %}</a></li>
-					</ul>
-				</div>
-				<div class="sidebar_section">
-					<div class="sidebar_title">
-						<h5>{% trans 'sub categories'|capfirst %}</h5>
-					</div>
-					<ul class="sidebar_categories">
-
-					</ul>
-				</div>
-				{% endblock %}
-
-				<!-- Price Range Filtering -->
-<!--				<div class="sidebar_section">-->
-<!--					<div class="sidebar_title">-->
-<!--						<h5>Filter by Price</h5>-->
-<!--					</div>-->
-<!--					<p>-->
-<!--						<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">-->
-<!--					</p>-->
-<!--					<div id="slider-range"></div>-->
-<!--					<div class="filter_button"><span>filter</span></div>-->
-<!--				</div>-->
-
-				<!-- Sizes -->
-				<div class="sidebar_section">
-					<div class="sidebar_title">
-						<h5>Sizes</h5>
-					</div>
-					<form class="filter_form" id="size_select">
-						<input type="checkbox" class="show_toggle" id="size_toggle" style="display: none;">
-						{% for key, value in query_params.lists %}
-							{% if key != 'size' %}
-								{% for element in value %}
-								<input type="hidden" name="{{ key }}" value="{{ element }}">
-								{% endfor %}
-							{% endif %}
-						{% endfor %}
-						{% for size in sizes %}
-						<label class="box_label"><input type="checkbox" name="size" value="{{ size }}"
-							{% for key, value in query_params.lists %}
-								{% if key == 'size' and size in value %}
-								checked
-								{% endif %}
-							{% endfor %}
-						> {{ size }}</label>
-						{% endfor %}
-						<label class="show_more" for="size_toggle">
-							<span><span>+</span>Show More</span>
-						</label>
-						<button class="list_filter_button">Filter</button>
-						<div class="show_less" style="display: none;">
-							<span><span>-</span>Show Less</span>
-						</div>
-					</form>
-				</div>
-
-				<!-- Color -->
-				<div class="sidebar_section">
-					<div class="sidebar_title">
-						<h5>Color</h5>
-					</div>
-					<form class="filter_form" id="color_select">
-						<input type="checkbox" class="show_toggle" id="color_toggle" style="display: none;">
-						{% for key, value in query_params.lists %}
-							{% if key != 'color' %}
-								{% for element in value %}
-								<input type="hidden" name="{{ key }}" value="{{ element }}">
-								{% endfor %}
-							{% endif %}
-						{% endfor %}
-
-						{% for color in colors %}
-						<label class="box_label"><input type="checkbox" name="color" value="{{ color.name_en }}"
-							{% for key, value in query_params.lists %}
-								{% if key == 'color' and color.name_en in value %}
-								checked
-								{% endif %}
-							{% endfor %}
-						> {{ color.name }}</label>
-						{% endfor %}
-						<label class="show_more" for="color_toggle">
-							<span><span>+</span>Show More</span>
-						</label>
-						<button class="list_filter_button">Filter</button>
-						<div class="show_less" style="display: none;">
-							<span><span>-</span>Show Less</span>
-						</div>
-					</form>
-				</div>
-			</div>
-
-			<!-- Main Content -->
-
-			<div class="main_content">
-
-				<!-- Products -->
-
-				<div class="products_iso">
-					<div class="row">
-						<div class="col">
-
-							<!-- Product Sorting -->
-
-							<div class="product_sorting_container product_sorting_container_top">
-								<ul class="product_sorting">
-<!--									<li>-->
-<!--										<span class="type_sorting_text">Default Sorting</span>-->
-<!--										<i class="fa fa-angle-down"></i>-->
-<!--										<ul class="sorting_type">-->
-<!--											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default Sorting</span></li>-->
-<!--											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>-->
-<!--											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Product Name</span></li>-->
-<!--										</ul>-->
-<!--									</li>-->
-									<li>
-										<span>Show</span>
-										<span class="num_sorting_text">{{ paginate_by }}</span>
-										<i class="fa fa-angle-down"></i>
-										<form id="pagination_form">
-											{% for key, value in query_params.lists %}
-												{% if key != 'show' %}
-													{% for element in value %}
-													<input type="hidden" name="{{ key }}" value="{{ element }}">
-													{% endfor %}
-												{% endif %}
-											{% endfor %}
-											<input name="show" type="hidden" id="paginate_by" value="{{ paginate_by }}">
-											<ul class="sorting_num">
-												<li class="num_sorting_btn"><span>6</span></li>
-												<li class="num_sorting_btn"><span>12</span></li>
-												<li class="num_sorting_btn"><span>24</span></li>
-											</ul>
-										</form>
-									</li>
-								</ul>
-
-								{% include 'items/pagination.html' %}
-
-							</div>
-
-							<!-- Product Grid -->
-
-							<div class="product-grid">
-
-								{% for item in object_list %}
-								<div class="product-item">
-									<div
-										{% if item.is_discounted %}
-											class="product discount product_filter"
-										{% else %}
-											class="product product_filter"
-										{% endif %}
-									>
-										<a href="{% url 'item-details' item.slug %}" class="product_image">
-											<img src="{{ item.main_picture_list.0.image.url }}" alt="{{ item.name }}">
-										</a>
-										<div
-											{% if item.is_discounted %}
-												class="favorite favorite_left"
-											{% else %}
-												class="favorite"
-											{% endif %}
-										></div>
-										{% if item.is_discounted %}
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }} лв</span></div>
-										{% elif item.is_new %}
-											<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
-										{% endif %}
-										<div class="product_info">
-											<h6 class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></h6>
-											{% if item.is_discounted %}
-												<div class="product_price">{{ item.discount_price }} лв<span>{{ item.price }} лв</span></div>
-											{% else %}
-												<div class="product_price">{{ item.price }} лв</div>
-											{% endif %}
-										</div>
-									</div>
-									<div class="red_button add_to_cart_button"><a href="{% url 'item-details' item.slug %}">{% trans 'see more' %}</a></div>
-								</div>
-								{% endfor %}
-
-							</div>
-
-							<!-- Product Sorting -->
-
-							<div class="product_sorting_container product_sorting_container_bottom clearfix">
-<!--								<ul class="product_sorting">-->
-<!--									<li>-->
-<!--										<span>Show:</span>-->
-<!--										<span class="num_sorting_text">04</span>-->
-<!--										<i class="fa fa-angle-down"></i>-->
-<!--										<ul class="sorting_num">-->
-<!--											<li class="num_sorting_btn"><span>01</span></li>-->
-<!--											<li class="num_sorting_btn"><span>02</span></li>-->
-<!--											<li class="num_sorting_btn"><span>03</span></li>-->
-<!--											<li class="num_sorting_btn"><span>04</span></li>-->
-<!--										</ul>-->
-<!--									</li>-->
-<!--								</ul>-->
-								<span class="showing_results">Showing {{ page_obj.start_index }}–{{ page_obj.end_index }} of {{ paginator.count }} results</span>
-
-								{% include 'items/pagination.html' %}
-
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+{% block categories %}
+<div class="sidebar_section">
+	<div class="sidebar_title">
+		<h5>{% trans 'styles'|capfirst %}</h5>
 	</div>
+	<ul class="sidebar_categories">
+		<li><a href="#">{% trans 'elegant blazers'|capfirst %}</a></li>
+		<li><a href="#">{% trans 'office blazers'|capfirst %}</a></li>
+	</ul>
 </div>
+<div class="sidebar_section">
+	<div class="sidebar_title">
+		<h5>{% trans 'sub categories'|capfirst %}</h5>
+	</div>
+	<ul class="sidebar_categories">
 
-<!-- Benefit -->
-
-{% include 'common/benefit.html' %}
-
-{% endblock %}
-
-{% block scripts %}
-<script src="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
-<script src="{% static 'js/categories_custom.js' %}"></script>
+	</ul>
+</div>
 {% endblock %}
