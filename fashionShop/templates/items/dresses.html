@@ -4,7 +4,7 @@
 
 {% block breadcrumbs %}
 <li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
-<li><a href="{% url 'all-items' %}">{% trans 'clothes'|capfirst %}</a></li>
+<li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
 <li class="active"><a href="{% url 'skirts' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'dresses'|capfirst %}</a></li>
 {% endblock %}
 
