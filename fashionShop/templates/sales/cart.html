@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/custom_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container first-container">
+    <div class="row">
+        <div class="col-md-8">
+            {% if request.user.is_authenticated %}
+                {% include 'sales/authenticated-user-content.html' %}
+            {% else %}
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -118,7 +118,7 @@
 							<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
 							<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 							<li class="checkout">
-								<a href="#">
+								<a href="{% url 'view-cart' %}">
 									<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 									{% if request.user.is_authenticated %}
 										{% if request.user.cart.cart_items.count %}

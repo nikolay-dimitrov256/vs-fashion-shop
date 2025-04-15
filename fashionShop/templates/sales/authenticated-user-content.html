@@ -1,0 +1,8 @@
+{% for cart_item in cart.cart_items.all %}
+<div class="container-fluid">
+    <h3>{{ cart_item.item.name }}</h3>
+    <div class="imgframe">
+        <img src="{{ cart_item.item.pictures.first }}" alt="{{ cart_item.item.name }}">
+    </div>
+</div>
+{% endfor %}

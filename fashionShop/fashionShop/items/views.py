@@ -43,6 +43,7 @@ class ItemDetailView(DetailView):
             Stock.objects
             .filter(item=self.object, quantity__gt=0)
             .values_list('size', flat=True)
+            .order_by('size__size')
             .distinct()
         )
 
