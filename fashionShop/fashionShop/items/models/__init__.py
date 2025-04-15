@@ -4,3 +4,4 @@ from fashionShop.items.models.item import *
 from fashionShop.items.models.pattern import *
 from fashionShop.items.models.size import *
 from fashionShop.items.models.style import *
+from fashionShop.items.models.online_items import *

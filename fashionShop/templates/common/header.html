@@ -120,7 +120,15 @@
 							<li class="checkout">
 								<a href="#">
 									<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-									<span id="checkout_items" class="checkout_items">2</span>
+									{% if request.user.is_authenticated %}
+										{% if request.user.cart.cart_items.count %}
+										<span id="checkout_items" class="checkout_items">{{ request.user.cart.cart_items.count }}</span>
+										{% endif %}
+									{% else %}
+										{% if request.session.cart|length %}
+										<span id="checkout_items" class="checkout_items">{{ request.session.cart|length }}</span>
+										{% endif %}
+									{% endif %}
 								</a>
 							</li>
 						</ul>

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from fashionShop.common.choices import CountryChoices
@@ -99,6 +100,10 @@ class ContactMessage(models.Model):
     )
 
     message = models.TextField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
 
     def __str__(self):
         return self.name

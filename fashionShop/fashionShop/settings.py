@@ -42,6 +42,7 @@ PROJECT_APPS = [
     'fashionShop.items',
     'fashionShop.pictures',
     'fashionShop.stores',
+    'fashionShop.sales',
 ]
 
 INSTALLED_APPS = [
