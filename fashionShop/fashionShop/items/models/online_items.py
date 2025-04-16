@@ -25,3 +25,7 @@ class CartItem(models.Model):
     quantity = models.IntegerField(
         default=1,
     )
+
+    @property
+    def total_price(self):
+        return self.item.final_price * self.quantity

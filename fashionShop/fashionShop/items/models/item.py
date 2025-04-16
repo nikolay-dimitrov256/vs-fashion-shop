@@ -150,6 +150,13 @@ class Item(models.Model):
 
         return int(self.price - self.discount_price)
 
+    @property
+    def final_price(self):
+        if self.is_discounted:
+            return self.discount_price
+
+        return self.price
+
     def __str__(self):
         return str(self.item_number)
 

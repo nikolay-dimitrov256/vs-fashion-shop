@@ -6,19 +6,20 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/custom_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/cart_styles.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="container first-container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-8">
             {% if request.user.is_authenticated %}
                 {% include 'sales/authenticated-user-content.html' %}
             {% else %}
             {% endif %}
         </div>
-        <div class="col-md-4">
-
+        <div class="col-lg-4 promo">
+            <!-- <p>Enter your promocode here</p> -->
         </div>
     </div>
 </div>

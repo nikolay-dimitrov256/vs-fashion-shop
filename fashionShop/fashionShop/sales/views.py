@@ -61,8 +61,7 @@ def view_cart_view(request):
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(user=request.user)
     else:
-        session_cart = request.session.get('cart', {})
-        cart = deepcopy(session_cart)
+        cart = request.session.get('cart', {})
 
         for item_number, data in cart.items():
             item = Item.objects.filter(pk=item_number).first()
