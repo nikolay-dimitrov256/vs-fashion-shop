@@ -43,15 +43,17 @@ def add_to_cart(request, pk):
             cart_item.save()
 
         else:
+            item_number = str(pk)
             cart = request.session.get('cart', {})
-            if item.item_number not in cart.keys():
-                cart[item.item_number] = {size: quantity}
+            print(cart)
+            if item_number not in cart.keys():
+                cart[item_number] = {size: quantity}
             else:
-                if size not in cart[item.item_number]:
-                    cart[item.item_number] = {size: quantity}
+                if size not in cart[item_number]:
+                    cart[item_number][size] = quantity
                 else:
-                    cart[item.item_number][size] += quantity
-
+                    cart[item_number][size] += quantity
+            print(cart)
             request.session['cart'] = cart
 
         message_text = _('was successfully added to cart.')
@@ -98,3 +100,48 @@ def view_cart_view(request):
         }
 
     return render(request, 'sales/cart.html', context)
+
+
+def remove_from_cart(request, pk):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            cart = Cart.objects.filter(user=request.user).first()
+            if not cart:
+                message = _('Your cart is empty.')
+                messages.info(request, message)
+                return redirect('view-cart')
+
+            size = request.POST.get('size')
+            size_obj = Size.objects.filter(size=size).first()
+            item = Item.objects.filter(pk=pk).first()
+            cart_item = CartItem.objects.filter(cart=cart, item=item, size=size_obj).first()
+
+            if cart_item:
+                cart_item.delete()
+
+            message = _('was removed successfully.')
+            messages.info(request, f'{item.name} {message}')
+
+        else:
+            cart = request.session.get('cart', {})
+
+            if not cart:
+                message = _('Your cart is empty.')
+                messages.info(request, message)
+                return redirect('view-cart')
+
+            size = request.POST.get('size')
+            item = Item.objects.filter(pk=pk).first()
+            pk = str(pk)
+
+            if pk in cart.keys():
+                if size in cart[pk].keys():
+                    del cart[pk][size]
+                    if not cart[pk]:
+                        del cart[pk]
+
+            request.session['cart'] = cart
+            message = _('was removed successfully.')
+            messages.info(request, f'{item.name} {message}')
+
+    return redirect('view-cart')

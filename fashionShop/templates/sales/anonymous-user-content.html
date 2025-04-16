@@ -12,7 +12,11 @@
             <h3 class="item-name">{{ entry.item.name }}</h3>
             <p class="item-size"><span>{{ size }}</span> x <span>{{ quantity }}</span></p>
             <p class="item-price">{{ entry.total }} {% trans 'lv' %}</p>
-            <a href="" class="remove-btn">{% trans 'remove' %}</a>
+            <form action="{% url 'remove-from-cart' entry.item.pk %}" method="post">
+                {% csrf_token %}
+                <input class="size" type="hidden" name="size" value="{{ size }}">
+                <a onclick="this.parentElement.submit()" href="#" class="remove-btn">{% trans 'remove' %}</a>
+            </form>
         </div>
     </div>
     {% endfor %}
@@ -30,6 +34,6 @@
 </div>
 {% else %}
 <div class="container-fluid empty-cart">
-    {% trans 'Your cart is empty.'}
+    {% trans 'Your cart is empty.' %}
 </div>
 {% endif %}

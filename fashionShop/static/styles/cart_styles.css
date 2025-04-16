@@ -98,6 +98,13 @@ img {
     margin-right: 0.5em;
 }
 
+.empty-cart {
+    text-align: center;
+    font-size: 24px;
+    background-color: #ffd453;
+    padding: 1em;
+}
+
 @media only screen and (max-width: 479px) {
     .item-name {
         margin-bottom: 0;

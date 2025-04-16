@@ -12,16 +12,14 @@
 {% block content %}
 <div class="container first-container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col">
             {% if request.user.is_authenticated %}
                 {% include 'sales/authenticated-user-content.html' %}
             {% else %}
                 {% include 'sales/anonymous-user-content.html' %}
             {% endif %}
         </div>
-        <div class="col-lg-4">
-            <!-- <p>Enter your promocode here</p> -->
-        </div>
+
     </div>
 </div>
 {% endblock %}
