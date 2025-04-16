@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-14 14:49+0300\n"
+"POT-Creation-Date: 2025-04-16 15:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,41 +69,70 @@ msgstr "фамилия"
 msgid "Bulgaria"
 msgstr "произведено в България"
 
-#: fashionShop/common/models.py:9
+#: fashionShop/common/forms.py:15
+msgid "Name"
+msgstr "Име"
+
+#: fashionShop/common/forms.py:16
+msgid "Name is required."
+msgstr "Името е задължитело"
+
+#: fashionShop/common/forms.py:29
+msgid "Email"
+msgstr "Имейл"
+
+#: fashionShop/common/forms.py:41
+msgid "Phone"
+msgstr "Телефон"
+
+#: fashionShop/common/forms.py:52
+msgid "Message"
+msgstr "Съобщение"
+
+#: fashionShop/common/forms.py:53
+msgid "Please, write something to us."
+msgstr "Напишете ни нещо."
+
+#: fashionShop/common/models.py:10
 msgid "country"
 msgstr "страна"
 
-#: fashionShop/common/models.py:16
+#: fashionShop/common/models.py:17
 msgid "province"
 msgstr "област"
 
-#: fashionShop/common/models.py:21
+#: fashionShop/common/models.py:22
 msgid "town"
 msgstr "населено място"
 
-#: fashionShop/common/models.py:26
+#: fashionShop/common/models.py:27
 msgid "postal code"
-msgstr ""
+msgstr "пощенски код"
 
-#: fashionShop/common/models.py:31
+#: fashionShop/common/models.py:32
 msgid "street"
 msgstr "улица"
 
-#: fashionShop/common/models.py:38
+#: fashionShop/common/models.py:39
 msgid "number"
 msgstr "номер"
 
-#: fashionShop/common/models.py:45
+#: fashionShop/common/models.py:46
 msgid "building"
 msgstr "блок"
 
-#: fashionShop/common/models.py:52
+#: fashionShop/common/models.py:53
 msgid "entrance"
 msgstr "вход"
 
-#: fashionShop/common/models.py:59
+#: fashionShop/common/models.py:60
 msgid "apartment"
 msgstr "апартамент"
+
+#: fashionShop/common/views.py:91
+msgid "Thank you for your message, we will contact you as soon as possible."
+msgstr ""
+"Благодарим Ви за съобщението. Ще се свържем с Вас при първа възможност."
 
 #: fashionShop/items/models/categories.py:12
 msgid "category"
@@ -138,7 +167,7 @@ msgstr "продукт"
 msgid "items"
 msgstr "продукти"
 
-#: fashionShop/items/models/item.py:180 fashionShop/items/models/item.py:181
+#: fashionShop/items/models/item.py:187 fashionShop/items/models/item.py:188
 msgid "stock"
 msgstr "наличност"
 
@@ -172,17 +201,31 @@ msgstr "стил"
 msgid "styles"
 msgstr "стилове"
 
-#: fashionShop/settings.py:244
+#: fashionShop/sales/views.py:19
+msgid "The item was not found."
+msgstr "Продуктът не беше намерен."
+
+#: fashionShop/sales/views.py:29
+msgid "There was a problem with your request."
+msgstr "Имаше проблем със заявката Ви."
+
+#: fashionShop/sales/views.py:56
+msgid "was successfully added to cart."
+msgstr "беше добавен в количката успешно."
+
+#: fashionShop/settings.py:245
+#: templates/sales/authenticated-user-content.html:13
+#: templates/sales/authenticated-user-content.html:22
 msgid "lv"
 msgstr "лв"
 
-#: fashionShop/settings.py:245
+#: fashionShop/settings.py:246
 msgid "EUR"
 msgstr "EUR"
 
 #: templates/common/benefit.html:11
 msgid "made in Bulgaria"
-msgstr "произведено в България"
+msgstr "българско производство"
 
 #: templates/common/benefit.html:12
 msgid "Our clothes are made with love in Bulgaria"
@@ -212,6 +255,58 @@ msgstr "Поръчка с телефонен номер"
 msgid "You can order with just your phone number. No registration necessary."
 msgstr "Може да поръчате с телефонен номер. Регистрацията не е задължителна."
 
+#: templates/common/contact.html:21 templates/items/single.html:32
+msgid "Home"
+msgstr "Начало"
+
+#: templates/common/contact.html:22 templates/common/footer.html:36
+#, fuzzy
+#| msgid "contacts"
+msgid "Contacts"
+msgstr "Контакти"
+
+#: templates/common/contact.html:47
+#, fuzzy
+#| msgid "contacts"
+msgid "Contact Us"
+msgstr "Контакти"
+
+#: templates/common/contact.html:50
+msgid "For orders or questions, you can contact us at:"
+msgstr "За поръчки и въпроси, можете да ни потърсите на:"
+
+#: templates/common/contact.html:55
+msgid "For wholesale orders:"
+msgstr "За поръчки на едро:"
+
+#: templates/common/contact.html:59
+msgid "Open hours:"
+msgstr "Работно време:"
+
+#: templates/common/contact.html:60
+msgid "Monday - Friday: 8:00am - 5:00pm"
+msgstr "Понеделник - Петък: 8:00 - 17:00"
+
+#: templates/common/contact.html:61
+msgid "Saturday and Sunday: Closed"
+msgstr "Събота и Неделя: почивни дни"
+
+#: templates/common/contact.html:79
+msgid "Get In Touch With Us"
+msgstr "Свържете се с нас"
+
+#: templates/common/contact.html:80
+msgid "Fill out the form below, and we will contact you."
+msgstr "Попълнете формата и ще се свържем с Вас."
+
+#: templates/common/contact.html:88
+msgid "send message"
+msgstr "изпрати съобщение"
+
+#: templates/common/feedback.html:8
+msgid "Customers feedback"
+msgstr "Отзиви от клиенти"
+
 #: templates/common/footer.html:34
 msgid "About us"
 msgstr "За нас"
@@ -221,12 +316,6 @@ msgstr "За нас"
 #| msgid "our shops"
 msgid "Our shops"
 msgstr "Нашите магазини"
-
-#: templates/common/footer.html:36
-#, fuzzy
-#| msgid "contacts"
-msgid "Contact us"
-msgstr "Контакти"
 
 #: templates/common/footer.html:37
 msgid "Shopping terms"
@@ -248,27 +337,27 @@ msgstr "Политика за поверителност"
 msgid "free shipping on all orders over"
 msgstr "безплатна доставка за всички поръчки над"
 
-#: templates/common/header.html:56 templates/common/header.html:194
+#: templates/common/header.html:56 templates/common/header.html:202
 msgid "Anonymous"
 msgstr "Анонимен"
 
-#: templates/common/header.html:62 templates/common/header.html:200
+#: templates/common/header.html:62 templates/common/header.html:208
 msgid "My Account"
 msgstr "Моят Акаунт"
 
-#: templates/common/header.html:63 templates/common/header.html:201
+#: templates/common/header.html:63 templates/common/header.html:209
 msgid "Log out"
 msgstr "Изход"
 
-#: templates/common/header.html:65 templates/common/header.html:203
+#: templates/common/header.html:65 templates/common/header.html:211
 msgid "Sign In"
 msgstr "Вход"
 
-#: templates/common/header.html:66 templates/common/header.html:204
+#: templates/common/header.html:66 templates/common/header.html:212
 msgid "Register"
 msgstr "Регистрация"
 
-#: templates/common/header.html:88 templates/common/header.html:145
+#: templates/common/header.html:88 templates/common/header.html:153
 #: templates/items/blazers.html:6 templates/items/blouses.html:6
 #: templates/items/category.html:21 templates/items/coats.html:6
 #: templates/items/dresses.html:6 templates/items/jackets.html:6
@@ -279,93 +368,97 @@ msgid "home"
 msgstr "начало"
 
 #: templates/common/header.html:89 templates/common/header.html:101
-#: templates/common/header.html:147 templates/items/category.html:49
+#: templates/common/header.html:155 templates/items/category.html:49
 #: templates/items/dresses.html:8
 msgid "dresses"
 msgstr "рокли"
 
 #: templates/common/header.html:90 templates/common/header.html:102
-#: templates/common/header.html:148 templates/items/blazers.html:8
+#: templates/common/header.html:156 templates/items/blazers.html:8
 #: templates/items/category.html:53
 msgid "blazers"
 msgstr "сака"
 
 #: templates/common/header.html:91 templates/common/header.html:104
-#: templates/common/header.html:150 templates/items/category.html:50
+#: templates/common/header.html:158 templates/items/category.html:50
 msgid "shirts"
 msgstr "ризи"
 
 #: templates/common/header.html:92 templates/common/header.html:103
-#: templates/common/header.html:149 templates/items/category.html:47
+#: templates/common/header.html:157 templates/items/category.html:47
 #: templates/items/pants.html:8
 msgid "pants"
 msgstr "панталони"
 
-#: templates/common/header.html:105 templates/common/header.html:151
+#: templates/common/header.html:105 templates/common/header.html:159
 #: templates/items/blouses.html:8 templates/items/category.html:51
 msgid "blouses"
 msgstr "блузи"
 
-#: templates/common/header.html:106 templates/common/header.html:152
+#: templates/common/header.html:106 templates/common/header.html:160
 #: templates/items/category.html:52 templates/items/tunics.html:8
 msgid "tunics"
 msgstr "туники"
 
-#: templates/common/header.html:107 templates/common/header.html:153
+#: templates/common/header.html:107 templates/common/header.html:161
 #: templates/items/category.html:54 templates/items/suits.html:8
 msgid "suits"
 msgstr "костюми"
 
-#: templates/common/header.html:108 templates/common/header.html:154
+#: templates/common/header.html:108 templates/common/header.html:162
 #: templates/items/category.html:55 templates/items/jackets.html:8
 msgid "jackets"
 msgstr "якета"
 
-#: templates/common/header.html:109 templates/common/header.html:155
+#: templates/common/header.html:109 templates/common/header.html:163
 #: templates/items/category.html:56 templates/items/coats.html:8
 msgid "coats"
 msgstr "манта"
 
-#: templates/common/header.html:110 templates/common/header.html:156
+#: templates/common/header.html:110 templates/common/header.html:164
 #: templates/items/category.html:57 templates/items/vests.html:8
 msgid "vests"
 msgstr "елеци"
 
-#: templates/common/header.html:111 templates/common/header.html:157
+#: templates/common/header.html:111 templates/common/header.html:165
 #: templates/items/category.html:48 templates/items/skirts.html:8
 msgid "skirts"
 msgstr "поли"
 
-#: templates/common/header.html:112 templates/common/header.html:158
+#: templates/common/header.html:112 templates/common/header.html:166
 msgid "all clothes"
 msgstr "всички дрехи"
 
-#: templates/common/header.html:115 templates/common/header.html:146
+#: templates/common/header.html:115 templates/common/header.html:154
 #: templates/items/grid-item-card.html:16
 msgid "new"
 msgstr "ново"
 
-#: templates/common/header.html:116 templates/common/header.html:159
+#: templates/common/header.html:116 templates/common/header.html:167
 msgid "sale"
 msgstr "промоции"
 
-#: templates/common/home.html:35 templates/items/category.html:36
+#: templates/common/home.html:6
+msgid "Online store for women\\"
+msgstr "Онлайн магазин за дамска мода"
+
+#: templates/common/home.html:44 templates/items/category.html:36
 msgid "elegant"
 msgstr "елегантни"
 
-#: templates/common/home.html:42 templates/items/category.html:38
+#: templates/common/home.html:51 templates/items/category.html:38
 msgid "office"
 msgstr "офис"
 
-#: templates/common/home.html:49 templates/items/category.html:37
+#: templates/common/home.html:58 templates/items/category.html:37
 msgid "official"
 msgstr "официални"
 
-#: templates/common/home.html:68
+#: templates/common/home.html:77
 msgid "New Arrivals"
 msgstr "Нови Предложения"
 
-#: templates/common/home.html:148
+#: templates/common/home.html:157
 #, fuzzy
 #| msgid "bestsellers"
 msgid "Best Sellers"
@@ -472,23 +565,19 @@ msgstr "елегантни ризи"
 msgid "office shirts"
 msgstr "офис ризи"
 
-#: templates/items/single.html:32
-msgid "Home"
-msgstr "Начало"
-
-#: templates/items/single.html:139
+#: templates/items/single.html:145
 msgid "This model in other colors:"
 msgstr "Други цветове от този модел:"
 
-#: templates/items/single.html:189 templates/items/single.html:203
+#: templates/items/single.html:195 templates/items/single.html:209
 msgid "Details"
 msgstr "Детайли"
 
-#: templates/items/single.html:190 templates/items/single.html:235
+#: templates/items/single.html:196 templates/items/single.html:241
 msgid "Additional Information"
 msgstr "Допълнителна информация"
 
-#: templates/items/single.html:256
+#: templates/items/single.html:262
 msgid "Complete your vision:"
 msgstr "Подходящи съчетания:"
 
@@ -523,6 +612,22 @@ msgstr "официални костюми"
 #| msgid "tunics"
 msgid "elegant tunics"
 msgstr "елегантни туники"
+
+#: templates/sales/authenticated-user-content.html:14
+msgid "remove"
+msgstr "премахни"
+
+#: templates/sales/authenticated-user-content.html:22
+msgid "Total:"
+msgstr "Общо:"
+
+#: templates/sales/authenticated-user-content.html:26
+msgid "continue shopping"
+msgstr "продължете с пазаруването"
+
+#: templates/sales/authenticated-user-content.html:27
+msgid "checkout"
+msgstr "поръчка"
 
 #~ msgid "14 days return"
 #~ msgstr "Връщане до 14 дни"

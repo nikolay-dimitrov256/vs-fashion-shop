@@ -1,6 +1,8 @@
+from _decimal import Decimal
 from copy import deepcopy
 
 from django.contrib import messages
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 from django.views.generic import DetailView
@@ -52,27 +54,47 @@ def add_to_cart(request, pk):
 
             request.session['cart'] = cart
 
-        messages.success(request,f"{item.name} {_('was successfully added to cart.')}")
+        message_text = _('was successfully added to cart.')
+        messages.success(request, f"{item.name} {message_text}")
 
     return redirect(request.META.get('HTTP_REFERER', 'home'))
 
 
 def view_cart_view(request):
     if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(user=request.user)
+        cart = (
+            Cart.objects
+            .prefetch_related(
+                'cart_items__item__pictures',
+                'cart_items__size'
+            )
+            .filter(user=request.user)
+            .first()
+        )
+        if cart:
+            cart.total = sum(i.total_price for i in cart.cart_items.all())
+
+        context = {
+            'cart': cart,
+        }
+
     else:
-        cart = request.session.get('cart', {})
+        session_cart = request.session.get('cart', {})
+        cart = deepcopy(session_cart)
+        cart_total = Decimal(0)
+        items = Item.objects.filter(item_number__in=cart.keys())
+        items_map = {item.item_number: item for item in items}
 
         for item_number, data in cart.items():
-            item = Item.objects.filter(pk=item_number).first()
+            item = items_map.get(int(item_number))
+            cart[item_number] = {'sizes': data, 'item': item}
+            total = sum(item.final_price * int(q) for s, q in data.items())
+            cart[item_number]['total'] = total
+            cart_total += total
 
-            if not item:  # fail silently
-                continue
-
-            cart[item_number]['item'] = item
-
-    context = {
-        'cart': cart
-    }
+        context = {
+            'cart': cart,
+            'cart_total': cart_total
+        }
 
     return render(request, 'sales/cart.html', context)

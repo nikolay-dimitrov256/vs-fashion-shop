@@ -2,8 +2,10 @@
 
 {% for cart_item in cart.cart_items.all %}
 <div class="row cart-item">
-    <div class="col-6 col-md-4 imgframe">
-        <img src="{{ cart_item.item.pictures.first.image.url }}" alt="{{ cart_item.item.name }}">
+    <div class="col-6 col-md-4">
+        <a href="{% url 'item-details' cart_item.item.slug %}" class="imgframe">
+            <img src="{{ cart_item.item.pictures.first.image.url }}" alt="{{ cart_item.item.name }}">
+        </a>
     </div>
     <div class="col-6 col-md-8 item-info">
         <h3 class="item-name">{{ cart_item.item.name }}</h3>
@@ -13,3 +15,19 @@
     </div>
 </div>
 {% endfor %}
+
+{% if cart.cart_items.count %}
+<div class="row">
+    <div class="col">
+        <p class="total-info"><span class="total">{% trans 'Total:' %} </span><span class="item-price">{{ cart.total }} {% trans 'lv' %}</span></p>
+    </div>
+</div>
+<div class="buttons">
+    <a href="#" onclick="javascript:history.back()" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
+    <a href="#" class="checkout-btn">{% trans 'checkout'|upper %}</a>
+</div>
+{% else %}
+<div class="container-fluid empty-cart">
+    {% trans 'Your cart is empty.'}
+</div>
+{% endif %}

@@ -1,0 +1,35 @@
+{% load i18n %}
+
+{% for item_number, entry in cart.items %}
+    {% for size, quantity in entry.sizes.items %}
+    <div class="row cart-item">
+        <div class="col-6 col-md-4">
+            <a href="{% url 'item-details' entry.item.slug %}" class="imgframe">
+                <img src="{{ entry.item.pictures.first.image.url }}" alt="{{ entry.item.name }}">
+            </a>
+        </div>
+        <div class="col-6 col-md-8 item-info">
+            <h3 class="item-name">{{ entry.item.name }}</h3>
+            <p class="item-size"><span>{{ size }}</span> x <span>{{ quantity }}</span></p>
+            <p class="item-price">{{ entry.total }} {% trans 'lv' %}</p>
+            <a href="" class="remove-btn">{% trans 'remove' %}</a>
+        </div>
+    </div>
+    {% endfor %}
+{% endfor %}
+
+{% if cart|length %}
+<div class="row">
+    <div class="col">
+        <p class="total-info"><span class="total">{% trans 'Total:' %} </span><span class="item-price">{{ cart_total }} {% trans 'lv' %}</span></p>
+    </div>
+</div>
+<div class="buttons">
+    <a href="#" onclick="javascript:history.back()" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
+    <a href="#" class="checkout-btn">{% trans 'checkout'|upper %}</a>
+</div>
+{% else %}
+<div class="container-fluid empty-cart">
+    {% trans 'Your cart is empty.'}
+</div>
+{% endif %}
