@@ -27,7 +27,7 @@ img {
     background-color: var(--warning);
     color: #282828;
     border: none;
-    width: 7em;
+    width: 8em;
     padding: 0.8em 0.6em;
     text-align: center;
     font-weight: 600;
@@ -47,6 +47,7 @@ img {
     display: flex;
     justify-content: flex-end;
     gap: 2em;
+    flex-wrap: wrap;
 }
 
 .checkout-btn {
@@ -69,6 +70,17 @@ img {
     transition: all 0.3s ease;
 }
 
+.clear-btn {
+    display: block;
+    background-color: var(--warning);
+    color: #000;
+    padding: 0.8em 1em;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
 .checkout-btn:hover {
     color: #fff;
     background-color: #208938;
@@ -77,6 +89,11 @@ img {
 .continue-btn:hover {
     color: #fff;
     background-color: #0062cb;
+}
+
+.clear-btn:hover {
+    color: #000;
+    background-color: var(--orange);
 }
 
 .item-size {

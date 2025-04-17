@@ -109,7 +109,7 @@ def view_cart_view(request):
     return render(request, 'sales/cart.html', context)
 
 
-def remove_from_cart(request, pk):
+def remove_from_cart_view(request, pk):
     if request.method == 'POST':
         if request.user.is_authenticated:
             cart = Cart.objects.filter(user=request.user).first()
@@ -150,5 +150,20 @@ def remove_from_cart(request, pk):
             request.session['cart'] = cart
             message = _('was removed successfully.')
             messages.info(request, f'{item.name} {message}')
+
+    return redirect('view-cart')
+
+
+def clear_cart_view(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            cart = Cart.objects.filter(user=request.user).first()
+            cart_items = CartItem.objects.filter(cart=cart)
+            cart_items.delete()  # If cart is None, this deletes all CartItem-s without a cart if any
+        else:
+            request.session['cart'] = {}
+
+        message = _('Your cart was cleared successfully.')
+        messages.info(request, message)
 
     return redirect('view-cart')

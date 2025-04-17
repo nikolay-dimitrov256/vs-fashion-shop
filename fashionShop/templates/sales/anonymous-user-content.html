@@ -15,7 +15,7 @@
             <form action="{% url 'remove-from-cart' entry.item.pk %}" method="post">
                 {% csrf_token %}
                 <input class="size" type="hidden" name="size" value="{{ size }}">
-                <button class="remove-btn">{% trans 'remove' %}</button>
+                <button class="remove-btn">{% trans 'remove'|upper %}</button>
             </form>
         </div>
     </div>
@@ -29,8 +29,12 @@
     </div>
 </div>
 <div class="buttons">
-    <a href="#" onclick="javascript:history.back()" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
-    <a href="#" class="checkout-btn">{% trans 'checkout'|upper %}</a>
+    <form method="post" action="{% url 'clear-cart' %}">
+        {% csrf_token %}
+        <button class="clear-btn">{% trans 'clear cart'|upper %}</button>
+    </form>
+    <a href="{% url 'home' %}" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
+    <a href="#" class="checkout-btn">{% trans 'to checkout'|upper %}</a>
 </div>
 {% else %}
 <div class="container-fluid empty-cart">

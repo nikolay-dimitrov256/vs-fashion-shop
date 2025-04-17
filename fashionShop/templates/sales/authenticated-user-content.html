@@ -27,7 +27,11 @@
     </div>
 </div>
 <div class="buttons">
-    <a href="#" onclick="javascript:history.back()" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
+    <form method="post" action="{% url 'clear-cart' %}">
+        {% csrf_token %}
+        <button class="clear-btn">{% trans 'clear cart'|upper %}</button>
+    </form>
+    <a href="{% url 'home' %}" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
     <a href="#" class="checkout-btn">{% trans 'checkout'|upper %}</a>
 </div>
 {% else %}
