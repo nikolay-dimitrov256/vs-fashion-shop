@@ -14,7 +14,7 @@
         <form action="{% url 'remove-from-cart' cart_item.item.pk %}" method="post">
             {% csrf_token %}
             <input class="size" type="hidden" name="size" value="{{ cart_item.size.size }}">
-            <a onclick="this.parentElement.submit()" href="#" class="remove-btn">{% trans 'remove' %}</a>
+            <button class="remove-btn">{% trans 'remove' %}</button>
         </form>
     </div>
 </div>

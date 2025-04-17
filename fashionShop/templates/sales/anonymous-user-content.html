@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% for item_number, entry in cart.items %}
-    {% for size, quantity in entry.sizes.items %}
+    {% for size, data in entry.sizes.items %}
     <div class="row cart-item">
         <div class="col-6 col-md-4">
             <a href="{% url 'item-details' entry.item.slug %}" class="imgframe">
@@ -10,12 +10,12 @@
         </div>
         <div class="col-6 col-md-8 item-info">
             <h3 class="item-name">{{ entry.item.name }}</h3>
-            <p class="item-size"><span>{{ size }}</span> x <span>{{ quantity }}</span></p>
-            <p class="item-price">{{ entry.total }} {% trans 'lv' %}</p>
+            <p class="item-size"><span>{{ size }}</span> x <span>{{ data.quantity }}</span></p>
+            <p class="item-price">{{ data.total }} {% trans 'lv' %}</p>
             <form action="{% url 'remove-from-cart' entry.item.pk %}" method="post">
                 {% csrf_token %}
                 <input class="size" type="hidden" name="size" value="{{ size }}">
-                <a onclick="this.parentElement.submit()" href="#" class="remove-btn">{% trans 'remove' %}</a>
+                <button class="remove-btn">{% trans 'remove' %}</button>
             </form>
         </div>
     </div>

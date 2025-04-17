@@ -22,12 +22,14 @@ def add_to_cart(request, pk):
 
         size = request.POST.get('size')
         quantity = request.POST.get('quantity')
+
         # Validate the size and quantity are correct
         try:
             size_obj = Size.objects.get(size=size)
             quantity = int(quantity)
         except Exception:
-            messages.error(request, _('There was a problem with your request.'))
+            message = _('You have not selected size and/or quantity.')
+            messages.warning(request, message)
             return redirect(request.META.get('HTTP_REFERER', 'home'))
 
         if request.user.is_authenticated:
@@ -59,7 +61,7 @@ def add_to_cart(request, pk):
         message_text = _('was successfully added to cart.')
         messages.success(request, f"{item.name} {message_text}")
 
-    return redirect(request.META.get('HTTP_REFERER', 'home'))
+    return redirect('view-cart')
 
 
 def view_cart_view(request):
@@ -89,14 +91,19 @@ def view_cart_view(request):
 
         for item_number, data in cart.items():
             item = items_map.get(int(item_number))
-            cart[item_number] = {'sizes': data, 'item': item}
-            total = sum(item.final_price * int(q) for s, q in data.items())
-            cart[item_number]['total'] = total
-            cart_total += total
+            # cart[item_number] = {'sizes': data, 'item': item}
+            sizes = {}
+
+            for size, quantity in data.items():
+                total = item.final_price * int(quantity)
+                sizes[size] = {'quantity': quantity, 'total': total}
+                cart_total += total
+
+            cart[item_number] = {'item': item, 'sizes': sizes}
 
         context = {
             'cart': cart,
-            'cart_total': cart_total
+            'cart_total': cart_total,
         }
 
     return render(request, 'sales/cart.html', context)

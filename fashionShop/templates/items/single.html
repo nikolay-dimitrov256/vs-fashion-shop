@@ -117,7 +117,7 @@
                 <form id="add-form" method="post" action="{% url 'add-to-cart' object.pk %}">
                     {% csrf_token %}
                     <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                        <input id="size" type="hidden" name="size">
+                        <input id="size" type="hidden" name="size" value="">
                         <input id="quantity" type="hidden" name="quantity">
 
                         <span>Quantity:</span>
