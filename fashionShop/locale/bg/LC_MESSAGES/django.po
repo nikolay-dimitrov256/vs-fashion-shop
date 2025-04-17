@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-16 15:26+0300\n"
+"POT-Creation-Date: 2025-04-17 16:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,21 +201,38 @@ msgstr "стил"
 msgid "styles"
 msgstr "стилове"
 
-#: fashionShop/sales/views.py:19
+#: fashionShop/sales/views.py:20
 msgid "The item was not found."
 msgstr "Продуктът не беше намерен."
 
-#: fashionShop/sales/views.py:29
-msgid "There was a problem with your request."
-msgstr "Имаше проблем със заявката Ви."
+#: fashionShop/sales/views.py:31
+msgid "You have not selected size and/or quantity."
+msgstr "Не сте избрали размер и/или количество."
 
-#: fashionShop/sales/views.py:56
+#: fashionShop/sales/views.py:61
 msgid "was successfully added to cart."
 msgstr "беше добавен в количката успешно."
 
-#: fashionShop/settings.py:245
+#: fashionShop/sales/views.py:117 fashionShop/sales/views.py:136
+#: templates/sales/anonymous-user-content.html:41
+#: templates/sales/authenticated-user-content.html:39
+msgid "Your cart is empty."
+msgstr "Количката Ви е празна."
+
+#: fashionShop/sales/views.py:129 fashionShop/sales/views.py:151
+#, fuzzy
+#| msgid "was successfully added to cart."
+msgid "was removed successfully."
+msgstr "беше добавен в количката успешно."
+
+#: fashionShop/sales/views.py:166
+msgid "Your cart was cleared successfully."
+msgstr "Количката ви беше изпразнена успешно."
+
+#: fashionShop/settings.py:245 templates/sales/anonymous-user-content.html:14
+#: templates/sales/anonymous-user-content.html:28
 #: templates/sales/authenticated-user-content.html:13
-#: templates/sales/authenticated-user-content.html:22
+#: templates/sales/authenticated-user-content.html:26
 msgid "lv"
 msgstr "лв"
 
@@ -439,8 +456,8 @@ msgid "sale"
 msgstr "промоции"
 
 #: templates/common/home.html:6
-msgid "Online store for women\\"
-msgstr "Онлайн магазин за дамска мода"
+msgid "Online store for women fashion Vili Style"
+msgstr "Онлайн магазин за дамска мода Вили Стил"
 
 #: templates/common/home.html:44 templates/items/category.html:36
 msgid "elegant"
@@ -613,28 +630,27 @@ msgstr "официални костюми"
 msgid "elegant tunics"
 msgstr "елегантни туники"
 
-#: templates/sales/authenticated-user-content.html:14
+#: templates/sales/anonymous-user-content.html:18
+#: templates/sales/authenticated-user-content.html:17
 msgid "remove"
 msgstr "премахни"
 
-#: templates/sales/authenticated-user-content.html:22
+#: templates/sales/anonymous-user-content.html:28
+#: templates/sales/authenticated-user-content.html:26
 msgid "Total:"
 msgstr "Общо:"
 
-#: templates/sales/authenticated-user-content.html:26
+#: templates/sales/anonymous-user-content.html:34
+#: templates/sales/authenticated-user-content.html:32
+msgid "clear cart"
+msgstr "изпразни количка"
+
+#: templates/sales/anonymous-user-content.html:36
+#: templates/sales/authenticated-user-content.html:34
 msgid "continue shopping"
-msgstr "продължете с пазаруването"
+msgstr "продължи с пазаруването"
 
-#: templates/sales/authenticated-user-content.html:27
-msgid "checkout"
-msgstr "поръчка"
-
-#~ msgid "14 days return"
-#~ msgstr "Връщане до 14 дни"
-
-#~ msgid "You can ask for refund 14 days after delivery"
-#~ msgstr ""
-#~ "Можете да поискате замяна, или връщане на парите до 14 дни от доставката"
-
-#~ msgid "Welcome to my online store"
-#~ msgstr "Добре дошли в моя онлайн магазин!"
+#: templates/sales/anonymous-user-content.html:37
+#: templates/sales/authenticated-user-content.html:35
+msgid "to checkout"
+msgstr "към поръчка"

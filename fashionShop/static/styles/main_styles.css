@@ -126,7 +126,7 @@ p::selection
 {
 	background: #fde0db;
 }
-h1{font-size: 72px;}
+h1{font-size: 45px;}
 h2{font-size: 40px;}
 h3{font-size: 28px;}
 h4{font-size: 24px;}
@@ -148,6 +148,12 @@ h6::selection
 {
 
 }
+
+h1 {
+	text-align: center;
+	margin-top: 0.5em;
+}
+
 ::-webkit-input-placeholder
 {
 	font-size: 16px !important;
@@ -838,10 +844,12 @@ section
 	text-transform: uppercase;
 	margin-bottom: 29px;
 }
-.main_slider_content h1
+.main_slider_content .promo-text
 {
+	font-size: 72px;
 	font-weight: 400;
 	line-height: 1;
+	color: #282828;
 }
 .red_button
 {
