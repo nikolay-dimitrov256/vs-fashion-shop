@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 from decouple import config
 from django.urls import reverse_lazy
@@ -118,7 +118,7 @@ DATABASES = {
         "NAME": config('DB_NAME'),
         "USER": config('DB_USER'),
         "PASSWORD": config('DB_PASSWORD'),
-        "HOST": config('DB_HOST'),
+        "HOST": os.environ.get('DB_HOST'),
         "PORT": config('DB_PORT'),
     }
 }

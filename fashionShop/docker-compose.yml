@@ -1,0 +1,36 @@
+name: vs-fashion-shop
+
+services:
+  app:
+    build: .
+    image: fashion-shop-image
+    command: python3 manage.py runserver 0.0.0.0:8000
+    container_name: fashion-shop-container
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - db
+    #restart: always
+    restart: unless-stopped
+  db:
+    image: postgres:16
+    container_name: vs-postgres-container
+    ports:
+      - '127.0.0.1:5432:5432'
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    #restart: always
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
