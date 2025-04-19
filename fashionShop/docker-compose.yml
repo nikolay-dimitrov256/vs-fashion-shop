@@ -14,8 +14,11 @@ services:
       - .env
     depends_on:
       - db
+      - redis
+      - celery
     #restart: always
     restart: unless-stopped
+
   db:
     image: postgres:16
     container_name: vs-postgres-container
@@ -31,6 +34,26 @@ services:
     restart: unless-stopped
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: redis-container
+    restart: unless-stopped
+
+  celery:
+    build: .
+    image: fashion-shop-image
+    container_name: celery-worker
+    command: celery -A fashionShop worker --loglevel=info
+    user: 1000:1000
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - db
+    restart: unless-stopped
 
 volumes:
   postgres_data:

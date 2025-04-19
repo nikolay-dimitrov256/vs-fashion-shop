@@ -3,6 +3,9 @@ FROM python:3.13.3
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Create a non-root user
+RUN useradd -ms /bin/bash appuser
+
 WORKDIR /app
 
 # System dependencies (install all at once to minimize layers)
@@ -20,6 +23,9 @@ RUN pip install -r requirements.txt
 COPY . .
 
 RUN chmod +x /app/entrypoint.sh
+
+# Switch to non-root user
+USER appuser
 
 ENTRYPOINT ["/app/entrypoint.sh"]
 

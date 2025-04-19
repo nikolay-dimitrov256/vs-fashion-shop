@@ -1,114 +1,20 @@
-from _decimal import Decimal
-from copy import copy, deepcopy
-
 import requests
-import json
-
-from django.db.models import F
+from celery import shared_task
 from django.utils.text import slugify
 
 from fashionShop.common.global_vars import BISOFT_API_URL
 from fashionShop.common.utils import transliterate
-from fashionShop.items.models import Item, Category, ColorGroup, Size, Stock
+from fashionShop.items.models import ColorGroup, Category, Size, Item, Stock
+from fashionShop.items.utils import check_and_create_color_groups, BISOFT_COLOR_GROUPS
 from fashionShop.stores.models import Store
 
-BISOFT_COLOR_GROUPS = {
-    1: 'white',
-    2: 'beige',
-    3: 'yellow',
-    4: 'orange',
-    5: 'red',
-    6: 'bordeaux',
-    7: 'pink',
-    8: 'purple',
-    9: 'sky blue',
-    10: 'blue',
-    11: 'green',
-    12: 'dark green',
-    13: 'brown',
-    14: 'gray',
-    15: 'black'
-}
 
-def check_and_create_color_groups():
-    existing_color_groups = ColorGroup.objects.all()
-    existing_color_group_names = [cg.name_en for cg in existing_color_groups]
-    new_color_group_names = set(BISOFT_COLOR_GROUPS.values()) - set(existing_color_group_names)
-    new_color_groups = [ColorGroup(name_en=name) for name in new_color_group_names]
-
-    if len(new_color_groups) > 0:
-        created_color_groups = ColorGroup.objects.bulk_create(new_color_groups)
+@shared_task
+def add(x, y):
+    return x + y
 
 
-def parse_and_save_items(data: list):
-    for bisoft_item in data:
-        item, created = Item.objects.get_or_create(item_number=bisoft_item['item_number'])
-        item.name_bg = bisoft_item['name_bg']
-        item.name_en = bisoft_item['name_en']
-        item.description_bg = bisoft_item['description_bg']
-        item.description_en = bisoft_item['description_en']
-        #item.price = Decimal(bisoft_item['item_number__stores__price_2'])
-
-        # if 0 < bisoft_item['item_number__stores__price_3'] < bisoft_item['item_number__stores__price_2']:
-        #     item.discount_price = Decimal(bisoft_item['item_number__stores__price_3'])
-
-        item.content_bg = bisoft_item['content_bg']
-        item.content_eb = bisoft_item['content_en']
-
-        category, created = Category.objects.get_or_create(name_en=bisoft_item['cat__key'])
-        item.category = category
-
-        if bisoft_item['color_group_en']:
-            color_group, created = ColorGroup.objects.get_or_create(name_en=bisoft_item['color_group_en'])
-            item.color_group = color_group
-
-        item.save()
-
-    for bisoft_item in data:
-        item = Item.objects.filter(item_number=bisoft_item['item_number']).first()
-
-        if not Item:
-            continue
-
-        bisoft_linked_items = [
-            bisoft_item['add_1'], bisoft_item['add_2'], bisoft_item['add_3'],
-            bisoft_item['add_4'], bisoft_item['add_5']
-        ]
-
-        for bisoft_linked_item in bisoft_linked_items:
-            if bisoft_linked_item:
-                linked_item = Item.objects.filter(item_number=bisoft_linked_item).first()
-                if linked_item:
-                    item.linked_items.add(linked_item)
-
-
-def update_prices_and_stock():
-    items = Item.objects.filter(deleted=False)
-
-    response = requests.get(f'{BISOFT_API_URL}items/prices-stock/')
-    data = response.json()
-
-    for bisoft_item in data:
-        item = items.filter(item_number=bisoft_item['item_number']).first()
-
-        if not item:
-            continue
-
-        item.price = bisoft_item['stores__price_2']
-        if 0 < bisoft_item['stores__price_3'] < bisoft_item['stores__price_2']:
-            item.discount_price = bisoft_item['stores__price_3']
-
-        for bisoft_size, quantity in bisoft_item['stock'].items():
-            size, created = Size.objects.get_or_create(size=bisoft_size)
-
-            stock, created = Stock.objects.get_or_create(item=item, size=size)
-
-            stock.quantity = quantity
-            stock.save()
-
-        item.save()
-
-
+@shared_task
 def load_items_from_bisoft():
     # Fetch data from API
     url = f'{BISOFT_API_URL}cat/all'
@@ -138,7 +44,13 @@ def load_items_from_bisoft():
     # Get and create sizes
     existing_sizes = Size.objects.all()
     existing_sizes_names = {s.size for s in existing_sizes}
-    sizes_names_from_response = {s for sub in [it['sizes'].keys() for it in data] for s in sub}
+    # sizes_names_from_response = {s for sub in [it['sizes'].keys() for it in data] for s in sub}
+    sizes_names_from_response = {
+        size
+        for item in data
+        if isinstance(item['sizes'], dict)
+        for size in item['sizes']
+    }
     new_sizes_names = sizes_names_from_response - existing_sizes_names
     new_sizes = [Size(size=s) for s in new_sizes_names]
     Size.objects.bulk_create(new_sizes)
@@ -217,7 +129,7 @@ def load_items_from_bisoft():
 
     for item in data:
         item['item_number'] = int(item['item_number'])
-        stock_data = item['sizes']
+        stock_data = item['sizes'] if isinstance(item['sizes'], dict) else {}
 
         # Get and set stocks
         for size, quantity in stock_data.items():
@@ -245,3 +157,19 @@ def load_items_from_bisoft():
     Stock.objects.bulk_update(list(existing_stocks), ['quantity'])
     # Create new stocks
     Stock.objects.bulk_create(new_stocks)
+
+
+@shared_task
+def check_sizes():
+    url = f'{BISOFT_API_URL}cat/all'
+    response = requests.get(url)
+    data = response.json()
+
+    sizes_names_from_response = {
+        size
+        for item in data
+        if isinstance(item['sizes'], dict)
+        for size in item['sizes']
+    }
+
+    print(sizes_names_from_response)

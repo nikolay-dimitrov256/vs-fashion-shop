@@ -1,6 +1,6 @@
 from django import template
 
-from fashionShop.settings import FREE_DELIVERY_THRESHOLD, CURRENCY_NAMES
+from fashionShop.common.global_vars import FREE_DELIVERY_THRESHOLD, CURRENCY_NAMES
 
 register = template.Library()
 

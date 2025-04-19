@@ -118,7 +118,7 @@ DATABASES = {
         "NAME": config('DB_NAME'),
         "USER": config('DB_USER'),
         "PASSWORD": config('DB_PASSWORD'),
-        "HOST": os.environ.get('DB_HOST'),
+        "HOST": os.environ.get('DB_HOST', config('DB_HOST_DEV')),
         "PORT": config('DB_PORT'),
     }
 }
@@ -143,6 +143,11 @@ LOGGING = {
         },
     },
 }
+
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -230,7 +235,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-BISOFT_API_URL = 'https://vilistil.com/vs/'
 BISOFT_API_KEY = 'lol_key'
 
 cloudinary.config(
@@ -241,11 +245,3 @@ cloudinary.config(
 )
 MEDIA_URL = '/media/'
 
-CURRENCY_NAMES = {
-    'BGN': _('lv'),
-    'EUR': _('EUR')
-}
-FREE_DELIVERY_THRESHOLD = {
-    'BGN': 150,
-    'EUR': 75,
-}

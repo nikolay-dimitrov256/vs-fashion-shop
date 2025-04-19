@@ -7,9 +7,9 @@ from admin_extra_buttons.utils import HttpResponseRedirectToReferrer
 import requests
 
 from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock, ColorGroup, Pattern
-from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock, load_items_from_bisoft
+from fashionShop.items.tasks import load_items_from_bisoft
+from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock
 from fashionShop.pictures.admin import PictureInline
-from fashionShop.settings import BISOFT_API_URL, BISOFT_API_KEY
 
 
 class StockInline(admin.StackedInline):
@@ -35,7 +35,7 @@ class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
     def load_items(self, request):
         start = time.time()
 
-        load_items_from_bisoft()
+        load_items_from_bisoft.delay()
 
         end = time.time()
         self.message_user(request, f'The operation took {end - start} seconds')
