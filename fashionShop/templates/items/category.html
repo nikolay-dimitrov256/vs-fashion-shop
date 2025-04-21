@@ -24,6 +24,10 @@
 				</ul>
 			</div>
 
+			{% block h1 %}
+			<h1>{% trans 'Women clothes all' %}</h1>
+			{% endblock %}
+
 			<!-- Sidebar -->
 
 			<div class="sidebar">
@@ -220,7 +224,7 @@
 											<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
 										{% endif %}
 										<div class="product_info">
-											<h6 class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></h6>
+											<p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></p>
 											{% if item.is_discounted %}
 												<div class="product_price">{{ item.discount_price }} лв<span>{{ item.price }} лв</span></div>
 											{% else %}

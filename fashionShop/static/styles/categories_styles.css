@@ -122,7 +122,11 @@ p::selection
 {
 	background: #fde0db;
 }
-h1{font-size: 72px;}
+h1 {
+	font-size: 40px;
+	text-align: center;
+	margin-block: 0.5em;
+}
 h2{font-size: 40px;}
 h3{font-size: 28px;}
 h4{font-size: 24px;}
@@ -1122,7 +1126,8 @@ section
 	width: 100%;
 	height: 60px;
 	border-bottom: solid 1px #ebebeb;
-	margin-bottom: 58px;
+	/* margin-bottom: 58px; */
+	margin-bottom: 1em;
 }
 .breadcrumbs ul li
 {
@@ -1367,6 +1372,7 @@ section
 {
 	color: #1e1e27;
 	line-height: 20px;
+	border-bottom: none;
 }
 .product_name:hover a
 {
