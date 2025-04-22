@@ -1,6 +1,7 @@
 .navbar_menu li a {
     font-weight: 600;
     letter-spacing: 0.5px;
+    padding: 20px 15px;
 }
 
 .navbar_menu > li {
