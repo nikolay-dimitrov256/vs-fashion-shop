@@ -93,6 +93,10 @@ class ContactMessageView(CreateView):
         return HttpResponseRedirect(self.success_url)
 
 
+class AboutView(TemplateView):
+    template_name = 'common/about.html'
+
+
 class CategoryView(TemplateView):
     template_name = 'common/categories.html'
 
