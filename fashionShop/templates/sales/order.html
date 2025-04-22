@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Order</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
+{% load static %}
+{% load i18n %}
 
-</body>
-</html>
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/thankyou_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container first-container">
+    <h2>{% trans 'Thank you for your order' %}</h2>
+    <p>{% trans 'Your order has been received and is being processed.' %}</p>
+    <p>{% trans 'The number of your order is:' %} <span class="order-num">{{ object.pk }}</span></p>
+    <p>{% trans 'We will contact you as soon as possible.' %}</p>
+</div>
+
+{% endblock %}
