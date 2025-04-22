@@ -1,8 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from fashionShop.common.choices import CountryChoices
+
+UserModel = get_user_model()
 
 
 class Address(models.Model):
@@ -65,6 +68,13 @@ class Address(models.Model):
 
     store = models.OneToOneField(
         to='stores.Store',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+
+    user = models.ForeignKey(
+        to=UserModel,
         on_delete=models.CASCADE,
         null=True,
         blank=True,

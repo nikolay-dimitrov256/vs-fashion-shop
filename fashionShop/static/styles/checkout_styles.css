@@ -1,0 +1,68 @@
+.order-info {
+    box-shadow: 0 0 0.8em 0 rgba(0, 0, 0, 0.5);
+}
+
+.item-info {
+    border-bottom: 1px solid #ccc;
+    padding-block: 0.5em;
+}
+
+.item-name {
+    margin-bottom: 0;
+}
+
+.item-size {
+    color: #282828;
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+.item-price {
+    color: #fe4c50;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.order-total {
+    padding-block: 1em;
+    background-color: #eee;
+}
+
+.order-total p {
+    margin-bottom: 0;
+}
+
+.total {
+    color: #282828;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.phone_order_button {
+    border: none;
+    height: 38px;
+}
+
+.button {
+    border-radius: 0;
+}
+
+@media only screen and (max-width: 479px) {
+    .item-name {
+        margin-bottom: 0;
+    }
+    p {
+        margin-bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 400px)
+{
+	.item-size {
+        font-size: 1em;
+    }
+    .item-price {
+        font-size: 16px;
+    }
+}

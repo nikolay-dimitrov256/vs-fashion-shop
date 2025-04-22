@@ -1,0 +1,19 @@
+{% load i18n %}
+
+{% for cart_item in cart.cart_items.all %}
+    <div class="row item-info">
+        <div class="col-8">
+            <h5 class="item-name">{{ cart_item.item.name }}</h5>
+            <p class="item-size"><span>{{ cart_item.size.size }}</span> x <span>{{ cart_item.quantity }}</span></p>
+        </div>
+        <div class="col-4">
+            <p class="item-price">{{ cart_item.total_price }} {% trans 'lv' %}</p>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="row order-total">
+    <div class="col">
+        <p><span class="total">{% trans 'Total:' %} </span><span class="item-price">{{ cart.total }} {% trans 'lv' %}</span></p>
+    </div>
+</div>

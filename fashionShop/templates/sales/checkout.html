@@ -1,0 +1,40 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/custom_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/checkout_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container first-container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <form action="{% url 'phone-order' %}" method="post" class="d-flex gap-2 align-items-end">
+                    {% csrf_token %}
+                    <div class="form-floating flex-grow-1">
+                        {{ phone_order_form.phone|as_crispy_field }}
+                    </div>
+                    <button type="submit" class="btn btn-success form-group button">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        {% trans 'Order with phone' %}
+                    </button>
+                </form>
+                <p>{% trans 'Leave your phone number and we will contact you about the details.' %}</p>
+            </div>
+        </div>
+        <div class="col-lg-4 order-info">
+            {% if request.user.is_authenticated %}
+                {% include 'sales/authenticated-user-checkout-content.html' %}
+            {% else %}
+                {% include 'sales/anonymous-user-checkout-content.html' %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

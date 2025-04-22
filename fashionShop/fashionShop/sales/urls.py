@@ -12,4 +12,7 @@ urlpatterns = [
             ])),
         ]),
     ),
+    path('checkout/', views.CheckoutView.as_view(), name='checkout'),
+    path('phone-order/', views.PhoneOrderView.as_view(), name='phone-order'),
+    path('order/<int:pk>/', views.OrderView.as_view(), name='order'),
 ]
