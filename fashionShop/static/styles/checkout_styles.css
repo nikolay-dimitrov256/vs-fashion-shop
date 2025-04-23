@@ -1,5 +1,6 @@
 .order-info {
     box-shadow: 0 0 0.8em 0 rgba(0, 0, 0, 0.5);
+    margin-left: 1em;
 }
 
 .item-info {
@@ -46,6 +47,12 @@
 
 .button {
     border-radius: 0;
+}
+
+.order-option {
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin-bottom: 0.5rem;
 }
 
 @media only screen and (max-width: 479px) {

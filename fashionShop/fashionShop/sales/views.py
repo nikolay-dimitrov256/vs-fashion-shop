@@ -222,6 +222,7 @@ class CheckoutView(View):
 
 
 class PhoneOrderView(CreateView):
+    model = OnlineOrder
     form_class = PhoneOrderForm
     success_url = reverse_lazy('order')
 
@@ -238,6 +239,6 @@ class PhoneOrderView(CreateView):
         return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 
 
-class OrderView(DetailView):
+class ThankYouView(DetailView):
     model = OnlineOrder
     template_name = 'sales/order.html'
