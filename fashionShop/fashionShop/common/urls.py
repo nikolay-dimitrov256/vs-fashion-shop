@@ -9,5 +9,7 @@ urlpatterns = [
     path('contact/', views.ContactView.as_view(), name='contact'),
     path('contact-message/', views.ContactMessageView.as_view(), name='contact-message'),
     path('about/', views.AboutView.as_view(), name='about'),
+    path('shopping-terms', views.ShoppingTermsView.as_view(), name='shopping-terms'),
+    path('shipping-terms/', views.ShippingTermsView.as_view(), name='shipping-terms'),
     # path('set-currency/', views.set_currency, name='set-currency')
 ]

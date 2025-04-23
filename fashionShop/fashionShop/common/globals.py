@@ -10,3 +10,5 @@ FREE_DELIVERY_THRESHOLD = {
     'BGN': 150,
     'EUR': 75,
 }
+
+SITE_ADDRESS = 'https://vilistil.bg'

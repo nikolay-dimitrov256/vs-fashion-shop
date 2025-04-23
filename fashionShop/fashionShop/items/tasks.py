@@ -2,7 +2,7 @@ import requests
 from celery import shared_task
 from django.utils.text import slugify
 
-from fashionShop.common.global_vars import BISOFT_API_URL
+from fashionShop.common.globals import BISOFT_API_URL
 from fashionShop.common.utils import transliterate
 from fashionShop.items.models import ColorGroup, Category, Size, Item, Stock
 from fashionShop.items.utils import check_and_create_color_groups, BISOFT_COLOR_GROUPS

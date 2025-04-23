@@ -7,7 +7,7 @@ import json
 from django.db.models import F
 from django.utils.text import slugify
 
-from fashionShop.common.global_vars import BISOFT_API_URL
+from fashionShop.common.globals import BISOFT_API_URL
 from fashionShop.common.utils import transliterate
 from fashionShop.items.models import Item, Category, ColorGroup, Size, Stock
 from fashionShop.stores.models import Store

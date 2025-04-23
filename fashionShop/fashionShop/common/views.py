@@ -97,6 +97,14 @@ class AboutView(TemplateView):
     template_name = 'common/about.html'
 
 
+class ShoppingTermsView(TemplateView):
+    template_name = 'common/shopping-terms.html'
+
+
+class ShippingTermsView(TemplateView):
+    template_name = 'common/shipping-terms.html'
+
+
 class CategoryView(TemplateView):
     template_name = 'common/categories.html'
 
