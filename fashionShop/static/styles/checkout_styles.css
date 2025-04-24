@@ -56,9 +56,10 @@
 }
 
 .autocomplete-list {
+    display: none;
     position: absolute;
     background: white;
-    /* border: 1px solid #ccc; */
+    border: 1px solid #ccc;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -66,6 +67,7 @@
     overflow-y: auto;
     width: 100%;
     z-index: 1000;
+    margin-top: -1rem;
 }
   
 .autocomplete-list li {

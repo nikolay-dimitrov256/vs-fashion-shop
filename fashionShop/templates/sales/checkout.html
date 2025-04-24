@@ -32,6 +32,7 @@
                 <form method="post" id="shipping-form">
                     {% csrf_token %}
                     <input type="hidden" name="form_type" value="shipping">
+                    <input type="hidden" id="town_id" value="">
 <!--                    {{ shipping_form|crispy }}-->
                     {{ shipping_form.phone|as_crispy_field }}
                     {{ shipping_form.email|as_crispy_field }}

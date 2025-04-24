@@ -28,4 +28,5 @@ urlpatterns = [
     ),
     path('items/', include('fashionShop.items.urls')),
     path('sales/', include('fashionShop.sales.urls')),
+    path('api/', include('fashionShop.api.urls')),
 ]

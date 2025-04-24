@@ -1,6 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 
 BISOFT_API_URL = 'https://vilistil.com/vs/'
+SPEEDY_API_URL = 'https://api.speedy.bg/v1'
 
 CURRENCY_NAMES = {
     'BGN': _('lv'),

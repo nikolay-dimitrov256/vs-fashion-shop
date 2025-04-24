@@ -1,0 +1,40 @@
+import requests
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
+from rest_framework.views import APIView
+
+from fashionShop.common.globals import SPEEDY_API_URL
+
+
+class SpeedyTownsView(APIView):
+    def post(self, request):
+        query = request.data.get('name', '')
+
+        url = f'{SPEEDY_API_URL}/location/site'
+        headers = {
+            'Content-Type': 'application/json',
+            'charset': 'utf-8',
+
+        }
+        params = {
+            'userName': '1996022',
+            'password': '1243131659',
+            'language': 'BG',
+            'countryId': '100',  # Bulgaria
+            'name': query,
+        }
+
+        response = requests.post(
+            url=url,
+            headers=headers,
+            json=params,
+        )
+
+        data = response.json()
+
+        return Response(data=data, status=HTTP_200_OK)
+
+
+class SpeedyOfficeView(APIView):
+    def post(self, request):
+        pass

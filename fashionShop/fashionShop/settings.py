@@ -43,6 +43,7 @@ PROJECT_APPS = [
     'fashionShop.pictures',
     'fashionShop.stores',
     'fashionShop.sales',
+    'fashionShop.api',
 ]
 
 INSTALLED_APPS = [
@@ -61,13 +62,11 @@ INSTALLED_APPS = [
 
     "crispy_forms",
     "crispy_bootstrap4",
-
     'modeltranslation',
-
     'admin_extra_buttons',
-
     'cloudinary',
     'cloudinary_storage',
+    'rest_framework',
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
