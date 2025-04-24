@@ -3,7 +3,7 @@ from pprint import pprint
 import requests
 import time
 
-from fashionShop.settings import BISOFT_API_URL
+from fashionShop.common.globals import BISOFT_API_URL
 
 
 def send_request():
@@ -39,4 +39,29 @@ def test_flattening():
     print(new_sizes_names)
 
 
-print((1, 3) in {(1, 3), (1, 2)})
+def find_town_request():
+    base_url = 'https://api.speedy.bg/v1'
+    url = f'{base_url}/location/site'
+    headers = {
+        'Content-Type': 'application/json',
+        'charset': 'utf-8',
+
+    }
+    params = {
+        'userName': '1996022',
+        'password': '1243131659',
+        'language': 'BG',
+        'countryId': '100',  # Bulgaria
+        'name': 'благоевград',
+    }
+
+    response = requests.post(
+        url=url,
+        headers=headers,
+        json=params,
+    )
+
+    pprint(response.json())
+
+
+find_town_request()

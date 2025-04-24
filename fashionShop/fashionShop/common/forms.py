@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from fashionShop.common.models import ContactMessage
+from fashionShop.common.models import ContactMessage, Address
 
 
 class ContactForm(forms.ModelForm):
@@ -57,3 +57,9 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
         fields = '__all__'
+
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        exclude = ['store', 'user']

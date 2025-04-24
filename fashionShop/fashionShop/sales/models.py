@@ -53,6 +53,18 @@ class OnlineOrder(models.Model):
         blank=True,
     )
 
+    town = models.CharField(
+        max_length=30,
+        null=True,
+        blank=True,
+    )
+
+    office = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )

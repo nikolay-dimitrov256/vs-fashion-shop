@@ -21,8 +21,8 @@ class Address(models.Model):
         max_length=20,
     )
 
-    town = models.CharField(
-        verbose_name=_('town'),
+    city = models.CharField(
+        verbose_name=_('city'),
         max_length=20,
     )
 

@@ -9,8 +9,9 @@ from django.utils.translation import gettext as _
 from django.views.generic import View, CreateView, TemplateView
 from django.views.generic import DetailView
 
+from fashionShop.common.forms import AddressForm
 from fashionShop.items.models import CartItem, Item, Size
-from fashionShop.sales.forms import PhoneOrderForm
+from fashionShop.sales.forms import PhoneOrderForm, ShippingOrderForm
 from fashionShop.sales.models import Cart, OnlineOrder
 from fashionShop.sales.utils import fill_order_from_cart_empty_cart
 
@@ -217,6 +218,78 @@ class CheckoutView(View):
             }
 
         context['phone_order_form'] = PhoneOrderForm()
+        context['shipping_form'] = ShippingOrderForm()
+        context['address_form'] = AddressForm()
+
+        return render(request, 'sales/checkout.html', context)
+
+    def post(self, request):
+        form_type = request.POST.get('form_type')
+
+        phone_form = PhoneOrderForm()
+        shipping_form = ShippingOrderForm()
+        address_form = AddressForm()
+
+        if form_type == 'phone':
+            phone_form = PhoneOrderForm(request.POST or None)
+            if phone_form.is_valid():
+                order = phone_form.save()
+
+                fill_order_from_cart_empty_cart(request, order)
+
+                if request.user.is_authenticated:
+                    order.user = request.user
+                    order.email = request.user.email
+                    order.save()
+
+                return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
+
+        elif form_type == 'shipping':
+            shipping_form = ShippingOrderForm(request.POST or None)
+            address_form = AddressForm(request.POST or None)
+
+            if shipping_form.is_valid():
+                order = shipping_form.save()
+
+                fill_order_from_cart_empty_cart(request, order)
+
+                order.user = request.user if request.user.is_authenticated else None
+                order.save()
+
+                return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
+
+        if request.user.is_authenticated:
+            self.cart.total = sum(i.total_price for i in self.cart.cart_items.all())
+
+            context = {
+                'cart': self.cart,
+            }
+
+        else:
+            self.cart = deepcopy(self.cart)
+            cart_total = Decimal(0)
+            items = Item.objects.filter(item_number__in=self.cart.keys())
+            items_map = {item.item_number: item for item in items}
+
+            for item_number, data in self.cart.items():
+                item = items_map.get(int(item_number))
+                sizes = {}
+
+                for size, quantity in data.items():
+                    total = item.final_price * int(quantity)
+                    sizes[size] = {'quantity': quantity, 'total': total}
+                    cart_total += total
+
+                self.cart[item_number] = {'item': item, 'sizes': sizes}
+
+            context = {
+                'cart': self.cart,
+                'cart_total': cart_total,
+            }
+
+        context['phone_order_form'] = phone_form
+        context['shipping_form'] = shipping_form
+        context['address_form'] = address_form
 
         return render(request, 'sales/checkout.html', context)
 
@@ -225,6 +298,7 @@ class PhoneOrderView(CreateView):
     model = OnlineOrder
     form_class = PhoneOrderForm
     success_url = reverse_lazy('order')
+    template_name = 'sales/checkout.html'
 
     def form_valid(self, form):
         order = form.save()
@@ -235,6 +309,33 @@ class PhoneOrderView(CreateView):
             order.user = self.request.user
             order.email = self.request.user.email
             order.save()
+
+        return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
+
+
+class ShippingOrderView(CreateView):
+    model = OnlineOrder
+    form_class = ShippingOrderForm
+    success_url = reverse_lazy('order')
+    template_name = 'sales/checkout.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['phone_order_form'] = PhoneOrderForm()
+        context['form'] = ShippingOrderForm()
+
+        return context
+
+    def form_valid(self, form):
+        order = form.save()
+
+        fill_order_from_cart_empty_cart(self.request, order)
+
+        if self.request.user.is_authenticated:
+            order.user = self.request.user
+
+        order.save()
 
         return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 

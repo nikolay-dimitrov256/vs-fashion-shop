@@ -55,6 +55,28 @@
     margin-bottom: 0.5rem;
 }
 
+.autocomplete-list {
+    position: absolute;
+    background: white;
+    /* border: 1px solid #ccc; */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 1000;
+}
+  
+.autocomplete-list li {
+    padding: 2px 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.autocomplete-list li:hover {
+    background: #f0f0f0;
+}
+
 @media only screen and (max-width: 479px) {
     .item-name {
         margin-bottom: 0;
