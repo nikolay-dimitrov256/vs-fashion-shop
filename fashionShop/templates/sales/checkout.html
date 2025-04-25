@@ -33,7 +33,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="form_type" value="shipping">
                     <input type="hidden" id="town_id" value="">
-<!--                    {{ shipping_form|crispy }}-->
+
                     {{ shipping_form.phone|as_crispy_field }}
                     {{ shipping_form.email|as_crispy_field }}
 
@@ -41,7 +41,6 @@
 
                     {{ shipping_form.town|as_crispy_field }}
                     <ul id="town-suggestions" class="autocomplete-list">
-<!--                        <li>Plovdiv</li>-->
                     </ul>
 
                     {{ shipping_form.office|as_crispy_field }}

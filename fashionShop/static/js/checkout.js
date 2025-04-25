@@ -106,7 +106,7 @@ function initTownField(query) {
     )
     .then(response => response.json())
     .then(data => makeTownLiElements(data))
-    .catch(error => console.log(error));
+    .catch(error => console.error(error));
 }
 
 function makeTownLiElements(data) {
@@ -139,14 +139,46 @@ function makeTownLiElements(data) {
 
 function populateOfficeOptions() {
     const hiddenInputElement = document.getElementById('town_id');
+    const siteId = hiddenInputElement.value;
     
-    const baseUrl = window.location.origin
-    const url = `${baseUrl}/api/proxy/speedy/offices/`;
+    if(!siteId) {
+        return;
+    }
+    
+    const baseUrl = window.location.origin;
+    const url = `${baseUrl}/api/proxy/speedy/office/`;
 
     const params = {
         'language': 'BG',
         'countryId': '100',  // Bulgaria
-        'name': query,
-    }
+        'siteId': siteId,
+    };
 
+    fetch(
+        url,
+        {
+            method: 'POST',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify(params)
+        }
+    )
+    .then(response => response.json())
+    .then(data => makeOfficeOptions(data))
+    .catch(error => console.error(error));
+}
+
+function makeOfficeOptions(data) {
+    const officeSelectElement = document.getElementById('id_office');
+
+    const officeOptionElements = data.offices.map(office => {
+        const optionElement = document.createElement('option');
+        const optionText = `${office.id} - ${office.name} - ${office.address.localAddressString}`;
+        optionElement.textContent = optionText;
+        optionElement.value = optionText;
+
+        return optionElement;
+    });
+
+    officeSelectElement.innerHTML = '';
+    officeSelectElement.append(...officeOptionElements);
 }

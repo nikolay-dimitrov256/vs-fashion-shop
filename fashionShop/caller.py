@@ -3,7 +3,7 @@ from pprint import pprint
 import requests
 import time
 
-from fashionShop.common.globals import BISOFT_API_URL
+from fashionShop.common.globals import BISOFT_API_URL, SPEEDY_API_URL
 
 
 def send_request():
@@ -52,7 +52,7 @@ def find_town_request():
         'password': '1243131659',
         'language': 'BG',
         'countryId': '100',  # Bulgaria
-        'name': 'благоевград',
+        'name': 'Стамболийски',
     }
 
     response = requests.post(
@@ -64,4 +64,33 @@ def find_town_request():
     pprint(response.json())
 
 
-find_town_request()
+def find_office():
+    query = '51980'
+
+    url = f'{SPEEDY_API_URL}/location/office'
+    headers = {
+        'Content-Type': 'application/json',
+        'charset': 'utf-8',
+
+    }
+    params = {
+        'userName': '1996022',
+        'password': '1243131659',
+        'language': 'BG',
+        'countryId': '100',  # Bulgaria
+        'siteId': query,
+    }
+
+    response = requests.post(
+        url=url,
+        headers=headers,
+        json=params,
+    )
+
+    data = response.json()
+
+    for office in data['offices']:
+        pprint(office)
+
+
+print(len('201 - СТАМБОЛИЙСКИ - ул. ХРИСТО БОТЕВ No 7'))

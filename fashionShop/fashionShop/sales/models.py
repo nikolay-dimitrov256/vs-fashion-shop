@@ -60,7 +60,7 @@ class OnlineOrder(models.Model):
     )
 
     office = models.CharField(
-        max_length=50,
+        max_length=100,
         null=True,
         blank=True,
     )

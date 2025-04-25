@@ -15,6 +15,7 @@ class ShippingOrderForm(forms.ModelForm):
         widget=forms.Select(),
         required=False,
     )
+
     def __init__(self, *args, **kwargs):
         self.address_form = kwargs.pop('address_form', None)
         super().__init__(*args, **kwargs)
