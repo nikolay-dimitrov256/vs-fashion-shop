@@ -1,7 +1,10 @@
+import json
 from pprint import pprint
 
 import requests
 import time
+
+from decouple import config
 
 from fashionShop.common.globals import BISOFT_API_URL, SPEEDY_API_URL
 
@@ -52,7 +55,7 @@ def find_town_request():
         'password': '1243131659',
         'language': 'BG',
         'countryId': '100',  # Bulgaria
-        'name': 'Стамболийски',
+        'name': 'благоевград',
     }
 
     response = requests.post(
@@ -65,7 +68,7 @@ def find_town_request():
 
 
 def find_office():
-    query = '51980'
+    query = '4279'
 
     url = f'{SPEEDY_API_URL}/location/office'
     headers = {
@@ -93,4 +96,41 @@ def find_office():
         pprint(office)
 
 
-print(len('201 - СТАМБОЛИЙСКИ - ул. ХРИСТО БОТЕВ No 7'))
+def request_econt():
+    url = 'https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getCities.json'
+
+    headers = {
+        'Accept': 'application/json,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Connection': 'keep-alive',
+        'Host': 'ee.econt.com',
+        'Upgrade-Insecure-Requests': '1',
+        'username': config('ECONT_USERNAME'),
+        'password': config('ECONT_PASSWORD')
+    }
+
+    payload = {
+        'countryCode': 'BGR',
+    }
+
+    response = requests.post(url=url, headers=headers, json=payload)
+
+    with open('econt_cities.json', 'w') as file:
+        file.write(json.dumps(response.json()))
+
+
+def load_econt_cities():
+    query = 'plovd'
+    with open('econt_cities.json', 'r') as file:
+        data = json.loads(file.read())
+
+    cities = []
+    for city in data['cities']:
+        if query.lower() in city['name'].lower() or query.lower() in city['nameEn'].lower():
+            cities.append(city)
+
+    pprint(cities)
+
+
+load_econt_cities()

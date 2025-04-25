@@ -9,7 +9,7 @@ function initShippingForm() {
     hideOfficeFields();
 
     // Init shipping method
-    shippingMethodSelectElement.addEventListener('change', initShippingMethod)
+    shippingMethodSelectElement.addEventListener('change', initShippingMethod);
 
     // Init town field
     townInputElement.addEventListener('input', (e) => initTownField(townInputElement.value.trim()));
@@ -84,10 +84,12 @@ function initTownField(query) {
     if (!query || query.length < 2) {
         suggestionsUlElement.innerHTML = '';
         suggestionsUlElement.style.display = 'none';
+        document.getElementById('id_office').innerHTML = '';
+        document.getElementById('town_id').value = '';
         return;
     }
 
-    const baseUrl = window.location.origin
+    const baseUrl = window.location.origin;
     const url = `${baseUrl}/api/proxy/speedy/towns/`;
 
     const params = {
@@ -172,7 +174,7 @@ function makeOfficeOptions(data) {
 
     const officeOptionElements = data.offices.map(office => {
         const optionElement = document.createElement('option');
-        const optionText = `${office.id} - ${office.name} - ${office.address.localAddressString}`;
+        const optionText = `${office.id}, ${office.name}, ${office.address.localAddressString}`;
         optionElement.textContent = optionText;
         optionElement.value = optionText;
 

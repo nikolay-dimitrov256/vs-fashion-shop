@@ -16,7 +16,6 @@ class SpeedyTownsView(APIView):
         headers = {
             'Content-Type': 'application/json',
             'charset': 'utf-8',
-
         }
         params = {
             'userName': '1996022',
@@ -47,7 +46,6 @@ class SpeedyOfficeView(APIView):
         headers = {
             'Content-Type': 'application/json',
             'charset': 'utf-8',
-
         }
         params = {
             'userName': '1996022',
