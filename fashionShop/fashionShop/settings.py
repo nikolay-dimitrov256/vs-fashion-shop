@@ -124,6 +124,25 @@ DATABASES = {
     }
 }
 
+if DEBUG:
+    # Development cache (local memory, super simple)
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-dev-cache',
+        }
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': config('CACHE_LOCATION'),  # <-- Important! "redis" is the Docker service name
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            }
+        }
+    }
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -230,6 +249,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+
+DATA_DIR = BASE_DIR / 'data'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

@@ -6,6 +6,7 @@ import time
 
 from decouple import config
 
+from fashionShop.api.utils import get_econt_cities_data
 from fashionShop.common.globals import BISOFT_API_URL, SPEEDY_API_URL
 
 
@@ -116,14 +117,14 @@ def request_econt():
 
     response = requests.post(url=url, headers=headers, json=payload)
 
-    with open('econt_cities.json', 'w') as file:
+    with open('data/api/econt_cities.json', 'w') as file:
         file.write(json.dumps(response.json()))
 
 
 def load_econt_cities():
     query = 'plovd'
-    with open('econt_cities.json', 'r') as file:
-        data = json.loads(file.read())
+
+    data = get_econt_cities_data()
 
     cities = []
     for city in data['cities']:
@@ -133,4 +134,17 @@ def load_econt_cities():
     pprint(cities)
 
 
-load_econt_cities()
+def econt_offices():
+    url = 'http://ee.econt.com/services/Nomenclatures/NomenclaturesService.getOffices.json'
+    params = {
+        'cityID': '114'
+    }
+
+    response = requests.post(url, json=params)
+
+    data = response.json()
+
+    pprint(data)
+
+
+econt_offices()

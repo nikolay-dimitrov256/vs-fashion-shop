@@ -16,12 +16,21 @@ function initShippingForm() {
 }
 
 function initShippingMethod() {
+    // Clear fields
+    const townInputElement = document.getElementById('id_town');
+    const officeSelectElement = document.getElementById('id_office');
+    const hiddenInputElement = document.getElementById('town_id');
+    townInputElement.value = '';
+    officeSelectElement.innerHTML = '';
+    officeSelectElement.value = '';
+    hiddenInputElement.value = '';
+
+    // Get elements
     const shippingMethodSelectElement = document.getElementById('id_shipping_method');
     const addressValues = ['spad', 'ecad'];
     const officeValues = ['spof', 'ecof'];
     const shippingMethod = shippingMethodSelectElement.value;
 
-    
     if(addressValues.includes(shippingMethod)) { // The method is address
 
         hideOfficeFields();
@@ -80,6 +89,8 @@ function hideAddressFields() {
 
 function initTownField(query) {
     const suggestionsUlElement = document.getElementById('town-suggestions');
+    const shippingMethodSelectElement = document.getElementById('id_shipping_method');
+    const shippingMethod = shippingMethodSelectElement.value;
 
     if (!query || query.length < 2) {
         suggestionsUlElement.innerHTML = '';
@@ -89,14 +100,23 @@ function initTownField(query) {
         return;
     }
 
+    if (shippingMethod == 'spof') {
+        fetchSpeedyTowns(query);
+    } else if (shippingMethod == 'ecof') {
+        fetchEcontTowns(query);
+    }
+    
+}
+
+function fetchSpeedyTowns(query) {
     const baseUrl = window.location.origin;
     const url = `${baseUrl}/api/proxy/speedy/towns/`;
 
     const params = {
-        'language': 'BG',
-        'countryId': '100',  // Bulgaria
+        // 'language': 'BG',
+        // 'countryId': '100',  // Bulgaria
         'name': query,
-    }
+    };
 
     fetch(
         url,
@@ -107,11 +127,27 @@ function initTownField(query) {
         }
     )
     .then(response => response.json())
-    .then(data => makeTownLiElements(data))
+    .then(data => makeSpeedyTownLiElements(data))
     .catch(error => console.error(error));
 }
 
-function makeTownLiElements(data) {
+function fetchEcontTowns(query) {
+    const baseUrl = window.location.origin;
+    const url = `${baseUrl}/api/proxy/econt/towns/?name=${query}`;
+
+    fetch(
+        url,
+        {
+            method: 'GET',
+            headers: {'Content-type': 'application/json'}
+        }
+    )
+    .then(response => response.json())
+    .then(data => makeEcontTownLiElements(data))
+    .catch(error => console.error(error));
+}
+
+function makeSpeedyTownLiElements(data) {
     const towns = data.sites;
     const suggestionsUlElement = document.getElementById('town-suggestions');
     const townInputElement = document.getElementById('id_town');
@@ -127,7 +163,7 @@ function makeTownLiElements(data) {
         liElement.addEventListener('click', () => {
             townInputElement.value = `${town.postCode}-${town.name}`;
             hiddenInputElement.value = town.id;
-            populateOfficeOptions();
+            populateSpeedyOfficeOptions();
             suggestionsUlElement.innerHTML = '';
             suggestionsUlElement.style.display = 'none';
             townInputElement.dispatchEvent(new Event('change'));
@@ -139,7 +175,34 @@ function makeTownLiElements(data) {
     suggestionsUlElement.append(...liElements);
 }
 
-function populateOfficeOptions() {
+function makeEcontTownLiElements(data) {
+    const suggestionsUlElement = document.getElementById('town-suggestions');
+    const townInputElement = document.getElementById('id_town');
+    const hiddenInputElement = document.getElementById('town_id');
+
+    suggestionsUlElement.innerHTML = '';
+    suggestionsUlElement.style.display = 'block';
+
+    const liElements = data.map((town) => {
+        const liElement = document.createElement('li');
+        liElement.textContent = `${town.postCode}-${town.name}-${town.regionName}`;
+        liElement.style.cursor = 'pointer';
+        liElement.addEventListener('click', () => {
+            townInputElement.value = `${town.postCode}-${town.name}`;
+            hiddenInputElement.value = town.id;
+            populateEcontOfficeOptions();
+            suggestionsUlElement.innerHTML = '';
+            suggestionsUlElement.style.display = 'none';
+            townInputElement.dispatchEvent(new Event('change'));
+        });
+
+        return liElement;
+    });
+    
+    suggestionsUlElement.append(...liElements);
+}
+
+function populateSpeedyOfficeOptions() {
     const hiddenInputElement = document.getElementById('town_id');
     const siteId = hiddenInputElement.value;
     
@@ -148,7 +211,7 @@ function populateOfficeOptions() {
     }
     
     const baseUrl = window.location.origin;
-    const url = `${baseUrl}/api/proxy/speedy/office/`;
+    const url = `${baseUrl}/api/proxy/speedy/offices/`;
 
     const params = {
         'language': 'BG',
@@ -165,16 +228,60 @@ function populateOfficeOptions() {
         }
     )
     .then(response => response.json())
-    .then(data => makeOfficeOptions(data))
+    .then(data => makeSpeedyOfficeOptions(data))
     .catch(error => console.error(error));
 }
 
-function makeOfficeOptions(data) {
+function populateEcontOfficeOptions() {
+    const hiddenInputElement = document.getElementById('town_id');
+    const townId = hiddenInputElement.value;
+    
+    if(!townId) {
+        return;
+    }
+    
+    const baseUrl = window.location.origin;
+    const url = `${baseUrl}/api/proxy/econt/offices/`;
+
+    const params = {
+        'cityID': townId,
+    };
+
+    fetch(
+        url,
+        {
+            method: 'POST',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify(params)
+        }
+    )
+    .then(response => response.json())
+    .then(data => makeEcontOfficeOptions(data))
+    .catch(error => console.error(error));
+}
+
+function makeSpeedyOfficeOptions(data) {
     const officeSelectElement = document.getElementById('id_office');
 
     const officeOptionElements = data.offices.map(office => {
         const optionElement = document.createElement('option');
         const optionText = `${office.id}, ${office.name}, ${office.address.localAddressString}`;
+        optionElement.textContent = optionText;
+        optionElement.value = optionText;
+
+        return optionElement;
+    });
+
+    officeSelectElement.innerHTML = '';
+    officeSelectElement.append(...officeOptionElements);
+}
+
+function makeEcontOfficeOptions(data) {
+    const officeSelectElement = document.getElementById('id_office');
+
+    const officeOptionElements = data.offices.map(office => {
+        const optionElement = document.createElement('option');
+        const optionText = `${office.id}, ${office.name}, ${office.address.fullAddress}`;
         optionElement.textContent = optionText;
         optionElement.value = optionText;
 
