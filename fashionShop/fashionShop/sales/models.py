@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from fashionShop.sales.choices import ShippingChoices
 
@@ -28,17 +29,34 @@ class OnlineOrder(models.Model):
         blank=True,
     )
 
+    first_name = models.CharField(
+        _('first name'),
+        max_length=20,
+        null=True,
+        blank=True,
+    )
+
+    last_name = models.CharField(
+        _('last name'),
+        max_length=20,
+        null=True,
+        blank=True,
+    )
+
     phone = models.CharField(
+        _('phone'),
         max_length=15,
     )
 
     email = models.EmailField(
+        _('e-mail'),
         max_length=30,
         null=True,
         blank=True,
     )
 
     shipping_method = models.CharField(
+        _('shipping method'),
         max_length=5,
         choices=ShippingChoices.choices,
         null=True,
@@ -54,12 +72,14 @@ class OnlineOrder(models.Model):
     )
 
     town = models.CharField(
+        _('town'),
         max_length=30,
         null=True,
         blank=True,
     )
 
     office = models.CharField(
+        _('office'),
         max_length=100,
         null=True,
         blank=True,

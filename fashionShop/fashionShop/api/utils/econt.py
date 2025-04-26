@@ -1,6 +1,9 @@
 import json
 import logging
 import os
+
+import requests
+from decouple import config
 from django.core.cache import cache
 from django.conf import settings
 
@@ -21,7 +24,12 @@ def get_econt_cities_data(force_reload=False):
         current_mtime = os.path.getmtime(file_path)
     except FileNotFoundError:
         logger.error(f"Econt cities file not found at {file_path}")
-        return {}
+        try:
+            load_econt_cities()
+        except Exception as e:
+            logger.exception(f"Failed to generate econt_cities.json automatically: {e}")
+            return {}
+        return get_econt_cities_data()
 
     cached_mtime = cache.get(ECONT_MTIME_KEY)
     cached_data = cache.get(ECONT_CACHE_KEY)
@@ -42,3 +50,28 @@ def clear_econt_cities_cache():
     """Clear the cached Econt cities data."""
     cache.delete(ECONT_CACHE_KEY)
     cache.delete(ECONT_MTIME_KEY)
+
+
+def load_econt_cities():
+    url = 'https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getCities.json'
+
+    headers = {
+        'Accept': 'application/json,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Connection': 'keep-alive',
+        'Host': 'ee.econt.com',
+        'Upgrade-Insecure-Requests': '1',
+        'username': config('ECONT_USERNAME'),
+        'password': config('ECONT_PASSWORD')
+    }
+
+    payload = {
+        'countryCode': 'BGR',
+    }
+
+    response = requests.post(url=url, headers=headers, json=payload)
+    file_path = os.path.join(settings.DATA_DIR, 'api', 'econt_cities.json')
+
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write(json.dumps(response.json()))

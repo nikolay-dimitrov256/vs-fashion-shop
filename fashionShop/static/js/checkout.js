@@ -6,7 +6,11 @@ function initShippingForm() {
     const townInputElement = document.getElementById('id_town');
 
     // Hide office fields
-    hideOfficeFields();
+    const shippingMethod = shippingMethodSelectElement.value;
+    if (!['spof', 'ecof'].includes(shippingMethod)) {
+        hideOfficeFields();
+    }
+    
 
     // Init shipping method
     shippingMethodSelectElement.addEventListener('change', initShippingMethod);

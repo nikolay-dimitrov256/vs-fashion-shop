@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext as _
 
 from fashionShop.sales.choices import ShippingChoices
 from fashionShop.sales.models import OnlineOrder
@@ -11,7 +12,18 @@ class PhoneOrderForm(forms.ModelForm):
 
 
 class ShippingOrderForm(forms.ModelForm):
+    first_name = forms.CharField(
+        label=_('first name'),
+        required=True,
+    )
+
+    last_name = forms.CharField(
+        label=_('last name'),
+        required=True,
+    )
+
     office = forms.CharField(
+        label=_('office'),
         widget=forms.Select(),
         required=False,
     )
