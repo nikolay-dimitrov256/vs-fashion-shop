@@ -218,8 +218,9 @@ class CheckoutView(View):
             }
 
         context['phone_order_form'] = PhoneOrderForm()
-        context['shipping_form'] = ShippingOrderForm()
-        context['address_form'] = AddressForm()
+        address_form = AddressForm()
+        context['address_form'] = address_form
+        context['shipping_form'] = ShippingOrderForm(address_form=address_form)
 
         return render(request, 'sales/checkout.html', context)
 
@@ -227,8 +228,8 @@ class CheckoutView(View):
         form_type = request.POST.get('form_type')
 
         phone_form = PhoneOrderForm()
-        shipping_form = ShippingOrderForm()
         address_form = AddressForm()
+        shipping_form = ShippingOrderForm(address_form=address_form)
 
         if form_type == 'phone':
             phone_form = PhoneOrderForm(request.POST or None)
@@ -245,8 +246,8 @@ class CheckoutView(View):
                 return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 
         elif form_type == 'shipping':
-            shipping_form = ShippingOrderForm(request.POST or None)
             address_form = AddressForm(request.POST or None)
+            shipping_form = ShippingOrderForm(request.POST or None, address_form=address_form)
 
             if shipping_form.is_valid():
                 order = shipping_form.save()

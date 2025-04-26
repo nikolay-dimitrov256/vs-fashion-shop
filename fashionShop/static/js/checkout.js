@@ -9,6 +9,10 @@ function initShippingForm() {
     const shippingMethod = shippingMethodSelectElement.value;
     if (!['spof', 'ecof'].includes(shippingMethod)) {
         hideOfficeFields();
+        
+        if (['spad', 'ecad'].includes(shippingMethod)) {
+            showAddressFields();
+        }
     }
     
 

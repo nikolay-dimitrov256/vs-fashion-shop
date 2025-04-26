@@ -14,5 +14,6 @@ class OrderItemInline(admin.TabularInline):
 @admin.register(OnlineOrder)
 class OnlineOrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline]
-    readonly_fields = ['first_name', 'last_name', 'phone', 'user', 'email', 'shipping_method', 'office', 'town', 'address', 'total']
+    readonly_fields = ['first_name', 'last_name', 'phone', 'user', 'email',
+                       'shipping_method', 'office', 'town', 'address', 'total']
     search_fields = ['pk']

@@ -45,6 +45,13 @@ class Address(models.Model):
         blank=True,
     )
 
+    block = models.CharField(
+        _('block'),
+        max_length=20,
+        null=True,
+        blank=True,
+    )
+
     building = models.CharField(
         verbose_name=_('building'),
         max_length=10,
@@ -79,6 +86,15 @@ class Address(models.Model):
         null=True,
         blank=True,
     )
+
+    def __str__(self):
+        text = f'{self.postal_code} {self.city} - {self.province}\n{self.street} {self.number}\n'
+        if self.block:
+            text += f'квартал {self.block}'
+        if any([self.building, self.entrance, self.apartment]):
+            text += f'бл.{self.building}, вх.{self.entrance}, ап.{self.apartment}'
+
+        return text
 
 
 class Feedback(models.Model):
