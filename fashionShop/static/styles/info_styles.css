@@ -13,7 +13,29 @@ h2 {
     margin-top: 1em;
 }
 
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 .list-title {
     font-weight: bold;
     margin-top: 2em;
+}
+
+.shop-imgframe {
+    width: 400px;
+    height: 300px;
+}
+
+.mapframe {
+    width: 100%;
+    height: auto;
+}
+
+@media only screen and (max-width: 991px) {
+    .shop-imgframe {
+        margin-bottom: 1.5em;
+    }
 }

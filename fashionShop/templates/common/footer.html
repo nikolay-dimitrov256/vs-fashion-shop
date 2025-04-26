@@ -32,12 +32,12 @@
                 <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
                     <ul class="footer_nav">
                         <li><a href="{% url 'about' %}">{% trans 'About us' %}</a></li>
-                        <li><a href="#">{% trans 'Our shops' %}</a></li>
+                        <li><a href="{% url 'our-shops' %}">{% trans 'Our shops' %}</a></li>
                         <li><a href="{% url 'contact' %}">{% trans 'Contacts' %}</a></li>
                         <li><a href="{% url 'shopping-terms' %}">{% trans 'Shopping terms' %}</a></li>
                         <li><a href="{% url 'shipping-terms' %}">{% trans 'Shipping terms' %}</a></li>
-                        <li><a href="#">{% trans 'Refunds' %}</a></li>
-                        <li><a href="#">{% trans 'Privacy policy' %}</a></li>
+                        <li><a href="{% url 'refunds' %}">{% trans 'Refunds' %}</a></li>
+                        <li><a href="{% url 'privacy-policy' %}">{% trans 'Privacy policy' %}</a></li>
                     </ul>
                 </div>
             </div>

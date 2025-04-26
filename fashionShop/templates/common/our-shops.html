@@ -1,1 +1,106 @@
 {% extends 'common/base.html' %}
+{% load static %}
+{% load shipping %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/info_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container first-container">
+    <h1>МАГАЗИНИ</h1>
+
+    <div class="shop-info">
+        <h2>Пловдив Иван Вазов</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="shop-imgframe">
+                    <img src="{% static 'images/store-2.jpg' %}" alt="Вили Стил Пловдив Иван Вазов">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mapframe">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2958.5763356662665!2d24.742026076052245!3d42.13795224910501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14acd1b3fb0469a9%3A0xbdef455abcbb119c!2z0YPQuy4g4oCe0JjQstCw0L0g0JLQsNC30L7QsuKAnCA1MiwgNDAwMCDQptC10L3RgtGK0YAsINCf0LvQvtCy0LTQuNCy!5e0!3m2!1sbg!2sbg!4v1692771489960!5m2!1sbg!2sbg" max-width="450" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <p>ул. "Иван Вазов" № 52</p>
+        <p>тел. +359877151732</p>
+    </div>
+
+    <div class="shop-info">
+        <h2>Пловдив Център</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="shop-imgframe">
+                    <img src="{% static 'images/store-7.jpg' %}" alt="Вили Стил Пловдив Център">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mapframe">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2354.191930503861!2d24.7454439910502!3d42.149744158779406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14acd1bd07ed69ed%3A0x1caebda53dd026cf!2z0YPQuy4g4oCe0KDQsNC50LrQviDQlNCw0YHQutCw0LvQvtCy4oCcIDQx0JAsIDQwMDAg0KbQtdC90YLRitGALCDQn9C70L7QstC00LjQsg!5e0!3m2!1sbg!2sbg!4v1692772179118!5m2!1sbg!2sbg" max-width="450" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <p>ул. "Райко Даскалов" №41А</p>
+        <p>тел. +359897845161 ; +359878525271</p>
+    </div>
+
+    <div class="shop-info">
+        <h2>Пазарджик</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="shop-imgframe">
+                    <img src="{% static 'images/store-1.jpg' %}" alt="Вили Стил Пазарджик">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mapframe">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d839.5023717087249!2d24.334595409465845!3d42.19316602590345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14acb001eeaeec2d%3A0x38b0512a500a4446!2z0YPQuy4g4oCe0JPRgNCw0LTRgdC60Lgg0L_QsNC30LDRgOKAnCA1MywgNDQwMCDQn9Cw0LfQsNGA0LTQttC40Log0KbQtdC90YLRitGALCDQn9Cw0LfQsNGA0LTQttC40Lo!5e0!3m2!1sbg!2sbg!4v1692773265089!5m2!1sbg!2sbg" max-width="450" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <p>ул. "Градски пазар" №53</p>
+        <p>тел. +359888663942</p>
+    </div>
+
+    <div class="shop-info">
+        <h2>Асеновград</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="shop-imgframe">
+                    <img src="{% static 'images/store-24.jpg' %}" alt="Вили Стил Асеновград">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mapframe">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1038.530721148959!2d24.873634108051164!3d42.00571998220366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14acd8c401a31171%3A0x6f1f699597f5d3b!2z0YPQuy4g4oCeMy3RgtC4INC80LDRgNGC4oCcIDMyLCA0MjMwINCm0LXQvdGC0YrRgCwg0JDRgdC10L3QvtCy0LPRgNCw0LQ!5e0!3m2!1sbg!2sbg!4v1692773033880!5m2!1sbg!2sbg" max-width="450" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <p>ул."3-ти март" №32</p>
+        <p>тел. +359885032534</p>
+    </div>
+
+    <div class="shop-info">
+        <h2>Стара Загора</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="shop-imgframe">
+                    <img src="{% static 'images/store-58.jpg' %}" alt="Вили Стил Стара Загора">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mapframe">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d437.79336625717633!2d25.632300129793673!3d42.42537259738583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a8699e3ffb3627%3A0xfc26e18010e7887b!2z0KbQtdC90YLRitGALCDQsdGD0LsuIOKAntCm0LDRgCDQodC40LzQtdC-0L0g0JLQtdC70LjQutC44oCcIDEyMSwgNjAwMCDQodGC0LDRgNCwINCX0LDQs9C-0YDQsA!5e0!3m2!1sbg!2sbg!4v1745699152235!5m2!1sbg!2sbg" max-width="450" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <p>бул. Цар Симеон Велики 121 (парк „Алана“)</p>
+        <p>тел. +359887703362</p>
+    </div>
+    
+</div>
+{% endblock %}
