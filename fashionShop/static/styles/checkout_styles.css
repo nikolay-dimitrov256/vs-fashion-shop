@@ -79,6 +79,17 @@
     background: #f0f0f0;
 }
 
+.form-control {
+    color: #282828;
+}
+
+@media only screen and (max-width: 991px) {
+    .order-info {
+        margin-left: 0;
+        margin-bottom: 1em;
+    }
+}
+
 @media only screen and (max-width: 479px) {
     .item-name {
         margin-bottom: 0;

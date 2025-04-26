@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load shipping %}
 
 {% for item_number, entry in cart.items %}
     {% for size, data in entry.sizes.items %}
@@ -17,5 +18,10 @@
 <div class="row order-total">
     <div class="col">
         <p><span class="total">{% trans 'Total:' %} </span><span class="item-price">{{ cart_total }} {% trans 'lv' %}</span></p>
+        {% if cart_total|is_free_shipping %}
+        <p>{% trans '+ shipping fee calculated by courier' %}</p>
+        {% else %}
+        <p>{% trans 'shipping: FREE' %}</p>
+        {% endif %}
     </div>
 </div>

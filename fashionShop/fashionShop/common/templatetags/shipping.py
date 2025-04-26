@@ -21,3 +21,8 @@ def free_shipping_string(request):
     currency_text = CURRENCY_NAMES.get(currency.upper())
 
     return f'{free_delivery}{currency_text}'
+
+
+@register.filter
+def is_free_shipping(total):
+    return total <= FREE_DELIVERY_THRESHOLD.get('BGN')
