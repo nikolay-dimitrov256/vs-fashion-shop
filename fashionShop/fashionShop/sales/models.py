@@ -85,6 +85,12 @@ class OnlineOrder(models.Model):
         blank=True,
     )
 
+    memo = models.TextField(
+        _('memo'),
+        null=True,
+        blank=True,
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )

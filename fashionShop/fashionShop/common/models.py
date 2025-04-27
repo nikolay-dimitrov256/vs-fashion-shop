@@ -29,6 +29,8 @@ class Address(models.Model):
     postal_code = models.CharField(
         verbose_name=_('postal code'),
         max_length=20,
+        null=True,
+        blank=True,
     )
 
     street = models.CharField(

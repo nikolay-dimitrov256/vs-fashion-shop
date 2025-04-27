@@ -29,10 +29,13 @@
                 <p>{% trans 'Leave your phone number and we will contact you about the details.' %}</p>
             </div>
             <div class="row order-option">
-                <form method="post" id="shipping-form">
+                <form method="post" id="shipping-form" novalidate>
                     {% csrf_token %}
                     <input type="hidden" name="form_type" value="shipping">
                     <input type="hidden" id="town_id" value="">
+
+                    <p>{% trans 'The fields marked with * are required' %}</p>
+
                     {{ shipping_form.first_name|as_crispy_field }}
                     {{ shipping_form.last_name|as_crispy_field }}
                     {{ shipping_form.phone|as_crispy_field }}
@@ -46,9 +49,11 @@
 
                     {{ shipping_form.office|as_crispy_field }}
 
-                    {% if form.non_field_errors %}
+                    {{ shipping_form.memo|as_crispy_field }}
+
+                    {% if shipping_form.non_field_errors %}
                         <div class="alert alert-danger">
-                            {{ form.non_field_errors }}
+                            {{ shipping_form.non_field_errors }}
                         </div>
                     {% endif %}
 

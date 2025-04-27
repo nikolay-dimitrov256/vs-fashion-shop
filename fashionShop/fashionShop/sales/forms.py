@@ -23,7 +23,7 @@ class ShippingOrderForm(forms.ModelForm):
     )
 
     office = forms.CharField(
-        label=_('office'),
+        label=_('Office'),
         widget=forms.Select(),
         required=False,
     )
@@ -47,12 +47,12 @@ class ShippingOrderForm(forms.ModelForm):
         method = cleaned_data.get('shipping_method')
 
         if not method:
-            self.add_error('shipping_method', 'Please select a shipping method.')
+            self.add_error('shipping_method', _('Please select a shipping method.'))
             return cleaned_data  # Early return to avoid more logic without a method
 
         if ShippingChoices.is_office(method):
             if not cleaned_data.get('town') or not cleaned_data.get('office'):
-                self.add_error(None, 'Please provide both town and office for office delivery.')
+                self.add_error(None, _('Please provide both town and office for office delivery.'))
             cleaned_data['address'] = None
 
         elif ShippingChoices.is_address(method):
