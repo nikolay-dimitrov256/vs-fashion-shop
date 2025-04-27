@@ -22,12 +22,16 @@ class UserModelAdmin(admin.ModelAdmin):
     list_display = ['email', 'date_joined', 'last_login']
     search_fields = ['email']
     ordering = ['last_login', 'email']
-    readonly_fields = ['date_joined', 'last_login']
+    readonly_fields = ['date_joined', 'last_login',
+                       'accepted_privacy_policy', 'accepted_privacy_policy_date',
+                       'accepted_marketing_emails', 'accepted_marketing_emails_date']
 
     fieldsets = (
         ('Credentials', {'fields': ('email', 'password')}),
         ('Personal Info', {'fields': ('date_joined', 'last_login',)}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')})
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Agrrements', {'fields': ('accepted_privacy_policy', 'accepted_privacy_policy_date',
+                       'accepted_marketing_emails', 'accepted_marketing_emails_date')})
     )
 
     add_fieldsets = (

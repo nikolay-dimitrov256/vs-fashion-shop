@@ -70,6 +70,42 @@
     font-size: 18px;
 }
 
+.button-sharp {
+    border-radius: 0;
+}
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: none;
+    width: 100%;
+}
+.btn-google {
+    background-color: #fff;
+    color: #444;
+    border: 1px solid #ddd;
+}
+.btn-google:hover {
+    background-color: #f7f7f7;
+}
+.btn-facebook {
+    background-color: #4267B2;
+    color: #fff;
+    border: none;
+}
+.btn-facebook:hover {
+    background-color: #375594;
+}
+.btn-social img {
+    height: 20px;
+}
+
 /* Fixes the positioning on the main banner elements */
 .main_slider_content {
     text-align: right;

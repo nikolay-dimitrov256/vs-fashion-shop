@@ -1,6 +1,8 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load socialaccount %}
+{% load i18n %}
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
@@ -12,13 +14,35 @@
 
 <div class="container first-container">
     <div>
-        <form class="px-lg-5" method="post">
-
+        <form method="post" novalidate>
+            <p>{% trans 'The fields marked with * are required' %}</p>
             {% csrf_token %}
-            {% crispy form %}
 
-            <button type="submit" class="btn btn-success btn-lg">Register</button>
+            {{ form.email|as_crispy_field }}
+            {{ form.password1|as_crispy_field }}
+            {{ form.password2|as_crispy_field }}
+            {% comment %}{{ form.accepted_privacy_policy|as_crispy_field }}
+            {{ form.accepted_marketing_emails|as_crispy_field }}{% endcomment %}
+
+            <div class="form-check mb-3">
+                {{ form.accepted_privacy_policy|as_crispy_field }}
+                <p>{% trans 'You can read our Privacy Policy' %} <a href="{% url 'privacy-policy' %}">{% trans 'HERE' %}</a></p>
+            </div>
+
+            <div class="form-check mb-3">
+                {{ form.accepted_marketing_emails|as_crispy_field }}
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg button-sharp">{% trans 'Register' %}</button>
         </form>
+        <p class="lead mt-4">{% trans 'or:' %}</p>
+        <form action="{% provider_login_url 'google' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-social btn-google">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google Logo">
+            {% trans 'Sign in with Google' %}
+        </button>
+    </form>
     </div>
 </div>
 

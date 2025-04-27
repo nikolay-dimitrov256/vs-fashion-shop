@@ -24,6 +24,11 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
+    accepted_privacy_policy = models.BooleanField(default=False)
+    accepted_privacy_policy_date = models.DateTimeField(null=True, blank=True)
+    accepted_marketing_emails = models.BooleanField(default=False)
+    accepted_marketing_emails_date = models.DateTimeField(null=True, blank=True)
+
     objects = AppUserManager()
 
     EMAIL_FIELD = "email"
