@@ -1,6 +1,9 @@
+import datetime
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 from fashionShop.sales.choices import ShippingChoices
 
@@ -91,6 +94,13 @@ class OnlineOrder(models.Model):
         blank=True,
     )
 
+    order_code = models.CharField(
+        max_length=10,
+        unique=True,
+        editable=False,
+        blank=True,
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -98,6 +108,24 @@ class OnlineOrder(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True,
     )
+
+    def save(self, *args, **kwargs):
+        if not self.order_code:
+            now = timezone.now()
+            year = now.strftime('%y')
+            month = now.strftime('%m')
+            transaction_type = '49'
+            start_of_month = timezone.make_aware(datetime.datetime(now.year, now.month, 1))
+            last_order_this_month = OnlineOrder.objects.filter(created_at__gte=start_of_month).last()
+
+            if last_order_this_month and last_order_this_month.order_code:
+                sequence = int(str(last_order_this_month.order_code[-4:])) + 1
+            else:
+                sequence = 1
+
+            self.order_code = f'{year}{month}{transaction_type}{sequence:04d}'
+
+        super().save(*args, **kwargs)
 
     @property
     def total(self):

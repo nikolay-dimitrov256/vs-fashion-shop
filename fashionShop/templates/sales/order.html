@@ -13,7 +13,7 @@
 <div class="container first-container">
     <h2>{% trans 'Thank you for your order' %}</h2>
     <p>{% trans 'Your order has been received and is being processed.' %}</p>
-    <p>{% trans 'The number of your order is:' %} <span class="order-num">{{ object.pk }}</span></p>
+    <p>{% trans 'The number of your order is:' %} <span class="order-num">{{ object.order_code }}</span></p>
     <p>{% trans 'We will contact you as soon as possible.' %}</p>
 </div>
 
