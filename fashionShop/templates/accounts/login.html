@@ -14,11 +14,11 @@
 
 <div class="container first-container">
 
-    <form method="post" action="">
+    <form class="login" method="post" action="{% url 'login' %}">
 
         {% csrf_token %}
-<!--        {% crispy form %}-->
-        {{ form.as_div }}
+        {{ form|crispy }}
+
         <button type="submit" class="btn btn-success btn-lg mt-3 button-sharp">{% trans 'Sign in' %}</button>
     </form>
 
@@ -35,5 +35,11 @@
     </form>
 
 </div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', (e) => {
+    console.log('Form is submitting...');
+});
+</script>
 
 {% endblock %}
