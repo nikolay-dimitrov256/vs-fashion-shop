@@ -78,11 +78,11 @@ function showAddressFields() {
     const hiddenDivElement = document.getElementById('hidden-fields');
     const addressDivElement = hiddenDivElement.querySelector('#address-fields');
     const submitButtonElement = shippingFormElement.querySelector('button');
-    const memoDivElement = document.getElementById('div_id_memo');
+    const commentDivElement = document.getElementById('div_id_comment');
 
     if(addressDivElement) {
         shippingFormElement.append(addressDivElement);
-        shippingFormElement.append(memoDivElement);
+        shippingFormElement.append(commentDivElement);
         shippingFormElement.append(submitButtonElement);
     }
 }

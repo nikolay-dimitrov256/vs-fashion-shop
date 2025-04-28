@@ -88,8 +88,8 @@ class OnlineOrder(models.Model):
         blank=True,
     )
 
-    memo = models.TextField(
-        _('memo'),
+    comment = models.TextField(
+        _('comment'),
         null=True,
         blank=True,
     )
