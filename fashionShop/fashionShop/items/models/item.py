@@ -14,10 +14,12 @@ from fashionShop.items.models.style import Style
 
 class Item(models.Model):
     item_number = models.IntegerField(
+        _('item number'),
         primary_key=True,
     )
 
     name = models.CharField(
+        _('name'),
         max_length=100,
         blank=True,
     )
@@ -29,17 +31,20 @@ class Item(models.Model):
     )
 
     description = models.TextField(
+        _('description'),
         null=True,
         blank=True,
     )
 
     price = models.DecimalField(
+        _('price'),
         max_digits=10,
         decimal_places=2,
         default=0,
     )
 
     discount_price = models.DecimalField(
+        _('discount price'),
         max_digits=10,
         decimal_places=2,
         null=True,
@@ -51,6 +56,7 @@ class Item(models.Model):
     )
 
     content = models.CharField(
+        _('content'),
         max_length=100,
         null=True,
         blank=True,
@@ -61,6 +67,7 @@ class Item(models.Model):
     )
 
     category = models.ForeignKey(
+        verbose_name=_('category'),
         to=Category,
         on_delete=models.SET_NULL,
         related_name='items',
@@ -69,6 +76,7 @@ class Item(models.Model):
     )
 
     sub_category = models.ForeignKey(
+        verbose_name=_('subcategory'),
         to=SubCategory,
         on_delete=models.SET_NULL,
         related_name='items',
@@ -77,6 +85,7 @@ class Item(models.Model):
     )
 
     pattern = models.ForeignKey(
+        verbose_name=_('pattern'),
         to=Pattern,
         on_delete=models.SET_NULL,
         related_name='items',
@@ -85,6 +94,7 @@ class Item(models.Model):
     )
 
     color_group = models.ForeignKey(
+        verbose_name=_('color group'),
         to=ColorGroup,
         on_delete=models.SET_NULL,
         related_name='items',
@@ -93,17 +103,20 @@ class Item(models.Model):
     )
 
     sizes = models.ManyToManyField(
+        verbose_name=_('sizes'),
         to=Size,
         through='Stock',
         related_name='items'
     )
 
     linked_items = models.ManyToManyField(
+        verbose_name=_('linked items'),
         to='Item',
         blank=True,
     )
 
     style = models.ManyToManyField(
+        verbose_name=_('style'),
         to=Style,
         blank=True,
     )

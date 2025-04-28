@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Store(models.Model):
@@ -7,14 +8,10 @@ class Store(models.Model):
     )
 
     name = models.CharField(
+        _('name'),
         max_length=50,
         unique=True,
     )
-
-    # address = models.OneToOneField(
-    #     to='common.Address',
-    #     on_delete=models.CASCADE,
-    # )
 
     is_active = models.BooleanField(
         default=True,

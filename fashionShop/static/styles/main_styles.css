@@ -958,6 +958,10 @@ section
 	margin-top: 74px;
 }
 
+.product_name a {
+	border-bottom: none;
+}
+
 /*********************************
 5.1 New Arrivals Sorting
 *********************************/

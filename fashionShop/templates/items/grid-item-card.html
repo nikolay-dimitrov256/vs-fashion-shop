@@ -11,16 +11,16 @@
         <div class="favorite"></div>
         {% endif %}
         {% if item.is_discounted %}
-        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }}лв</span></div>
+        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }}{% trans 'lv' %}</span></div>
         {% elif item.is_new %}
         <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>{% trans 'new' %}</span></div>
         {% endif %}
         <div class="product_info">
-            <h6 class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></h6>
+            <p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></p>
             {% if item.is_discounted %}
-            <div class="product_price">{{ item.discount_price }}лв<span>{{ item.price }}лв</span></div>
+            <div class="product_price">{{ item.discount_price }}{% trans 'lv' %}<span>{{ item.price }}{% trans 'lv' %}</span></div>
             {% else %}
-            <div class="product_price">{{ item.price }}лв</div>
+            <div class="product_price">{{ item.price }}{% trans 'lv' %}</div>
             {% endif %}
         </div>
     </div>

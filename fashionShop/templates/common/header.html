@@ -52,7 +52,7 @@
 									{% if request.user.is_authenticated %}
 										{{ request.user.email }}
 									{% else %}
-										{% trans 'Anonymous' %}
+										{% trans 'Guest' %}
 									{% endif %}
 									<i class="fa fa-angle-down"></i>
 								</a>
@@ -111,8 +111,8 @@
 									<li><a href="{% url 'all-items' %}">{% trans 'all clothes' %}</a></li>
 								</ul>
 							</li>
-							<li><a href="#">{% trans 'new' %}</a></li>
-							<li><a href="#">{% trans 'sale' %}</a></li>
+							{% comment %}<li><a href="#">{% trans 'new' %}</a></li>{% endcomment %}
+							{% comment %}<li><a href="#">{% trans 'sale' %}</a></li>{% endcomment %}
 						</ul>
 						<ul class="navbar_user">
 							<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
@@ -150,7 +150,7 @@
 		<nav class="mobile_nav">
 			<ul class="menu_top_nav">
 				<li class="menu_item"><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
-				<li class="menu_item"><a href="#">{% trans 'new' %}</a></li>
+				{% comment %}<li class="menu_item"><a href="#">{% trans 'new' %}</a></li>{% endcomment %}
 				<li class="menu_item"><a href="{% url 'dresses' %}">{% trans 'dresses' %}</a></li>
 				<li class="menu_item"><a href="{% url 'blazers' %}">{% trans 'blazers' %}</a></li>
 				<li class="menu_item"><a href="{% url 'pants' %}">{% trans 'pants' %}</a></li>
@@ -163,7 +163,7 @@
 				<li class="menu_item"><a href="{% url 'vests' %}">{% trans 'vests' %}</a></li>
 				<li class="menu_item"><a href="{% url 'skirts' %}">{% trans 'skirts' %}</a></li>
 				<li class="menu_item"><a href="{% url 'all-items' %}">{% trans 'all clothes' %}</a></li>
-				<li class="menu_item"><a href="#">{% trans 'sale' %}</a></li>
+				{% comment %}<li class="menu_item"><a href="#">{% trans 'sale' %}</a></li>{% endcomment %}
 				{% comment %}
 				<li class="menu_item has-children">
 					<a href="#">
@@ -197,7 +197,7 @@
 					{% if request.user.is_authenticated %}
 						{{ request.user.email }}
 					{% else %}
-						{% trans 'Anonymous' %}
+						{% trans 'Guest' %}
 					{% endif %}
 						<i class="fa fa-angle-down"></i>
 					</a>

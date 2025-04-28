@@ -295,52 +295,6 @@ class CheckoutView(View):
         return render(request, 'sales/checkout.html', context)
 
 
-class PhoneOrderView(CreateView):
-    model = OnlineOrder
-    form_class = PhoneOrderForm
-    success_url = reverse_lazy('order')
-    template_name = 'sales/checkout.html'
-
-    def form_valid(self, form):
-        order = form.save()
-        
-        fill_order_from_cart_empty_cart(self.request, order)
-
-        if self.request.user.is_authenticated:
-            order.user = self.request.user
-            order.email = self.request.user.email
-            order.save()
-
-        return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
-
-
-class ShippingOrderView(CreateView):
-    model = OnlineOrder
-    form_class = ShippingOrderForm
-    success_url = reverse_lazy('order')
-    template_name = 'sales/checkout.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context['phone_order_form'] = PhoneOrderForm()
-        context['form'] = ShippingOrderForm()
-
-        return context
-
-    def form_valid(self, form):
-        order = form.save()
-
-        fill_order_from_cart_empty_cart(self.request, order)
-
-        if self.request.user.is_authenticated:
-            order.user = self.request.user
-
-        order.save()
-
-        return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
-
-
 class ThankYouView(DetailView):
     model = OnlineOrder
     template_name = 'sales/order.html'

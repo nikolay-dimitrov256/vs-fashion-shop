@@ -15,6 +15,8 @@ urlpatterns = [
     path('jackets/', views.JacketsListView.as_view(), name='jackets'),
     path('coats/', views.CoatsListView.as_view(), name='coats'),
     path('vests/', views.VestsListView.as_view(), name='vests'),
+    path('cardigans/', views.CardigansListView.as_view(), name='cardigans'),
+    path('underwear/', views.TankTopsListView.as_view(), name='underwear'),
     path('<slug:slug>/', include([
         path('', views.ItemDetailView.as_view(), name='item-details'),
     ]))

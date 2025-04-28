@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Size(models.Model):
     size = models.CharField(
+        _('size'),
         max_length=15,
         primary_key=True,
     )

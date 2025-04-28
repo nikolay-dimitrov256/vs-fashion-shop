@@ -11,10 +11,6 @@ from fashionShop.accounts.forms import AppUserCreateForm
 UserModel = get_user_model()
 
 
-def test(request):
-    return render(request, 'accounts/test.html')
-
-
 class AppUserRegisterView(CreateView):
     model = UserModel
     template_name = 'accounts/register.html'

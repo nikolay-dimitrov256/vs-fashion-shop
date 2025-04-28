@@ -267,3 +267,4 @@ cloudinary.config(
 )
 MEDIA_URL = '/media/'
 
+ADMIN_URL = config('ADMIN_URL')

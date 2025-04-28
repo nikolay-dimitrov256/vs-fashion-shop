@@ -2,10 +2,23 @@
 {% load static %}
 {% load i18n %}
 
+{% block title %}
+{% trans "Women's blouses Vili Style" %}
+{% endblock %}
+
+{% block meta %}
+<meta name="title" content="Стилни дамски блузи - Онлайн Цени | Вили Стил">
+<meta name="description" content="Разгледайте предложенията за блузи от българския производител Вили Стил. Имаме голямо разнообразие от цветове и размери за всякакви поводи. За поръчки - 0886531811">
+{% endblock %}
+
 {% block breadcrumbs %}
 <li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
 <li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
 <li class="active"><a href="{% url 'blouses' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'blouses'|capfirst %}</a></li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "Women's blouses" %}</h1>
 {% endblock %}
 
 {% block categories %}

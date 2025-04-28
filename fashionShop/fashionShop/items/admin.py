@@ -23,7 +23,7 @@ class StockInline(admin.StackedInline):
 @admin.register(Item)
 class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
     list_display = ['item_number', 'name', 'price', 'discount_price']
-    list_filter = ['category', 'color_group']
+    list_filter = ['category', 'style', 'color_group']
     ordering = ['item_number']
     inlines = [PictureInline, StockInline]
     readonly_fields = ['slug']
@@ -35,7 +35,7 @@ class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
     def load_items(self, request):
         start = time.time()
 
-        load_items_from_bisoft.delay()
+        load_items_from_bisoft()
 
         end = time.time()
         self.message_user(request, f'The operation took {end - start} seconds')
@@ -48,9 +48,9 @@ class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
             html_attrs={'style': 'background-color:#88FF88;color:black'})
     def _update_prices_and_stock(self, request):
 
-        update_prices_and_stock()
+        # update_prices_and_stock()
 
-        self.message_user(request, 'items updated')
+        self.message_user(request, 'Function not available yet.')
 
         return HttpResponseRedirectToReferrer(request)
 

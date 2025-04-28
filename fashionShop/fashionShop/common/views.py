@@ -3,15 +3,13 @@ from random import sample
 
 from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.utils.timezone import now
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView, CreateView
 from django.contrib import messages
 
-from fashionShop import settings
 from fashionShop.common.forms import ContactForm
 from fashionShop.common.models import Feedback, ContactMessage
 from fashionShop.items.models import Item
@@ -115,11 +113,3 @@ class RefundsView(TemplateView):
 
 class PrivacyPolicyView(TemplateView):
     template_name = 'common/privacy-policy.html'
-
-
-class CategoryView(TemplateView):
-    template_name = 'common/categories.html'
-
-
-class SingleView(TemplateView):
-    template_name = 'common/single.html'

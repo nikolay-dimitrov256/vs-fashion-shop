@@ -1,5 +1,6 @@
 from cloudinary.models import CloudinaryField
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from fashionShop.items.models import Item
 
@@ -16,6 +17,7 @@ class Picture(models.Model):
     )
 
     description = models.TextField(
+        _('description'),
         null=True,
         blank=True,
     )
@@ -25,6 +27,7 @@ class Picture(models.Model):
     )
 
     item = models.ForeignKey(
+        verbose_name=_('item'),
         to=Item,
         on_delete=models.CASCADE,
         related_name='pictures'

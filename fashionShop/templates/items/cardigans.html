@@ -1,0 +1,21 @@
+{% extends 'items/category.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Women's cardigans Vili Style" %}
+{% endblock %}
+
+{% block breadcrumbs %}
+<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
+<li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
+<li class="active"><a href="{% url 'cardigans' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'cardigans'|capfirst %}</a></li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "Women's cardigans" %}</h1>
+{% endblock %}
+
+{% block categories %}
+
+{% endblock %}

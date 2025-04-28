@@ -1,10 +1,4 @@
-from _decimal import Decimal
-from copy import copy, deepcopy
-
 import requests
-import json
-
-from django.db.models import F
 from django.utils.text import slugify
 
 from fashionShop.common.globals import BISOFT_API_URL
@@ -29,6 +23,7 @@ BISOFT_COLOR_GROUPS = {
     14: 'gray',
     15: 'black'
 }
+
 
 def check_and_create_color_groups():
     existing_color_groups = ColorGroup.objects.all()

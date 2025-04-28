@@ -101,10 +101,13 @@ class Address(models.Model):
 
 class Feedback(models.Model):
     author = models.CharField(
+        _('author'),
         max_length=100
     )
 
-    comment = models.TextField()
+    comment = models.TextField(
+        _('comment')
+    )
 
     def __str__(self):
         return self.author
@@ -112,22 +115,27 @@ class Feedback(models.Model):
 
 class ContactMessage(models.Model):
     name = models.CharField(
+        _('name'),
         max_length=50,
     )
 
     email = models.EmailField(
+        _('email'),
         max_length=50,
         null=True,
         blank=True,
     )
 
     phone = models.CharField(
+        _('phone'),
         max_length=15,
         null=True,
         blank=True,
     )
 
-    message = models.TextField()
+    message = models.TextField(
+        _('message'),
+    )
 
     created_at = models.DateTimeField(
         auto_now_add=True,

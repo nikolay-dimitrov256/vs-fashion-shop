@@ -2,10 +2,23 @@
 {% load static %}
 {% load i18n %}
 
+{% block title %}
+{% trans "Women's blazers Vili Style" %}
+{% endblock %}
+
+{% block meta %}
+<meta name="title" content="Стилни дамски сака - Онлайн Цени | Вили Стил">
+<meta name="description" content="Разгледайте дамски сака и блейзъри от българския производител Вили Стил. Имаме голямо разнообразие от цветове и размери. За запитвания и поръчки - 0886531811">
+{% endblock %}
+
 {% block breadcrumbs %}
 <li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
 <li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
 <li class="active"><a href="{% url 'blazers' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'blazers'|capfirst %}</a></li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "Women's blazers" %}</h1>
 {% endblock %}
 
 {% block categories %}

@@ -3,12 +3,12 @@
 {% load i18n %}
 
 {% block title %}
-{% trans 'Online store for women fashion Vili Style' %}
+{% trans 'Vili Style Online store for women fashion' %}
 {% endblock %}
 
 {% block meta %}
-<meta name="title" content="Онлайн магазин за дамска мода | Вили Стил">
-<meta name="description" content="Colo Shop Template">
+<meta name="title" content="Онлайн магазин за българска дамска мода - Цени | Вили Стил">
+<meta name="description" content="Онлайн магазин за Българска дамска мода в спортно елегантен официален и офис стил. Очакваме Ви онлайн, или на тел: 0886531811">
 {% endblock %}
 
 {% block styles %}
@@ -20,6 +20,7 @@
 <!-- Slider -->
 
 <div class="main_slider" style="background-image:url({% static 'images/slider_1.jpg' %})">
+    {% comment %}
     <div class="container fill_height">
         <div class="row align-items-center fill_height">
             <div class="col">
@@ -31,6 +32,7 @@
             </div>
         </div>
     </div>
+    {% endcomment %}
 </div>
 
 <h1>{% trans 'Online store for women fashion Vili Style' %} </h1>
@@ -155,7 +157,7 @@
         <div class="row">
             <div class="col text-center">
                 <div class="section_title new_arrivals_title">
-                    <h2>{% trans 'Best Sellers' %}</h2>
+                    <h2>{% trans 'Best Sellers'|capfirst %}</h2>
                 </div>
             </div>
         </div>
