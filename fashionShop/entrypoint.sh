@@ -19,10 +19,6 @@ python manage.py migrate
 echo "Compiling .po to .mo..."
 python manage.py compilemessages
 
-# Load fixtures or sample data (optional)
-# echo "Loading initial data..."
-# python3 manage.py loaddata initial_data.json
-
 # Run the main command passed to the container
 echo "Starting application..."
 exec "$@"
