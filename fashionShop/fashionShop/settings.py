@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import logging
 from pathlib import Path
 from decouple import config
 from django.urls import reverse_lazy
@@ -132,22 +133,50 @@ CACHES = {
     }
 }
 
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+os.makedirs(LOG_DIR, exist_ok=True)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
+            'level': 'WARNING',
         },
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_DIR, 'django.log'),
+        }
     },
     'root': {
-        'handlers': ['console'],
-        'level': 'DEBUG',  # Other levels CRITICAL, ERROR, WARNING, INFO, DEBUG
+        'handlers': ['console', 'file'],
+        'level': 'ERROR',  # Other levels CRITICAL, ERROR, WARNING, INFO, DEBUG
+        'propagate': True,
     },
     'loggers': {
+        # Root Logger
+        # '': {
+        #     'handlers': ['console', 'file'],
+        #     'level': 'ERROR',
+        #     'propagate': True,
+        # },
+        # Django Logger
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # Project specific logger (optional)
+        'fashionShop': {
+            'handlers': ['console', 'file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         'django.db.backends': {  # responsible for the sql logs
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'propagate': False,
         },
     },
