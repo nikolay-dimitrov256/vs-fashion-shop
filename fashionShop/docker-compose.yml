@@ -1,4 +1,4 @@
-name: vs-fashion-shop
+version: '3.8'
 
 services:
   app:
