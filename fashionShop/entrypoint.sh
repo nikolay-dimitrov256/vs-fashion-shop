@@ -15,9 +15,9 @@ python manage.py migrate
 # echo "Collecting static files..."
 # python3 manage.py collectstatic --noinput
 
-# Compile translation files
-echo "Compiling .po to .mo..."
-python manage.py compilemessages
+# Compile translation files.
+# echo "Compiling .po to .mo..."
+# python manage.py compilemessages
 
 # Run the main command passed to the container
 echo "Starting application..."

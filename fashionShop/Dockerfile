@@ -22,7 +22,16 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+# Compile translations now (while still root)
+ENV DJANGO_SETTINGS_MODULE=fashionShop.settings
+ENV SECRET_KEY=dummy
+ENV DATABASE_URL=postgres://dummy:dummy@localhost:5432/dummy
+
 RUN chmod +x /app/entrypoint.sh
+RUN python manage.py compilemessages
+
+# Fix permissions
+RUN chown -R appuser:appuser /app
 
 # Switch to non-root user
 USER appuser
