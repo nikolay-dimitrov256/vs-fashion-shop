@@ -33,6 +33,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG') == 'True'
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS').split(',')
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
