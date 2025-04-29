@@ -9,11 +9,11 @@ echo "PostgreSQL is up."
 
 # Apply database migrations
 echo "Applying database migrations..."
-python manage.py migrate
+python manage.py migrate --noinput
 
 # Collect static files (optional in dev)
-# echo "Collecting static files..."
-# python3 manage.py collectstatic --noinput
+echo "Collecting static files..."
+python3 manage.py collectstatic --noinput
 
 # Compile translation files.
 echo "Compiling .po to .mo..."

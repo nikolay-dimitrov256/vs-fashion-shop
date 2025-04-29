@@ -1,6 +1,26 @@
+# Secrets
 .env
+.env-prod
+
+# Python virtual environments
 .venv/
 venv/
+
+# IDE settings
 .idea/
+
+# Python cache
+*.pyc
+*.pyo
+*.pyd
 __pycache__/
-Dockerfile
+
+# Static files (collected)
+staticfiles/
+
+# Media files (uploaded)
+media/
+
+# Local database (optional if SQLite)
+*.db
+*.sqlite3
