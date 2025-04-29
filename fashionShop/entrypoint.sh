@@ -11,6 +11,10 @@ echo "PostgreSQL is up."
 echo "Applying database migrations..."
 python manage.py migrate --noinput
 
+# Create staticfiles and media dirs if not exist
+mkdir -p /app/staticfiles /media
+chmod -R 777 /app/staticfiles /media
+
 # Collect static files (optional in dev)
 echo "Collecting static files..."
 python3 manage.py collectstatic --noinput
@@ -20,5 +24,5 @@ echo "Compiling .po to .mo..."
 python manage.py compilemessages
 
 # Run the main command passed to the container
-echo "Starting application..."
-exec "$@"
+echo "Switching to appuser..."
+exec su appuser -c "$*"

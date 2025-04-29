@@ -28,7 +28,7 @@ RUN chmod +x /app/entrypoint.sh
 RUN chown -R appuser:appuser /app
 
 # Switch to non-root user
-USER appuser
+# USER appuser
 
 ENTRYPOINT ["/app/entrypoint.sh"]
 
