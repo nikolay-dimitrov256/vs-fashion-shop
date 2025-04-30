@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',
     # allauth apps
     'allauth',
     'allauth.account',
@@ -229,7 +230,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # Django allauth config
-SITE_ID = 2
+SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
