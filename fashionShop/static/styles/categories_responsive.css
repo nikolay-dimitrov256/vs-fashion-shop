@@ -62,11 +62,13 @@
 {
 	.product-item
 	{
-		height: 360px;
+		/* height: 360px; */
+		height: 27em;
 	}
 	.product
 	{
-		height: 320px;
+		/* height: 320px; */
+		height: 27em;
 	}
 }
 
@@ -123,9 +125,13 @@
 	{
 		width: 25%;
 	}
+	.product{
+		height: 31em;
+	}
 	.product-item
 	{
 		width: 33.33333333%;
+		height: 31em;
 	}
 	.benefit_col
 	{
@@ -263,11 +269,13 @@
 	.product-item
 	{
 		width: 33.333333333333%;
-		height: 345px;
+		/* height: 345px; */
+		height: 27em;
 	}
 	.product
 	{
-		height: 305px;
+		/* height: 305px; */
+		height: 27em;
 	}
 	.benefit_col
 	{
@@ -297,11 +305,13 @@
 	.product-item
 	{
 		width: 50%;
-		height: 420px;
+		/* height: 420px; */
+		height: 34em;
 	}
 	.product
 	{
-		height: 380px;
+		/* height: 380px; */
+		height: 34em;
 	}
 	.cr
 	{
@@ -415,10 +425,12 @@
 	{
 		width: 100%;
 		height: auto;
+		/* height: 30em; */
 	}
 	.product
 	{
 		height: auto;
+		/* height: 30em; */
 	}
 	.product_name a
 	{

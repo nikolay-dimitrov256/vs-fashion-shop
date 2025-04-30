@@ -50,9 +50,13 @@
     padding-bottom: 1em;
 }
 
-.product {
+/* .product {
     height: auto;
-}
+} */
+
+/* .product-item {
+    height: auto;
+} */
 
 .product_slider_item .product-item .product_name {
     font-size: 18px;
