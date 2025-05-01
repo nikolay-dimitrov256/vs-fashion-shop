@@ -218,7 +218,11 @@
 										{% endif %}
 									>
 										<a href="{% url 'item-details' item.slug %}" class="product_image">
+											{% if item.main_picture_list.0.image.url %}
 											<img src="{{ item.main_picture_list.0.image.url }}" alt="{{ item.name }}">
+											{% else %}
+											<img src="{% static 'images/item.jpg' %}" alt="no image">
+											{% endif %}
 										</a>
 										<div
 											{% if item.is_discounted %}

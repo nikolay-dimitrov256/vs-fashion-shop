@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 
 <div class="product-item">
     <div
@@ -9,7 +10,11 @@
     {% endif %}
     >
         <a href="{% url 'item-details' item.slug %}" class="product_image">
+            {% if item.pictures_list.0.image.url %}
             <img src="{{ item.pictures_list.0.image.url }}" alt="{{ item.name }}">
+            {% else %}
+            <img src="{% static 'images/item.jpg' %}" alt="no image">
+            {% endif %}
         </a>
         {% if item.is_discounted %}
         <div class="favorite favorite_left"></div>
