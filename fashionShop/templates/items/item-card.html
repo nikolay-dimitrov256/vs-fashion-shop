@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="owl-item product_slider_item">
     <div class="product-item">
         <div
@@ -8,7 +10,11 @@
             {% endif %}
         >
             <a href="{% url 'item-details' item.slug %}" class="product_image">
+                {% if item.pictures.all.first.image.url %}
                 <img src="{{ item.pictures.all.first.image.url }}" alt="{{ item.name }}" title="{{ item.name }} | Вили Стил">
+                {% else %}
+                <img src="{% static 'images/item.jpg' %}" alt="no image">
+                {% endif %}
             </a>
             <div
                 {% if item.is_discounted %}
