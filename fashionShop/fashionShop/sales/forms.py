@@ -40,7 +40,7 @@ class ShippingOrderForm(forms.ModelForm):
         valid = super().is_valid()
         address_valid = self.address_form.is_valid() if self.address_form else True
 
-        return valid and address_valid
+        return valid  # and address_valid
 
     def clean(self):
         cleaned_data = super().clean()

@@ -1,11 +1,16 @@
 {% load i18n %}
+{% load static %}
 
 {% for item_number, entry in cart.items %}
     {% for size, data in entry.sizes.items %}
     <div class="row cart-item">
         <div class="col-6 col-md-4">
             <a href="{% url 'item-details' entry.item.slug %}" class="imgframe">
+                {% if entry.item.pictures.first %}
                 <img src="{{ entry.item.pictures.first.image.url }}" alt="{{ entry.item.name }}">
+                {% else %}
+                <img src="{% static 'images/item.jpg' %}" alt="no image">
+                {% endif %}
             </a>
         </div>
         <div class="col-6 col-md-8 item-info">
