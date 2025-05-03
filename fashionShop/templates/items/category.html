@@ -109,11 +109,11 @@
 						> {{ size }}</label>
 						{% endfor %}
 						<label class="show_more" for="size_toggle">
-							<span><span>+</span>Show More</span>
+							<span><span>+</span>{% trans 'Show More' %}</span>
 						</label>
-						<button class="list_filter_button">Filter</button>
+						<button class="list_filter_button">{% trans 'filter'|capfirst %}</button>
 						<div class="show_less" style="display: none;">
-							<span><span>-</span>Show Less</span>
+							<span><span>-</span>{% trans 'Show Less' %}</span>
 						</div>
 					</form>
 				</div>
@@ -143,11 +143,11 @@
 						> {{ color.name }}</label>
 						{% endfor %}
 						<label class="show_more" for="color_toggle">
-							<span><span>+</span>Show More</span>
+							<span><span>+</span>{% trans 'Show More' %}</span>
 						</label>
-						<button class="list_filter_button">Filter</button>
+						<button class="list_filter_button">{% trans 'filter'|capfirst %}</button>
 						<div class="show_less" style="display: none;">
-							<span><span>-</span>Show Less</span>
+							<span><span>-</span>{% trans 'Show Less' %}</span>
 						</div>
 					</form>
 				</div>
