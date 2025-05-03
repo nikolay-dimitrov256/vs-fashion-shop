@@ -89,27 +89,26 @@
 							<li><a href="{% url 'blazers' %}">{% trans 'blazers' %}</a></li>
 							<li><a href="{% url 'shirts' %}">{% trans 'shirts' %}</a></li>
 							<li><a href="{% url 'pants' %}">{% trans 'pants' %}</a></li>
-							<li class="has-dropdown">
-								<a href="#" data-toggle="dropdown"
-								   onclick="document.querySelector('.dropdown').classList.toggle('show');"
-
-								>
-									{% trans 'categories' %} <i class="fa fa-angle-down"></i>
-								</a>
-								<ul class="dropdown">
-									<li><a href="{% url 'dresses' %}">{% trans 'dresses' %}</a></li>
-									<li><a href="{% url 'blazers' %}">{% trans 'blazers' %}</a></li>
-									<li><a href="{% url 'pants' %}">{% trans 'pants' %}</a></li>
-									<li><a href="{% url 'shirts' %}">{% trans 'shirts' %}</a></li>
-									<li><a href="{% url 'blouses' %}">{% trans 'blouses' %}</a></li>
-									<li><a href="{% url 'tunics' %}">{% trans 'tunics' %}</a></li>
-									<li><a href="{% url 'suits' %}">{% trans 'suits' %}</a></li>
-									<li><a href="{% url 'jackets' %}">{% trans 'jackets' %}</a></li>
-									<li><a href="{% url 'coats' %}">{% trans 'coats' %}</a></li>
-									<li><a href="{% url 'vests' %}">{% trans 'vests' %}</a></li>
-									<li><a href="{% url 'skirts' %}">{% trans 'skirts' %}</a></li>
-									<li><a href="{% url 'all-items' %}">{% trans 'all clothes' %}</a></li>
-								</ul>
+							<li>
+								<div class="dropdown show">
+									<a href="#" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										{% trans 'categories' %}
+									</a>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+										<a class="dropdown-item" href="{% url 'blazers' %}">{% trans 'blazers' %}</a>
+										<a class="dropdown-item" href="{% url 'dresses' %}">{% trans 'dresses' %}</a>
+										<a class="dropdown-item" href="{% url 'pants' %}">{% trans 'pants' %}</a>
+										<a class="dropdown-item" href="{% url 'shirts' %}">{% trans 'shirts' %}</a>
+										<a class="dropdown-item" href="{% url 'blouses' %}">{% trans 'blouses' %}</a>
+										<a class="dropdown-item" href="{% url 'tunics' %}">{% trans 'tunics' %}</a>
+										<a class="dropdown-item" href="{% url 'suits' %}">{% trans 'suits' %}</a>
+										<a class="dropdown-item" href="{% url 'jackets' %}">{% trans 'jackets' %}</a>
+										<a class="dropdown-item" href="{% url 'coats' %}">{% trans 'coats' %}</a>
+										<a class="dropdown-item" href="{% url 'vests' %}">{% trans 'vests' %}</a>
+										<a class="dropdown-item" href="{% url 'skirts' %}">{% trans 'skirts' %}</a>
+										<a class="dropdown-item" href="{% url 'all-items' %}">{% trans 'all clothes' %}</a>
+									</div>
+								</div>
 							</li>
 							{% comment %}<li><a href="#">{% trans 'new' %}</a></li>{% endcomment %}
 							{% comment %}<li><a href="#">{% trans 'sale' %}</a></li>{% endcomment %}
