@@ -50,6 +50,7 @@ jQuery(document).ready(function($)
 		setHeader();
 	});
 
+	rearangeSidebar();
 	initMenu();
 	initFavorite();
 	// initFixProductBorder();
@@ -58,7 +59,6 @@ jQuery(document).ready(function($)
 	// initPriceSlider();
 	initCheckboxes();
 	initPagination();
-	rearangeSidebar();
 
 	/* 
 
