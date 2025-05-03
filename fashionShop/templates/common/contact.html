@@ -2,6 +2,15 @@
 {% load static %}
 {% load i18n %}
 
+{% block title %}
+{% trans 'Contacts - Vili Style' %}
+{% endblock %}
+
+{% block meta %}
+<meta name="title" content="Контакти | Вили Стил">
+<meta name="description" content="Нашият екип е винаги на разположение за всяко Ваше запитване. За поръчки и въпроси, можете да ни потърсите на 0886531811, или на shop@vilistil.com">
+{% endblock %}
+
 {% block styles %}
 <link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
@@ -38,6 +47,12 @@
         </div>
     </div>
 
+    <!-- Factory Photo -->
+
+    <div class="factory-photo">
+        <img src="{% static 'images/factory.jpg' %}" alt="цех Вили Стил">
+    </div>
+
     <!-- Contact Us -->
 
     <div class="row">
@@ -45,6 +60,13 @@
         <div class="col-lg-6 contact_col">
             <div class="contact_contents">
                 <h1>{% trans 'Contact Us' %}</h1>
+
+                <div>
+                    <h5>{% trans 'Factory and Central Store' %}</h5>
+                    <p>{% trans 'Bulgaria' %}</p>
+                    <p>{% trans 'Stambloiyski 4210' %}</p>
+                    <p>{% trans 'Trakia BLVD 42' %}</p>
+                </div>
 
                 <div>
                     <p>{% trans 'For orders or questions, you can contact us at:' %}</p>

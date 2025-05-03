@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-03 14:54+0300\n"
+"POT-Creation-Date: 2025-05-03 15:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,7 +79,7 @@ msgstr "име"
 msgid "last name"
 msgstr "фамилия"
 
-#: fashionShop/common/choices.py:6
+#: fashionShop/common/choices.py:6 templates/common/contact.html:60
 msgid "Bulgaria"
 msgstr "България"
 
@@ -452,47 +452,63 @@ msgstr "Поръчка с телефонен номер"
 msgid "You can order with just your phone number. No registration necessary."
 msgstr "Може да поръчате с телефонен номер. Регистрацията не е задължителна."
 
-#: templates/common/contact.html:21 templates/items/single.html:31
+#: templates/common/contact.html:6
+msgid "Contacts - Vili Style"
+msgstr "Контакти - Вили Стил"
+
+#: templates/common/contact.html:30 templates/items/single.html:31
 msgid "Home"
 msgstr "Начало"
 
-#: templates/common/contact.html:22 templates/common/footer.html:36
+#: templates/common/contact.html:31 templates/common/footer.html:36
 msgid "Contacts"
 msgstr "Контакти"
 
-#: templates/common/contact.html:47
+#: templates/common/contact.html:56
 msgid "Contact Us"
 msgstr "Контакти"
 
-#: templates/common/contact.html:50
+#: templates/common/contact.html:59
+msgid "Factory and Central Store"
+msgstr "Производствен цех и Централен склад"
+
+#: templates/common/contact.html:61
+msgid "Stambloiyski 4210"
+msgstr "гр. Стамболийски 4210"
+
+#: templates/common/contact.html:62
+msgid "Trakia BLVD 42"
+msgstr "бул. Тракия 42"
+
+#: templates/common/contact.html:66
 msgid "For orders or questions, you can contact us at:"
 msgstr "За поръчки и въпроси, можете да ни потърсите на:"
 
-#: templates/common/contact.html:55
+#: templates/common/contact.html:71
 msgid "For wholesale orders:"
 msgstr "За поръчки на едро:"
 
-#: templates/common/contact.html:59
+#: templates/common/contact.html:75
 msgid "Open hours:"
 msgstr "Работно време:"
 
-#: templates/common/contact.html:60
+#: templates/common/contact.html:76
 msgid "Monday - Friday: 8:00am - 5:00pm"
 msgstr "Понеделник - Петък: 8:00 - 17:00"
 
-#: templates/common/contact.html:61
+#: templates/common/contact.html:77
 msgid "Saturday and Sunday: Closed"
 msgstr "Събота и Неделя: почивни дни"
 
-#: templates/common/contact.html:79
+#: templates/common/contact.html:95
 msgid "Get In Touch With Us"
 msgstr "Свържете се с нас"
 
-#: templates/common/contact.html:80
+#: templates/common/contact.html:96
 msgid "Fill out the form below, and we will contact you."
 msgstr "Попълнете формата и ще се свържем с Вас."
 
-#: templates/common/contact.html:88
+#: templates/common/contact.html:104
 msgid "send message"
 msgstr "изпрати съобщение"
 

@@ -1302,3 +1302,15 @@ textarea:hover
 {
 	color: #fe4c50;
 }
+
+.factory-photo {
+	max-width: 1000px;
+	margin-inline: auto;
+	margin-bottom: 2em;
+}
+
+.factory-photo img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
