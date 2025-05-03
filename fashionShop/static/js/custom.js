@@ -39,7 +39,7 @@ jQuery(document).ready(function($)
 
 	$(window).on('resize', function()
 	{
-		initFixProductBorder();
+		// initFixProductBorder();
 		setHeader();
 	});
 
@@ -51,9 +51,9 @@ jQuery(document).ready(function($)
 	initMenu();
 	initTimer();
 	initFavorite();
-	initFixProductBorder();
-	initIsotopeFiltering();
-	initSlider();
+	// initFixProductBorder();
+	// initIsotopeFiltering();
+	// initSlider();
 
 	/* 
 

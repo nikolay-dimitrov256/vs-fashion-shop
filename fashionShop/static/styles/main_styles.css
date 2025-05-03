@@ -1740,3 +1740,29 @@ section
 	font-style: italic;
 	margin-bottom: 0;
 }
+
+/* MY STYLES */
+
+.product-grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 1em;
+}
+
+.product-grid img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.product-item {
+	width: unset;
+	height: auto;
+	border: 1px solid #eee;
+	padding-bottom: 1em;
+}
+
+.product {
+	height: auto;
+	border-right: none;
+}

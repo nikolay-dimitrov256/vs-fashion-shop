@@ -19,11 +19,6 @@ class ItemDetailView(DetailView):
                 'linked_items',
                 'linked_items__pictures',
                 'pictures',
-                Prefetch(
-                    'pattern__items',
-                    queryset=Item.objects.exclude(Q(slug=self.kwargs['slug']) | Q(deleted=True)),
-                    to_attr='other_colors'
-                )
             ),
             slug=self.kwargs['slug']
         )
@@ -45,6 +40,11 @@ class ItemDetailView(DetailView):
             .values_list('size', flat=True)
             .order_by('size__size')
             .distinct()
+        )
+        context['other_colors'] = (
+            Item.objects
+            .exclude(Q(deleted=True) | Q(pk=self.object.pk))
+            .filter(pattern=self.object.pattern)
         )
 
         return context
