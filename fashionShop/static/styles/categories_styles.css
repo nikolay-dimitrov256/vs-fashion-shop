@@ -1323,11 +1323,11 @@ section
 	cursor: pointer;
 	padding-bottom: 1em;
 }
-.product-item img {
+/* .product-item img {
 	display: block;
-	width: 100;
-	height: auto;
-}
+	width: 100%;
+	height: auto; NOT FROM SOURCE
+} */
 .product-item::after
 {
 	display: block;
@@ -1789,4 +1789,29 @@ section
 
 .show_toggle:checked ~ .box_label {
 	display: block;
+}
+
+/* MY STYLES */
+
+.product-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1em;
+}
+
+.product-grid img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.product-item {
+	width: unset;
+	height: auto;
+	border: 1px solid #eee;
+}
+
+.product {
+	height: auto;
+	border-right: none;
 }

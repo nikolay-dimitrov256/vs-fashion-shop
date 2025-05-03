@@ -51,9 +51,9 @@ jQuery(document).ready(function($)
 
 	initMenu();
 	initFavorite();
-	initFixProductBorder();
+	// initFixProductBorder();
 	// initIsotopeFiltering();
-	initIsotopeLayoutOnly();
+	// initIsotopeLayoutOnly();
 	// initPriceSlider();
 	initCheckboxes();
 	initPagination();

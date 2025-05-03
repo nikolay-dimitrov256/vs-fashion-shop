@@ -130,7 +130,7 @@
 	}
 	.product-item
 	{
-		width: 33.33333333%;
+		/* width: 33.33333333%; */
 		height: 31em;
 	}
 	.benefit_col
@@ -192,7 +192,14 @@
 	}
 	.product-grid {
 		margin-top: 1.5em;
+		grid-template-columns: repeat(3, 1fr);
 	}
+	
+	/* .product-item {
+		width: unset;
+		height: auto;
+	} */
+
 }
 
 /************
@@ -268,7 +275,7 @@
 	}
 	.product-item
 	{
-		width: 33.333333333333%;
+		/* width: 33.333333333333%; */
 		/* height: 345px; */
 		height: 27em;
 	}
@@ -304,7 +311,7 @@
 	}
 	.product-item
 	{
-		width: 50%;
+		/* width: 50%; */
 		/* height: 420px; */
 		height: 34em;
 	}
@@ -332,6 +339,10 @@
 	.footer_nav li a
 	{
 		font-size: 13px;
+	}
+
+	.product-grid {
+		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
@@ -423,7 +434,7 @@
 	}
 	.product-item
 	{
-		width: 100%;
+		/* width: 100%; */
 		height: auto;
 		/* height: 30em; */
 	}
@@ -514,6 +525,10 @@
 	{
 		margin-top: 5px;
 		margin-bottom: 30px;
+	}
+
+	.product-grid {
+		grid-template-columns: 1fr;
 	}
 }
 
