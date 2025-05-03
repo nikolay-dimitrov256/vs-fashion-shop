@@ -12,7 +12,7 @@ from fashionShop.items.utils import parse_and_save_items, update_prices_and_stoc
 from fashionShop.pictures.admin import PictureInline
 
 
-class StockInline(admin.StackedInline):
+class StockInline(admin.TabularInline):
     model = Stock
     fields = ['size', 'quantity']
     ordering = ['size__size']

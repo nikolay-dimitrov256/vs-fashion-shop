@@ -17,7 +17,7 @@ class PictureAdmin(admin.ModelAdmin):
     image_preview.short_description = 'Preview'
 
 
-class PictureInline(admin.StackedInline):
+class PictureInline(admin.TabularInline):
     model = Picture
     can_delete = True
     extra = 1
