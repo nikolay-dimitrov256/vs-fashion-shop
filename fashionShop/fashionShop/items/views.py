@@ -44,7 +44,7 @@ class ItemDetailView(DetailView):
         context['other_colors'] = (
             Item.objects
             .exclude(Q(deleted=True) | Q(pk=self.object.pk))
-            .filter(pattern=self.object.pattern)
+            .filter(pattern=self.object.pattern, pattern__isnull=False)
         )
 
         return context

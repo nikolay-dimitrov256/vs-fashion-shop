@@ -42,6 +42,7 @@ jQuery(document).ready(function($)
 	{
 		initFixProductBorder();
 		setHeader();
+		rearangeSidebar();
 	});
 
 	$(document).on('scroll', function()
@@ -57,6 +58,7 @@ jQuery(document).ready(function($)
 	// initPriceSlider();
 	initCheckboxes();
 	initPagination();
+	rearangeSidebar();
 
 	/* 
 
@@ -466,4 +468,16 @@ jQuery(document).ready(function($)
 		}
 	}
 	
+	function rearangeSidebar() {
+		// Get elements
+		const parentDivElement = document.querySelector('.product_section');
+		const sidebarDivElement = document.querySelector('.sidebar');
+		const contentDivElement = document.querySelector('.main_content');
+
+		if (window.innerWidth <= 991) {
+			parentDivElement.append(sidebarDivElement);
+		} else {
+			parentDivElement.insertBefore(sidebarDivElement, contentDivElement);
+		}
+	}
 });
