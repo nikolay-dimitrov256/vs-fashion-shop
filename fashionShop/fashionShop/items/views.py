@@ -241,3 +241,36 @@ class CardigansListView(ItemsListView):
         items = items.filter(category__name_en='cardigans')
 
         return items
+
+
+class ElegantListView(ItemsListView):
+    template_name = 'items/elegant.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(style__name__iexact='elegant')
+
+        return items
+
+
+class OfficeListView(ItemsListView):
+    template_name = 'items/office.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(style__name__iexact='office')
+
+        return items
+
+
+class OfficialListView(ItemsListView):
+    template_name = 'items/official.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(style__name__iexact='official')
+
+        return items

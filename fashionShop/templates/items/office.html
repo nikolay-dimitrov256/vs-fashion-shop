@@ -1,0 +1,26 @@
+{% extends 'items/category.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Women's shirts Vili Style" %}
+{% endblock %}
+
+{% block meta %}
+<meta name="title" content="Дамски офис дрехи - Онлайн Цени | Вили Стил">
+<meta name="description" content="Работата е удоволствие, когато се върши със стил. Разгледайте офис тоалетите ни за жени, за да покажете стила си на работното място. За поръчки - 0886531811">
+{% endblock %}
+
+{% block breadcrumbs %}
+<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
+<li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
+<li class="active"><a href="{% url 'office' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans "Office clothes" %}</a></li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "Women's office clothes" %}</h1>
+{% endblock %}
+
+{% block categories %}
+
+{% endblock %}

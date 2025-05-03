@@ -1,0 +1,26 @@
+{% extends 'items/category.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Women's shirts Vili Style" %}
+{% endblock %}
+
+{% block meta %}
+<meta name="title" content="Официални дрехи за жени - Онлайн Цени | Вили Стил">
+<meta name="description" content="Възползвайте се от предложенията ни за официални дамски дрехи, за да сияете на предстоящото събитие. За въпроси и поръчки - 0886531811">
+{% endblock %}
+
+{% block breadcrumbs %}
+<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
+<li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
+<li class="active"><a href="{% url 'official' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans "Official clothes" %}</a></li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "Official women's clothes" %}</h1>
+{% endblock %}
+
+{% block categories %}
+
+{% endblock %}
