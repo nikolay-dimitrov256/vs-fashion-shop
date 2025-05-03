@@ -52,7 +52,8 @@ jQuery(document).ready(function($)
 	initMenu();
 	initFavorite();
 	initFixProductBorder();
-	initIsotopeFiltering();
+	// initIsotopeFiltering();
+	initIsotopeLayoutOnly();
 	// initPriceSlider();
 	initCheckboxes();
 	initPagination();
@@ -441,5 +442,19 @@ jQuery(document).ready(function($)
 				paginationFormElement.submit();
 			});
 		});
+	}
+
+	function initIsotopeLayoutOnly() {
+		if ($('.product-grid').length) {
+			$('.product-grid').isotope({
+				itemSelector: '.product-item',
+				layoutMode: 'fitRows', // Or 'masonry' depending on your design
+				animationOptions: {
+					duration: 750,
+					easing: 'linear',
+					queue: false
+				}
+			});
+		}
 	}
 });

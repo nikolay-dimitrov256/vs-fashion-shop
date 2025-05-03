@@ -1323,6 +1323,11 @@ section
 	cursor: pointer;
 	padding-bottom: 1em;
 }
+.product-item img {
+	display: block;
+	width: 100;
+	height: auto;
+}
 .product-item::after
 {
 	display: block;
