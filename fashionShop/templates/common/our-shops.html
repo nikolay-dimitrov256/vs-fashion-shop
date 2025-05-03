@@ -2,6 +2,15 @@
 {% load static %}
 {% load shipping %}
 
+{% block title %}
+Магазини - Вили Стил
+{% endblock %}
+
+{% block meta %}
+<meta name="title" content="Магазини | Вили Стил">
+<meta name="description" content="Пробата на място е най-сигурна. Посетете някой от нашите магазини, където ще бъдете посрещнати и обслужени професионално.">
+{% endblock %}
+
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
