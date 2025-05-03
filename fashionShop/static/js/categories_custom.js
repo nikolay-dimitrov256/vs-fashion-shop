@@ -446,15 +446,24 @@ jQuery(document).ready(function($)
 
 	function initIsotopeLayoutOnly() {
 		if ($('.product-grid').length) {
-			$('.product-grid').isotope({
+			var $grid = $('.product-grid');
+	
+			// Initialize Isotope first (so layout mode is known)
+			$grid.isotope({
 				itemSelector: '.product-item',
-				layoutMode: 'fitRows', // Or 'masonry' depending on your design
+				layoutMode: 'fitRows', // or 'masonry'
 				animationOptions: {
 					duration: 750,
 					easing: 'linear',
 					queue: false
 				}
 			});
+	
+			// Then trigger layout only *after* images are loaded
+			$grid.imagesLoaded().progress(function () {
+				$grid.isotope('layout');
+			});
 		}
 	}
+	
 });
