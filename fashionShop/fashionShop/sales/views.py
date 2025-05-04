@@ -189,10 +189,20 @@ class CheckoutView(View):
 
     def get(self, request):
         if request.user.is_authenticated:
-            self.cart.total = sum(i.total_price for i in self.cart.cart_items.all())
+            # self.cart.total = sum(i.total_price for i in self.cart.cart_items.all())
+            self.cart.total = 0
+            num_items = 0
+            content_ids = set()
+
+            for item in self.cart.cart_items.all():
+                self.cart.total += item.total_price
+                num_items += item.quantity
+                content_ids.add(item.item.pk)
 
             context = {
                 'cart': self.cart,
+                'num_items': num_items,
+                'content_ids': list(content_ids),
             }
 
         else:
@@ -200,6 +210,8 @@ class CheckoutView(View):
             cart_total = Decimal(0)
             items = Item.objects.filter(item_number__in=self.cart.keys())
             items_map = {item.item_number: item for item in items}
+            num_items = 0
+            content_ids = list(items_map.keys())
 
             for item_number, data in self.cart.items():
                 item = items_map.get(int(item_number))
@@ -209,12 +221,15 @@ class CheckoutView(View):
                     total = item.final_price * int(quantity)
                     sizes[size] = {'quantity': quantity, 'total': total}
                     cart_total += total
+                    num_items += quantity
 
                 self.cart[item_number] = {'item': item, 'sizes': sizes}
 
             context = {
                 'cart': self.cart,
                 'cart_total': cart_total,
+                'num_items': num_items,
+                'content_ids': content_ids,
             }
 
         context['phone_order_form'] = PhoneOrderForm()
@@ -298,3 +313,10 @@ class CheckoutView(View):
 class ThankYouView(DetailView):
     model = OnlineOrder
     template_name = 'sales/order.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['content_ids'] = list(set(oi.item.pk for oi in self.object.order_items.all()))
+        context['num_items'] = sum(oi.quantity for oi in self.object.order_items.all())
+
+        return context

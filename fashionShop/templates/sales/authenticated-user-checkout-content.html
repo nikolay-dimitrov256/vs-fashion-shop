@@ -23,3 +23,12 @@
         {% endif %}
     </div>
 </div>
+
+<script>
+    fbq('track', 'InitiateCheckout', {
+                content_ids: {{ content_ids }},
+                num_items: {{ num_items }},
+                currency: "BGN", 
+                value: {{ cart.total }}
+                });
+</script>

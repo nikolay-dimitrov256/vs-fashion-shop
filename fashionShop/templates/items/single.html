@@ -296,7 +296,32 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- <script src="{% static 'js/custom.js' %}"></script>  Added for carousel-->
+<script>
+    fbq('track', 'ViewContent', {
+        content_ids: [{{ object.pk }}],
+        content_type: "{{ object.category }}",
+        currency: "BGN", 
+        value: {{ object.final_price }}
+        });
+    
+    const addtoCartButton = document.querySelector('.add_to_cart_button a');
+    addtoCartButton.addEventListener('click', fbAddToCart);
+
+    function fbAddToCart() {
+        const sizesDivElement = document.querySelector('.sizes');
+
+        if (sizesDivElement.querySelector('.selected')) {
+            
+            fbq('track', 'AddToCart', {
+                content_ids: [{{ object.pk }}],
+                content_type: "{{ object.category }}",
+                currency: "BGN", 
+                value: {{ object.final_price }}
+                });
+        }
+    }
+</script>
+
 <script src="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
 <script src="{% static 'js/single_custom.js' %}"></script>
 {% endblock %}
