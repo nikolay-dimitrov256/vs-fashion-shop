@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load l10n %}
 {% load shipping %}
 
 {% for item_number, entry in cart.items %}
@@ -31,6 +32,6 @@
                 content_ids: {{ content_ids|safe }},
                 num_items: {{ num_items }},
                 currency: "BGN", 
-                value: {{ cart_total|floatformat:2 }}
+                value: {{ cart_total|unlocalize }}
                 });
 </script>

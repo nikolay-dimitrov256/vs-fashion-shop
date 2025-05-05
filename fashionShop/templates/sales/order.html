@@ -1,6 +1,7 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load l10n %}
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
@@ -22,7 +23,7 @@
                 content_ids: {{ content_ids|safe }},
                 num_items: {{ num_items }},
                 currency: "BGN", 
-                value: {{ object.total|floatformat:2 }}
+                value: {{ object.total|unlocalize }}
                 });
 </script>
 

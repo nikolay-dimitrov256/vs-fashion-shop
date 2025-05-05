@@ -1,6 +1,7 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load l10n %}
 
 {% block title %}
 {{ object.name }} | Вили Стил
@@ -301,7 +302,7 @@
         content_ids: [{{ object.pk }}],
         content_type: "{{ object.category }}",
         currency: "BGN", 
-        value: {{ object.final_price|floatformat:2 }}
+        value: {{ object.final_price|unlocalize }}
         });
     
     const addtoCartButton = document.querySelector('.add_to_cart_button a');
@@ -316,7 +317,7 @@
                 content_ids: [{{ object.pk }}],
                 content_type: "{{ object.category }}",
                 currency: "BGN", 
-                value: {{ object.final_price|floatformat:2 }}
+                value: {{ object.final_price|unlocalize }}
                 });
         }
     }
