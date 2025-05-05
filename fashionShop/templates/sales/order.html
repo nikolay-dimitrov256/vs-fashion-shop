@@ -19,10 +19,10 @@
 
 <script>
     fbq('track', 'Purchase', {
-                content_ids: {{ content_ids }},
+                content_ids: {{ content_ids|safe }},
                 num_items: {{ num_items }},
                 currency: "BGN", 
-                value: {{ object.total }}
+                value: {{ object.total|floatformat:2 }}
                 });
 </script>
 

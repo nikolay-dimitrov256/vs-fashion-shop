@@ -26,9 +26,9 @@
 
 <script>
     fbq('track', 'InitiateCheckout', {
-                content_ids: {{ content_ids }},
+                content_ids: {{ content_ids|safe }},
                 num_items: {{ num_items }},
                 currency: "BGN", 
-                value: {{ cart.total }}
+                value: {{ cart.total|floatformat:2 }}
                 });
 </script>

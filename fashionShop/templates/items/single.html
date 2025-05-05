@@ -301,7 +301,7 @@
         content_ids: [{{ object.pk }}],
         content_type: "{{ object.category }}",
         currency: "BGN", 
-        value: {{ object.final_price }}
+        value: {{ object.final_price|floatformat:2 }}
         });
     
     const addtoCartButton = document.querySelector('.add_to_cart_button a');
@@ -316,7 +316,7 @@
                 content_ids: [{{ object.pk }}],
                 content_type: "{{ object.category }}",
                 currency: "BGN", 
-                value: {{ object.final_price }}
+                value: {{ object.final_price|floatformat:2 }}
                 });
         }
     }
