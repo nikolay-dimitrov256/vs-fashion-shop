@@ -41,6 +41,7 @@
 
 			<div class="sidebar">
 				{% block categories %}
+				{% comment %}
 				<div class="sidebar_section">
 					<div class="sidebar_title">
 						<h5>{% trans 'styles'|capfirst %}</h5>
@@ -70,6 +71,7 @@
 						<li><a href="{% url 'vests' %}">{% trans 'vests'|capfirst %}</a></li>
 					</ul>
 				</div>
+				{% endcomment %}
 				{% endblock %}
 
 				{% comment %}
@@ -179,7 +181,7 @@
 									</li>
 									{% endcomment %}
 									<li>
-										<span>Show</span>
+										<span>{% trans 'Show' %}</span>
 										<span class="num_sorting_text">{{ paginate_by }}</span>
 										<i class="fa fa-angle-down"></i>
 										<form id="pagination_form">
@@ -269,7 +271,7 @@
 									</li>
 								</ul>
 								{% endcomment %}
-								<span class="showing_results">Showing {{ page_obj.start_index }}–{{ page_obj.end_index }} of {{ paginator.count }} results</span>
+								<span class="showing_results">{% trans 'Showing' %} {{ page_obj.start_index }}–{{ page_obj.end_index }} {% trans 'of' %} {{ paginator.count }} {% trans 'results' %}</span>
 
 								{% include 'items/pagination.html' %}
 

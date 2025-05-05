@@ -1016,7 +1016,8 @@ section
 	text-align: center;
 	border: solid 1px #ecedee;
 	margin-right: 16px;
-	margin-left: 31px;
+	/* margin-left: 31px; */
+	margin-left: 1em;
 }
 .product_sorting_container_bottom .pages .page_current
 {
@@ -1084,7 +1085,8 @@ section
 {
 	display: inline-block;
 	line-height: 40px;
-	margin-right: 31px;
+	/* margin-right: 31px; */
+	margin-right: 1em;
 }
 .page_total span
 {
@@ -1115,6 +1117,13 @@ section
 	line-height: 40px;
 	float: right;
 	margin-right: 34px;
+}
+
+.page_next a,
+.page_previous a {
+	color: #282828;
+	font-weight: 600;
+	text-transform: capitalize;
 }
 
 /*********************************
