@@ -130,7 +130,8 @@ class Item(models.Model):
         verbose_name_plural = _('items')
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f'{self.item_number}-{transliterate(self.name_bg)}')
+        if not self.slug:
+            self.slug = slugify(f'{self.item_number}-{transliterate(self.name_bg)}')
 
         if self.sub_category:
             self.category = self.sub_category.category
