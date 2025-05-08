@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-05 09:58+0300\n"
+"POT-Creation-Date: 2025-05-08 11:10+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -252,6 +252,7 @@ msgid "pattern"
 msgstr "кройка"
 
 #: fashionShop/items/models/item.py:106 fashionShop/items/models/size.py:17
+#: templates/items/category.html:95
 msgid "sizes"
 msgstr "размери"
 
@@ -708,6 +709,10 @@ msgstr "филтрирай"
 msgid "Show Less"
 msgstr "Покажи по-малко"
 
+#: templates/items/category.html:128
+msgid "colors"
+msgstr "цветове"
+
 #: templates/items/category.html:187
 msgid "Show"
 msgstr "Покажи"
@@ -800,6 +805,10 @@ msgstr "Дамски панталони"
 #: templates/items/shirts.html:17 templates/items/shirts.html:21
 msgid "Women's shirts"
 msgstr "Дамски ризи"
+
+#: templates/items/single.html:138
+msgid "add to cart"
+msgstr "добави в количка"
 
 #: templates/items/single.html:154
 msgid "This model in other colors:"
