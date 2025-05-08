@@ -58,7 +58,7 @@ class HomeView(TemplateView):
             .filter(is_bestseller=True)[:10]
         )
         all_feedback = list(Feedback.objects.all())
-        sample_size = min(len(all_feedback), 4) # Prevents error if looking for more elements than there are in the list
+        sample_size = min(len(all_feedback), 5) # Prevents error if looking for more elements than there are in the list
         feedback_sample = sample(all_feedback, sample_size)
         context['feedback'] = feedback_sample
 
