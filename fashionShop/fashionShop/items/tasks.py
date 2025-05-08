@@ -78,7 +78,7 @@ def load_items_from_bisoft():
             existing_item = existing_items_map.get(item['item_number'])
             existing_item.name_bg = item['name_bg']
             existing_item.name_en = item['name_en']
-            existing_item.slug = slugify(f"{item['item_number']}-{transliterate(item['name_bg'])}")
+            # existing_item.slug = slugify(f"{item['item_number']}-{transliterate(item['name_bg'])}")
             existing_item.description_bg = item['description_bg'] if '=' not in item['description_bg'] else ''
             existing_item.description_en = item['description_en'] if '=' not in item['description_en'] else ''
             existing_item.price = item['price']
