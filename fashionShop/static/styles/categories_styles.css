@@ -1330,7 +1330,7 @@ section
 	/* height: 380px; */
 	height: 30em;
 	cursor: pointer;
-	padding-bottom: 1em;
+	padding-bottom: 4em;
 }
 /* .product-item img {
 	display: block;
@@ -1476,8 +1476,11 @@ section
 .add_to_cart_button
 {
 	width: 100%;
-	visibility: hidden;
-	opacity: 0;
+	/* visibility: hidden;
+	opacity: 0; */
+	visibility: visible;
+	position: absolute;
+	bottom: 0;
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	-ms-transition: all 0.3s ease;
