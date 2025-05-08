@@ -23,9 +23,7 @@ jQuery(document).ready(function($)
 
 	$(window).on('resize', function()
 	{
-		initFixProductBorder();
 		setHeader();
-		rearangeSidebar();
 	});
 
 	$(document).on('scroll', function()
