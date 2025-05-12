@@ -19,4 +19,4 @@ class OnlineOrderAdmin(admin.ModelAdmin):
                        'created_at', 'updated_at']
     search_fields = ['pk', 'order_code']
     list_filter = ['created_at']
-    list_display = ['pk', 'total']
+    list_display = ['pk', 'status', 'total']
