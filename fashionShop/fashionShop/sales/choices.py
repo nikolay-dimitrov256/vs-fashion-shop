@@ -23,3 +23,15 @@ class ShippingChoices(TextChoices):
         elif value.startswith('ec'):
             return 'Econt'
         return None
+
+
+class StatusChoices(TextChoices):
+    PENDING = 'pnd', _('pending')
+    CONFIRMED = 'cnf', _('confirmed')
+    CANCELED = 'cnl', _('canceled')
+    SENT = 'snt', _('sent')
+    REJECTED = 'rjt', _('rejected')
+    ABANDONED = 'abd', _('abandoned')
+    COMPLETED = 'cmp', _('completed')
+    REPLACED = 'rpl', _('replaced')
+    REFUNDED = 'rfn', _('refunded')

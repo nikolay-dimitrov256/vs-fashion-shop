@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
-from fashionShop.sales.choices import ShippingChoices
+from fashionShop.sales.choices import ShippingChoices, StatusChoices
 
 UserModel = get_user_model()
 
@@ -108,6 +108,16 @@ class OnlineOrder(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True,
     )
+
+    status = models.CharField(
+        max_length=3,
+        choices=StatusChoices.choices,
+        default=StatusChoices.PENDING,
+    )
+
+    class Meta:
+        verbose_name = _('Online Order')
+        verbose_name_plural = _('Online Orders')
 
     def save(self, *args, **kwargs):
         if not self.order_code:

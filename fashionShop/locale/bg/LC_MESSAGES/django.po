@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-08 11:38+0300\n"
+"POT-Creation-Date: 2025-05-12 13:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -275,7 +275,7 @@ msgstr "продукт"
 msgid "items"
 msgstr "продукти"
 
-#: fashionShop/items/models/item.py:200 fashionShop/items/models/item.py:201
+#: fashionShop/items/models/item.py:201 fashionShop/items/models/item.py:202
 msgid "stock"
 msgstr "наличност"
 
@@ -322,6 +322,42 @@ msgstr "ЕКОНТ до офис"
 msgid "ECONT address"
 msgstr "ЕКОНТ до адрес"
 
+#: fashionShop/sales/choices.py:29
+msgid "pending"
+msgstr "изчакваща"
+
+#: fashionShop/sales/choices.py:30
+msgid "confirmed"
+msgstr "потвърдена"
+
+#: fashionShop/sales/choices.py:31
+msgid "canceled"
+msgstr "отменена"
+
+#: fashionShop/sales/choices.py:32
+msgid "sent"
+msgstr "изпратена"
+
+#: fashionShop/sales/choices.py:33
+msgid "rejected"
+msgstr "отказана"
+
+#: fashionShop/sales/choices.py:34
+msgid "abandoned"
+msgstr "не потърсена"
+
+#: fashionShop/sales/choices.py:35
+msgid "completed"
+msgstr "завършена"
+
+#: fashionShop/sales/choices.py:36
+msgid "replaced"
+msgstr "заменена"
+
+#: fashionShop/sales/choices.py:37
+msgid "refunded"
+msgstr "върната"
+
 #: fashionShop/sales/forms.py:26
 msgid "Office"
 msgstr "Офис"
@@ -349,6 +385,14 @@ msgstr "град/село"
 #: fashionShop/sales/models.py:85 templates/common/home.html:56
 msgid "office"
 msgstr "офис"
+
+#: fashionShop/sales/models.py:119
+msgid "Online Order"
+msgstr "Онлайн Поръчка"
+
+#: fashionShop/sales/models.py:120
+msgid "Online Orders"
+msgstr "Онлайн Поръчки"
 
 #: fashionShop/sales/views.py:25
 msgid "The item was not found."
@@ -409,7 +453,7 @@ msgstr "Можете да прочетете Политиката ни за по
 msgid "HERE"
 msgstr "ТУК"
 
-#: templates/common/base.html:8
+#: templates/common/base.html:17
 msgid "Vili Style - Online store for women's fashion"
 msgstr "Вили Стил - Онлайн магазин за дамска мода"
 
@@ -625,7 +669,7 @@ msgstr "поли"
 msgid "all clothes"
 msgstr "всички дрехи"
 
-#: templates/common/home.html:6
+#: templates/common/home.html:11
 msgid "Vili Style Online store for women fashion"
 msgstr "Вили Стил Онлайн магазин за дамска мода"
 
@@ -717,15 +761,19 @@ msgstr "цветове"
 msgid "Show"
 msgstr "Покажи"
 
-#: templates/items/category.html:279
+#: templates/items/category.html:253 templates/items/grid-item-card.html:39
+msgid "get"
+msgstr "вземи"
+
+#: templates/items/category.html:278
 msgid "Showing"
 msgstr "Показани"
 
-#: templates/items/category.html:279
+#: templates/items/category.html:278
 msgid "of"
 msgstr "от"
 
-#: templates/items/category.html:279
+#: templates/items/category.html:278
 msgid "results"
 msgstr "резулата"
 
@@ -761,10 +809,6 @@ msgstr "Спортно елегантни дамски дрехи"
 #: templates/items/grid-item-card.html:27
 msgid "new"
 msgstr "ново"
-
-#: templates/items/grid-item-card.html:39
-msgid "get"
-msgstr "вземи"
 
 #: templates/items/jackets.html:6
 msgid "Women's jackets Vili Style"
