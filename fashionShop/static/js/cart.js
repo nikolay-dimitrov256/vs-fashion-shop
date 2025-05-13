@@ -11,7 +11,7 @@ jQuery(document).ready(function($)
 	*/
 
 	var header = $('.header');
-	var topNav = $('.top_nav')
+	var topNav = $('.top_nav');
 	var mainSlider = $('.main_slider');
 	var hamburger = $('.hamburger_container');
 	var menu = $('.hamburger_menu');

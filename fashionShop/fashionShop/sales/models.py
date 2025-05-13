@@ -113,6 +113,7 @@ class OnlineOrder(models.Model):
         max_length=3,
         choices=StatusChoices.choices,
         default=StatusChoices.PENDING,
+        blank=True,
     )
 
     class Meta:

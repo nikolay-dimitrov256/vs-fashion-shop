@@ -34,7 +34,7 @@ class ShippingOrderForm(forms.ModelForm):
 
     class Meta:
         model = OnlineOrder
-        exclude = ['user', 'created_at', 'updated_at', 'address']
+        exclude = ['user', 'created_at', 'updated_at', 'address', 'status']
 
     def is_valid(self) -> bool:
         valid = super().is_valid()
