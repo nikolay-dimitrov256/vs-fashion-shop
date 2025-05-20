@@ -56,14 +56,14 @@
                                         {% if picture.is_main %}
                                         class="active"
                                         {% endif %}
-                                    ><img src="{{ picture.image.url }}" alt="{{ object.name }}" data-image="{{ picture.image.url }}" title="{{ object.name }} | Вили Стил"></li>
+                                    ><img src="{{ picture.image_url }}" alt="{{ object.name }}" data-image="{{ picture.image_url }}" title="{{ object.name }} | Вили Стил"></li>
                                 {% endfor %}
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-9 image_col order-lg-2 order-1">
                         <div class="single_product_image">
-                            <img src="{{ object.pictures.all.first.image.url }}" alt="{{ object.name }}" title="{{ object.name }} | Вили Стил">
+                            <img src="{{ object.pictures.all.first.image_url }}" alt="{{ object.name }}" title="{{ object.name }} | Вили Стил">
                         </div>
                     </div>
                 </div>
@@ -140,6 +140,10 @@
         </div>
     </div>
 </div>
+
+<!-- Benefit -->
+
+{% include 'common/benefit.html' %}
 
 <!-- Other Colors -->
 
@@ -220,7 +224,7 @@
                                 <p>{{ detail_picture.description }}</p>
                             </div>
                             <div class="tab_image">
-                                <img src="{{ detail_picture.image.url }}" alt="{{ object.name }}" title="{{ object.name }} | Вили Стил" loading="lazy">
+                                <img src="{{ detail_picture.image_url }}" alt="{{ object.name }}" title="{{ object.name }} | Вили Стил" loading="lazy">
                             </div>
                         </div>
                     {% else %}
@@ -229,7 +233,7 @@
                                 <p>{{ detail_picture.description }}</p>
                             </div>
                             <div class="tab_image">
-                                <img src="{{ detail_picture.image.url }}" alt="{{ object.name }}" title="{{ object.name }} | Вили Стил" loading="lazy">
+                                <img src="{{ detail_picture.image_url }}" alt="{{ object.name }}" title="{{ object.name }} | Вили Стил" loading="lazy">
                             </div>
                         </div>
                     {% endif %}
@@ -289,10 +293,6 @@
         </div>
     </div>
 </div>
-
-<!-- Benefit -->
-
-{% include 'common/benefit.html' %}
 
 {% endblock %}
 

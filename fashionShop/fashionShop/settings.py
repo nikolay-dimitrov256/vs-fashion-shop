@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'rest_framework',
+    'storages'
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
@@ -288,7 +289,32 @@ cloudinary.config(
     api_secret=config('CLOUDINARY_API_SECRET'),
     secure=True,  # Ensures image urls are https
 )
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
+
+CLOUDFLARE_R2_BUCKET = config('CLOUDFLARE_R2_BUCKET')
+CLOUDFLARE_R2_ACCESS_TOKEN_VALUE = config('CLOUDFLARE_R2_ACCESS_TOKEN_VALUE')
+CLOUDFLARE_R2_ACCESS_KEY = config('CLOUDFLARE_R2_ACCESS_KEY')
+CLOUDFLARE_R2_SECRET_KEY = config('CLOUDFLARE_R2_SECRET_KEY')
+CLOUDFLARE_R2_BUCKET_ENDPOINT = config('CLOUDFLARE_R2_BUCKET_ENDPOINT')
+
+CLOUDFLARE_R2_CONFIG_OPTIONS = {
+    'bucket_name': CLOUDFLARE_R2_BUCKET,
+    'access_key': CLOUDFLARE_R2_ACCESS_KEY,
+    'secret_key': CLOUDFLARE_R2_SECRET_KEY,
+    'endpoint_url': CLOUDFLARE_R2_BUCKET_ENDPOINT,
+    'default_acl': 'public-read',  # or 'private'
+    'signature_version': 's3v4',
+}
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'fashionShop.pictures.utils.cloudflare.MediaFileStorage',
+        'OPTIONS': CLOUDFLARE_R2_CONFIG_OPTIONS
+    },
+    'staticfiles': {
+        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    }
+}
 
 ADMIN_URL = config('ADMIN_URL')

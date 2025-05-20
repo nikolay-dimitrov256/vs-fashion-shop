@@ -924,7 +924,7 @@ section
 {
 	margin-top: 150px;
 	padding-bottom: 80px;
-	border-bottom: solid 1px #ebebeb;
+	/* border-bottom: solid 1px #ebebeb; */
 }
 .single_product_thumbnails
 {
@@ -1441,7 +1441,8 @@ section
 
 .benefit
 {
-	margin-top: 74px;
+	/* margin-top: 74px; */
+	margin-bottom: 1.5em;
 }
 .benefit_row
 {

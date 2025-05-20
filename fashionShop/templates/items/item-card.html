@@ -10,8 +10,8 @@
             {% endif %}
         >
             <a href="{% url 'item-details' item.slug %}" class="product_image">
-                {% if item.pictures.all.first.image.url %}
-                <img src="{{ item.pictures.all.first.image.url }}" alt="{{ item.name }}" title="{{ item.name }} | Вили Стил" loading="lazy">
+                {% if item.pictures.all.first.image_url %}
+                <img src="{{ item.pictures.all.first.image_url }}" alt="{{ item.name }}" title="{{ item.name }} | Вили Стил" loading="lazy">
                 {% else %}
                 <img src="{% static 'images/item.jpg' %}" alt="no image">
                 {% endif %}

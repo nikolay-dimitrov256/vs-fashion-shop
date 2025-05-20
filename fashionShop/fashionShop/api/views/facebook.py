@@ -41,7 +41,7 @@ def products_feed(request):
         SubElement(it, 'g:title').text = item.name_bg
         SubElement(it, 'g:description').text = item.description_bg
         SubElement(it, 'g:link').text = request.build_absolute_uri(reverse_lazy('item-details', kwargs={'slug': item.slug}))
-        SubElement(it, 'g:image_link').text = item.pictures.first().image.url if item.pictures.first() else ''
+        SubElement(it, 'g:image_link').text = item.pictures.first().image_url if item.pictures.first() else ''
         SubElement(it, 'g:availability').text = 'in stock'
         SubElement(it, 'g:condition').text = 'new'
         SubElement(it, 'g:price').text = f'{item.price} BGN'
@@ -51,9 +51,9 @@ def products_feed(request):
         SubElement(it, 'g:google_product_category').text = item.category.name_bg
 
         if len(item.pictures.all()) > 1:
-            SubElement(it, 'additional_image_link').text = item.pictures.all()[1].image.url
+            SubElement(it, 'additional_image_link').text = item.pictures.all()[1].image_url
         if len(item.pictures.all()) > 2:
-            SubElement(it, 'additional_image_link').text = item.pictures.all()[2].image.url
+            SubElement(it, 'additional_image_link').text = item.pictures.all()[2].image_url
 
     xml_str = tostring(rss, encoding='utf-8')
     # pretty_xml = xml.dom.minidom.parseString(xml_str).toprettyxml(indent='  ')

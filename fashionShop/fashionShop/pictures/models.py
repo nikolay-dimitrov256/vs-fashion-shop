@@ -3,10 +3,17 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from fashionShop.items.models import Item
+from fashionShop.pictures.utils.cloudflare import image_file_upload_handler
 
 
 class Picture(models.Model):
     image = CloudinaryField('image')
+
+    image_r2 = models.ImageField(
+        upload_to=image_file_upload_handler,
+        null=True,
+        blank=True,
+    )
 
     is_main = models.BooleanField(
         default=False,
@@ -35,6 +42,14 @@ class Picture(models.Model):
 
     class Meta:
         ordering = ['-is_main', 'is_detail', '-created_at']
+
+    @property
+    def image_url(self):
+        if self.image_r2:
+            return self.image_r2.url
+        elif self.image:
+            return self.image.url
+        return ''
 
     def save(self, *args, **kwargs):
         if self.is_main:
