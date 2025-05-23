@@ -13,3 +13,4 @@ FREE_DELIVERY_THRESHOLD = {
 }
 
 SITE_ADDRESS = 'https://vilistil.bg'
+SITE_DOMAIN = 'vilistil.bg'

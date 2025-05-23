@@ -2,6 +2,7 @@ from cloudinary.models import CloudinaryField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from fashionShop.common.globals import SITE_DOMAIN
 from fashionShop.items.models import Item
 from fashionShop.pictures.utils.cloudflare import image_file_upload_handler
 
@@ -46,7 +47,7 @@ class Picture(models.Model):
     @property
     def image_url(self):
         if self.image_r2:
-            return self.image_r2.url
+            return f'https://media.{SITE_DOMAIN}/{self.image_r2.name}'
         elif self.image:
             return self.image.url
         return ''

@@ -11,10 +11,8 @@ class PictureAdmin(admin.ModelAdmin):
     actions = [migrate_image_to_r2]
 
     def image_preview(self, obj):
-        if obj.image_r2:
-            return format_html(f'<img src="{obj.image_r2.url}" width="100" height="auto"/>')
-        elif obj.image:
-            return format_html(f'<img src="{obj.image.url}" width="100" height="auto"/>')
+        if obj.image_r2 or obj.image:
+            return format_html(f'<img src="{obj.image_url}" width="100" height="auto"/>')
         return 'No image'
 
     image_preview.allow_tags = True
@@ -34,10 +32,8 @@ class PictureInline(admin.TabularInline):
     readonly_fields = ['image_preview', 'created_at']
 
     def image_preview(self, obj):
-        if obj.image_r2:
-            return format_html(f'<img src="{obj.image_r2.url}" width="100" height="auto"/>')
-        elif obj.image:
-            return format_html(f'<img src="{obj.image.url}" width="100" height="auto"/>')
+        if obj.image_r2 or obj.image:
+            return format_html(f'<img src="{obj.image_url}" width="100" height="auto"/>')
         return 'No image'
 
     image_preview.allow_tags = True
