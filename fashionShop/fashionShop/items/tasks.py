@@ -123,6 +123,7 @@ def load_items_from_bisoft():
 
     # Get Stocks to be updated
     existing_stocks = Stock.objects.filter(store__id=0)
+    stocks_to_nullify = []
 
     # Get Stocks to be created
     new_stocks = []
@@ -130,6 +131,7 @@ def load_items_from_bisoft():
     for item in data:
         item['item_number'] = int(item['item_number'])
         stock_data = item['sizes'] if isinstance(item['sizes'], dict) else {}
+        existing_item_stocks = existing_stocks.filter(item__item_number=item['item_number'])
 
         # Get and set stocks
         for size, quantity in stock_data.items():
@@ -143,6 +145,11 @@ def load_items_from_bisoft():
                 new_stock = Stock(item=item_obj, store=store, size=size_obj, quantity=quantity)
                 new_stocks.append(new_stock)
 
+        for stock in existing_item_stocks:
+            if stock.size.size not in stock_data:
+                stock.quantity = 0
+                stocks_to_nullify.append(stock)
+
         # Get and set linked items
         linked_items_from_request = [item['add_1'], item['add_2'], item['add_3'], item['add_4'], item['add_5']]
         linked_item_ids = {el for el in linked_items_from_request if el}
@@ -155,6 +162,7 @@ def load_items_from_bisoft():
 
     # Update existing stocks
     Stock.objects.bulk_update(list(existing_stocks), ['quantity'])
+    Stock.objects.bulk_update(stocks_to_nullify, ['quantity'])
     # Create new stocks
     Stock.objects.bulk_create(new_stocks)
 
