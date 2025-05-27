@@ -73,7 +73,8 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'rest_framework',
-    'storages'
+    'storages',
+    'axes',
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
@@ -87,6 +88,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'allauth.account.middleware.AccountMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'fashionShop.urls'
@@ -213,6 +215,8 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'accounts.AppUser'
 
 AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',  # Must come first
+
     # Needed to log in by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
 
@@ -243,6 +247,14 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
+
+AXES_FAILURE_LIMIT = 5            # Number of allowed failures
+AXES_COOLOFF_TIME = 1             # Lockout period (in hours)
+AXES_LOCKOUT_CALLABLE = None      # Optional: custom lockout logic
+AXES_LOCK_OUT_BY = ["user", "ip"]
+AXES_LOCKOUT_TEMPLATE = 'lockout.html'  # Optional custom template
+AXES_RESET_ON_SUCCESS = True      # Reset counter on successful login
+AXES_SENSITIVE_PARAMETERS = ['email']
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

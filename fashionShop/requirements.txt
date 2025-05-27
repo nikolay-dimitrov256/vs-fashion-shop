@@ -19,6 +19,7 @@ cryptography==44.0.2
 Django==5.1.6
 django-admin-extra-buttons==1.5.8
 django-allauth==65.4.1
+django-axes==8.0.0
 django-cloudinary-storage==0.3.0
 django-crispy-forms==2.3
 django-modeltranslation==0.19.12
