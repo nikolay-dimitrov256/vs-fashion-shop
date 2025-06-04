@@ -144,5 +144,14 @@ class OnlineOrder(models.Model):
 
         return total
 
+    @property
+    def full_name(self):
+        full_name = f'{self.first_name or ""} {self.last_name or ""}'
+
+        if full_name.strip():
+            return full_name.strip()
+
+        return None
+
     def __str__(self):
         return f'Order number {self.pk}'
