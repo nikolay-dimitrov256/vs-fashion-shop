@@ -106,7 +106,8 @@ class Item(models.Model):
         verbose_name=_('sizes'),
         to=Size,
         through='Stock',
-        related_name='items'
+        related_name='items',
+        through_fields=('item', 'size'),
     )
 
     linked_items = models.ManyToManyField(
@@ -196,10 +197,22 @@ class Stock(models.Model):
         default=0
     )
 
+    translated_size = models.ForeignKey(
+        to=Size,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='translated_sizes',
+    )
+
     class Meta:
         unique_together = [['item', 'store', 'size']]
         verbose_name = _('stock')
         verbose_name_plural = _('stock')
 
+    @property
+    def effective_size(self):
+        return self.translated_size or self.size
+
     def __str__(self):
-        return f'{str(self.item)} - {self.size.size}'
+        return f'{str(self.item)} - {self.effective_size.size}'

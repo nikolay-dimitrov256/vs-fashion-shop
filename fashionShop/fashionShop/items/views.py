@@ -1,4 +1,5 @@
 from django.db.models import OuterRef, Subquery, Prefetch, Q
+from django.db.models.functions import Coalesce
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 
@@ -37,7 +38,8 @@ class ItemDetailView(DetailView):
         context['available_sizes'] = (
             Stock.objects
             .filter(item=self.object, quantity__gt=0)
-            .values_list('size', flat=True)
+            .annotate(effective_size=Coalesce('translated_size', 'size'))
+            .values_list('effective_size', flat=True)
             .order_by('size__size')
             .distinct()
         )
@@ -88,8 +90,9 @@ class ItemsListView(ListView):
         selected_sizes = self.request.GET.getlist('size')
         if selected_sizes:
             items = items.filter(
+                Q(stock__translated_size__size__in=selected_sizes) |
+                Q(stock__translated_size__isnull=True, stock__size__size__in=selected_sizes),
                 stock__quantity__gt=0,
-                stock__size__size__in=selected_sizes
             )
 
         return items

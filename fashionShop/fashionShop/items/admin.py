@@ -14,7 +14,7 @@ from fashionShop.pictures.admin import PictureInline
 
 class StockInline(admin.TabularInline):
     model = Stock
-    fields = ['size', 'quantity']
+    fields = ['size', 'translated_size', 'quantity']
     ordering = ['size__size']
     # readonly_fields = ['size']
     can_delete = False
