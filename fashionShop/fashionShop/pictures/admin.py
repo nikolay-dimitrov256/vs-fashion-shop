@@ -28,7 +28,7 @@ class PictureInline(admin.TabularInline):
     model = Picture
     can_delete = True
     extra = 1
-    fields = ['image', 'image_preview', 'is_main', 'is_detail', 'description_bg', 'description_en']
+    fields = ['image_r2', 'image_preview', 'is_main', 'is_detail', 'description_bg', 'description_en']
     readonly_fields = ['image_preview', 'created_at']
 
     def image_preview(self, obj):

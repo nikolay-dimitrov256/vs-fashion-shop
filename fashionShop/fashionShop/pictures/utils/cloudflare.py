@@ -16,7 +16,7 @@ def image_file_upload_handler(instance, filepath):
 
     filepath = pathlib.Path(filepath).resolve()
 
-    return f'pictures/{instance.pk}/{filepath.name}'
+    return f'pictures/{instance.item.pk}/{filepath.name}'
 
 
 def migrate_image_to_r2(modeladmin, request, queryset):
