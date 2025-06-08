@@ -12,6 +12,7 @@ class Pattern(models.Model):
     class Meta:
         verbose_name = _('pattern')
         verbose_name_plural = _('patterns')
+        ordering = ['name']
 
     def __str__(self):
         return self.name

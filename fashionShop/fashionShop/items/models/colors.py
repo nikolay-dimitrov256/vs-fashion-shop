@@ -16,6 +16,7 @@ class ColorGroup(models.Model):
     class Meta:
         verbose_name = _('color group')
         verbose_name_plural = _('color groups')
+        ordering = ['name']
 
     def __str__(self):
         return self.name
