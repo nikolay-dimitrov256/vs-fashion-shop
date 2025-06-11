@@ -1,0 +1,40 @@
+{% extends 'admin/change_list.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<h2>📊 {% trans 'Monthly Order Summary' %}</h2>
+<table border="1">
+  <tr>
+    <th>{% trans 'Month' %}</th>
+    <th>{% trans 'Total Orders' %}</th>
+    <th>{% trans 'Average Cart Value' %}</th>
+    <th>{% trans 'Revenue' %}</th>
+  </tr>
+  {% for row in monthly_data %}
+  <tr>
+    <td>{{ row.month|date:"F Y" }}</td>
+    <td>{{ row.total_orders }}</td>
+    <td>{{ row.avg_cart_value|floatformat:2 }}</td>
+    <td>{{ row.revenue|floatformat:2 }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>📦 {% trans 'Orders by Status' %}</h2>
+<table border="1">
+  <tr>
+    <th>{% trans 'Status' %}</th>
+    <th>{% trans 'Count' %}</th>
+  </tr>
+  {% for row in status_data %}
+  <tr>
+    <td>{{ row.status }}</td>
+    <td>{{ row.count }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{{ block.super }}
+
+{% endblock %}

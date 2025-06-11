@@ -48,7 +48,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(
         verbose_name='order',
         to=OnlineOrder,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name='order_items'
     )
 
@@ -70,9 +70,17 @@ class OrderItem(models.Model):
         decimal_places=2,
     )
 
-    @property
-    def total_price(self):
-        return self.at_price * self.quantity
+    total_price = models.DecimalField(
+        verbose_name=_('total price'),
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
+    def save(self, *args, **kwargs):
+        self.total_price = self.at_price * self.quantity
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.item.name

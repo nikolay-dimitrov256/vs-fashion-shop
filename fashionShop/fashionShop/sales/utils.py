@@ -38,3 +38,12 @@ def fill_order_from_cart_empty_cart(request, order):
         request.session['cart'] = {}
 
     return OrderItem.objects.bulk_create(order_items)
+
+
+def refresh_orders(modeladmin, request, queryset):
+    for order in queryset:
+        for item in order.order_items.all():
+            item.save()
+
+
+refresh_orders.short_description = 'Refresh orders'

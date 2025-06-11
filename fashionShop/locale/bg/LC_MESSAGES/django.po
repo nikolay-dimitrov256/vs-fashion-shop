@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-27 09:07+0300\n"
+"POT-Creation-Date: 2025-06-11 14:58+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,7 +176,7 @@ msgid "comment"
 msgstr "коментар"
 
 #: fashionShop/common/models.py:118 fashionShop/items/models/categories.py:7
-#: fashionShop/items/models/categories.py:22
+#: fashionShop/items/models/categories.py:23
 #: fashionShop/items/models/colors.py:7 fashionShop/items/models/item.py:22
 #: fashionShop/items/models/pattern.py:7 fashionShop/items/models/style.py:7
 #: fashionShop/stores/models.py:11
@@ -201,7 +201,7 @@ msgstr ""
 "Благодарим Ви за съобщението. Ще се свържем с Вас при първа възможност."
 
 #: fashionShop/items/models/categories.py:13
-#: fashionShop/items/models/categories.py:28
+#: fashionShop/items/models/categories.py:29
 #: fashionShop/items/models/item.py:70
 msgid "category"
 msgstr "категория"
@@ -210,12 +210,12 @@ msgstr "категория"
 msgid "categories"
 msgstr "категории"
 
-#: fashionShop/items/models/categories.py:35
+#: fashionShop/items/models/categories.py:36
 #: fashionShop/items/models/item.py:79
 msgid "subcategory"
 msgstr "подкатегория"
 
-#: fashionShop/items/models/categories.py:36
+#: fashionShop/items/models/categories.py:37
 msgid "subcategories"
 msgstr "подкатегории"
 
@@ -256,26 +256,26 @@ msgstr "кройка"
 msgid "sizes"
 msgstr "размери"
 
-#: fashionShop/items/models/item.py:113
+#: fashionShop/items/models/item.py:114
 msgid "linked items"
 msgstr "свързани продукти"
 
-#: fashionShop/items/models/item.py:119 fashionShop/items/models/style.py:12
+#: fashionShop/items/models/item.py:120 fashionShop/items/models/style.py:12
 msgid "style"
 msgstr "стил"
 
-#: fashionShop/items/models/item.py:129
+#: fashionShop/items/models/item.py:130
 #: fashionShop/items/models/online_items.py:10
 #: fashionShop/items/models/online_items.py:42
 #: fashionShop/pictures/models.py:38
 msgid "item"
 msgstr "продукт"
 
-#: fashionShop/items/models/item.py:130
+#: fashionShop/items/models/item.py:131
 msgid "items"
 msgstr "продукти"
 
-#: fashionShop/items/models/item.py:201 fashionShop/items/models/item.py:202
+#: fashionShop/items/models/item.py:211 fashionShop/items/models/item.py:212
 msgid "stock"
 msgstr "наличност"
 
@@ -297,6 +297,10 @@ msgstr "количество"
 #: fashionShop/items/models/online_items.py:68
 msgid "at price"
 msgstr "на цена"
+
+#: fashionShop/items/models/online_items.py:74
+msgid "total price"
+msgstr "обща цена"
 
 #: fashionShop/items/models/pattern.py:14
 msgid "patterns"
@@ -452,6 +456,38 @@ msgstr "Можете да прочетете Политиката ни за по
 #: templates/accounts/register.html:27
 msgid "HERE"
 msgstr "ТУК"
+
+#: templates/admin/orders_changelist.html:6
+msgid "Monthly Order Summary"
+msgstr "Месечен отчет на поръчките"
+
+#: templates/admin/orders_changelist.html:9
+msgid "Month"
+msgstr "Месец"
+
+#: templates/admin/orders_changelist.html:10
+msgid "Total Orders"
+msgstr "Общо Поръчки"
+
+#: templates/admin/orders_changelist.html:11
+msgid "Average Cart Value"
+msgstr "Средна количка"
+
+#: templates/admin/orders_changelist.html:12
+msgid "Revenue"
+msgstr "Оборот"
+
+#: templates/admin/orders_changelist.html:24
+msgid "Orders by Status"
+msgstr "Поръчки по статус"
+
+#: templates/admin/orders_changelist.html:27
+msgid "Status"
+msgstr "Статус"
+
+#: templates/admin/orders_changelist.html:28
+msgid "Count"
+msgstr "Брой"
 
 #: templates/common/base.html:17
 msgid "Vili Style - Online store for women's fashion"
@@ -861,11 +897,11 @@ msgstr "Дамски туники"
 msgid "Women's vests"
 msgstr "Дамски елеци"
 
-#: templates/lockout.html:5
+#: templates/lockout.html:3
 msgid "Account Locked"
 msgstr "Акаунтът Ви е заключен"
 
-#: templates/lockout.html:6
+#: templates/lockout.html:4
 msgid "Too many login attempts. Please try again later."
 msgstr "Имате много неуспешни опити за вход. Моля опитайте по-късно."
 
