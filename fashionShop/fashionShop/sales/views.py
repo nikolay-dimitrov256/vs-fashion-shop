@@ -256,7 +256,8 @@ class CheckoutView(View):
                 if request.user.is_authenticated:
                     order.user = request.user
                     order.email = request.user.email
-                    order.save()
+
+                order.save()
 
                 return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 
@@ -270,6 +271,7 @@ class CheckoutView(View):
                 fill_order_from_cart_empty_cart(request, order)
 
                 order.user = request.user if request.user.is_authenticated else None
+                order.email = request.user.email if request.user.is_authenticated else None
                 order.save()
 
                 return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))

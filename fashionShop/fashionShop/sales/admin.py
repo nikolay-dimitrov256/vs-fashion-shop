@@ -12,7 +12,7 @@ class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
     can_delete = False
-    readonly_fields = ['item', 'size', 'quantity', 'at_price']
+    readonly_fields = ['item', 'quantity', 'at_price', 'total_price']
 
 
 @admin.register(OnlineOrder)
@@ -38,7 +38,7 @@ class OnlineOrderAdmin(admin.ModelAdmin):
             .annotate(
                 total_orders=Count('pk'),
                 avg_cart_value=Avg('total'),
-                revenue=Sum('order_items__total_price', filter=Q(status=StatusChoices.COMPLETED))
+                revenue=Sum('total', filter=Q(status=StatusChoices.COMPLETED))
             )
             .order_by('-month')
         )

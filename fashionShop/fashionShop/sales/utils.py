@@ -14,7 +14,8 @@ def fill_order_from_cart_empty_cart(request, order):
                 order=order,
                 size=cart_item.size,
                 quantity=cart_item.quantity,
-                at_price=cart_item.item.final_price
+                at_price=cart_item.item.final_price,
+                total_price=cart_item.quantity * cart_item.item.final_price,
             )
             order_items.append(order_item)
 
@@ -32,6 +33,7 @@ def fill_order_from_cart_empty_cart(request, order):
                     size=size_obj,
                     quantity=int(quantity),
                     at_price=item.final_price,
+                    total_price=int(quantity) * item.final_price,
                 )
                 order_items.append(order_item)
 

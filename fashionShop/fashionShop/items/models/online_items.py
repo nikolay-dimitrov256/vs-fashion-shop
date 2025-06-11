@@ -74,7 +74,7 @@ class OrderItem(models.Model):
         verbose_name=_('total price'),
         max_digits=10,
         decimal_places=2,
-        default=0
+        default=0,
     )
 
     def save(self, *args, **kwargs):
