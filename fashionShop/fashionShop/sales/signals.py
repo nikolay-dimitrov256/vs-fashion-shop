@@ -1,8 +1,10 @@
 from django.contrib.auth import user_logged_in, get_user_model
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from fashionShop.items.models import Item, Size, CartItem
-from fashionShop.sales.models import Cart
+from fashionShop.sales.models import Cart, OnlineOrder
+
 
 # UserModel = get_user_model()
 
@@ -38,3 +40,12 @@ def sync_session_cart(sender, user, request, **kwargs):
             cart.save()
 
     request.session['cart'] = {}
+
+
+@receiver(post_save, sender=OnlineOrder)
+def calculate_total(sender, instance, **kwargs):
+    total = sum(item.total_price for item in instance.order_items.all())
+
+    if total != instance.total:
+        instance.total = total
+        instance.save()
