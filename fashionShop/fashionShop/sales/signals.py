@@ -47,5 +47,4 @@ def calculate_total(sender, instance, **kwargs):
     total = sum(item.total_price for item in instance.order_items.all())
 
     if total != instance.total:
-        instance.total = total
-        instance.save()
+        OnlineOrder.objects.filter(pk=instance.pk).update(total=total)
