@@ -37,7 +37,7 @@ class OnlineOrderAdmin(admin.ModelAdmin):
             .values('month')
             .annotate(
                 total_orders=Count('pk'),
-                avg_cart_value=Avg('order_items__total_price'),
+                avg_cart_value=Avg('total'),
                 revenue=Sum('order_items__total_price', filter=Q(status=StatusChoices.COMPLETED))
             )
             .order_by('-month')

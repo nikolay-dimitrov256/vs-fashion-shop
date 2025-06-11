@@ -45,5 +45,7 @@ def refresh_orders(modeladmin, request, queryset):
         for item in order.order_items.all():
             item.save()
 
+        order.save()
+
 
 refresh_orders.short_description = 'Refresh orders'

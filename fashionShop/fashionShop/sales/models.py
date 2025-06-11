@@ -116,11 +116,19 @@ class OnlineOrder(models.Model):
         blank=True,
     )
 
+    total = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
+
     class Meta:
         verbose_name = _('Online Order')
         verbose_name_plural = _('Online Orders')
 
     def save(self, *args, **kwargs):
+        self.total = sum(item.total_price for item in self.order_items.all())
+
         if not self.order_code:
             now = timezone.now()
             year = now.strftime('%y')
@@ -138,11 +146,11 @@ class OnlineOrder(models.Model):
 
         super().save(*args, **kwargs)
 
-    @property
-    def total(self):
-        total = sum(item.total_price for item in self.order_items.all())
-
-        return total
+    # @property
+    # def total(self):
+    #     total = sum(item.total_price for item in self.order_items.all())
+    #
+    #     return total
 
     @property
     def full_name(self):
