@@ -21,19 +21,17 @@
 <!-- Slider -->
 
 <div class="main_slider" style="background-image:url({% static 'images/slider_1.jpg' %})">
-    {% comment %}
     <div class="container fill_height">
         <div class="row align-items-center fill_height">
             <div class="col">
                 <div class="main_slider_content">
-                    <h6>Spring / Summer Collection 2017</h6>
-                    <p class="promo-text">Get up to 30% Off New Arrivals</p>
-                    <div class="red_button shop_now_button"><a href="#">shop now</a></div>
+                    {# <h6>Spring / Summer Collection 2017</h6> #}
+                    <p class="promo-text">{% trans 'Check our dresses for the summer' %}</p>
+                    <div class="red_button shop_now_button"><a href="{% url 'dresses' %}">{% trans 'shop now' %}</a></div>
                 </div>
             </div>
         </div>
     </div>
-    {% endcomment %}
 </div>
 
 <h1>{% trans 'Online store for women fashion Vili Style' %} </h1>
