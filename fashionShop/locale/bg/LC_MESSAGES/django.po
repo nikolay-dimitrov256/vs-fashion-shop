@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-14 09:52+0300\n"
+"POT-Creation-Date: 2025-06-14 16:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,8 +107,8 @@ msgstr "Съобщение"
 msgid "Please, write something to us."
 msgstr "Напишете ни нещо."
 
-#: fashionShop/common/globals.py:7 templates/items/category.html:241
-#: templates/items/category.html:248 templates/items/category.html:250
+#: fashionShop/common/globals.py:7 templates/items/category.html:243
+#: templates/items/category.html:250 templates/items/category.html:252
 #: templates/items/grid-item-card.html:25
 #: templates/items/grid-item-card.html:32
 #: templates/items/grid-item-card.html:34
@@ -252,7 +252,7 @@ msgid "pattern"
 msgstr "кройка"
 
 #: fashionShop/items/models/item.py:106 fashionShop/items/models/size.py:17
-#: templates/items/category.html:96
+#: templates/items/category.html:97
 msgid "sizes"
 msgstr "размери"
 
@@ -765,39 +765,47 @@ msgstr "Дамски жилетки"
 msgid "Women's clothes"
 msgstr "Дамски дрехи"
 
-#: templates/items/category.html:117 templates/items/category.html:151
+#: templates/items/category.html:94
+msgid "Filter Sizes"
+msgstr "Филтрирай Размери"
+
+#: templates/items/category.html:118 templates/items/category.html:153
 msgid "Show More"
 msgstr "Покажи повече"
 
-#: templates/items/category.html:119 templates/items/category.html:153
+#: templates/items/category.html:120 templates/items/category.html:155
 msgid "filter"
 msgstr "филтрирай"
 
-#: templates/items/category.html:121 templates/items/category.html:155
+#: templates/items/category.html:122 templates/items/category.html:157
 msgid "Show Less"
 msgstr "Покажи по-малко"
 
-#: templates/items/category.html:129
+#: templates/items/category.html:128
+msgid "Filter Colors"
+msgstr "Филтрирай Цветове"
+
+#: templates/items/category.html:131
 msgid "colors"
 msgstr "цветове"
 
-#: templates/items/category.html:188
+#: templates/items/category.html:190
 msgid "Show"
 msgstr "Покажи"
 
-#: templates/items/category.html:254 templates/items/grid-item-card.html:39
+#: templates/items/category.html:256 templates/items/grid-item-card.html:39
 msgid "get"
 msgstr "вземи"
 
-#: templates/items/category.html:279
+#: templates/items/category.html:281
 msgid "Showing"
 msgstr "Показани"
 
-#: templates/items/category.html:279
+#: templates/items/category.html:281
 msgid "of"
 msgstr "от"
 
-#: templates/items/category.html:279
+#: templates/items/category.html:281
 msgid "results"
 msgstr "резулата"
 
