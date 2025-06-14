@@ -17,7 +17,7 @@ chmod -R 777 /app/staticfiles /media
 
 # Collect static files (optional in dev)
 echo "Collecting static files..."
-python3 manage.py collectstatic --noinput
+python manage.py collectstatic --noinput
 
 # Compile translation files.
 echo "Compiling .po to .mo..."

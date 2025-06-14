@@ -32,12 +32,14 @@
     </div>
 </div>
 <div class="buttons">
+    {% comment %}
     <form method="post" action="{% url 'clear-cart' %}">
         {% csrf_token %}
         <button class="clear-btn">{% trans 'clear cart'|upper %}</button>
     </form>
-    <a href="{% url 'home' %}" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
+    {% endcomment %}
     <a href="{% url 'checkout' %}" class="checkout-btn">{% trans 'to checkout'|upper %}</a>
+    <a href="{% url 'home' %}" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
 </div>
 {% else %}
 <div class="container-fluid empty-cart">
