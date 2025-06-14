@@ -42,7 +42,8 @@ jQuery(document).ready(function($)
 	{
 		initFixProductBorder();
 		setHeader();
-		rearangeSidebar();
+		//rearangeSidebar();
+		initFilters();
 	});
 
 	$(document).on('scroll', function()
@@ -50,7 +51,8 @@ jQuery(document).ready(function($)
 		setHeader();
 	});
 
-	rearangeSidebar();
+	//rearangeSidebar();
+	initFilters();
 	initMenu();
 	initFavorite();
 	// initFixProductBorder();
@@ -479,5 +481,54 @@ jQuery(document).ready(function($)
 		} else {
 			parentDivElement.insertBefore(sidebarDivElement, contentDivElement);
 		}
+	}
+
+	function initFilters() {
+		const sidebarDivElement = document.querySelector('.sidebar');
+		const filterDivElements = sidebarDivElement.querySelectorAll('.sidebar_section');
+		const filterAElements = sidebarDivElement.querySelectorAll('.filter-button');
+
+		if (window.innerWidth <= 991) {
+			filterAElements.forEach(element => {
+				element.style.display = 'inline-block';
+			});
+
+			filterDivElements.forEach(element => {
+			element.style.display = 'none';
+			
+			// Expand filter parameters
+			const toggleInputElement = element.querySelector('.show_toggle');
+			toggleInputElement.checked = true;
+			// Hide labels
+			const showLabelElement = element.querySelector('label.show_more');
+			showLabelElement.style.display = 'none';
+		});
+		} else {
+			filterAElements.forEach(element => {
+				element.style.display = 'none';
+			});
+
+			filterDivElements.forEach(element => {
+				element.style.display = 'block';
+
+				// Colapse filter parameters
+				const toggleInputElement = element.querySelector('.show_toggle');
+				toggleInputElement.checked = false;
+				// Show labels
+				const showLabelElement = element.querySelector('label.show_more');
+				showLabelElement.style.display = 'block';
+			});
+		}
+		
+		filterAElements.forEach(element => {
+			element.addEventListener('click', e => toggleFilters(e, element));
+		});
+	}
+
+	function toggleFilters(e, element) {
+		e.preventDefault();
+		const filterDivElement = element.nextElementSibling;
+		filterDivElement.style.display = 'block';
+		element.style.display = 'none';
 	}
 });

@@ -78,6 +78,23 @@
     border-radius: 0;
 }
 
+.filter-button {
+    display: inline-block;
+    border-radius: 0;
+    color: #fff;
+    background-color: #fe4c50;
+    padding: 0.8em 1em;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    font-weight: 600;
+}
+
+.filter-button:hover,
+.filter-button:active {
+    background-color: #FE7C7F;
+    color: #fff;
+}
+
 .btn-social {
     display: flex;
     align-items: center;
