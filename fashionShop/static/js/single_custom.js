@@ -442,10 +442,17 @@ jQuery(document).ready(function($)
 		const sizeHiddenInputElement = document.getElementById('size');
 		const quantityHiddenInputElement = document.getElementById('quantity');
 
-		addToCartButtonAElement.addEventListener('click', ()=>{
-			const size = sizesDivElement.querySelector('.selected').textContent;
+		addToCartButtonAElement.addEventListener('click', (e)=>{
+			e.preventDefault();
+			const sizeDivElement = sizesDivElement.querySelector('.selected');
 			const quantity = quantitySpanElement.textContent;
 			
+			if (!sizeDivElement) {
+				alert('Моля изберете размер.');
+				return;
+			}
+			
+			const size = sizeDivElement.textContent;
 			sizeHiddenInputElement.value = size;
 			quantityHiddenInputElement.value = quantity;
 
