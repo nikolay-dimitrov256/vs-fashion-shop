@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}"> <!-- Added for carousel-->
 <link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/single_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/single_styles.css' %}?v=2">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/single_responsive.css' %}">
 {% endblock %}
 
@@ -115,6 +115,250 @@
                     </ul>
                 </div>
                 {% endcomment %}
+                <input type="checkbox" id="size-guide-toggle" style="display: none;">
+                <label class="show-sizes" for="size-guide-toggle">
+                    <img src="{% static 'images/ruler.png' %}" alt="ruler">
+                    <span>{% trans 'Size Guide' %}</span>
+                </label>
+                <div class="size-guide-overlay">
+                    <div class="size-guide">
+                        <label class="hide-sizes" for="size-guide-toggle"><i class="fa fa-times"></i></label>
+                        <h3>{% trans 'Sizes' %}</h3>
+                        <div class="tables">
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">40</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>80cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>62cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>86cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">42</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>84cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>66cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>90cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">44</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>88cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>70cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>94cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">46</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>92cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>74cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>98cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">48</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>96cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>78cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>102cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">50</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>100cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>82cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>106cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">52</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>104cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>86cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>110cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">54</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>108cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>90cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>114cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">56</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>112cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>94cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>118cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">58</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>116cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>98cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>122cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">60</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{% trans 'Chest' %}</td>
+                                        <td>120cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Waist' %}</td>
+                                        <td>102cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans 'Hips' %}</td>
+                                        <td>126cm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div class="sizes d-flex flex-wrap">
                     {% for size in available_sizes %}
                     <div class="size">{{ size }}</div>
@@ -177,7 +421,7 @@
         </div>
     </div>
 </div>
-
+{% comment %}
 <div class="container">
     <div class="size-guide">
         <img
@@ -191,7 +435,7 @@
         >
     </div>
 </div>
-
+{% endcomment %}
 <!-- Tabs -->
 
 <div class="tabs_section_container">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-14 16:43+0300\n"
+"POT-Creation-Date: 2025-06-15 13:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -865,23 +865,43 @@ msgstr "Дамски панталони"
 msgid "Women's shirts"
 msgstr "Дамски ризи"
 
-#: templates/items/single.html:138
+#: templates/items/single.html:124
+msgid "Size Guide"
+msgstr "Размерна таблица"
+
+#: templates/items/single.html:128
+msgid "Sizes"
+msgstr "Размери"
+
+#: templates/items/single.html:137
+msgid "Chest"
+msgstr "Гръдна обиколка"
+
+#: templates/items/single.html:141
+msgid "Waist"
+msgstr "Обиколка Талия"
+
+#: templates/items/single.html:145
+msgid "Hips"
+msgstr "Обиколка Ханш"
+
+#: templates/items/single.html:169
 msgid "add to cart"
 msgstr "добави в количка"
 
-#: templates/items/single.html:158
+#: templates/items/single.html:189
 msgid "This model in other colors:"
 msgstr "Други цветове от този модел:"
 
-#: templates/items/single.html:207 templates/items/single.html:221
+#: templates/items/single.html:238 templates/items/single.html:252
 msgid "Details"
 msgstr "Детайли"
 
-#: templates/items/single.html:208 templates/items/single.html:253
+#: templates/items/single.html:239 templates/items/single.html:284
 msgid "Additional Information"
 msgstr "Допълнителна информация"
 
-#: templates/items/single.html:274
+#: templates/items/single.html:305
 msgid "Complete your vision:"
 msgstr "Подходящи съчетания:"
 
