@@ -1,4 +1,5 @@
 from fashionShop.common import globals
+from fashionShop.common.forms import SearchForm
 
 
 def global_variables(request):
@@ -7,3 +8,9 @@ def global_variables(request):
     }
 
     return gl_vars
+
+
+def search_form(request):
+    return {
+        'search_form': SearchForm(request.GET or None)
+    }

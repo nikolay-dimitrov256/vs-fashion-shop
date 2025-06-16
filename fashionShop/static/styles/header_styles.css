@@ -30,6 +30,38 @@
     overflow: auto;
 }
 
+.navbar_user li {
+    position: relative;
+}
+
+#search-form {
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#search-form.expand {
+    display: flex;
+}
+
+#search-form input {
+    border-radius: 2em;
+    border: 2px solid #ccc;
+    padding: 0.4em 0.8em;
+    width: 20em;
+}
+
+#search-form button {
+    border: none;
+    background: none;
+    padding: 0.4em 0.6em;
+    position: absolute;
+    right: 0.4em;
+}
+
 @media only screen and (max-width: 1280px)
 {
 	.navbar_menu > li > a {

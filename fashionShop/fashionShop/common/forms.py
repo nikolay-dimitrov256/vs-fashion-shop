@@ -63,3 +63,11 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         exclude = ['store', 'user']
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(
+        required=False,
+        label='',
+        widget=forms.TextInput(attrs={'placeholder': _('Search')}),
+    )

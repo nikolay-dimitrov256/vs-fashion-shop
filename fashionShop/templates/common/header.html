@@ -114,7 +114,13 @@
 							{% comment %}<li><a href="#">{% trans 'sale' %}</a></li>{% endcomment %}
 						</ul>
 						<ul class="navbar_user">
-							<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+							<li>
+								<a class="search-toggle" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+								<form id="search-form" action="{% url 'search' %}">
+									{{ search_form }}
+									<button><i class="fa fa-search" aria-hidden="true"></i></button>
+								</form>
+							</li>
 							<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 							<li class="checkout">
 								<a href="{% url 'view-cart' %}">
@@ -236,6 +242,18 @@
 		document.getElementById('language-input').value = language;
 		document.getElementById('language-form').submit();
 	}
+
+	function initSearchBar() {
+		const searchToggle = document.querySelector('.search-toggle');
+		const searchForm = document.getElementById('search-form');
+		
+		searchToggle.addEventListener('click', e => {
+			e.preventDefault();
+			searchForm.classList.toggle('expand');
+		})
+	}
+
+	initSearchBar();
 {% comment %}
 	function changeCurrency(currency) {
 	console.log(currency);

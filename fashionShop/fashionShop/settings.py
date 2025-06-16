@@ -108,6 +108,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'fashionShop.common.context_processors.global_variables',
+                'fashionShop.common.context_processors.search_form',
             ],
         },
     },

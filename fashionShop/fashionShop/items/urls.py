@@ -20,6 +20,7 @@ urlpatterns = [
     path('elegant/', views.ElegantListView.as_view(), name='elegant'),
     path('office/', views.OfficeListView.as_view(), name='office'),
     path('official/', views.OfficialListView.as_view(), name='official'),
+    path('search/', views.SearchView.as_view(), name='search'),
     path('<slug:slug>/', include([
         path('', views.ItemDetailView.as_view(), name='item-details'),
     ]))

@@ -277,3 +277,21 @@ class OfficialListView(ItemsListView):
         items = items.filter(style__name__iexact='official')
 
         return items
+
+
+class SearchView(ItemsListView):
+    template_name = 'items/search.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        search = self.request.GET.get('search', '').strip()
+        query = (Q(name__icontains=search) | Q(name_en__icontains=search)
+                 | Q(description__icontains=search) | Q(description_en__icontains=search))
+
+        if search.isdigit():
+            query |= Q(pk=search)
+
+        items = items.filter(query)
+
+        return items
