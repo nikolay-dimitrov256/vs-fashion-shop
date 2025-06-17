@@ -42,7 +42,7 @@ class Picture(models.Model):
     )
 
     class Meta:
-        ordering = ['-is_main', 'is_detail', '-created_at']
+        ordering = ['-is_main', 'is_detail', 'created_at']
 
     @property
     def image_url(self):
