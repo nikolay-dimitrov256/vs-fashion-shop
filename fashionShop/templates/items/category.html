@@ -224,7 +224,7 @@
 									>
 										<a href="{% url 'item-details' item.slug %}" class="product_image">
 											{% if item.main_picture_list.0.image_url %}
-											<img src="{{ item.main_picture_list.0.image_url }}" alt="{{ item.name }}" loading="lazy">
+											<img src="{{ item.main_picture_list.0.image_url }}" alt="продуктово изображение" loading="lazy">
 											{% else %}
 											<img src="{% static 'images/item.jpg' %}" alt="no image">
 											{% endif %}
