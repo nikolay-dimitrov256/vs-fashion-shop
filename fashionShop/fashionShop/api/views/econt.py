@@ -1,10 +1,10 @@
 import requests
-from decouple import config
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.views import APIView
 
 from fashionShop.api.utils import get_econt_cities_data
+from fashionShop.settings import ECONT_USERNAME, ECONT_PASSWORD
 
 
 class EcontTownsView(APIView):
@@ -45,8 +45,8 @@ class EcontOfficeView(APIView):
             'Connection': 'keep-alive',
             'Host': 'ee.econt.com',
             'Upgrade-Insecure-Requests': '1',
-            'username': config('ECONT_USERNAME'),
-            'password': config('ECONT_PASSWORD')
+            'username': ECONT_USERNAME,
+            'password': ECONT_PASSWORD
         }
 
         params = {

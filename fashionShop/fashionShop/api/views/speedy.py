@@ -4,6 +4,7 @@ from rest_framework.status import HTTP_200_OK
 from rest_framework.views import APIView
 
 from fashionShop.common.globals import SPEEDY_API_URL
+from fashionShop.settings import SPEEDY_USERNAME, SPEEDY_PASSWORD
 
 
 class SpeedyTownsView(APIView):
@@ -18,8 +19,8 @@ class SpeedyTownsView(APIView):
             'charset': 'utf-8',
         }
         params = {
-            'userName': '1996022',
-            'password': '1243131659',
+            'userName': SPEEDY_USERNAME,
+            'password': SPEEDY_PASSWORD,
             'language': 'BG',
             'countryId': '100',  # Bulgaria
             'name': query,
@@ -48,8 +49,8 @@ class SpeedyOfficeView(APIView):
             'charset': 'utf-8',
         }
         params = {
-            'userName': '1996022',
-            'password': '1243131659',
+            'userName': SPEEDY_USERNAME,
+            'password': SPEEDY_PASSWORD,
             'language': 'BG',
             'countryId': '100',  # Bulgaria
             'siteId': query,

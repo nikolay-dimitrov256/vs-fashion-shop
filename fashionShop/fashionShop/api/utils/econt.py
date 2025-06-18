@@ -3,9 +3,10 @@ import logging
 import os
 
 import requests
-from decouple import config
 from django.core.cache import cache
 from django.conf import settings
+
+from fashionShop.settings import ECONT_USERNAME, ECONT_PASSWORD
 
 ECONT_CACHE_KEY = 'econt_cities_data'
 ECONT_MTIME_KEY = 'econt_cities_mtime'
@@ -62,8 +63,8 @@ def load_econt_cities():
         'Connection': 'keep-alive',
         'Host': 'ee.econt.com',
         'Upgrade-Insecure-Requests': '1',
-        'username': config('ECONT_USERNAME'),
-        'password': config('ECONT_PASSWORD')
+        'username': ECONT_USERNAME,
+        'password': ECONT_PASSWORD
     }
 
     payload = {
