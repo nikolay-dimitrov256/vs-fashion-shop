@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-16 14:52+0300\n"
+"POT-Creation-Date: 2025-06-18 15:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,7 +109,7 @@ msgstr "Напишете ни нещо."
 
 #: fashionShop/common/forms.py:72
 msgid "Search"
-msgstr ""
+msgstr "Търси"
 
 #: fashionShop/common/globals.py:7 templates/items/category.html:243
 #: templates/items/category.html:250 templates/items/category.html:252
@@ -427,6 +427,14 @@ msgstr "беше добавен в количката успешно."
 #: fashionShop/sales/views.py:171
 msgid "Your cart was cleared successfully."
 msgstr "Количката ви беше изпразнена успешно."
+
+#: templates/403.html:17
+msgid "You do not have permission to do this."
+msgstr "Нямате право да извършите това действие."
+
+#: templates/404.html:17
+msgid "The page you are looking for is not found."
+msgstr "Страницата, която търсите не е намерена."
 
 #: templates/accounts/login.html:22
 msgid "Sign in"

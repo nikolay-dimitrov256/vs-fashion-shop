@@ -127,6 +127,27 @@
     height: 20px;
 }
 
+.error-status-image {
+    max-width: 40em;
+    margin: 0 auto;
+}
+
+.error-status-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.error-code,
+.error-message {
+    text-align: center;
+}
+
+.error-message {
+    font-size: 1.5em;
+    color: #000;
+}
+
 /* Fixes the positioning on the main banner elements */
 .main_slider_content {
     text-align: right;

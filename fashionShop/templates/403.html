@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+<meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container first-container">
+    <h1 class="error-code">403</h1>
+    <p class="error-message">{% trans 'You do not have permission to do this.' %}</p>
+    <div class="error-status-image">
+        <img src="{% static 'images/forbidden.jpg' %}" alt="403">
+    </div>
+</div>
+{% endblock %}

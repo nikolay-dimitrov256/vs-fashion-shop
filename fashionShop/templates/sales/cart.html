@@ -2,6 +2,10 @@
 {% load static %}
 {% load i18n %}
 
+{% block meta %}
+<meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
