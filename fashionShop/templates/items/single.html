@@ -493,8 +493,13 @@
                             <div class="tab_title additional_info_title">
                                 <h4>{% trans 'Additional Information' %}</h4>
                             </div>
-                            <p>COLOR:<span>Gold, Red</span></p>
-                            <p>SIZE:<span>L,M,XL</span></p>
+                            {% if object.additional_info %}
+                            <ul>
+                                {% for element in object.additional_info %}
+                                <li>{{ element }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

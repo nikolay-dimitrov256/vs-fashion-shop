@@ -5,7 +5,7 @@ from fashionShop.items.models import Item, Category, SubCategory, ColorGroup
 
 @register(Item)
 class ItemTranslationOptions(TranslationOptions):
-    fields = ['name', 'description', 'content']
+    fields = ['name', 'description', 'content', 'additional_info']
 
 
 @register(Category)

@@ -36,6 +36,12 @@ class Item(models.Model):
         blank=True,
     )
 
+    additional_info = models.TextField(
+        _('additional information'),
+        null=True,
+        blank=True,
+    )
+
     price = models.DecimalField(
         _('price'),
         max_digits=10,

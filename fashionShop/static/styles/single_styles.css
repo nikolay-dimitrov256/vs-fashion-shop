@@ -1388,6 +1388,14 @@ label[for="size-guide-toggle"].hide-sizes i {
 	margin-bottom: 48px;
 }
 
+.additional_info_col ul {
+	list-style: disc;
+}
+
+.additional_info_col ul li {
+	margin-bottom: 0.5em;
+}
+
 /*********************************
 7.3 Reviews
 *********************************/
