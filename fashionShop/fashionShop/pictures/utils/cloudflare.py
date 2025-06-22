@@ -19,6 +19,13 @@ def image_file_upload_handler(instance, filepath):
     return f'pictures/{instance.item.pk}/{filepath.name}'
 
 
+def review_image_upload_handler(instance, filepath):
+
+    filepath = pathlib.Path(filepath).resolve()
+
+    return f'review_pictures/{instance.review.item.pk}/{filepath.name}'
+
+
 def migrate_image_to_r2(modeladmin, request, queryset):
     for picture in queryset:
         if picture.image_r2 or not picture.image:

@@ -58,6 +58,7 @@ jQuery(document).ready(function($)
 	initFavoriteColors();
 	initSlider();
 	InitAddToCart();
+	initReviewForm();
 
 	/*
 
@@ -295,6 +296,33 @@ jQuery(document).ready(function($)
 						$(stars[x]).find('i').removeClass('fa-star-o');
 						$(stars[x]).find('i').addClass('fa-star');
 					};
+
+					// Set the rating in the hidden input
+					$('#id_rating').val(i + 1);
+				});
+
+				// Hover effect
+				star.on('mouseenter', function () {
+					const index = $(this).index();
+
+					stars.each(function (i) {
+						const icon = $(this).find('i');
+						if (i <= index) {
+							icon.removeClass('fa-star-o').addClass('fa-star');
+						} else {
+							icon.removeClass('fa-star').addClass('fa-star-o');
+						}
+					});
+				});
+
+				// Hover out: restore selected rating
+				star.on('mouseleave', function () {
+					var selected = $('#id_rating').val();
+
+					stars.find('i').removeClass('fa-star').addClass('fa-star-o');
+					for (var x = 0; x < selected; x++) {
+						$(stars[x]).find('i').removeClass('fa-star-o').addClass('fa-star');
+					}
 				});
 			});
 		}
@@ -458,5 +486,32 @@ jQuery(document).ready(function($)
 
 			addFormElement.submit();
 		})
+	}
+
+	function initReviewForm() {
+		const form = document.getElementById('review_form');
+		const submitButtonElement = document.getElementById('review_submit');
+
+
+		submitButtonElement.addEventListener('click', (e) => {
+			e.preventDefault();
+			const author = document.getElementById('id_author').value.trim();
+			const rating = document.getElementById('id_rating').value;
+			const content = document.getElementById('id_content').value.trim();
+			
+			if (!author) {
+				alert('Моля напишете имената си.');
+				return;
+			} else if (!rating) {
+				alert('Моля изберете своята оценка.');
+				return;
+			} else if (!content || content.length <5) {
+				alert('Моля напишете своя отзив.');
+				return;
+			}
+
+			submitButtonElement.disabled = true;
+			form.submit();
+		});
 	}
 });

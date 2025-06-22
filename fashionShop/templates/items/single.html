@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load l10n %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 {{ object.name }} | Вили Стил
@@ -447,6 +448,7 @@
                     <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
                         <li class="tab active" data-active-tab="tab_1"><span>{% trans 'Details' %}</span></li>
                         <li class="tab" data-active-tab="tab_2"><span>{% trans 'Additional Information' %}</span></li>
+                        <li class="tab" data-active-tab="tab_3"><span>{% trans 'Reviews' %} ({{ reviews.count }})</span></li>
                     </ul>
                 </div>
             </div>
@@ -500,6 +502,100 @@
                                 {% endfor %}
                             </ul>
                             {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Reviews -->
+
+                <div id="tab_3" class="tab_container">
+                    <div class="row">
+
+                        <!-- User Reviews -->
+
+                        <div class="col-lg-6 reviews_col">
+                            <div class="tab_title reviews_title">
+                                <h4>{% trans 'Reviews' %} ({{ reviews.count }})</h4>
+                            </div>
+
+                            <!-- User Review -->
+                            {% for review in reviews %}
+                            <div class="user_review_container d-flex flex-column flex-sm-row">
+                                {% comment %}
+                                <div class="user">
+                                    <div class="user_pic"></div>
+                                    <div class="user_rating">
+                                        <ul class="star_rating">
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endcomment %}
+                                <div class="review">
+                                    <div class="user_rating">
+                                        <ul class="star_rating">
+                                            {% for i in '12345' %}
+                                                {% if forloop.counter <= review.rating %}
+                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                {% else %}
+                                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <!-- <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li> -->
+                                        </ul>
+                                    </div>
+                                    <!-- <div class="review_date">27 Aug 2016</div> -->
+                                    <div class="user_name">{{ review.author }}</div>
+                                    <h5>{{ review.title }}</h5>
+                                    <p>{{ review.content }}</p>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p>{% trans 'There are no reviews for this product yet, but you can write the first one.' %}</p>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Add Review -->
+
+                        <div class="col-lg-6 add_review_col">
+
+                            <div class="add_review">
+                                <form id="review_form" method="post" action="{% url 'submit-review' object.pk %}" novalidate>
+                                    {% csrf_token %}
+                                    
+                                    {{ review_form.rating }}
+                                    <div>
+                                        <h1>{% trans 'Add Review' %}</h1>
+                                        <!-- <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
+                                        <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required."> -->
+                                        {{ review_form.author|as_crispy_field }}
+                                    </div>
+                                    <div>
+                                        <h1>{% trans 'Your Rating:' %}</h1>
+                                        <ul class="user_star_rating">
+                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                        </ul>
+                                        <!-- <textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea> -->
+                                        {{ review_form.title|as_crispy_field }}
+                                        {{ review_form.content|as_crispy_field }}
+                                    </div>
+                                    <div class="text-left text-sm-right">
+                                        <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">{% trans 'submit' %}</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

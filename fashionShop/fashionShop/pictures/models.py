@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from fashionShop.common.globals import SITE_DOMAIN
 from fashionShop.items.models import Item
-from fashionShop.pictures.utils.cloudflare import image_file_upload_handler
+from fashionShop.pictures.utils.cloudflare import image_file_upload_handler, review_image_upload_handler
 
 
 class Picture(models.Model):
@@ -62,3 +62,15 @@ class Picture(models.Model):
 
     def __str__(self):
         return f'{self.item.item_number} picture'
+
+
+# class ReviewPicture(models.Model):
+#     image = models.ImageField(
+#         upload_to=review_image_upload_handler,
+#         null=True,
+#         blank=True,
+#     )
+#
+#     created_at = models.DateTimeField(
+#         auto_now_add=True
+#     )

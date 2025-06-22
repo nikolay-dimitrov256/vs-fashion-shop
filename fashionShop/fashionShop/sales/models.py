@@ -53,7 +53,7 @@ class OnlineOrder(models.Model):
 
     email = models.EmailField(
         _('e-mail'),
-        max_length=30,
+        max_length=50,
         null=True,
         blank=True,
     )

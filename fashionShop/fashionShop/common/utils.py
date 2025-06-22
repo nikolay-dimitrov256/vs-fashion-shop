@@ -10,3 +10,12 @@ CYRILLIC_TO_LATIN = {
 def transliterate(text):
     text = text or ''
     return ''.join(CYRILLIC_TO_LATIN.get(ch, ch) for ch in text.lower())
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]  # Use first IP in list
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

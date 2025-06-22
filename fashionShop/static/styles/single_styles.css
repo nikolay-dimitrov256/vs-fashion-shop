@@ -1422,8 +1422,9 @@ label[for="size-guide-toggle"].hide-sizes i {
 }
 .user_rating .star_rating
 {
-	margin-left: 5px;
+	margin-left: 0;
 	margin-top: 13px;
+	margin-bottom: 5px;
 }
 .user_rating .star_rating li
 {

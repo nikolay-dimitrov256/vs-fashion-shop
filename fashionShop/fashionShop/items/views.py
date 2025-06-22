@@ -5,6 +5,7 @@ from django.views.generic import DetailView, ListView
 
 from fashionShop.items.models import Item, ColorGroup, Stock, Size, SubCategory
 from fashionShop.pictures.models import Picture
+from fashionShop.reviews.forms import ReviewCreateForm
 
 
 class ItemDetailView(DetailView):
@@ -50,6 +51,8 @@ class ItemDetailView(DetailView):
             .exclude(Q(deleted=True) | Q(pk=self.object.pk))
             .filter(pattern=self.object.pattern, pattern__isnull=False)
         )
+        context['reviews'] = self.object.reviews.all().order_by('-created_at')
+        context['review_form'] = ReviewCreateForm(self.request.POST or None)
 
         return context
 
