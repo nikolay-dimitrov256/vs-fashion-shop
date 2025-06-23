@@ -1,9 +1,10 @@
-from django.db.models import OuterRef, Subquery, Prefetch, Q
+from django.db.models import OuterRef, Subquery, Prefetch, Q, Avg
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 
 from fashionShop.items.models import Item, ColorGroup, Stock, Size, SubCategory
+from fashionShop.pictures.forms import ReviewPictureFormSet
 from fashionShop.pictures.models import Picture
 from fashionShop.reviews.forms import ReviewCreateForm
 
@@ -16,11 +17,14 @@ class ItemDetailView(DetailView):
         # item = super().get_object(queryset)
         item = get_object_or_404(
             Item.objects
+            .annotate(review_avg=Avg('reviews__rating'))
             .select_related('category', 'sub_category', 'pattern', 'color_group')
             .prefetch_related(
                 'linked_items',
                 'linked_items__pictures',
                 'pictures',
+                'reviews',
+                'reviews__pictures'
             ),
             slug=self.kwargs['slug']
         )
@@ -51,8 +55,9 @@ class ItemDetailView(DetailView):
             .exclude(Q(deleted=True) | Q(pk=self.object.pk))
             .filter(pattern=self.object.pattern, pattern__isnull=False)
         )
-        context['reviews'] = self.object.reviews.all().order_by('-created_at')
+        context['review_avg'] = round(self.object.review_avg or 0)
         context['review_form'] = ReviewCreateForm(self.request.POST or None)
+        context['formset'] = ReviewPictureFormSet(self.request.POST or None, self.request.FILES or None)
 
         return context
 

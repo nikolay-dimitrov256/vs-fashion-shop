@@ -499,11 +499,11 @@ jQuery(document).ready(function($)
 			const rating = document.getElementById('id_rating').value;
 			const content = document.getElementById('id_content').value.trim();
 			
-			if (!author) {
-				alert('Моля напишете имената си.');
-				return;
-			} else if (!rating) {
+			if (!rating) {
 				alert('Моля изберете своята оценка.');
+				return;
+			} else if (!author) {
+				alert('Моля напишете имената си.');
 				return;
 			} else if (!content || content.length <5) {
 				alert('Моля напишете своя отзив.');

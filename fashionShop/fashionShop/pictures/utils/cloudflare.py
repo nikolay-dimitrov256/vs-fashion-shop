@@ -1,6 +1,6 @@
 import pathlib
 from urllib.parse import urlparse
-
+import uuid
 import requests
 from django.contrib import messages
 from django.core.files.base import ContentFile
@@ -20,10 +20,15 @@ def image_file_upload_handler(instance, filepath):
 
 
 def review_image_upload_handler(instance, filepath):
+    """
+    This method works only when the review is created before uploading the pictures.
+    """
 
-    filepath = pathlib.Path(filepath).resolve()
+    # Always saves as .jpg regardless of uploaded file type.
+    ext = '.jpg'
+    filename = f"{uuid.uuid4().hex}{ext}"
 
-    return f'review_pictures/{instance.review.item.pk}/{filepath.name}'
+    return f'review_pictures/{instance.review.item.pk}/{filename}'
 
 
 def migrate_image_to_r2(modeladmin, request, queryset):

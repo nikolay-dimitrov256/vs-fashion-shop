@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-22 11:49+0300\n"
+"POT-Creation-Date: 2025-06-22 17:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -367,11 +367,11 @@ msgstr "Отзив"
 msgid "Reviews"
 msgstr "Отзиви"
 
-#: fashionShop/reviews/views.py:19
+#: fashionShop/reviews/views.py:20
 msgid "You have already sent a review for this product."
 msgstr "Вече сте изпратили отзив за този продукт."
 
-#: fashionShop/reviews/views.py:28
+#: fashionShop/reviews/views.py:34
 msgid "Your review was submitted successfully."
 msgstr "Вашият отзив беше публикуван успешно."
 
@@ -999,19 +999,23 @@ msgid ""
 "There are no reviews for this product yet, but you can write the first one."
 msgstr "Все още няма отзиви за този продукт, но можете да напишете първия."
 
-#: templates/items/single.html:580
-msgid "Add Review"
-msgstr "Напишете отзив"
-
-#: templates/items/single.html:586
+#: templates/items/single.html:581
 msgid "Your Rating:"
 msgstr "Вашата оценка:"
 
+#: templates/items/single.html:591
+msgid "Add Review"
+msgstr "Напишете отзив"
+
 #: templates/items/single.html:599
+msgid "Upload photos"
+msgstr "Качете снимки"
+
+#: templates/items/single.html:609
 msgid "submit"
 msgstr "изпрати"
 
-#: templates/items/single.html:620
+#: templates/items/single.html:630
 msgid "Complete your vision:"
 msgstr "Подходящи съчетания:"
 

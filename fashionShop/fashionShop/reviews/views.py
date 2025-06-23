@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 
 from fashionShop.common.utils import get_client_ip
 from fashionShop.items.models import Item
+from fashionShop.pictures.forms import ReviewPictureFormSet
 from fashionShop.reviews.forms import ReviewCreateForm
 from fashionShop.reviews.models import Review
 
@@ -20,11 +21,16 @@ def submit_review(request, item_pk):
             return redirect('item-details', slug=item.slug)
 
         form = ReviewCreateForm(request.POST or None)
-        if form.is_valid():
+        formset = ReviewPictureFormSet(request.POST or None, request.FILES or None)
+        if form.is_valid() and formset.is_valid():
             review = form.save(commit=False)
             review.item = item
             review.ip_address = ip
-            review.save()
+            review.save()  # Make sure the review is created before uploading the pictures
+
+            formset.instance = review
+            formset.save()
+
             messages.success(request, _('Your review was submitted successfully.'))
             return redirect('item-details', slug=item.slug)
 

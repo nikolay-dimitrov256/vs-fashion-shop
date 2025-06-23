@@ -50,3 +50,4 @@ class Review(models.Model):
     class Meta:
         verbose_name = _('Review')
         verbose_name_plural = _('Reviews')
+        ordering = ['-created_at']

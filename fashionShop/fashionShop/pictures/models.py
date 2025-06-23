@@ -1,6 +1,10 @@
 from cloudinary.models import CloudinaryField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
+import os
 
 from fashionShop.common.globals import SITE_DOMAIN
 from fashionShop.items.models import Item
@@ -64,13 +68,41 @@ class Picture(models.Model):
         return f'{self.item.item_number} picture'
 
 
-# class ReviewPicture(models.Model):
-#     image = models.ImageField(
-#         upload_to=review_image_upload_handler,
-#         null=True,
-#         blank=True,
-#     )
-#
-#     created_at = models.DateTimeField(
-#         auto_now_add=True
-#     )
+class ReviewPicture(models.Model):
+    image = models.ImageField(
+        upload_to=review_image_upload_handler,
+        null=True,
+        blank=True,
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    review = models.ForeignKey(
+        to='reviews.Review',
+        on_delete=models.CASCADE,
+        related_name='pictures',
+    )
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            img = Image.open(self.image)
+            img = img.convert('RGB')  # Normalize format
+
+            max_width = 1200
+            if img.width > max_width:
+                # Calculate new height to preserve aspect ratio
+                w_percent = max_width / float(img.width)
+                new_height = int((float(img.height) * float(w_percent)))
+                img = img.resize((max_width, new_height), Image.LANCZOS)
+
+            # Save to buffer
+            buffer = BytesIO()
+            img.save(buffer, format='JPEG', quality=85)
+            buffer.seek(0)
+
+            # Replace original image
+            self.image = ContentFile(buffer.read(), name=self.image.name)
+
+        super().save(*args, **kwargs)
