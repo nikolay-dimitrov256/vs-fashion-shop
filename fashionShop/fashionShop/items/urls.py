@@ -17,6 +17,7 @@ urlpatterns = [
     path('vests/', views.VestsListView.as_view(), name='vests'),
     path('cardigans/', views.CardigansListView.as_view(), name='cardigans'),
     path('underwear/', views.TankTopsListView.as_view(), name='underwear'),
+    path('sets/', views.SetsListView.as_view(), name='classic'),
     path('elegant/', views.ElegantListView.as_view(), name='elegant'),
     path('office/', views.OfficeListView.as_view(), name='office'),
     path('official/', views.OfficialListView.as_view(), name='official'),

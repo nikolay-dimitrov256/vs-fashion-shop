@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-22 17:05+0300\n"
+"POT-Creation-Date: 2025-06-27 09:50+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -235,7 +235,7 @@ msgstr "цветови групи"
 msgid "item number"
 msgstr "арт. номер"
 
-#: fashionShop/items/models/item.py:34 fashionShop/pictures/models.py:28
+#: fashionShop/items/models/item.py:34 fashionShop/pictures/models.py:32
 msgid "description"
 msgstr "описание"
 
@@ -275,7 +275,7 @@ msgstr "стил"
 #: fashionShop/items/models/item.py:136
 #: fashionShop/items/models/online_items.py:10
 #: fashionShop/items/models/online_items.py:42
-#: fashionShop/pictures/models.py:38
+#: fashionShop/pictures/models.py:42
 msgid "item"
 msgstr "продукт"
 
@@ -362,8 +362,8 @@ msgstr "Моля, напишете вашият отзив."
 msgid "Review"
 msgstr "Отзив"
 
-#: fashionShop/reviews/models.py:52 templates/items/single.html:454
-#: templates/items/single.html:521
+#: fashionShop/reviews/models.py:52 templates/items/single.html:108
+#: templates/items/single.html:463 templates/items/single.html:530
 msgid "Reviews"
 msgstr "Отзиви"
 
@@ -709,9 +709,10 @@ msgstr "Вход"
 #: templates/items/elegant.html:15 templates/items/jackets.html:16
 #: templates/items/office.html:15 templates/items/official.html:15
 #: templates/items/pants.html:16 templates/items/search.html:14
-#: templates/items/shirts.html:16 templates/items/skirts.html:16
-#: templates/items/suits.html:16 templates/items/tank-tops.html:19
-#: templates/items/tunics.html:16 templates/items/vests.html:16
+#: templates/items/sets.html:16 templates/items/shirts.html:16
+#: templates/items/skirts.html:16 templates/items/suits.html:16
+#: templates/items/tank-tops.html:19 templates/items/tunics.html:16
+#: templates/items/vests.html:16
 msgid "home"
 msgstr "начало"
 
@@ -808,10 +809,10 @@ msgstr "най-продавани"
 #: templates/items/elegant.html:16 templates/items/jackets.html:17
 #: templates/items/office.html:16 templates/items/official.html:16
 #: templates/items/pants.html:17 templates/items/search.html:15
-#: templates/items/shirts.html:17 templates/items/single.html:34
-#: templates/items/skirts.html:17 templates/items/suits.html:17
-#: templates/items/tank-tops.html:20 templates/items/tunics.html:17
-#: templates/items/vests.html:17
+#: templates/items/sets.html:17 templates/items/shirts.html:17
+#: templates/items/single.html:34 templates/items/skirts.html:17
+#: templates/items/suits.html:17 templates/items/tank-tops.html:20
+#: templates/items/tunics.html:17 templates/items/vests.html:17
 msgid "clothes"
 msgstr "дрехи"
 
@@ -939,83 +940,91 @@ msgstr "Дамски панталони"
 msgid "Search Results"
 msgstr "Резултати от търсенето"
 
+#: templates/items/sets.html:18
+msgid "sets"
+msgstr "комплекти"
+
+#: templates/items/sets.html:22
+msgid "Women's sets"
+msgstr "Дамски комплекти"
+
 #: templates/items/shirts.html:18 templates/items/shirts.html:22
 msgid "Women's shirts"
 msgstr "Дамски ризи"
 
-#: templates/items/single.html:125
+#: templates/items/single.html:134
 msgid "Size Guide"
 msgstr "Размерна таблица"
 
-#: templates/items/single.html:130
+#: templates/items/single.html:139
 msgid "Sizes"
 msgstr "Размери"
 
-#: templates/items/single.html:140 templates/items/single.html:161
-#: templates/items/single.html:182 templates/items/single.html:203
-#: templates/items/single.html:224 templates/items/single.html:245
-#: templates/items/single.html:266 templates/items/single.html:287
-#: templates/items/single.html:308 templates/items/single.html:329
-#: templates/items/single.html:350
+#: templates/items/single.html:149 templates/items/single.html:170
+#: templates/items/single.html:191 templates/items/single.html:212
+#: templates/items/single.html:233 templates/items/single.html:254
+#: templates/items/single.html:275 templates/items/single.html:296
+#: templates/items/single.html:317 templates/items/single.html:338
+#: templates/items/single.html:359
 msgid "Chest"
 msgstr "Гръдна обиколка"
 
-#: templates/items/single.html:144 templates/items/single.html:165
-#: templates/items/single.html:186 templates/items/single.html:207
-#: templates/items/single.html:228 templates/items/single.html:249
-#: templates/items/single.html:270 templates/items/single.html:291
-#: templates/items/single.html:312 templates/items/single.html:333
-#: templates/items/single.html:354
+#: templates/items/single.html:153 templates/items/single.html:174
+#: templates/items/single.html:195 templates/items/single.html:216
+#: templates/items/single.html:237 templates/items/single.html:258
+#: templates/items/single.html:279 templates/items/single.html:300
+#: templates/items/single.html:321 templates/items/single.html:342
+#: templates/items/single.html:363
 msgid "Waist"
 msgstr "Обиколка Талия"
 
-#: templates/items/single.html:148 templates/items/single.html:169
-#: templates/items/single.html:190 templates/items/single.html:211
-#: templates/items/single.html:232 templates/items/single.html:253
-#: templates/items/single.html:274 templates/items/single.html:295
-#: templates/items/single.html:316 templates/items/single.html:337
-#: templates/items/single.html:358
+#: templates/items/single.html:157 templates/items/single.html:178
+#: templates/items/single.html:199 templates/items/single.html:220
+#: templates/items/single.html:241 templates/items/single.html:262
+#: templates/items/single.html:283 templates/items/single.html:304
+#: templates/items/single.html:325 templates/items/single.html:346
+#: templates/items/single.html:367
 msgid "Hips"
 msgstr "Обиколка Ханш"
 
-#: templates/items/single.html:383
+#: templates/items/single.html:392
 msgid "add to cart"
 msgstr "добави в количка"
 
-#: templates/items/single.html:403
+#: templates/items/single.html:412
 msgid "This model in other colors:"
 msgstr "Други цветове от този модел:"
 
-#: templates/items/single.html:452 templates/items/single.html:467
+#: templates/items/single.html:461 templates/items/single.html:476
 msgid "Details"
 msgstr "Детайли"
 
-#: templates/items/single.html:453 templates/items/single.html:499
+#: templates/items/single.html:462 templates/items/single.html:508
 msgid "Additional Information"
 msgstr "Допълнителна информация"
 
-#: templates/items/single.html:566
+#: templates/items/single.html:578
 msgid ""
 "There are no reviews for this product yet, but you can write the first one."
 msgstr "Все още няма отзиви за този продукт, но можете да напишете първия."
 
-#: templates/items/single.html:581
+#: templates/items/single.html:601
 msgid "Your Rating:"
 msgstr "Вашата оценка:"
 
-#: templates/items/single.html:591
+#: templates/items/single.html:611
 msgid "Add Review"
 msgstr "Напишете отзив"
 
-#: templates/items/single.html:599
+#: templates/items/single.html:619
 msgid "Upload photos"
 msgstr "Качете снимки"
 
-#: templates/items/single.html:609
+#: templates/items/single.html:629
 msgid "submit"
 msgstr "изпрати"
 
-#: templates/items/single.html:630
+#: templates/items/single.html:650
 msgid "Complete your vision:"
 msgstr "Подходящи съчетания:"
 

@@ -245,6 +245,17 @@ class TankTopsListView(ItemsListView):
         return items
 
 
+class SetsListView(ItemsListView):
+    template_name = 'items/sets.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(category__name_en='classic')
+
+        return items
+
+
 class CardigansListView(ItemsListView):
     template_name = 'items/tank-tops.html'
 
