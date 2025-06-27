@@ -557,7 +557,7 @@
                                         </ul>
                                     </div>
                                     <div class="user_name">{{ review.author }}</div>
-                                    <h5>{{ review.title }}</h5>
+                                    {% if review.title %}<h5>{{ review.title }}</h5>{% endif %}
                                     <p>{{ review.content }}</p>
                                     {% if review.pictures.all.exists %}
                                     <div class="review-gallery">
