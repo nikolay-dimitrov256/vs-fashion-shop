@@ -8,8 +8,8 @@ CURRENCY_NAMES = {
     'EUR': _('EUR')
 }
 FREE_DELIVERY_THRESHOLD = {
-    'BGN': 150,
-    'EUR': 75,
+    'BGN': 199,
+    'EUR': 101,
 }
 
 SITE_ADDRESS = 'https://vilistil.bg'
