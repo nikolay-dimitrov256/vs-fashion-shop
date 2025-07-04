@@ -84,6 +84,18 @@
 					</div>
 					<nav class="navbar">
 						<ul class="navbar_menu">
+							{% if request.user.is_staff %}
+							<li>
+								<div class="dropdown show">
+									<a href="#" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Статистика
+									</a>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+										<a class="dropdown-item" href="{% url 'sizes-sales' %}">Продажби по размери</a>
+									</div>
+								</div>
+							</li>
+							{% endif %}
 							<li><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
 							<li><a href="{% url 'new' %}">{% trans 'new' %}</a></li>
 							<li><a href="{% url 'dresses' %}">{% trans 'dresses' %}</a></li>

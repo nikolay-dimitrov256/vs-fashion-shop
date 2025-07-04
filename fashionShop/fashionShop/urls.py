@@ -32,4 +32,5 @@ urlpatterns = [
     path('sales/', include('fashionShop.sales.urls')),
     path('api/', include('fashionShop.api.urls')),
     path('reviews/', include('fashionShop.reviews.urls')),
+    path('analytics/', include('fashionShop.analytics.urls')),
 ]
