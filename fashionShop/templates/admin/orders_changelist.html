@@ -10,6 +10,15 @@
     <th>{% trans 'Total Orders' %}</th>
     <th>{% trans 'Average Cart Value' %}</th>
     <th>{% trans 'Revenue' %}</th>
+    <th>{% trans 'pending'|capfirst %}</th>
+    <th>{% trans 'confirmed'|capfirst %}</th>
+    <th>{% trans 'canceled'|capfirst %}</th>
+    <th>{% trans 'sent'|capfirst %}</th>
+    <th>{% trans 'rejected'|capfirst %}</th>
+    <th>{% trans 'abandoned'|capfirst %}</th>
+    <th>{% trans 'completed'|capfirst %}</th>
+    <th>{% trans 'replaced'|capfirst %}</th>
+    <th>{% trans 'refunded'|capfirst %}</th>
   </tr>
   {% for row in monthly_data %}
   <tr>
@@ -17,6 +26,15 @@
     <td>{{ row.total_orders }}</td>
     <td>{{ row.avg_cart_value|floatformat:2 }}</td>
     <td>{{ row.revenue|floatformat:2 }}</td>
+    <td>{{ row.pending }}</td>
+    <td>{{ row.confirmed }}</td>
+    <td>{{ row.canceled }}</td>
+    <td>{{ row.sent }}</td>
+    <td>{{ row.rejected }}</td>
+    <td>{{ row.abandoned }}</td>
+    <td>{{ row.completed }}</td>
+    <td>{{ row.replaced }}</td>
+    <td>{{ row.refunded }}</td>
   </tr>
   {% endfor %}
 </table>

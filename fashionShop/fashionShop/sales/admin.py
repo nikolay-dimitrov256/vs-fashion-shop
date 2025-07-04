@@ -38,7 +38,16 @@ class OnlineOrderAdmin(admin.ModelAdmin):
             .annotate(
                 total_orders=Count('pk'),
                 avg_cart_value=Avg('total'),
-                revenue=Sum('total', filter=Q(status=StatusChoices.COMPLETED))
+                revenue=Sum('total', filter=Q(status=StatusChoices.COMPLETED)),
+                pending=Count('pk', filter=Q(status=StatusChoices.PENDING)),
+                confirmed=Count('pk', filter=Q(status=StatusChoices.CONFIRMED)),
+                canceled=Count('pk', filter=Q(status=StatusChoices.CANCELED)),
+                sent=Count('pk', filter=Q(status=StatusChoices.SENT)),
+                rejected=Count('pk', filter=Q(status=StatusChoices.REJECTED)),
+                abandoned=Count('pk', filter=Q(status=StatusChoices.ABANDONED)),
+                completed=Count('pk', filter=Q(status=StatusChoices.COMPLETED)),
+                replaced=Count('pk', filter=Q(status=StatusChoices.REPLACED)),
+                refunded=Count('pk', filter=Q(status=StatusChoices.REFUNDED)),
             )
             .order_by('-month')
         )
