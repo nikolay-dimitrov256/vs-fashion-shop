@@ -1,7 +1,7 @@
 from datetime import timedelta
 from random import sample
 
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -55,7 +55,9 @@ class HomeView(TemplateView):
                     to_attr='pictures_list'
                 )
             )
-            .filter(is_bestseller=True)[:10]
+            .annotate(sales=Sum('order_items__quantity'))
+            .filter(sales__gte=5)
+            .order_by('-sales')[:10]
         )
         all_feedback = list(Feedback.objects.all())
         sample_size = min(len(all_feedback), 5) # Prevents error if looking for more elements than there are in the list

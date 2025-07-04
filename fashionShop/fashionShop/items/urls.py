@@ -22,6 +22,7 @@ urlpatterns = [
     path('office/', views.OfficeListView.as_view(), name='office'),
     path('official/', views.OfficialListView.as_view(), name='official'),
     path('search/', views.SearchView.as_view(), name='search'),
+    path('bestsellers/', views.BestsellersListView.as_view(), name='bestsellers'),
     path('<slug:slug>/', include([
         path('', views.ItemDetailView.as_view(), name='item-details'),
     ]))

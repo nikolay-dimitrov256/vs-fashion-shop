@@ -1,0 +1,45 @@
+{% extends 'items/category.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+<meta name="title" content="Най-продавани дрехи | Вили Стил">
+<meta name="description" content="Най-продаваните ни изделия. За запитвания и поръчки - 0886531811">
+{% endblock %}
+
+{% block title %}
+Най-продавани | Вили Стил
+{# {% trans "Women's blazers Vili Style" %} #}
+{% endblock %}
+
+{% block breadcrumbs %}
+<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
+<li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
+<li class="active"><a href="{% url 'blazers' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'blazers'|capfirst %}</a></li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "Bestsellers" %}</h1>
+{% endblock %}
+
+{% block categories %}
+{% comment %}
+<div class="sidebar_section">
+	<div class="sidebar_title">
+		<h5>{% trans 'styles'|capfirst %}</h5>
+	</div>
+	<ul class="sidebar_categories">
+		<li><a href="#">{% trans 'elegant blazers'|capfirst %}</a></li>
+		<li><a href="#">{% trans 'office blazers'|capfirst %}</a></li>
+	</ul>
+</div>
+<div class="sidebar_section">
+	<div class="sidebar_title">
+		<h5>{% trans 'sub categories'|capfirst %}</h5>
+	</div>
+	<ul class="sidebar_categories">
+
+	</ul>
+</div>
+{% endcomment %}
+{% endblock %}

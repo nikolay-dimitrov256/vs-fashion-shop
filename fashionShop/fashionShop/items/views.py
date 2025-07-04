@@ -1,4 +1,4 @@
-from django.db.models import OuterRef, Subquery, Prefetch, Q, Avg
+from django.db.models import OuterRef, Subquery, Prefetch, Q, Avg, Sum
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
@@ -314,5 +314,16 @@ class SearchView(ItemsListView):
             query |= Q(pk=search)
 
         items = items.filter(query)
+
+        return items
+
+
+class BestsellersListView(ItemsListView):
+    template_name = 'items/bestsellers.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.annotate(sales=Sum('order_items__quantity')).filter(sales__gte=5).order_by('-sales')
 
         return items

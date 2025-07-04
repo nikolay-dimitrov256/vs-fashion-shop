@@ -95,6 +95,7 @@
 										{% trans 'categories' %}
 									</a>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+										<a class="dropdown-item" href="{% url 'bestsellers' %}">{% trans 'best sellers' %}</a>
 										<a class="dropdown-item" href="{% url 'blazers' %}">{% trans 'blazers' %}</a>
 										<a class="dropdown-item" href="{% url 'dresses' %}">{% trans 'dresses' %}</a>
 										<a class="dropdown-item" href="{% url 'pants' %}">{% trans 'pants' %}</a>
@@ -156,6 +157,7 @@
 			<ul class="menu_top_nav">
 				<li class="menu_item"><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
 				{% comment %}<li class="menu_item"><a href="#">{% trans 'new' %}</a></li>{% endcomment %}
+				<li class="menu_item"><a href="{% url 'bestsellers' %}">{% trans 'best sellers' %}</a></li>
 				<li class="menu_item"><a href="{% url 'dresses' %}">{% trans 'dresses' %}</a></li>
 				<li class="menu_item"><a href="{% url 'blazers' %}">{% trans 'blazers' %}</a></li>
 				<li class="menu_item"><a href="{% url 'pants' %}">{% trans 'pants' %}</a></li>
