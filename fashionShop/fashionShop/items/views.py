@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.db.models import OuterRef, Subquery, Prefetch, Q, Avg, Sum
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, get_object_or_404
@@ -325,5 +327,16 @@ class BestsellersListView(ItemsListView):
         items = super().get_queryset()
 
         items = items.annotate(sales=Sum('order_items__quantity')).filter(sales__gte=5).order_by('-sales')
+
+        return items
+
+
+class NewItemsListView(ItemsListView):
+    template_name = 'items/new.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(created_at__gte=datetime.today().date() - timedelta(days=60)).order_by('-created_at')
 
         return items

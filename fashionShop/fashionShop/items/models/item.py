@@ -72,6 +72,10 @@ class Item(models.Model):
         default=False,
     )
 
+    is_new = models.BooleanField(
+        default=False,
+    )
+
     category = models.ForeignKey(
         verbose_name=_('category'),
         to=Category,
@@ -158,12 +162,12 @@ class Item(models.Model):
 
         return False
 
-    @property
-    def is_new(self):
-        if datetime.today().date() - self.created_at < timedelta(days=90):
-            return True
-
-        return False
+    # @property
+    # def is_new(self):
+    #     if datetime.today().date() - self.created_at < timedelta(days=90):
+    #         return True
+    #
+    #     return False
 
     @property
     def discount(self):

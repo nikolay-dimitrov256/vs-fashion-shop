@@ -1,0 +1,27 @@
+{% extends 'items/category.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Нови предложения | Вили Стил
+{# {% trans "New Arrivals Vili Style" %} #}
+{% endblock %}
+
+{% block meta %}
+<meta name="title" content="Нови предложения - Онлайн Цени | Вили Стил">
+<meta name="description" content="Разгледайте новите предложения на българския производител Вили Стил. За запитвания и поръчки - 0886531811">
+{% endblock %}
+
+{% block breadcrumbs %}
+<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
+<li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
+<li class="active"><a href="{% url 'new' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'new'|capfirst %}</a></li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "New Arrivals" %}</h1>
+{% endblock %}
+
+{% block categories %}
+
+{% endblock %}

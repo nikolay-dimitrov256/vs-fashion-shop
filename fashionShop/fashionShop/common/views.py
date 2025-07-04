@@ -42,7 +42,7 @@ class HomeView(TemplateView):
                     to_attr='pictures_list'
                 )
             )
-            .filter(created_at__gt=now().date() - timedelta(days=90))
+            .filter(is_new=True)
             .order_by('-created_at')[:10]
         )
         context['bestsellers'] = (
