@@ -5,16 +5,22 @@ function initShippingForm() {
     const shippingMethodSelectElement = document.getElementById('id_shipping_method');
     const townInputElement = document.getElementById('id_town');
 
-    // Hide office fields
+    // Hide/show fields
     const shippingMethod = shippingMethodSelectElement.value;
-    if (!['spof', 'ecof'].includes(shippingMethod)) {
+    if (['spad', 'ecad'].includes(shippingMethod)) {
         hideOfficeFields();
-        
-        if (['spad', 'ecad'].includes(shippingMethod)) {
-            showAddressFields();
-        }
+        showAddressFields();
+    } else if (['spof', 'ecof'].includes(shippingMethod)) {
+        hideAddressFields();
+        showOfficeFields();
+    } else {
+        // fallback for unknown values
+        hideOfficeFields();
+        hideAddressFields();
     }
-    
+
+    // Clear the town input, so the user types in his town again
+    townInputElement.value = '';
 
     // Init shipping method
     shippingMethodSelectElement.addEventListener('change', initShippingMethod);

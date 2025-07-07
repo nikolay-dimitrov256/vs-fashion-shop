@@ -22,8 +22,13 @@ class ShippingOrderForm(forms.ModelForm):
         required=True,
     )
 
+    town = forms.CharField(
+        label=_('Town*'),
+        required=False,
+    )
+
     office = forms.CharField(
-        label=_('Office'),
+        label=_('Office*'),
         widget=forms.Select(),
         required=False,
     )
@@ -38,9 +43,12 @@ class ShippingOrderForm(forms.ModelForm):
 
     def is_valid(self) -> bool:
         valid = super().is_valid()
-        address_valid = self.address_form.is_valid() if self.address_form else True
+        address_valid = True
 
-        return valid  # and address_valid
+        if ShippingChoices.is_address(self.cleaned_data.get('shipping_method')):
+            address_valid = self.address_form.is_valid()
+
+        return valid and address_valid
 
     def clean(self):
         cleaned_data = super().clean()

@@ -469,9 +469,16 @@ jQuery(document).ready(function($)
 		const quantitySpanElement = document.getElementById('quantity_value');
 		const sizeHiddenInputElement = document.getElementById('size');
 		const quantityHiddenInputElement = document.getElementById('quantity');
+		const allSizesElements = sizesDivElement.querySelectorAll('.size');
 
 		addToCartButtonAElement.addEventListener('click', (e)=>{
 			e.preventDefault();
+
+			// If there is only one size, add it to cart without making the user click it
+			if (allSizesElements.length == 1) {
+				allSizesElements[0].classList.add('selected');
+			}
+
 			const sizeDivElement = sizesDivElement.querySelector('.selected');
 			const quantity = quantitySpanElement.textContent;
 			

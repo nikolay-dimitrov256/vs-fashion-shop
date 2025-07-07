@@ -38,6 +38,12 @@
                     <input type="hidden" name="form_type" value="shipping">
                     <input type="hidden" id="town_id" value="">
 
+                    {% if shipping_form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ shipping_form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
                     <p>{% trans 'The fields marked with * are required' %}</p>
 
                     {{ shipping_form.first_name|as_crispy_field }}
@@ -54,12 +60,6 @@
                     {{ shipping_form.office|as_crispy_field }}
 
                     {{ shipping_form.comment|as_crispy_field }}
-
-                    {% if shipping_form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            {{ shipping_form.non_field_errors }}
-                        </div>
-                    {% endif %}
 
                     <button type="submit" class="btn btn-success form-group button">{% trans 'Send Order' %}</button>
                 </form>
@@ -84,5 +84,5 @@
 
 {% block scripts %}
 <script src="{% static 'js/cart.js' %}"></script>
-<script src="{% static 'js/checkout.js' %}"></script>
+<script src="{% static 'js/checkout.js' %}?v=2"></script>
 {% endblock %}

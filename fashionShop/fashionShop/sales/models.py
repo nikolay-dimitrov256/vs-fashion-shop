@@ -75,7 +75,7 @@ class OnlineOrder(models.Model):
     )
 
     town = models.CharField(
-        _('town'),
+        # _('town'),
         max_length=30,
         null=True,
         blank=True,
