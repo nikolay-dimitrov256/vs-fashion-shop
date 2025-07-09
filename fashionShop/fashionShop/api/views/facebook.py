@@ -27,7 +27,9 @@ def products_feed(request):
         Item.objects
         .exclude(deleted=True)
         .prefetch_related(
-            'pictures'
+            'pictures',
+            'style',
+            'order_items',
         )
         .select_related(
             'category',
@@ -54,6 +56,13 @@ def products_feed(request):
             SubElement(it, 'additional_image_link').text = item.pictures.all()[1].image_url
         if len(item.pictures.all()) > 2:
             SubElement(it, 'additional_image_link').text = item.pictures.all()[2].image_url
+
+        for style in item.style.all():
+            SubElement(it, 'style').text = style.name
+
+        SubElement(it, 'is_new').text = str(item.is_new)
+        sales = item.order_items.count()
+        SubElement(it, 'is_bestseller').text = str(sales >= 5)
 
     xml_str = tostring(rss, encoding='utf-8')
     # pretty_xml = xml.dom.minidom.parseString(xml_str).toprettyxml(indent='  ')
