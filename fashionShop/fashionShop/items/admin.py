@@ -26,7 +26,7 @@ class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
     list_filter = ['category', 'style', 'color_group']
     ordering = ['item_number']
     inlines = [PictureInline, StockInline]
-    readonly_fields = ['slug', 'created_at']
+    readonly_fields = ['created_at']
     search_fields = ['item_number', 'name']
 
     @button(visible=lambda self: self.context["request"].user.is_superuser,
