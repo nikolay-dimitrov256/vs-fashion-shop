@@ -47,8 +47,11 @@ def send_bisoft_report(order_id, save=True):
     }
 
     try:
+        print('Sending report for:', order.order_code)
+        print('Payload:', report)
         response = requests.post(url, json=report, headers=headers)
-
+        print('Status:', response.status_code)
+        print('Response:', response.text)
         data = response.json()
 
         if data['success']:
@@ -58,5 +61,6 @@ def send_bisoft_report(order_id, save=True):
 
         return data['success']
 
-    except Exception:
+    except Exception as e:
+        print(str(e))
         return False
