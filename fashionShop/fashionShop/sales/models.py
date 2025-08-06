@@ -123,6 +123,10 @@ class OnlineOrder(models.Model):
         blank=True,
     )
 
+    bisoft_report_sent = models.BooleanField(
+        default=False,
+    )
+
     class Meta:
         verbose_name = _('Online Order')
         verbose_name_plural = _('Online Orders')

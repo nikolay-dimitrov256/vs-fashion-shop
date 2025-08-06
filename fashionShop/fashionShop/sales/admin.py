@@ -5,7 +5,7 @@ from django.db.models.functions import TruncMonth
 from fashionShop.items.models import OrderItem
 from fashionShop.sales.choices import StatusChoices
 from fashionShop.sales.models import OnlineOrder
-from fashionShop.sales.utils import refresh_orders
+from fashionShop.sales.utils import refresh_orders, send_bisoft_reports
 
 
 class OrderItemInline(admin.TabularInline):
@@ -23,9 +23,9 @@ class OnlineOrderAdmin(admin.ModelAdmin):
                        'created_at', 'updated_at']
     search_fields = ['pk', 'order_code', 'first_name', 'last_name', 'comment', 'phone', 'email']
     list_filter = ['status', 'created_at']
-    list_display = ['pk', 'full_name', 'status', 'total']
+    list_display = ['pk', 'full_name', 'status', 'total', 'bisoft_report_sent']
     change_list_template = 'admin/orders_changelist.html'
-    actions = [refresh_orders]
+    actions = [refresh_orders, send_bisoft_reports]
 
     def changelist_view(self, request, extra_context=None):
         # Get the orders queryset

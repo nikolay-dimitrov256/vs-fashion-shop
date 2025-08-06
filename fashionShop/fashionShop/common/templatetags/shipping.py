@@ -25,4 +25,4 @@ def free_shipping_string(request):
 
 @register.filter
 def is_free_shipping(total):
-    return total <= FREE_DELIVERY_THRESHOLD.get('BGN')
+    return total > FREE_DELIVERY_THRESHOLD.get('BGN')

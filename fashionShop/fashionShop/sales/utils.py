@@ -1,5 +1,6 @@
 from fashionShop.items.models import OrderItem, Size, Item, CartItem
-from fashionShop.sales.models import Cart
+from fashionShop.sales.models import Cart, OnlineOrder
+from fashionShop.sales.tasks import send_bisoft_report
 
 
 def fill_order_from_cart_empty_cart(request, order):
@@ -51,3 +52,16 @@ def refresh_orders(modeladmin, request, queryset):
 
 
 refresh_orders.short_description = 'Refresh orders'
+
+
+def send_bisoft_reports(modeladmin, request, queryset):
+    orders = list(queryset)
+    for order in orders:
+        # if not order.bisoft_report_sent:
+        success = send_bisoft_report(order.pk, save=False)
+        order.bisoft_report_sent = success
+
+    OnlineOrder.objects.bulk_update(orders, ['bisoft_report_sent'])
+
+
+send_bisoft_reports.short_description = 'Send BiSOFT reports'

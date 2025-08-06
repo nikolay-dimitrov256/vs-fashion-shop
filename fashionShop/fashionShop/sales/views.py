@@ -13,6 +13,7 @@ from fashionShop.common.forms import AddressForm
 from fashionShop.items.models import CartItem, Item, Size
 from fashionShop.sales.forms import PhoneOrderForm, ShippingOrderForm
 from fashionShop.sales.models import Cart, OnlineOrder
+from fashionShop.sales.tasks import send_bisoft_report
 from fashionShop.sales.utils import fill_order_from_cart_empty_cart
 
 
@@ -259,6 +260,9 @@ class CheckoutView(View):
 
                 order.save()
 
+                order.refresh_from_db()
+                send_bisoft_report.delay(order.pk)
+
                 return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 
         elif form_type == 'shipping':
@@ -273,6 +277,9 @@ class CheckoutView(View):
                 order.user = request.user if request.user.is_authenticated else None
                 order.email = request.user.email if request.user.is_authenticated else None
                 order.save()
+
+                order.refresh_from_db()
+                send_bisoft_report.delay(order.pk)
 
                 return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 

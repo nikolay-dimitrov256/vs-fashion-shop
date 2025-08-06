@@ -1,150 +1,33 @@
-import json
+from decimal import Decimal
 from pprint import pprint
 
 import requests
-import time
 
-from decouple import config
-
-from fashionShop.api.utils import get_econt_cities_data
-from fashionShop.common.globals import BISOFT_API_URL, SPEEDY_API_URL
+from fashionShop.common.templatetags.shipping import is_free_shipping
 
 
-def send_request():
-    start = time.time()
-
-    url = 'https://vilistil.com/vs/item/10015'
-    #url = 'https://vilistil.com/vs/cat/all'
-    #url = 'http://127.0.0.1:8001/items/prices-stock/'
-    #url = 'https://api.exchangerate-api.com/v4/latest/GBP'
-    #url = 'https://vilistil.com/bisoft/xauge.php/feeds/vshop?c1=cat&c2=pants'
-    #url = 'https://vilistil.com/bisoft/xauge.php/feeds/vshop?c1=item&c2=50412'
-    #url = 'https://bisoft.style.bg/item.php'
-    #url = 'https://vilistil.com/vshop.php?c1=item&c2=50412'
-
-    response = requests.get(url)
-
-    end = time.time()
-
-    data = response.json()
-    #item_numbers = [el['item_number'] for el in data]
-    pprint(data)
-    print(len(data))
-    print(f'The request took {end - start} seconds')
+def send_bisoft_request():
+    payload = {'basket': {'10329': {'price': '65.00', 'sizes': {'42': 1}}},
+ 'user': {'address': 'няма информация за адрес',
+          'date': '2025-08-06',
+          'delivery': 5.99,
+          'doc_num': '2508490058',
+          'name': 'анонимен',
+          'phone': '0886531811',
+          'total': '65.00',
+          'total_quantity': 1}}
 
 
-def test_flattening():
-    url = f'{BISOFT_API_URL}cat/all'
-    response = requests.get(url)
-    data = response.json()
+    url = f'https://vilistil.com/get_sale.php?order=2508490058&lic=license'
 
-    new_sizes_names = {s for sub in [it['sizes'].keys() for it in data] for s in sub}
-
-    print(new_sizes_names)
-
-
-def find_town_request():
-    base_url = 'https://api.speedy.bg/v1'
-    url = f'{base_url}/location/site'
     headers = {
         'Content-Type': 'application/json',
-        'charset': 'utf-8',
-
-    }
-    params = {
-        'userName': '1996022',
-        'password': '1243131659',
-        'language': 'BG',
-        'countryId': '100',  # Bulgaria
-        'name': 'благоевград',
     }
 
-    response = requests.post(
-        url=url,
-        headers=headers,
-        json=params,
-    )
+    response = requests.post(url, json=payload, headers=headers)
 
-    pprint(response.json())
+    print(response.text)
+    print(response.json())
 
 
-def find_office():
-    query = '4279'
-
-    url = f'{SPEEDY_API_URL}/location/office'
-    headers = {
-        'Content-Type': 'application/json',
-        'charset': 'utf-8',
-
-    }
-    params = {
-        'userName': '1996022',
-        'password': '1243131659',
-        'language': 'BG',
-        'countryId': '100',  # Bulgaria
-        'siteId': query,
-    }
-
-    response = requests.post(
-        url=url,
-        headers=headers,
-        json=params,
-    )
-
-    data = response.json()
-
-    for office in data['offices']:
-        pprint(office)
-
-
-def request_econt():
-    url = 'https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getCities.json'
-
-    headers = {
-        'Accept': 'application/json,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Encoding': 'gzip, deflate',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Connection': 'keep-alive',
-        'Host': 'ee.econt.com',
-        'Upgrade-Insecure-Requests': '1',
-        'username': config('ECONT_USERNAME'),
-        'password': config('ECONT_PASSWORD')
-    }
-
-    payload = {
-        'countryCode': 'BGR',
-    }
-
-    response = requests.post(url=url, headers=headers, json=payload)
-
-    with open('data/api/econt_cities.json', 'w') as file:
-        file.write(json.dumps(response.json()))
-
-
-def load_econt_cities():
-    query = 'plovd'
-
-    data = get_econt_cities_data()
-
-    cities = []
-    for city in data['cities']:
-        if query.lower() in city['name'].lower() or query.lower() in city['nameEn'].lower():
-            cities.append(city)
-
-    pprint(cities)
-
-
-def econt_offices():
-    url = 'http://ee.econt.com/services/Nomenclatures/NomenclaturesService.getOffices.json'
-    params = {
-        'cityID': '114'
-    }
-
-    response = requests.post(url, json=params)
-
-    data = response.json()
-
-    pprint(data)
-
-
-econt_offices()
+send_bisoft_request()

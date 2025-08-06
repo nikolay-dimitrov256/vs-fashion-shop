@@ -18,9 +18,9 @@
     <div class="col">
         <p><span class="total">{% trans 'Total:' %} </span><span class="item-price">{{ cart.total }} {% trans 'lv' %}</span></p>
         {% if cart.total|is_free_shipping %}
-        <p>{% trans '+ shipping fee calculated by courier' %}</p>
-        {% else %}
         <p>{% trans 'shipping: FREE' %}</p>
+        {% else %}
+        <p>{% trans '+ shipping fee calculated by courier' %}</p>
         {% endif %}
     </div>
 </div>
