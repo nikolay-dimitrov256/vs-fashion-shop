@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <div class="owl-item product_slider_item">
     <div class="product-item">
@@ -32,9 +33,9 @@
                 <p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></p>
                 <div class="product_price">
                     {% if item.is_discounted %}
-                    {{ item.discount_price }} лв<span>{{ item.price }} лв</span>
+                    {{ item.discount_price }} лв<span class="price_eur">/ {{ item.discount_price_eur }} €</span>
                     {% else %}
-                    {{ item.price }} лв
+                    {{ item.price }} {% trans 'lv' %}<span class="price_eur">/ {{ item.price_eur }} €</span>
                     {% endif %}
                 </div>
             </div>

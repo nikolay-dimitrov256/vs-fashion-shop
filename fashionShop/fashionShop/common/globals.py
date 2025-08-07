@@ -14,3 +14,5 @@ FREE_DELIVERY_THRESHOLD = {
 
 SITE_ADDRESS = 'https://vilistil.bg'
 SITE_DOMAIN = 'vilistil.bg'
+
+EURO_RATE = 1.95583

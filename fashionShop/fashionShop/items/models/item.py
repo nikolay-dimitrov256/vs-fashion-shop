@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
+from decimal import Decimal
 
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
+from fashionShop.common.globals import EURO_RATE
 from fashionShop.common.utils import transliterate
 from fashionShop.items.models.categories import Category, SubCategory
 from fashionShop.items.models.colors import ColorGroup
@@ -182,6 +184,14 @@ class Item(models.Model):
             return self.discount_price
 
         return self.price
+
+    @property
+    def price_eur(self):
+        return round(self.price / Decimal(EURO_RATE), 2)
+
+    @property
+    def discount_price_eur(self):
+        return round(self.discount_price / Decimal(EURO_RATE), 2)
 
     def __str__(self):
         return str(self.item_number)

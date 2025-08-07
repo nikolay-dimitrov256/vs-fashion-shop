@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}"> <!-- Added for carousel-->
 <link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/single_styles.css' %}?v=3">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/single_styles.css' %}?v=4">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/single_responsive.css' %}?v=2">
 {% endblock %}
 
@@ -96,10 +96,13 @@
                 <div class="product-info">
                     <div class="price">
                         {% if object.is_discounted %}
-                            <div class="original_price">{{ object.price }} лв.</div>
-                            <div class="product_price">{{ object.discount_price }} лв</div>
+                            <div class="original_price">{{ object.price }} {% trans 'lv' %}</div>
+                            <div class="original_price">{{ object.price_eur }} €</div>
+                            <div class="product_price">{{ object.discount_price }} {% trans 'lv' %}</div>
+                            <div class="secondary_price">{{ object.discount_price_eur }} €</div>
                         {% else %}
-                            <div class="product_price">{{ object.price }} лв</div>
+                            <div class="product_price">{{ object.price }} {% trans 'lv' %}</div>
+                            <div class="secondary_price">{{ object.price_eur }} €</div>
                         {% endif %}
                     </div>
                     <div class="review-data">

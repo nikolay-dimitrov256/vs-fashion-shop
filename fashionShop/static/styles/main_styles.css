@@ -1098,6 +1098,12 @@ section
 	color: #b5aec4;
 	text-decoration: line-through;
 }
+.product_price .price_eur {
+	text-decoration: none;
+	color: #777;
+	font-size: 14px;
+	font-weight: 600;
+}
 .product_bubble
 {
 	position: absolute;
