@@ -25,6 +25,11 @@
     margin-bottom: 0;
 }
 
+.price-eur {
+    color: #777;
+    font-size: 18px;
+}
+
 .order-total {
     padding-block: 1em;
     background-color: #eee;

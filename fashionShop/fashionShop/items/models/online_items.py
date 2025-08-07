@@ -36,6 +36,10 @@ class CartItem(models.Model):
     def total_price(self):
         return self.item.final_price * self.quantity
 
+    @property
+    def total_price_eur(self):
+        return self.item.final_price_eur * self.quantity
+
 
 class OrderItem(models.Model):
     item = models.ForeignKey(

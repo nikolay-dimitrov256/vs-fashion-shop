@@ -10,6 +10,7 @@ from django.views.generic import View, CreateView, TemplateView
 from django.views.generic import DetailView
 
 from fashionShop.common.forms import AddressForm
+from fashionShop.common.globals import EURO_RATE
 from fashionShop.items.models import CartItem, Item, Size
 from fashionShop.sales.forms import PhoneOrderForm, ShippingOrderForm
 from fashionShop.sales.models import Cart, OnlineOrder
@@ -83,6 +84,7 @@ def view_cart_view(request):
         )
         if cart:
             cart.total = sum(i.total_price for i in cart.cart_items.all())
+            cart.total_eur = sum(i.total_price_eur for i in cart.cart_items.all())
 
         context = {
             'cart': cart,
@@ -102,7 +104,8 @@ def view_cart_view(request):
 
             for size, quantity in data.items():
                 total = item.final_price * int(quantity)
-                sizes[size] = {'quantity': quantity, 'total': total}
+                total_eur = item.final_price_eur * int(quantity)
+                sizes[size] = {'quantity': quantity, 'total': total, 'total_eur': total_eur}
                 cart_total += total
 
             cart[item_number] = {'item': item, 'sizes': sizes}
@@ -110,6 +113,7 @@ def view_cart_view(request):
         context = {
             'cart': cart,
             'cart_total': cart_total,
+            'cart_total_eur': round(cart_total / Decimal(EURO_RATE), 2)
         }
 
     return render(request, 'sales/cart.html', context)
@@ -200,6 +204,8 @@ class CheckoutView(View):
                 num_items += item.quantity
                 content_ids.add(item.item.pk)
 
+            self.cart.total_eur = round(self.cart.total / Decimal(EURO_RATE), 2)
+
             context = {
                 'cart': self.cart,
                 'num_items': num_items,
@@ -220,7 +226,8 @@ class CheckoutView(View):
 
                 for size, quantity in data.items():
                     total = item.final_price * int(quantity)
-                    sizes[size] = {'quantity': quantity, 'total': total}
+                    total_eur = item.final_price_eur * int(quantity)
+                    sizes[size] = {'quantity': quantity, 'total': total, 'total_eur': total_eur}
                     cart_total += total
                     num_items += quantity
 
@@ -229,6 +236,7 @@ class CheckoutView(View):
             context = {
                 'cart': self.cart,
                 'cart_total': cart_total,
+                'cart_total_eur': round(cart_total / Decimal(EURO_RATE), 2),
                 'num_items': num_items,
                 'content_ids': content_ids,
             }
@@ -285,6 +293,7 @@ class CheckoutView(View):
 
         if request.user.is_authenticated:
             self.cart.total = sum(i.total_price for i in self.cart.cart_items.all())
+            self.cart.total_eur = round(self.cart.total / Decimal(EURO_RATE), 2)
 
             context = {
                 'cart': self.cart,
@@ -302,7 +311,8 @@ class CheckoutView(View):
 
                 for size, quantity in data.items():
                     total = item.final_price * int(quantity)
-                    sizes[size] = {'quantity': quantity, 'total': total}
+                    total_eur = item.final_price_eur * int(quantity)
+                    sizes[size] = {'quantity': quantity, 'total': total, 'total_eur': total_eur}
                     cart_total += total
 
                 self.cart[item_number] = {'item': item, 'sizes': sizes}
@@ -310,6 +320,7 @@ class CheckoutView(View):
             context = {
                 'cart': self.cart,
                 'cart_total': cart_total,
+                'cart_total_eur': round(cart_total / Decimal(EURO_RATE), 2)
             }
 
         context['phone_order_form'] = phone_form

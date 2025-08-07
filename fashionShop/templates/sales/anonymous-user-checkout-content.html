@@ -11,6 +11,7 @@
         </div>
         <div class="col-4">
             <p class="item-price">{{ data.total }} {% trans 'lv' %}</p>
+            <p class="price-eur">{{ data.total_eur }} €</p>
         </div>
     </div>
     {% endfor %}
@@ -18,7 +19,11 @@
 
 <div class="row order-total">
     <div class="col">
-        <p><span class="total">{% trans 'Total:' %} </span><span class="item-price">{{ cart_total }} {% trans 'lv' %}</span></p>
+        <p>
+            <span class="total">{% trans 'Total:' %} </span>
+            <span class="item-price">{{ cart_total }} {% trans 'lv' %}</span>
+            <span class="price-eur">/ {{ cart_total_eur }} €</span>
+        </p>
         {% if cart_total|is_free_shipping %}
         <p>{% trans 'shipping: FREE' %}</p>
         {% else %}

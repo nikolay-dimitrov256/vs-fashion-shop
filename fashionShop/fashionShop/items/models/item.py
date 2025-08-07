@@ -193,6 +193,13 @@ class Item(models.Model):
     def discount_price_eur(self):
         return round(self.discount_price / Decimal(EURO_RATE), 2)
 
+    @property
+    def final_price_eur(self):
+        if self.is_discounted:
+            return self.discount_price_eur
+
+        return self.price_eur
+
     def __str__(self):
         return str(self.item_number)
 

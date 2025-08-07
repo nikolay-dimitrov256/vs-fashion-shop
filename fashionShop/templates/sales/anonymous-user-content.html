@@ -17,6 +17,7 @@
             <h3 class="item-name">{{ entry.item.name }}</h3>
             <p class="item-size"><span>{{ size }}</span> x <span>{{ data.quantity }}</span></p>
             <p class="item-price">{{ data.total }} {% trans 'lv' %}</p>
+            <p class="price-eur">{{ data.total_eur }} €</p>
             <form action="{% url 'remove-from-cart' entry.item.pk %}" method="post">
                 {% csrf_token %}
                 <input class="size" type="hidden" name="size" value="{{ size }}">
@@ -30,7 +31,11 @@
 {% if cart|length %}
 <div class="row">
     <div class="col">
-        <p class="total-info"><span class="total">{% trans 'Total:' %} </span><span class="item-price">{{ cart_total }} {% trans 'lv' %}</span></p>
+        <p class="total-info">
+            <span class="total">{% trans 'Total:' %} </span>
+            <span class="item-price">{{ cart_total }} {% trans 'lv' %}</span>
+            <span class="price-eur">/{{ cart_total_eur }} €</span>
+        </p>
     </div>
 </div>
 <div class="buttons">
