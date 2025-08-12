@@ -337,6 +337,6 @@ class NewItemsListView(ItemsListView):
     def get_queryset(self):
         items = super().get_queryset()
 
-        items = items.filter(created_at__gte=datetime.today().date() - timedelta(days=60)).order_by('-created_at')
+        items = items.filter(is_new=True).order_by('-created_at')
 
         return items

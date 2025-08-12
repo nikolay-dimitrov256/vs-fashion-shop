@@ -215,6 +215,9 @@
 
 								{% for item in object_list %}
 								<div class="product-item">
+									{% if request.user.is_authenticated and request.user.is_staff and item.sales %}
+									<p>{{ item.sales }} продажби</p>
+									{% endif %}
 									<div
 										{% if item.is_discounted %}
 											class="product discount product_filter"
