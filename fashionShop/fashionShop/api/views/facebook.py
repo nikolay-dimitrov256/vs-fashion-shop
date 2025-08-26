@@ -60,10 +60,8 @@ def products_feed(request):
         for style in item.style.all():
             SubElement(it, 'style').text = style.name
 
-        SubElement(it, 'is_new').text = str(item.is_new)
         sales = item.order_items.count()
-        SubElement(it, 'is_bestseller').text = str(sales >= 5)
-        SubElement(it, 'product_type').text = item.category.name_bg
+
         SubElement(it, 'custom_label_1').text = str(item.is_new)
         SubElement(it, 'custom_label_2').text = str(sales >= 5)
 
