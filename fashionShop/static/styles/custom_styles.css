@@ -157,5 +157,36 @@
 .main_slider_content .promo-text {
     width: 50%;
     margin-left: auto;
+    font-weight: 500;
+}
+
+@media (min-width: 479px) {
+    .main_slider_content {
+        top: -6rem;
+    }
+}
+
+@media (max-width: 479px) {
+    .main_slider_content {
+        top: -15rem;
+    }
+
+    .main_slider_content .promo-text {
+        width: 70%;
+    }
+
+    .shop_now_button {
+        width: 110px;
+    }
+
+    .shop_now_button a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 399px) {
+    .main_slider_content .promo-text {
+        width: 100%;
+    }
 }
 /* Fixes the positioning on the main banner elements */
