@@ -41,7 +41,7 @@
         <div class="col">
             <div id="google_map">
                 <div class="map_container">
-                    <div id="map"></div>
+                    <div id="map" style="width:100%; height:600px;"></div>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
             <!-- Follow Us -->
 
             <div class="follow_us_contents">
-                <h2>Follow Us</h2>
+                <h2>{% trans 'Follow Us' %}</h2>
                 <ul class="social d-flex flex-row">
                     <li><a href="https://www.facebook.com/vilistyle" target="_blank" style="background-color: #3a61c9"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                     <li><a href="https://www.instagram.com/vili.stil/" target="_blank" style="background-color: #8f6247"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
@@ -118,7 +118,33 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
 <script src="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
-<script src="{% static 'js/contact_custom.js' %}"></script>
+<script src="{% static 'js/contact_custom.js' %}?v=1"></script>
+<script>
+  function initGoogleMap() {
+    const myLatlng = { lat: 42.14184304174352, lng: 24.54358717498793 };
+
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: myLatlng,
+      zoom: 16,
+      draggable: true,
+      scrollwheel: true,
+      zoomControl: true,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      scaleControl: true,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.RIGHT_CENTER,
+        },
+    });
+
+    new google.maps.Marker({
+      position: myLatlng,
+      map,
+      icon: "{% static 'images/map_marker.png' %}",
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCKFnNjOhOuujvzT_YQAonCLb4ksOOIXd8&callback=initGoogleMap" async defer></script>
 {% endblock %}

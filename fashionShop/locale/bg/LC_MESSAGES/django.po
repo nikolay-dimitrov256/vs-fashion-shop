@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-23 15:14+0300\n"
+"POT-Creation-Date: 2025-09-24 10:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -643,6 +643,10 @@ msgstr "Понеделник - Петък: 8:00 - 17:00"
 #: templates/common/contact.html:83
 msgid "Saturday and Sunday: Closed"
 msgstr "Събота и Неделя: почивни дни"
+
+#: templates/common/contact.html:90
+msgid "Follow Us"
+msgstr "Последвайте ни"
 
 #: templates/common/contact.html:101
 msgid "Get In Touch With Us"
