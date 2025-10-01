@@ -37,8 +37,8 @@ CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS').split(',')
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
 
 # Application definition
 PROJECT_APPS = [
@@ -167,13 +167,6 @@ LOGGING = {
         'propagate': True,
     },
     'loggers': {
-        # Root Logger
-        # '': {
-        #     'handlers': ['console', 'file'],
-        #     'level': 'ERROR',
-        #     'propagate': True,
-        # },
-        # Django Logger
         'django': {
             'handlers': ['console', 'file'],
             'level': 'ERROR',

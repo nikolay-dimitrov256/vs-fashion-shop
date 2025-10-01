@@ -33,7 +33,8 @@ def products_feed(request):
         )
         .select_related(
             'category',
-            'color_group'
+            'color_group',
+            'collection'
         )
     )
 
@@ -64,6 +65,7 @@ def products_feed(request):
 
         SubElement(it, 'custom_label_1').text = str(item.is_new)
         SubElement(it, 'custom_label_2').text = str(sales >= 5)
+        SubElement(it, 'custom_label_3').text = item.collection.name if item.collection else ''
 
     xml_str = tostring(rss, encoding='utf-8')
     # pretty_xml = xml.dom.minidom.parseString(xml_str).toprettyxml(indent='  ')

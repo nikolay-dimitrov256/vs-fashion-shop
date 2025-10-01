@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-24 10:47+0300\n"
+"POT-Creation-Date: 2025-10-01 14:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,7 +183,7 @@ msgstr "коментар"
 
 #: fashionShop/common/models.py:118 fashionShop/items/models/categories.py:7
 #: fashionShop/items/models/categories.py:23
-#: fashionShop/items/models/colors.py:7 fashionShop/items/models/item.py:24
+#: fashionShop/items/models/colors.py:7 fashionShop/items/models/item.py:25
 #: fashionShop/items/models/pattern.py:7 fashionShop/items/models/style.py:7
 #: fashionShop/stores/models.py:11
 msgid "name"
@@ -208,7 +208,7 @@ msgstr ""
 
 #: fashionShop/items/models/categories.py:13
 #: fashionShop/items/models/categories.py:29
-#: fashionShop/items/models/item.py:82
+#: fashionShop/items/models/item.py:83
 msgid "category"
 msgstr "категория"
 
@@ -217,7 +217,7 @@ msgid "categories"
 msgstr "категории"
 
 #: fashionShop/items/models/categories.py:36
-#: fashionShop/items/models/item.py:91
+#: fashionShop/items/models/item.py:92
 msgid "subcategory"
 msgstr "подкатегория"
 
@@ -225,7 +225,7 @@ msgstr "подкатегория"
 msgid "subcategories"
 msgstr "подкатегории"
 
-#: fashionShop/items/models/colors.py:17 fashionShop/items/models/item.py:109
+#: fashionShop/items/models/colors.py:17 fashionShop/items/models/item.py:110
 msgid "color group"
 msgstr "цветова група"
 
@@ -233,61 +233,70 @@ msgstr "цветова група"
 msgid "color groups"
 msgstr "цветови групи"
 
-#: fashionShop/items/models/item.py:19
+#: fashionShop/items/models/item.py:20
 msgid "item number"
 msgstr "арт. номер"
 
-#: fashionShop/items/models/item.py:36 fashionShop/pictures/models.py:32
+#: fashionShop/items/models/item.py:37 fashionShop/pictures/models.py:32
 msgid "description"
 msgstr "описание"
 
-#: fashionShop/items/models/item.py:42
+#: fashionShop/items/models/item.py:43
 msgid "additional information"
 msgstr "допълнителна информация"
 
-#: fashionShop/items/models/item.py:48
+#: fashionShop/items/models/item.py:49
 msgid "price"
 msgstr "цена"
 
-#: fashionShop/items/models/item.py:55
+#: fashionShop/items/models/item.py:56
 msgid "discount price"
 msgstr "промо цена"
 
-#: fashionShop/items/models/item.py:67
+#: fashionShop/items/models/item.py:68
 msgid "content"
 msgstr "състав"
 
-#: fashionShop/items/models/item.py:100 fashionShop/items/models/pattern.py:13
+#: fashionShop/items/models/item.py:101 fashionShop/items/models/pattern.py:13
 msgid "pattern"
 msgstr "кройка"
 
-#: fashionShop/items/models/item.py:118 fashionShop/items/models/size.py:17
+#: fashionShop/items/models/item.py:119
+#: fashionShop/items/models/item_collection.py:18
+msgid "collection"
+msgstr "колекция"
+
+#: fashionShop/items/models/item.py:128 fashionShop/items/models/size.py:17
 #: templates/items/category.html:97
 msgid "sizes"
 msgstr "размери"
 
-#: fashionShop/items/models/item.py:126
+#: fashionShop/items/models/item.py:136
 msgid "linked items"
 msgstr "свързани продукти"
 
-#: fashionShop/items/models/item.py:132 fashionShop/items/models/style.py:12
+#: fashionShop/items/models/item.py:142 fashionShop/items/models/style.py:12
 msgid "style"
 msgstr "стил"
 
-#: fashionShop/items/models/item.py:142
+#: fashionShop/items/models/item.py:152
 #: fashionShop/items/models/online_items.py:10
 #: fashionShop/items/models/online_items.py:46
 #: fashionShop/pictures/models.py:42
 msgid "item"
 msgstr "продукт"
 
-#: fashionShop/items/models/item.py:143
+#: fashionShop/items/models/item.py:153
 msgid "items"
 msgstr "продукти"
 
-#: fashionShop/items/models/item.py:238 fashionShop/items/models/item.py:239
+#: fashionShop/items/models/item.py:248 fashionShop/items/models/item.py:249
 msgid "stock"
 msgstr "наличност"
+
+#: fashionShop/items/models/item_collection.py:19
+msgid "collections"
+msgstr "колекции"
 
 #: fashionShop/items/models/online_items.py:17
 msgid "cart"
@@ -319,6 +328,14 @@ msgstr "кройки"
 #: fashionShop/items/models/style.py:13
 msgid "styles"
 msgstr "стилове"
+
+#: fashionShop/items/utils.py:292
+msgid "items were set to collection"
+msgstr "артикула бяха зададени към колекция"
+
+#: fashionShop/items/utils.py:295
+msgid "Set collection to"
+msgstr "Задай колекция"
 
 #: fashionShop/reviews/forms.py:9
 msgid "Your name*"
@@ -464,6 +481,10 @@ msgstr "Онлайн Поръчка"
 #: fashionShop/sales/models.py:132
 msgid "Online Orders"
 msgstr "Онлайн Поръчки"
+
+#: fashionShop/sales/utils.py:68
+msgid "Send BiSOFT reports"
+msgstr "Изпрати BiSOFT отчети"
 
 #: fashionShop/sales/views.py:27
 msgid "The item was not found."

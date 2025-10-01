@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 from fashionShop.common.globals import EURO_RATE
 from fashionShop.common.utils import transliterate
+from fashionShop.items.models import ItemCollection
 from fashionShop.items.models.categories import Category, SubCategory
 from fashionShop.items.models.colors import ColorGroup
 from fashionShop.items.models.pattern import Pattern
@@ -108,6 +109,15 @@ class Item(models.Model):
     color_group = models.ForeignKey(
         verbose_name=_('color group'),
         to=ColorGroup,
+        on_delete=models.SET_NULL,
+        related_name='items',
+        null=True,
+        blank=True,
+    )
+
+    collection = models.ForeignKey(
+        verbose_name=_('collection'),
+        to=ItemCollection,
         on_delete=models.SET_NULL,
         related_name='items',
         null=True,

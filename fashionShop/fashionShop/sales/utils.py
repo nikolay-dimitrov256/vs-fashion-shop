@@ -1,6 +1,7 @@
 from fashionShop.items.models import OrderItem, Size, Item, CartItem
 from fashionShop.sales.models import Cart, OnlineOrder
 from fashionShop.sales.tasks import send_bisoft_report
+from django.utils.translation import gettext as _
 
 
 def fill_order_from_cart_empty_cart(request, order):
@@ -64,4 +65,4 @@ def send_bisoft_reports(modeladmin, request, queryset):
     OnlineOrder.objects.bulk_update(orders, ['bisoft_report_sent'])
 
 
-send_bisoft_reports.short_description = 'Send BiSOFT reports'
+send_bisoft_reports.short_description = _('Send BiSOFT reports')

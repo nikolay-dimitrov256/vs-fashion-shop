@@ -1,14 +1,15 @@
 import time
 from pprint import pprint
 
-from django.contrib import admin
+from django.contrib import admin, messages
 from admin_extra_buttons.api import ExtraButtonsMixin, button, confirm_action, link, view
 from admin_extra_buttons.utils import HttpResponseRedirectToReferrer
 import requests
 
-from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock, ColorGroup, Pattern
+from fashionShop.items.models import Item, Category, SubCategory, Style, Size, Stock, ColorGroup, Pattern, \
+    ItemCollection
 from fashionShop.items.tasks import load_items_from_bisoft
-from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock
+from fashionShop.items.utils import parse_and_save_items, update_prices_and_stock, make_set_collection_action
 from fashionShop.pictures.admin import PictureInline
 
 
@@ -22,12 +23,21 @@ class StockInline(admin.TabularInline):
 
 @admin.register(Item)
 class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
-    list_display = ['item_number', 'name', 'price', 'discount_price']
+    list_display = ['item_number', 'name', 'collection', 'price', 'discount_price']
     list_filter = ['category', 'style', 'color_group']
     ordering = ['item_number']
     inlines = [PictureInline, StockInline]
     readonly_fields = ['created_at']
     search_fields = ['item_number', 'name']
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+
+        for collection in ItemCollection.objects.all():
+            func = make_set_collection_action(collection)
+            actions[func.__name__] = (func, func.__name__, func.__doc__)
+
+        return actions
 
     @button(visible=lambda self: self.context["request"].user.is_superuser,
             change_form=True,
@@ -83,3 +93,8 @@ class ColorGroupAdmin(admin.ModelAdmin):
 @admin.register(Pattern)
 class PatternAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(ItemCollection)
+class ItemCollectionAdmin(admin.ModelAdmin):
+    list_display = ['name', 'position']

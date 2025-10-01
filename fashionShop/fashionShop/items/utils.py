@@ -1,9 +1,11 @@
 import requests
 from django.utils.text import slugify
+from django.contrib import admin, messages
+from django.utils.translation import gettext as _
 
 from fashionShop.common.globals import BISOFT_API_URL
 from fashionShop.common.utils import transliterate
-from fashionShop.items.models import Item, Category, ColorGroup, Size, Stock
+from fashionShop.items.models import Item, Category, ColorGroup, Size, Stock, ItemCollection
 from fashionShop.stores.models import Store
 
 BISOFT_COLOR_GROUPS = {
@@ -240,3 +242,19 @@ def load_items_from_bisoft():
     Stock.objects.bulk_update(list(existing_stocks), ['quantity'])
     # Create new stocks
     Stock.objects.bulk_create(new_stocks)
+
+
+def make_set_collection_action(collection):
+    def action(modeladmin, request, queryset):
+        items = list(queryset)
+
+        for item in items:
+            item.collection = collection
+
+        Item.objects.bulk_update(items, ['collection'])
+        messages.success(request, f'{queryset.count()} {_("items were set to collection")} {collection.name}.')
+
+    action.__name__ = f'set_collection_{collection.pk}'
+    action.__doc__ = f'{_("Set collection to")} {collection.name}'
+
+    return action
