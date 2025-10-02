@@ -171,9 +171,9 @@
     background-position-x: 42%;
     }
 
-    /* .main_slider_content {
+    .main_slider_content {
         top: -12rem;
-    } */
+    }
 
     .main_slider_content .promo-text {
         width: 70%;
