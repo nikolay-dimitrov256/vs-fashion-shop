@@ -167,6 +167,10 @@
 }
 
 @media (max-width: 479px) {
+    .main_slider {
+    background-position-x: 42%;
+    }
+
     .main_slider_content {
         top: -12rem;
     }

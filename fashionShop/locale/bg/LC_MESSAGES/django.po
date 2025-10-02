@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-01 14:49+0300\n"
+"POT-Creation-Date: 2025-10-02 15:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -329,11 +329,11 @@ msgstr "кройки"
 msgid "styles"
 msgstr "стилове"
 
-#: fashionShop/items/utils.py:292
+#: fashionShop/items/utils.py:255
 msgid "items were set to collection"
 msgstr "артикула бяха зададени към колекция"
 
-#: fashionShop/items/utils.py:295
+#: fashionShop/items/utils.py:258
 msgid "Set collection to"
 msgstr "Задай колекция"
 
@@ -819,8 +819,8 @@ msgid "all clothes"
 msgstr "всички дрехи"
 
 #: templates/common/home.html:29
-msgid "Check out our blazers"
-msgstr "Разгледайте нашите сака"
+msgid "Check out our new arrivals"
+msgstr "Разгледайте новите ни предложения"
 
 #: templates/common/home.html:30
 msgid "shop now"
