@@ -340,3 +340,21 @@ class NewItemsListView(ItemsListView):
         items = items.filter(is_new=True)
 
         return items
+
+
+class MaxSizeListView(ItemsListView):
+    template_name = 'items/max-size.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        max_sizes = ['52', '54', '56', '58', '60', '62', '64', '66', '68', '70']
+
+        query = (
+            Q(stock__translated_size__size__in=max_sizes) |
+            Q(stock__translated_size__size__isnull=True, stock__size__size__in=max_sizes)
+        ) & Q(stock__quantity__gt=0)
+
+        items = items.filter(query)
+
+        return items

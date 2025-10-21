@@ -24,6 +24,7 @@ urlpatterns = [
     path('search/', views.SearchView.as_view(), name='search'),
     path('bestsellers/', views.BestsellersListView.as_view(), name='bestsellers'),
     path('new/', views.NewItemsListView.as_view(), name='new'),
+    path('max/', views.MaxSizeListView.as_view(), name='max-size'),
     path('<slug:slug>/', include([
         path('', views.ItemDetailView.as_view(), name='item-details'),
     ]))

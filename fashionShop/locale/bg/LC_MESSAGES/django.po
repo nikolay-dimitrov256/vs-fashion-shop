@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-02 15:15+0300\n"
+"POT-Creation-Date: 2025-10-14 16:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -734,13 +734,13 @@ msgstr "Вход"
 #: templates/items/blouses.html:16 templates/items/cardigans.html:10
 #: templates/items/category.html:31 templates/items/coats.html:16
 #: templates/items/dresses.html:16 templates/items/elegant.html:15
-#: templates/items/jackets.html:16 templates/items/new.html:16
-#: templates/items/office.html:15 templates/items/official.html:15
-#: templates/items/pants.html:16 templates/items/search.html:14
-#: templates/items/sets.html:16 templates/items/shirts.html:16
-#: templates/items/skirts.html:16 templates/items/suits.html:16
-#: templates/items/tank-tops.html:19 templates/items/tunics.html:16
-#: templates/items/vests.html:16
+#: templates/items/jackets.html:16 templates/items/max-size.html:15
+#: templates/items/new.html:16 templates/items/office.html:15
+#: templates/items/official.html:15 templates/items/pants.html:16
+#: templates/items/search.html:14 templates/items/sets.html:16
+#: templates/items/shirts.html:16 templates/items/skirts.html:16
+#: templates/items/suits.html:16 templates/items/tank-tops.html:19
+#: templates/items/tunics.html:16 templates/items/vests.html:16
 msgid "home"
 msgstr "начало"
 
@@ -850,13 +850,14 @@ msgstr "Най-продавани"
 #: templates/items/blouses.html:17 templates/items/cardigans.html:11
 #: templates/items/category.html:32 templates/items/coats.html:17
 #: templates/items/dresses.html:17 templates/items/elegant.html:16
-#: templates/items/jackets.html:17 templates/items/new.html:17
-#: templates/items/office.html:16 templates/items/official.html:16
-#: templates/items/pants.html:17 templates/items/search.html:15
-#: templates/items/sets.html:17 templates/items/shirts.html:17
-#: templates/items/single.html:34 templates/items/skirts.html:17
-#: templates/items/suits.html:17 templates/items/tank-tops.html:20
-#: templates/items/tunics.html:17 templates/items/vests.html:17
+#: templates/items/jackets.html:17 templates/items/max-size.html:16
+#: templates/items/new.html:17 templates/items/office.html:16
+#: templates/items/official.html:16 templates/items/pants.html:17
+#: templates/items/search.html:15 templates/items/sets.html:17
+#: templates/items/shirts.html:17 templates/items/single.html:34
+#: templates/items/skirts.html:17 templates/items/suits.html:17
+#: templates/items/tank-tops.html:20 templates/items/tunics.html:17
+#: templates/items/vests.html:17
 msgid "clothes"
 msgstr "дрехи"
 
@@ -947,6 +948,14 @@ msgstr "Спортно елегантни дамски дрехи"
 #: templates/items/jackets.html:22
 msgid "Women's jackets"
 msgstr "Дамски якета"
+
+#: templates/items/max-size.html:17
+msgid "plus size"
+msgstr "големи размери"
+
+#: templates/items/max-size.html:21
+msgid "Women's Clothes Plus Size"
+msgstr "Дамски дрехи големи размери"
 
 #: templates/items/office.html:17
 msgid "Office clothes"
@@ -1180,9 +1189,6 @@ msgstr "Ще се свържем с Вас при първа възможнос�
 
 #~ msgid "Women's blouses Vili Style"
 #~ msgstr "Дамски блузи Вили Стил"
-
-#~ msgid "Women's clothes Vili Style"
-#~ msgstr "Дамски дрехи Вили Стил"
 
 #~ msgid "Women's coats Vili Style"
 #~ msgstr "Дамски манта Вили Стил"

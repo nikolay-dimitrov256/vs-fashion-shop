@@ -1,0 +1,26 @@
+{% extends 'items/category.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Големи размери | Вили Стил
+{% endblock %}
+
+{% block meta %}
+<meta name="title" content="Големи размери - Онлайн Цени | Вили Стил">
+<meta name="description" content="Стилни дамски дрехи в големи размери – открий своя модел и се почувствай уверено. Бърза доставка и коректно обслужване.">
+{% endblock %}
+
+{% block breadcrumbs %}
+<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
+<li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
+<li class="active"><a href="{% url 'max-size' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'plus size'|capfirst %}</a></li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "Women's Clothes Plus Size" %}</h1>
+{% endblock %}
+
+{% block categories %}
+
+{% endblock %}
