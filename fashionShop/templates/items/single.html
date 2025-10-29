@@ -95,7 +95,12 @@
                 {% endcomment %}
                 <div class="product-info">
                     <div class="price">
-                        {% if object.is_discounted %}
+                        {% if is_black_friday %}
+                            <div class="original_price">{{ object.price }} {% trans 'lv' %}</div>
+                            <div class="original_price">{{ object.price_eur }} €</div>
+                            <div class="product_price">{{ object.black_price }} {% trans 'lv' %}</div>
+                            <div class="secondary_price">{{ object.discount_price_eur }} €</div>
+                        {% elif object.is_discounted %}
                             <div class="original_price">{{ object.price }} {% trans 'lv' %}</div>
                             <div class="original_price">{{ object.price_eur }} €</div>
                             <div class="product_price">{{ object.discount_price }} {% trans 'lv' %}</div>

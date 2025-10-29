@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-from fashionShop.common.globals import EURO_RATE
+from fashionShop.common.globals import EURO_RATE, black_friday_discount_percent, is_black_friday
 from fashionShop.common.utils import transliterate
 from fashionShop.items.models import ItemCollection
 from fashionShop.items.models.categories import Category, SubCategory
@@ -183,13 +183,19 @@ class Item(models.Model):
 
     @property
     def discount(self):
+        if is_black_friday:
+            return int(self.price - self.black_price)
+
         if not self.discount_price:
-            return None
+            return 0
 
         return int(self.price - self.discount_price)
 
     @property
     def final_price(self):
+        if is_black_friday:
+            return self.black_price
+
         if self.is_discounted:
             return self.discount_price
 
@@ -201,14 +207,32 @@ class Item(models.Model):
 
     @property
     def discount_price_eur(self):
+        if is_black_friday:
+            return self.black_price_eur
+
         return round(self.discount_price / Decimal(EURO_RATE), 2)
 
     @property
     def final_price_eur(self):
+        if is_black_friday:
+            return self.black_price_eur
+
         if self.is_discounted:
             return self.discount_price_eur
 
         return self.price_eur
+
+    @property
+    def black_price(self):
+        price = self.discount_price if self.is_discounted else self.price
+        discount = Decimal(black_friday_discount_percent / 100) * price
+        black_price = price - discount
+
+        return black_price.to_integral_value(rounding=ROUND_HALF_UP)
+
+    @property
+    def black_price_eur(self):
+        return round(self.black_price / Decimal(EURO_RATE), 2)
 
     def __str__(self):
         return str(self.item_number)

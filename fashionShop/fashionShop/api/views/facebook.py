@@ -4,6 +4,7 @@ import xml.dom.minidom
 
 from django.urls import reverse_lazy
 
+from fashionShop.common.globals import is_black_friday
 from fashionShop.items.models import Item
 
 
@@ -48,7 +49,7 @@ def products_feed(request):
         SubElement(it, 'g:availability').text = 'in stock'
         SubElement(it, 'g:condition').text = 'new'
         SubElement(it, 'g:price').text = f'{item.price} BGN'
-        SubElement(it, 'g:sale_price').text = f'{item.discount_price} BGN'
+        SubElement(it, 'g:sale_price').text = f'{item.black_price} BGN' if is_black_friday else f'{item.discount_price} BGN'
         SubElement(it, 'g:brand').text = 'Вили Стил'
         SubElement(it, 'color').text = item.color_group.name_bg if item.color_group else ''
         SubElement(it, 'g:google_product_category').text = item.category.name_bg
