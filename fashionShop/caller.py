@@ -2,8 +2,13 @@ from decimal import Decimal
 from pprint import pprint
 
 import requests
+import http.client
+import json
 
 from fashionShop.common.templatetags.shipping import is_free_shipping
+from fashionShop.settings import INFOBIP_URL, INFOBIP_API_KEY
+
+recepient = "359886531811"
 
 
 def send_bisoft_request():
@@ -30,4 +35,60 @@ def send_bisoft_request():
     print(response.json())
 
 
-send_bisoft_request()
+def send_sms_http():
+    BASE_URL = INFOBIP_URL
+    conn = http.client.HTTPSConnection(BASE_URL)
+    payload = json.dumps({
+        "messages": [
+            {
+                "sender": "InfoSMS",
+                "destinations": [
+                    {
+                        "to": "41793026727"
+                    }
+                ],
+                "content": {
+                    "text": "This is a sample message"
+                }
+            }
+        ]
+    })
+    headers = {
+        'Authorization': '{authorization}',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+    conn.request("POST", "/sms/3/messages", payload, headers)
+    res = conn.getresponse()
+    data = res.read()
+    print(data.decode("utf-8"))
+
+
+def send_sms():
+    payload = {
+        "messages": [
+            {
+                "sender": "InfoSMS",
+                "destinations": [
+                    {
+                        "to": recepient
+                    }
+                ],
+                "content": {
+                    "text": "This is a sample message"
+                }
+            }
+        ]
+    }
+    headers = {
+        'Authorization': f'App {INFOBIP_API_KEY}',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+
+    response = requests.post(f'{INFOBIP_URL}/sms/3/messages', headers=headers, json=payload)
+
+    print(response.json())
+
+
+send_sms()

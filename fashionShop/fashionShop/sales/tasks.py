@@ -41,7 +41,8 @@ def send_bisoft_report(order_id, save=True):
 
     report['user']['total_quantity'] = total_quantity
 
-    url = f'https://vilistil.com/get_sale.php?order={order.order_code}&lic=license'
+    # url = f'https://vilistil.com/get_sale.php?order={order.order_code}&lic=license'
+    url = f'https://vilistil.com/order/{order.order_code}/licence'
     headers = {
         'Content-Type': 'application/json'
     }
