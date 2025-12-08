@@ -14,7 +14,7 @@ from fashionShop.common.globals import EURO_RATE
 from fashionShop.items.models import CartItem, Item, Size
 from fashionShop.sales.forms import PhoneOrderForm, ShippingOrderForm
 from fashionShop.sales.models import Cart, OnlineOrder
-from fashionShop.sales.tasks import send_bisoft_report
+from fashionShop.sales.tasks import send_bisoft_report, send_sms
 from fashionShop.sales.utils import fill_order_from_cart_empty_cart
 
 
@@ -270,6 +270,7 @@ class CheckoutView(View):
 
                 order.refresh_from_db()
                 send_bisoft_report.delay(order.pk)
+                send_sms.delay(order.infobip_phone, order.status_message)
 
                 return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 
@@ -288,6 +289,7 @@ class CheckoutView(View):
 
                 order.refresh_from_db()
                 send_bisoft_report.delay(order.pk)
+                send_sms.delay(order.infobip_phone, order.status_message)
 
                 return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 

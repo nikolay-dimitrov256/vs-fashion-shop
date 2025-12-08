@@ -5,6 +5,7 @@ from django.db.models.functions import TruncMonth
 from fashionShop.items.models import OrderItem
 from fashionShop.sales.choices import StatusChoices
 from fashionShop.sales.models import OnlineOrder
+from fashionShop.sales.tasks import send_sms
 from fashionShop.sales.utils import refresh_orders, send_bisoft_reports
 
 
@@ -23,7 +24,7 @@ class OnlineOrderAdmin(admin.ModelAdmin):
                        'created_at', 'updated_at']
     search_fields = ['pk', 'order_code', 'first_name', 'last_name', 'comment', 'phone', 'email']
     list_filter = ['status', 'created_at']
-    list_display = ['pk', 'full_name', 'status', 'total', 'bisoft_report_sent']
+    list_display = ['pk', 'order_code', 'full_name', 'status', 'total', 'bisoft_report_sent']
     change_list_template = 'admin/orders_changelist.html'
     actions = [refresh_orders, send_bisoft_reports]
 
@@ -48,6 +49,14 @@ class OnlineOrderAdmin(admin.ModelAdmin):
                 completed=Count('pk', filter=Q(status=StatusChoices.COMPLETED)),
                 replaced=Count('pk', filter=Q(status=StatusChoices.REPLACED)),
                 refunded=Count('pk', filter=Q(status=StatusChoices.REFUNDED)),
+                sklad=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от склада')),
+                pazardjik=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Пазарджик')),
+                vazov=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Вазов')),
+                vazov_refunded=Sum('total', filter=Q(status=StatusChoices.REFUNDED) & Q(comment__icontains='Изпратена от Вазов')),
+                centar=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Център')),
+                centar_refunded=Sum('total', filter=Q(status=StatusChoices.REFUNDED) & Q(comment__icontains='Изпратена от Център')),
+                stara_zagora=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Стара Загора')),
+                asenovgrad=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Асеновград')),
             )
             .order_by('-month')
         )
@@ -72,3 +81,23 @@ class OnlineOrderAdmin(admin.ModelAdmin):
         extra_context['status_data'] = status_data
 
         return super().changelist_view(request, extra_context=extra_context)
+
+    def save_model(self, request, obj, form, change):
+        old_status = None
+
+        if change:
+            # Fetch old status from DB before saving
+            old_status = OnlineOrder.objects.only('status').get(pk=obj.pk).status
+
+        # Save the object first
+        super().save_model(request, obj, form, change)
+
+        # If it’s a new order created from the admin
+        if not change:
+            if obj.status == StatusChoices.PENDING:
+                send_sms(obj.infobip_phone, obj.status_message)
+            return
+
+        # For updates, check if status actually changed
+        if old_status != obj.status and obj.status in [StatusChoices.SENT, StatusChoices.COMPLETED]:
+            send_sms(obj.infobip_phone, obj.status_message)

@@ -46,7 +46,7 @@
     </form>
     {% endcomment %}
     <a href="{% url 'checkout' %}" class="checkout-btn">{% trans 'to checkout'|upper %}</a>
-    <a href="{% url 'home' %}" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
+    <a href=# onclick="javascript:history.back()" class="continue-btn">{% trans 'continue shopping'|upper %}</a>
 </div>
 {% else %}
 <div class="container-fluid empty-cart">

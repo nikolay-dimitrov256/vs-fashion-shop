@@ -4,6 +4,7 @@ from celery import shared_task
 from fashionShop.common.templatetags.shipping import is_free_shipping
 from fashionShop.sales.choices import ShippingChoices
 from fashionShop.sales.models import OnlineOrder
+from fashionShop.settings import INFOBIP_API_KEY, INFOBIP_URL
 
 
 @shared_task
@@ -65,3 +66,48 @@ def send_bisoft_report(order_id, save=True):
     except Exception as e:
         print(str(e))
         return False
+
+
+@shared_task
+def send_sms(to: str, message: str) -> dict | None:
+    return # TODO: remove this row when ready
+    if not to:
+        return None
+
+    payload = {
+        'messages': [
+            {
+                'sender': 'Vili Stil',
+                'destinations': [
+                    {
+                        'to': to
+                    }
+                ],
+                'content': {
+                    'text': message,
+                    # 'transliteration': 'BULGARIAN_CYRILLIC',
+                    'language': {
+                        'languageCode': 'BG'
+                    }
+                }
+            }
+        ],
+        'urlOptions': {
+            'shortenUrl': True,
+        },
+        'includeSmsCountInResponse': True,
+    }
+
+    headers = {
+        'Authorization': f'App {INFOBIP_API_KEY}',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+
+    try:
+        response = requests.post(f'{INFOBIP_URL}/sms/3/messages', headers=headers, json=payload)
+
+        return response.json()
+
+    except Exception:
+        return None

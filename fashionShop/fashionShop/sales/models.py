@@ -1,10 +1,13 @@
 import datetime
+import re
 
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse_lazy, reverse
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
+from fashionShop.common.utils import get_absolute_url
 from fashionShop.sales.choices import ShippingChoices, StatusChoices
 
 UserModel = get_user_model()
@@ -157,6 +160,38 @@ class OnlineOrder(models.Model):
             return full_name.strip()
 
         return None
+
+    @property
+    def status_message(self):
+        STATUS_SMS_TEMPLATES = {
+            StatusChoices.PENDING: f'Вили Стил: Вашата поръчка е приета с номер {self.order_code}.',
+            StatusChoices.SENT: f'Вили Стил: Поръчката Ви {self.order_code} беше предадена на куриер.',
+            StatusChoices.COMPLETED: f'Вили Стил: Поръчката Ви {self.order_code} беше изпълнена. Ако сте доволни '
+                                     f'от нея, ще се радваме да ни оставите положителен отзив:\n'
+                                     f'{"\n".join(
+                                         get_absolute_url("item-details", kwargs={"slug": slug})
+                                         for slug in {oi.item.slug for oi in self.order_items.all()}
+                                     )}',
+        }
+
+        message = STATUS_SMS_TEMPLATES[self.status]
+
+        return message
+
+    @property
+    def infobip_phone(self) -> str:
+        raw_phone = self.phone.replace(' ', '')
+        pattern = r'\(?\+?(359)?\)?0?(?P<phone>\d{9})\b'
+        match = re.search(pattern, raw_phone)
+
+        if match:
+            phone = match.group('phone')
+
+            cleaned_phone = f'359{phone}'
+
+            return cleaned_phone
+
+        return ''
 
     def __str__(self):
         return f'Order number {self.pk}'

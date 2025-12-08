@@ -19,6 +19,13 @@
     <th>{% trans 'completed'|capfirst %}</th>
     <th>{% trans 'replaced'|capfirst %}</th>
     <th>{% trans 'refunded'|capfirst %}</th>
+    <th>склад</th>
+    <th>Пазарджик</th>
+    <th>Вазов</th>
+    <th>върната Вазов</th>
+    <th>Център</th>
+    <th>върната Център</th>
+    <th>Стара Загора</th>
   </tr>
   {% for row in monthly_data %}
   <tr>
@@ -35,6 +42,13 @@
     <td>{{ row.completed }}</td>
     <td>{{ row.replaced }}</td>
     <td>{{ row.refunded }}</td>
+    <td>{{ row.sklad }}</td>
+    <td>{{ row.pazardjik }}</td>
+    <td>{{ row.vazov }}</td>
+    <td>{{ row.vazov_refunded }}</td>
+    <td>{{ row.centar }}</td>
+    <td>{{ row.centar_refunded }}</td>
+    <td>{{ row.stara_zagora }}</td>
   </tr>
   {% endfor %}
 </table>

@@ -1,3 +1,4 @@
+import re
 from decimal import Decimal
 from pprint import pprint
 
@@ -7,8 +8,6 @@ import json
 
 from fashionShop.common.templatetags.shipping import is_free_shipping
 from fashionShop.settings import INFOBIP_URL, INFOBIP_API_KEY
-
-recepient = "359886531811"
 
 
 def send_bisoft_request():
@@ -64,22 +63,30 @@ def send_sms_http():
     print(data.decode("utf-8"))
 
 
-def send_sms():
+def send_sms(to, message):
     payload = {
-        "messages": [
+        'messages': [
             {
-                "sender": "InfoSMS",
-                "destinations": [
+                'sender': 'Vili Stil',
+                'destinations': [
                     {
-                        "to": recepient
+                        'to': to
                     }
                 ],
-                "content": {
-                    "text": "This is a sample message"
+                'content': {
+                    'text': message,
+                    'transliteration': 'BULGARIAN_CYRILLIC',
+                    'language': {
+                        'languageCode': 'BG'
+                    }
                 }
             }
-        ]
+        ],
+        'options': {
+            'shortenUrl': True,
+        }
     }
+
     headers = {
         'Authorization': f'App {INFOBIP_API_KEY}',
         'Content-Type': 'application/json',
@@ -89,6 +96,3 @@ def send_sms():
     response = requests.post(f'{INFOBIP_URL}/sms/3/messages', headers=headers, json=payload)
 
     print(response.json())
-
-
-send_sms()
