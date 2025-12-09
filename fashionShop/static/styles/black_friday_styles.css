@@ -1,7 +1,7 @@
 header .black-friday-banner {
     text-align: center;
     color: #fff;
-    background-color: #000;
+    background-color: #0a5f00;
     font-size: 42px;
     line-height: 1;
     padding-block: 0.3em;
@@ -12,11 +12,11 @@ header .black-friday-banner {
 }
 
 .product_bubble_black {
-    background-color: #000;
+    background-color: #fe4c50;
 }
 
 .product_bubble_black::after {
-    border-color: transparent transparent transparent #000;
+    border-color: transparent transparent transparent #fe4c50;
 }
 
 @media only screen and (max-width: 991px) {

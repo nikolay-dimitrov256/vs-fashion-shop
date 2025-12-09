@@ -59,11 +59,12 @@ def products_feed(request):
         if len(item.pictures.all()) > 2:
             SubElement(it, 'additional_image_link').text = item.pictures.all()[2].image_url
 
-        for style in item.style.all():
-            SubElement(it, 'style').text = style.name
+        # for style in item.style.all():
+        #     SubElement(it, 'style').text = style.name
 
         sales = item.order_items.count()
 
+        SubElement(it, 'custom_label_0').text = ', '.join([s.name for s in item.style.all()])
         SubElement(it, 'custom_label_1').text = str(item.is_new)
         SubElement(it, 'custom_label_2').text = str(sales >= 5)
         SubElement(it, 'custom_label_3').text = item.collection.name if item.collection else ''

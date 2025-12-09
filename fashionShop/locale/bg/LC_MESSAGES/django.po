@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-29 10:55+0200\n"
+"POT-Creation-Date: 2025-12-08 10:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,12 +70,12 @@ msgid "users"
 msgstr "потребители"
 
 #: fashionShop/accounts/models.py:54 fashionShop/sales/forms.py:16
-#: fashionShop/sales/models.py:36
+#: fashionShop/sales/models.py:39
 msgid "first name"
 msgstr "име"
 
 #: fashionShop/accounts/models.py:61 fashionShop/sales/forms.py:21
-#: fashionShop/sales/models.py:43
+#: fashionShop/sales/models.py:46
 msgid "last name"
 msgstr "фамилия"
 
@@ -181,7 +181,7 @@ msgstr "апартамент"
 msgid "author"
 msgstr "автор"
 
-#: fashionShop/common/models.py:109 fashionShop/sales/models.py:92
+#: fashionShop/common/models.py:109 fashionShop/sales/models.py:95
 msgid "comment"
 msgstr "коментар"
 
@@ -197,7 +197,7 @@ msgstr "име"
 msgid "email"
 msgstr "имейл"
 
-#: fashionShop/common/models.py:130 fashionShop/sales/models.py:50
+#: fashionShop/common/models.py:130 fashionShop/sales/models.py:53
 msgid "phone"
 msgstr "телефон"
 
@@ -294,7 +294,7 @@ msgstr "продукт"
 msgid "items"
 msgstr "продукти"
 
-#: fashionShop/items/models/item.py:275 fashionShop/items/models/item.py:276
+#: fashionShop/items/models/item.py:272 fashionShop/items/models/item.py:273
 msgid "stock"
 msgstr "наличност"
 
@@ -466,23 +466,23 @@ msgstr "Моля изберете метод на доставка."
 msgid "Please provide both town and office for office delivery."
 msgstr "Моля въведете град и офис за доставка до офис."
 
-#: fashionShop/sales/models.py:55
+#: fashionShop/sales/models.py:58
 msgid "e-mail"
 msgstr "Имейл"
 
-#: fashionShop/sales/models.py:62
+#: fashionShop/sales/models.py:65
 msgid "shipping method"
 msgstr "метод за доставка"
 
-#: fashionShop/sales/models.py:85 templates/common/home.html:54
+#: fashionShop/sales/models.py:88 templates/common/home.html:54
 msgid "office"
 msgstr "офис"
 
-#: fashionShop/sales/models.py:131
+#: fashionShop/sales/models.py:134
 msgid "Online Order"
 msgstr "Онлайн Поръчка"
 
-#: fashionShop/sales/models.py:132
+#: fashionShop/sales/models.py:135
 msgid "Online Orders"
 msgstr "Онлайн Поръчки"
 
@@ -577,15 +577,15 @@ msgstr "Средна количка"
 msgid "Revenue"
 msgstr "Оборот"
 
-#: templates/admin/orders_changelist.html:42
+#: templates/admin/orders_changelist.html:56
 msgid "Orders by Status"
 msgstr "Поръчки по статус"
 
-#: templates/admin/orders_changelist.html:45
+#: templates/admin/orders_changelist.html:59
 msgid "Status"
 msgstr "Статус"
 
-#: templates/admin/orders_changelist.html:46
+#: templates/admin/orders_changelist.html:60
 msgid "Count"
 msgstr "Брой"
 
@@ -828,8 +828,8 @@ msgid "all clothes"
 msgstr "всички дрехи"
 
 #: templates/common/header.html:167
-msgid "Black Friday!"
-msgstr "Черен Петък!"
+msgid "Christmas sale!"
+msgstr "Коледно намаление!"
 
 #: templates/common/header.html:167
 msgid "on everything!"
@@ -1181,6 +1181,9 @@ msgstr "Номерът на Вашата поръчка е:"
 #: templates/sales/order.html:22
 msgid "We will contact you as soon as possible."
 msgstr "Ще се свържем с Вас при първа възможност."
+
+#~ msgid "Black Friday!"
+#~ msgstr "Черен Петък!"
 
 #~ msgid "Check our dresses for the summer"
 #~ msgstr "Разгледайте нашите рокли за лятото"
