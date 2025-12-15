@@ -40,7 +40,7 @@ class ShippingOrderForm(forms.ModelForm):
     class Meta:
         model = OnlineOrder
         # exclude = ['user', 'created_at', 'updated_at', 'address', 'status', 'total', 'bisoft_report_sent', 'send_message']
-        fields = ['phone', 'email', 'shipping_method', 'comment']
+        fields = ['phone', 'email', 'shipping_method', 'comment', 'first_name', 'last_name', 'town', 'office']
 
     def is_valid(self) -> bool:
         valid = super().is_valid()
