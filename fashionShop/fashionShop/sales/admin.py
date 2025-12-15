@@ -99,5 +99,5 @@ class OnlineOrderAdmin(admin.ModelAdmin):
             return
 
         # For updates, check if status actually changed
-        if old_status != obj.status and obj.status in [StatusChoices.SENT, StatusChoices.COMPLETED]:
+        if old_status != obj.status and obj.send_message:
             send_sms(obj.infobip_phone, obj.status_message)

@@ -69,9 +69,8 @@ def send_bisoft_report(order_id, save=True):
 
 
 @shared_task
-def send_sms(to: str, message: str) -> dict | None:
-    return # TODO: remove this row when ready
-    if not to:
+def send_sms(to: str, message: str | None) -> dict | None:
+    if not to or not message:
         return None
 
     payload = {

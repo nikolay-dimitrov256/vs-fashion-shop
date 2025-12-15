@@ -130,6 +130,10 @@ class OnlineOrder(models.Model):
         default=False,
     )
 
+    send_message = models.BooleanField(
+        default=True,
+    )
+
     class Meta:
         verbose_name = _('Online Order')
         verbose_name_plural = _('Online Orders')
@@ -162,7 +166,7 @@ class OnlineOrder(models.Model):
         return None
 
     @property
-    def status_message(self):
+    def status_message(self) -> str | None:
         STATUS_SMS_TEMPLATES = {
             StatusChoices.PENDING: f'Вили Стил: Вашата поръчка е приета с номер {self.order_code}.',
             StatusChoices.SENT: f'Вили Стил: Поръчката Ви {self.order_code} беше предадена на куриер.',
@@ -174,13 +178,13 @@ class OnlineOrder(models.Model):
                                      )}',
         }
 
-        message = STATUS_SMS_TEMPLATES[self.status]
+        message = STATUS_SMS_TEMPLATES.get(self.status)
 
         return message
 
     @property
     def infobip_phone(self) -> str:
-        raw_phone = self.phone.replace(' ', '')
+        raw_phone = self.phone.replace(' ', '').replace('-', '')
         pattern = r'\(?\+?(359)?\)?0?(?P<phone>\d{9})\b'
         match = re.search(pattern, raw_phone)
 
