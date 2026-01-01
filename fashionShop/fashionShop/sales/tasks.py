@@ -77,7 +77,7 @@ def send_sms(to: str, message: str | None) -> dict | None:
     payload = {
         'messages': [
             {
-                'sender': 'Vili Stil',
+                'sender': 'InfoSMS',
                 'destinations': [
                     {
                         'to': to

@@ -19,5 +19,5 @@ SITE_DOMAIN = 'vilistil.bg'
 EURO_RATE = 1.95583
 
 # is_black_friday = timezone.now().month == 11
-is_black_friday = True
+is_black_friday = False
 black_friday_discount_percent = 10
