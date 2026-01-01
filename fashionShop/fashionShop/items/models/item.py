@@ -214,6 +214,10 @@ class Item(models.Model):
         return int(self.price - self.discount_price)
 
     @property
+    def discount_eur(self):
+        return round(Decimal(self.discount) / Decimal(EURO_RATE), 2)
+
+    @property
     def final_price(self):
         if is_black_friday:
             return self.black_price

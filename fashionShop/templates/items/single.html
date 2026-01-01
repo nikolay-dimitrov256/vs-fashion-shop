@@ -98,18 +98,18 @@
                 <div class="product-info">
                     <div class="price">
                         {% if is_black_friday %}
-                            <div class="original_price">{{ object.price }} {% trans 'lv' %}</div>
                             <div class="original_price">{{ object.price_eur }} €</div>
-                            <div class="product_price">{{ object.black_price }} {% trans 'lv' %}</div>
-                            <div class="secondary_price">{{ object.discount_price_eur }} €</div>
+                            <div class="original_price">{{ object.price }} {% trans 'lv' %}</div>
+                            <div class="product_price">{{ object.black_price_eur }} €</div>
+                            <div class="secondary_price">{{ object.black_price }} {% trans 'lv' %}</div>
                         {% elif object.is_discounted %}
-                            <div class="original_price">{{ object.price }} {% trans 'lv' %}</div>
                             <div class="original_price">{{ object.price_eur }} €</div>
-                            <div class="product_price">{{ object.discount_price }} {% trans 'lv' %}</div>
-                            <div class="secondary_price">{{ object.discount_price_eur }} €</div>
+                            <div class="original_price">{{ object.price }} {% trans 'lv' %}</div>
+                            <div class="product_price">{{ object.discount_price_eur }} €</div>
+                            <div class="secondary_price">{{ object.discount_price }} {% trans 'lv' %}</div>
                         {% else %}
-                            <div class="product_price">{{ object.price }} {% trans 'lv' %}</div>
-                            <div class="secondary_price">{{ object.price_eur }} €</div>
+                            <div class="product_price">{{ object.price_eur }} €</div>
+                            <div class="secondary_price">{{ object.price }} {% trans 'lv' %}</div>
                         {% endif %}
                     </div>
                     <div class="review-data">

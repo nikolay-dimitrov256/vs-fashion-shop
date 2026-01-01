@@ -25,9 +25,9 @@
                 {% endif %}
             ></div>
             {% if is_black_friday %}
-            <div class="product_bubble product_bubble_right product_bubble_black d-flex flex-column align-items-center"><span>-{{ item.discount }} лв</span></div>
+            <div class="product_bubble product_bubble_right product_bubble_black d-flex flex-column align-items-center"><span>-{{ item.discount_eur }} €</span></div>
             {% elif item.is_discounted %}
-            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }} лв</span></div>
+            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount_eur }} €</span></div>
             {% elif item.is_new %}
             <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
             {% endif %}
@@ -35,11 +35,11 @@
                 <p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></p>
                 <div class="product_price">
                     {% if is_black_friday %}
-                    {{ item.black_price }} лв<span class="price_eur">/ {{ item.discount_price_eur }} €</span>
+                    {{ item.black_price_eur }} €<span class="price_eur">/ {{ item.black_price }} {% trans 'lv' %}</span>
                     {% elif item.is_discounted %}
-                    {{ item.discount_price }} лв<span class="price_eur">/ {{ item.discount_price_eur }} €</span>
+                    {{ item.discount_price_eur }} €<span class="price_eur">/ {{ item.discount_price }} {% trans 'lv' %}</span>
                     {% else %}
-                    {{ item.price }} {% trans 'lv' %}<span class="price_eur">/ {{ item.price_eur }} €</span>
+                    {{ item.price_eur }} €<span class="price_eur">/ {{ item.price }} {% trans 'lv' %}</span>
                     {% endif %}
                 </div>
             </div>

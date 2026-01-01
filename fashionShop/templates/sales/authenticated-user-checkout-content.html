@@ -9,8 +9,8 @@
             <p class="item-size"><span>{{ cart_item.size.size }}</span> x <span>{{ cart_item.quantity }}</span></p>
         </div>
         <div class="col-4">
-            <p class="item-price">{{ cart_item.total_price }} {% trans 'lv' %}</p>
-            <p class="price-eur">{{ cart_item.total_price_eur }} €</p>
+            <p class="item-price">{{ cart_item.total_price_eur }} €</p>
+            <p class="price-eur">{{ cart_item.total_price }} {% trans 'lv' %}</p>
         </div>
     </div>
 {% endfor %}
@@ -19,8 +19,8 @@
     <div class="col">
         <p>
             <span class="total">{% trans 'Total:' %} </span>
-            <span class="item-price">{{ cart.total }} {% trans 'lv' %}</span>
-            <span class="price-eur"> / {{ cart.total_eur }} €</span>
+            <span class="item-price">{{ cart.total_eur }} €</span>
+            <span class="price-eur"> / {{ cart.total }} {% trans 'lv' %}</span>
         </p>
         {% if cart.total|is_free_shipping %}
         <p>{% trans 'shipping: FREE' %}</p>
