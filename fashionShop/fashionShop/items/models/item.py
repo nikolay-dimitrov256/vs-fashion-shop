@@ -52,7 +52,22 @@ class Item(models.Model):
         default=0,
     )
 
+    price_eur = models.DecimalField(
+        _('price eur'),
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
+
     discount_price = models.DecimalField(
+        _('discount price'),
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+
+    discount_price_eur = models.DecimalField(
         _('discount price'),
         max_digits=10,
         decimal_places=2,
@@ -160,6 +175,13 @@ class Item(models.Model):
         if self.sub_category:
             self.category = self.sub_category.category
 
+        self.price_eur = (self.price / Decimal(EURO_RATE)).quantize(Decimal("0.01"), ROUND_HALF_UP)
+
+        if self.discount_price:
+            self.discount_price_eur = (self.discount_price / Decimal(EURO_RATE)).quantize(Decimal("0.01"), ROUND_HALF_UP)
+        else:
+            self.discount_price_eur = None
+
         super().save(*args, **kwargs)
 
     def get_available_sizes(self):
@@ -201,16 +223,16 @@ class Item(models.Model):
 
         return self.price
 
-    @property
-    def price_eur(self):
-        return round(self.price / Decimal(EURO_RATE), 2)
+    # @property
+    # def price_eur(self):
+    #     return round(self.price / Decimal(EURO_RATE), 2)
 
-    @property
-    def discount_price_eur(self):
-        if is_black_friday:
-            return self.black_price_eur
-
-        return round(self.discount_price / Decimal(EURO_RATE), 2)
+    # @property
+    # def discount_price_eur(self):
+    #     if is_black_friday:
+    #         return self.black_price_eur
+    #
+    #     return round(self.discount_price / Decimal(EURO_RATE), 2)
 
     @property
     def final_price_eur(self):
