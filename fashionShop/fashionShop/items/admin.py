@@ -23,7 +23,7 @@ class StockInline(admin.TabularInline):
 
 @admin.register(Item)
 class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
-    list_display = ['item_number', 'name', 'collection', 'price', 'price_eur', 'discount_price', 'discount_price_eur']
+    list_display = ['item_number', 'name', 'collection', 'price', 'price_bgn', 'discount_price', 'discount_price_bgn']
     list_filter = ['category', 'style', 'color_group']
     ordering = ['item_number']
     inlines = [PictureInline, StockInline]
