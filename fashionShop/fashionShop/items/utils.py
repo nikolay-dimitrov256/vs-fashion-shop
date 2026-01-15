@@ -1,9 +1,11 @@
+from decimal import Decimal, ROUND_HALF_UP
+
 import requests
 from django.utils.text import slugify
 from django.contrib import admin, messages
 from django.utils.translation import gettext as _
 
-from fashionShop.common.globals import BISOFT_API_URL
+from fashionShop.common.globals import BISOFT_API_URL, EURO_RATE
 from fashionShop.common.utils import transliterate
 from fashionShop.items.models import Item, Category, ColorGroup, Size, Stock, ItemCollection
 from fashionShop.stores.models import Store
@@ -166,8 +168,8 @@ def load_items_from_bisoft():
             existing_item.slug = slugify(f"{item['item_number']}-{transliterate(item['name_bg'])}")
             existing_item.description_bg = item['description_bg'] if '=' not in item['description_bg'] else ''
             existing_item.description_en = item['description_en'] if '=' not in item['description_en'] else ''
-            existing_item.price = item['price']
-            existing_item.discount_price = item['sale_price']
+            existing_item.price = (Decimal(item['price']) / Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+            existing_item.discount_price = (Decimal(item['sale_price']) / Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
             existing_item.content_bg = item['content_bg']
             existing_item.content_en = item['content_en']
 
@@ -182,8 +184,8 @@ def load_items_from_bisoft():
                 'slug': slugify(f"{item['item_number']}-{transliterate(item['name_bg'])}"),
                 'description_bg': item['description_bg'] if '=' not in item['description_bg'] else '',
                 'description_en': item['description_en'] if '=' not in item['description_en'] else '',
-                'price': item['price'],
-                'discount_price': item['sale_price'],
+                'price': (Decimal(item['price']) / Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP),
+                'discount_price': (Decimal(item['sale_price']) / Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP),
                 'content_bg': item['content_bg'],
                 'content_en': item['content_en'],
             }

@@ -26,7 +26,7 @@
     fbq('track', 'Purchase', {
                 content_ids: {{ content_ids|safe }},
                 num_items: {{ num_items }},
-                currency: "BGN", 
+                currency: "EUR", 
                 value: {{ object.total|unlocalize }}
                 });
 </script>

@@ -240,20 +240,20 @@
 											{% endif %}
 										></div>
 										{% if is_black_friday %}
-											<div class="product_bubble product_bubble_right product_bubble_black d-flex flex-column align-items-center"><span>-{{ item.discount_eur }}€</span></div>
+											<div class="product_bubble product_bubble_right product_bubble_black d-flex flex-column align-items-center"><span>-{{ item.discount }}€</span></div>
 										{% elif item.is_discounted %}
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount_eur }}€</span></div>
+											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }}€</span></div>
 										{% elif item.is_new %}
 											<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
 										{% endif %}
 										<div class="product_info">
 											<p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name|truncatewords:4 }}</a></p>
 											{% if is_black_friday %}
-												<div class="product_price">{{ item.black_price_eur }} €<span class="price_eur">/{{ item.black_price }} {% trans 'lv' %}</span></div>
+												<div class="product_price">{{ item.black_price }} €<span class="price_eur">/{{ item.black_price_bgn }} {% trans 'lv' %}</span></div>
 											{% elif item.is_discounted %}
-												<div class="product_price">{{ item.discount_price_eur }} €<span class="price_eur">/{{ item.discount_price }} {% trans 'lv' %}</span></div>
+												<div class="product_price">{{ item.discount_price }} €<span class="price_eur">/{{ item.discount_price_bgn }} {% trans 'lv' %}</span></div>
 											{% else %}
-												<div class="product_price">{{ item.price_eur }} €<span class="price_eur">/{{ item.price }} {% trans 'lv' %}</span></div>
+												<div class="product_price">{{ item.price }} €<span class="price_eur">/{{ item.price_bgn }} {% trans 'lv' %}</span></div>
 											{% endif %}
 										</div>
 									</div>

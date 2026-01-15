@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -34,11 +36,11 @@ class CartItem(models.Model):
 
     @property
     def total_price(self):
-        return self.item.final_price * self.quantity
+        return self.item.final_price * Decimal(self.quantity)
 
     @property
-    def total_price_eur(self):
-        return self.item.final_price_eur * self.quantity
+    def total_price_bgn(self):
+        return self.item.final_price_bgn * Decimal(self.quantity)
 
 
 class OrderItem(models.Model):

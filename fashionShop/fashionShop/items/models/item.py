@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal, ROUND_HALF_UP, ROUND_HALF_DOWN
 
 from django.db import models
 from django.utils.text import slugify
@@ -175,12 +175,12 @@ class Item(models.Model):
         if self.sub_category:
             self.category = self.sub_category.category
 
-        self.price_eur = (self.price / Decimal(EURO_RATE)).quantize(Decimal("0.01"), ROUND_HALF_UP)
+        # self.price_eur = (self.price / Decimal(EURO_RATE)).quantize(Decimal("0.01"), ROUND_HALF_UP)
 
-        if self.discount_price:
-            self.discount_price_eur = (self.discount_price / Decimal(EURO_RATE)).quantize(Decimal("0.01"), ROUND_HALF_UP)
-        else:
-            self.discount_price_eur = None
+        # if self.discount_price:
+        #     self.discount_price_eur = (self.discount_price / Decimal(EURO_RATE)).quantize(Decimal("0.01"), ROUND_HALF_UP)
+        # else:
+        #     self.discount_price_eur = None
 
         super().save(*args, **kwargs)
 
@@ -190,35 +190,28 @@ class Item(models.Model):
         return available_sizes.distinct()
 
     @property
-    def is_discounted(self):
+    def is_discounted(self) -> bool:
         if self.discount_price and 0 < self.discount_price < self.price:
             return True
 
         return False
 
-    # @property
-    # def is_new(self):
-    #     if datetime.today().date() - self.created_at < timedelta(days=90):
-    #         return True
-    #
-    #     return False
-
     @property
-    def discount(self):
+    def discount(self) -> Decimal:
         if is_black_friday:
-            return int(self.price - self.black_price)
+            return self.price - self.black_price
 
-        if not self.discount_price:
-            return 0
+        if not self.is_discounted:
+            return Decimal(0)
 
-        return int(self.price - self.discount_price)
-
-    @property
-    def discount_eur(self):
-        return round(Decimal(self.discount) / Decimal(EURO_RATE), 2)
+        return (self.price - self.discount_price).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
 
     @property
-    def final_price(self):
+    def discount_bgn(self) -> Decimal:
+        return (self.discount * Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+
+    @property
+    def final_price(self) -> Decimal:
         if is_black_friday:
             return self.black_price
 
@@ -227,38 +220,37 @@ class Item(models.Model):
 
         return self.price
 
-    # @property
-    # def price_eur(self):
-    #     return round(self.price / Decimal(EURO_RATE), 2)
-
-    # @property
-    # def discount_price_eur(self):
-    #     if is_black_friday:
-    #         return self.black_price_eur
-    #
-    #     return round(self.discount_price / Decimal(EURO_RATE), 2)
+    @property
+    def price_bgn(self) -> Decimal:
+        return (self.price * Decimal(EURO_RATE)).quantize(Decimal('.01'))
 
     @property
-    def final_price_eur(self):
+    def discount_price_bgn(self) -> Decimal:
+        return (self.discount_price * Decimal(EURO_RATE)).quantize(Decimal('.01'))
+
+    @property
+    def final_price_bgn(self) -> Decimal:
         if is_black_friday:
-            return self.black_price_eur
+            return self.black_price_bgn
 
         if self.is_discounted:
-            return self.discount_price_eur
+            return self.discount_price_bgn
 
-        return self.price_eur
+        return self.price_bgn
 
     @property
-    def black_price(self):
+    def black_price(self) -> Decimal:
         price = self.discount_price if self.is_discounted else self.price
         discount = Decimal(black_friday_discount_percent / 100) * price
         black_price = price - discount
 
-        return black_price.to_integral_value(rounding=ROUND_HALF_UP)
+        return black_price.quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
 
     @property
-    def black_price_eur(self):
-        return round(self.black_price / Decimal(EURO_RATE), 2)
+    def black_price_bgn(self) -> Decimal:
+        return (self.black_price * Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+
+
 
     def __str__(self):
         return str(self.item_number)

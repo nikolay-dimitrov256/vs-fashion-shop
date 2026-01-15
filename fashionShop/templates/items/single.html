@@ -98,18 +98,18 @@
                 <div class="product-info">
                     <div class="price">
                         {% if is_black_friday %}
-                            <div class="original_price">{{ object.price_eur }} €</div>
-                            <div class="original_price">{{ object.price }} {% trans 'lv' %}</div>
-                            <div class="product_price">{{ object.black_price_eur }} €</div>
-                            <div class="secondary_price">{{ object.black_price }} {% trans 'lv' %}</div>
+                            <div class="original_price">{{ object.price }} €</div>
+                            <div class="original_price">{{ object.price_bgn }} {% trans 'lv' %}</div>
+                            <div class="product_price">{{ object.black_price }} €</div>
+                            <div class="secondary_price">{{ object.black_price_bgn }} {% trans 'lv' %}</div>
                         {% elif object.is_discounted %}
-                            <div class="original_price">{{ object.price_eur }} €</div>
-                            <div class="original_price">{{ object.price }} {% trans 'lv' %}</div>
-                            <div class="product_price">{{ object.discount_price_eur }} €</div>
-                            <div class="secondary_price">{{ object.discount_price }} {% trans 'lv' %}</div>
+                            <div class="original_price">{{ object.price }} €</div>
+                            <div class="original_price">{{ object.price_bgn }} {% trans 'lv' %}</div>
+                            <div class="product_price">{{ object.discount_price }} €</div>
+                            <div class="secondary_price">{{ object.discount_price_bgn }} {% trans 'lv' %}</div>
                         {% else %}
-                            <div class="product_price">{{ object.price_eur }} €</div>
-                            <div class="secondary_price">{{ object.price }} {% trans 'lv' %}</div>
+                            <div class="product_price">{{ object.price }} €</div>
+                            <div class="secondary_price">{{ object.price_bgn }} {% trans 'lv' %}</div>
                         {% endif %}
                     </div>
                     <div class="review-data">
@@ -686,8 +686,8 @@
     fbq('track', 'ViewContent', {
         content_ids: [{{ object.pk }}],
         content_type: "{{ object.category }}",
-        currency: "BGN", 
-        value: {{ object.final_price|unlocalize }}
+        currency: "EUR", 
+        value: {{ object.final_pricе|unlocalize }}
         });
     
     const addtoCartButton = document.querySelector('.add_to_cart_button a');
@@ -701,11 +701,15 @@
             fbq('track', 'AddToCart', {
                 content_ids: [{{ object.pk }}],
                 content_type: "{{ object.category }}",
-                currency: "BGN", 
+                currency: "EUR", 
                 value: {{ object.final_price|unlocalize }}
                 });
         }
     }
+</script>
+
+<script>
+
 </script>
 
 <script>

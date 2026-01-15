@@ -1,5 +1,6 @@
 from _decimal import Decimal
 from copy import deepcopy
+from decimal import ROUND_HALF_UP, ROUND_HALF_DOWN
 
 from django.contrib import messages
 from django.db.models import Sum
@@ -84,7 +85,7 @@ def view_cart_view(request):
         )
         if cart:
             cart.total = sum(i.total_price for i in cart.cart_items.all())
-            cart.total_eur = sum(i.total_price_eur for i in cart.cart_items.all())
+            cart.total_bgn = sum(i.total_price_bgn for i in cart.cart_items.all())
 
         context = {
             'cart': cart,
@@ -103,9 +104,9 @@ def view_cart_view(request):
             sizes = {}
 
             for size, quantity in data.items():
-                total = item.final_price * int(quantity)
-                total_eur = item.final_price_eur * int(quantity)
-                sizes[size] = {'quantity': quantity, 'total': total, 'total_eur': total_eur}
+                total = item.final_price * Decimal(quantity)
+                total_bgn = item.final_price_bgn * Decimal(quantity)
+                sizes[size] = {'quantity': quantity, 'total': total, 'total_bgn': total_bgn}
                 cart_total += total
 
             cart[item_number] = {'item': item, 'sizes': sizes}
@@ -113,7 +114,7 @@ def view_cart_view(request):
         context = {
             'cart': cart,
             'cart_total': cart_total,
-            'cart_total_eur': round(cart_total / Decimal(EURO_RATE), 2)
+            'cart_total_bgn': (cart_total * Decimal(EURO_RATE)).quantize(Decimal('1.'))
         }
 
     return render(request, 'sales/cart.html', context)
@@ -195,7 +196,7 @@ class CheckoutView(View):
     def get(self, request):
         if request.user.is_authenticated:
             # self.cart.total = sum(i.total_price for i in self.cart.cart_items.all())
-            self.cart.total = 0
+            self.cart.total = Decimal(0)
             num_items = 0
             content_ids = set()
 
@@ -204,7 +205,7 @@ class CheckoutView(View):
                 num_items += item.quantity
                 content_ids.add(item.item.pk)
 
-            self.cart.total_eur = round(self.cart.total / Decimal(EURO_RATE), 2)
+            self.cart.total_bgn = (self.cart.total * Decimal(EURO_RATE)).quantize(Decimal('.01'))
 
             context = {
                 'cart': self.cart,
@@ -225,9 +226,9 @@ class CheckoutView(View):
                 sizes = {}
 
                 for size, quantity in data.items():
-                    total = item.final_price * int(quantity)
-                    total_eur = item.final_price_eur * int(quantity)
-                    sizes[size] = {'quantity': quantity, 'total': total, 'total_eur': total_eur}
+                    total = item.final_price * Decimal(quantity)
+                    total_bgn = (item.final_price_bgn * Decimal(quantity)).quantize(Decimal('.01'))
+                    sizes[size] = {'quantity': quantity, 'total': total, 'total_bgn': total_bgn}
                     cart_total += total
                     num_items += quantity
 
@@ -236,7 +237,7 @@ class CheckoutView(View):
             context = {
                 'cart': self.cart,
                 'cart_total': cart_total,
-                'cart_total_eur': round(cart_total / Decimal(EURO_RATE), 2),
+                'cart_total_bgn': (cart_total * Decimal(EURO_RATE)).quantize(Decimal('.01')),
                 'num_items': num_items,
                 'content_ids': content_ids,
             }

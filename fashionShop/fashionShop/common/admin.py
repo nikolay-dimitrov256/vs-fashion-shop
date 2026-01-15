@@ -16,4 +16,4 @@ class FeedbackAdmin(admin.ModelAdmin):
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'message']
-    readonly_fields = ['name', 'email', 'phone', 'message']
+    readonly_fields = ['name', 'email', 'phone', 'created_at', 'message']

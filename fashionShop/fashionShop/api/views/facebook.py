@@ -48,8 +48,8 @@ def products_feed(request):
         SubElement(it, 'g:image_link').text = item.pictures.first().image_url if item.pictures.first() else ''
         SubElement(it, 'g:availability').text = 'in stock'
         SubElement(it, 'g:condition').text = 'new'
-        SubElement(it, 'g:price').text = f'{item.price} BGN'
-        SubElement(it, 'g:sale_price').text = f'{item.black_price} BGN' if is_black_friday else f'{item.discount_price} BGN'
+        SubElement(it, 'g:price').text = f'{item.price} EUR'
+        SubElement(it, 'g:sale_price').text = f'{item.black_price} EUR' if is_black_friday else f'{item.discount_price} EUR'
         SubElement(it, 'g:brand').text = 'Вили Стил'
         SubElement(it, 'color').text = item.color_group.name_bg if item.color_group else ''
         SubElement(it, 'g:google_product_category').text = item.category.name_bg

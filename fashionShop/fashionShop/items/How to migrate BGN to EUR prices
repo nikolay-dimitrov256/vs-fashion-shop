@@ -1,0 +1,99 @@
+Current condition:
+class Item(models.Model):
+    price = models.DecimalField(
+        _('price'),
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
+
+    price_eur = models.DecimalField(
+        _('price eur'),
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
+
+    discount_price = models.DecimalField(
+        _('discount price'),
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+
+    discount_price_eur = models.DecimalField(
+        _('discount price'),
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+
+    @property
+    def is_discounted(self):
+        if self.discount_price and 0 < self.discount_price < self.price:
+            return True
+
+        return False
+
+    @property
+    def discount(self):
+        if is_black_friday:
+            return int(self.price - self.black_price)
+
+        if not self.discount_price:
+            return 0
+
+        return int(self.price - self.discount_price)
+
+    @property
+    def discount_eur(self):
+        return round(Decimal(self.discount) / Decimal(EURO_RATE), 2)
+
+    @property
+    def final_price(self):
+        if is_black_friday:
+            return self.black_price
+
+        if self.is_discounted:
+            return self.discount_price
+
+        return self.price
+
+    @property
+    def final_price_eur(self):
+        if is_black_friday:
+            return self.black_price_eur
+
+        if self.is_discounted:
+            return self.discount_price_eur
+
+        return self.price_eur
+
+    @property
+    def black_price(self):
+        price = self.discount_price if self.is_discounted else self.price
+        discount = Decimal(black_friday_discount_percent / 100) * price
+        black_price = price - discount
+
+        return black_price.to_integral_value(rounding=ROUND_HALF_UP)
+
+    @property
+    def black_price_eur(self):
+        return round(self.black_price / Decimal(EURO_RATE), 2)
+
+The price field is in BGN, and the price_eur field is in EUR.
+
+Question: Do I make the price field in EUR and make a price_bgn? It requires some refactoring and potential errors, but it will make my life easier later.
+Answer: Yes.
+Question: Do I make price_bgn a field, or a property, where it's dynamically calculated?
+Answer: Make price_bgn a dynamically calculated property.
+
+Plan:
+- Migrate the euro prices into the price field, using a custom migration. - done
+- Make a property price_bgn and discount_price_bgn - done
+- Refactor code - done
+- Deploy changes
+- Drop price_eur and discount_price_eur fields
+- Deploy changes
