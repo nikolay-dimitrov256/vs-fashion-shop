@@ -16,13 +16,15 @@ def free_shipping(request):
 @register.simple_tag
 def free_shipping_string(request):
     # currency = request.session.get('currency', 'bgn')
-    currency = 'bgn'
-    free_delivery = FREE_DELIVERY_THRESHOLD.get(currency.upper())
-    currency_text = CURRENCY_NAMES.get(currency.upper())
+    currency = 'EUR'
+    free_delivery_eur = FREE_DELIVERY_THRESHOLD.get('EUR')
+    free_delivery_bgn = FREE_DELIVERY_THRESHOLD.get('BGN')
+    currency_text_eur = CURRENCY_NAMES.get('EUR')
+    currency_text_bgn = CURRENCY_NAMES.get('BGN')
 
-    return f'{free_delivery}{currency_text}'
+    return f'{free_delivery_eur} {currency_text_eur} / {free_delivery_bgn} {currency_text_bgn}'
 
 
 @register.filter
 def is_free_shipping(total):
-    return total > FREE_DELIVERY_THRESHOLD.get('BGN')
+    return total > FREE_DELIVERY_THRESHOLD.get('EUR')
