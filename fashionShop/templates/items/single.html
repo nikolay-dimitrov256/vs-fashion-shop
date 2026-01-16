@@ -683,18 +683,23 @@
 
 {% block scripts %}
 <script>
+    // Meta Pixel tracking
     fbq('track', 'ViewContent', {
         content_ids: [{{ object.pk }}],
         content_type: "{{ object.category }}",
         currency: "EUR", 
-        value: {{ object.final_pricе|unlocalize }}
+        value: {{ object.final_price|unlocalize }}
         });
     
     const addtoCartButton = document.querySelector('.add_to_cart_button a');
     addtoCartButton.addEventListener('click', fbAddToCart);
+    
 
     function fbAddToCart() {
         const sizesDivElement = document.querySelector('.sizes');
+        const quantitySpanElement = document.getElementById('quantity_value');
+        const quantity = Number(quantitySpanElement.textContent);
+        const value = quantity * {{ object.final_price|unlocalize }};
 
         if (sizesDivElement.querySelector('.selected')) {
             
@@ -702,14 +707,45 @@
                 content_ids: [{{ object.pk }}],
                 content_type: "{{ object.category }}",
                 currency: "EUR", 
-                value: {{ object.final_price|unlocalize }}
+                value: value
                 });
         }
     }
-</script>
 
-<script>
+    // GA4 tracking
+    window.dataLayer.push({
+        event: 'view_item',
+        currency: 'EUR',
+        value: {{ object.final_price|unlocalize }},
+        items: [{
+            item_id: '{{ object.pk }}',
+            item_name: '{{ object.name }}',
+            item_category: '{{ object.category }}',
+            price: {{ object.final_price|unlocalize }},
+            quantity: 1
+        }]
+    });
 
+    addtoCartButton.addEventListener('click', googleAddToCart);
+
+    function googleAddToCart() {
+        const quantitySpanElement = document.getElementById('quantity_value');
+        const quantity = Number(quantitySpanElement.textContent);
+        const value = quantity * {{ object.final_price|unlocalize }};
+
+        window.dataLayer.push({
+            event: 'add_to_cart',
+            currency: 'EUR',
+            value: value,
+            items: [{
+                item_id: '{{ object.pk }}',
+                item_name: '{{ object.name }}',
+                item_category: '{{ object.category }}',
+                price: {{ object.final_price|unlocalize }},
+                quantity: quantity
+            }]
+        });
+    }
 </script>
 
 <script>

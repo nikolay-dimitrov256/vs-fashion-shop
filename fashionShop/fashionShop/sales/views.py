@@ -1,3 +1,4 @@
+import json
 from _decimal import Decimal
 from copy import deepcopy
 from decimal import ROUND_HALF_UP, ROUND_HALF_DOWN
@@ -198,11 +199,26 @@ class CheckoutView(View):
             self.cart.total = Decimal(0)
             num_items = 0
             content_ids = set()
+            ga4_items = []
 
             for item in self.cart.cart_items.all():
                 self.cart.total += item.total_price
                 num_items += item.quantity
                 content_ids.add(item.item.pk)
+
+                # This is for GA4 tracking
+                ga4_item = next((it for it in ga4_items if it['item_id'] == str(item.item.pk)), None)
+
+                if not ga4_item:
+                    ga4_item = {
+                        'item_id': str(item.item.pk),
+                        'item_name': item.item.name,
+                        'price': float(item.item.final_price),
+                        'quantity': 0
+                    }
+                    ga4_items.append(ga4_item)
+
+                ga4_item['quantity'] += item.quantity
 
             self.cart.total_bgn = (self.cart.total * Decimal(EURO_RATE)).quantize(Decimal('.01'))
 
@@ -210,6 +226,7 @@ class CheckoutView(View):
                 'cart': self.cart,
                 'num_items': num_items,
                 'content_ids': list(content_ids),
+                'ga4_items': json.dumps(ga4_items, ensure_ascii=False),
             }
 
         else:
@@ -219,10 +236,17 @@ class CheckoutView(View):
             items_map = {item.item_number: item for item in items}
             num_items = 0
             content_ids = list(items_map.keys())
+            ga4_items = []
 
             for item_number, data in self.cart.items():
                 item = items_map.get(int(item_number))
                 sizes = {}
+                ga4_item = {
+                    'item_id': str(item.item_number),
+                    'item_name': item.name,
+                    'price': float(item.final_price),
+                    'quantity': 0
+                }
 
                 for size, quantity in data.items():
                     total = item.final_price * Decimal(quantity)
@@ -230,8 +254,10 @@ class CheckoutView(View):
                     sizes[size] = {'quantity': quantity, 'total': total, 'total_bgn': total_bgn}
                     cart_total += total
                     num_items += quantity
+                    ga4_item['quantity'] += quantity
 
                 self.cart[item_number] = {'item': item, 'sizes': sizes}
+                ga4_items.append(ga4_item)
 
             context = {
                 'cart': self.cart,
@@ -239,6 +265,7 @@ class CheckoutView(View):
                 'cart_total_bgn': (cart_total * Decimal(EURO_RATE)).quantize(Decimal('.01')),
                 'num_items': num_items,
                 'content_ids': content_ids,
+                'ga4_items': json.dumps(ga4_items, ensure_ascii=False),
             }
 
         context['phone_order_form'] = PhoneOrderForm()
@@ -338,7 +365,29 @@ class ThankYouView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['content_ids'] = list(set(oi.item.pk for oi in self.object.order_items.all()))
-        context['num_items'] = sum(oi.quantity for oi in self.object.order_items.all())
+        content_ids = set()
+        num_items = 0
+        ga4_items = []
+
+        for order_item in self.object.order_items.all():
+            content_ids.add(order_item.item.pk)
+            num_items += order_item.quantity
+
+            ga4_item = next((it for it in ga4_items if it['item_id'] == str(order_item.item.pk)), None)
+
+            if not ga4_item:
+                ga4_item = {
+                    'item_id': str(order_item.item.pk),
+                    'item_name': order_item.item.name,
+                    'price': float(order_item.item.final_price),
+                    'quantity': 0
+                }
+                ga4_items.append(ga4_item)
+
+            ga4_item['quantity'] += order_item.quantity
+
+        context['content_ids'] = list(content_ids)
+        context['num_items'] = num_items
+        context['ga4_items'] = json.dumps(ga4_items, ensure_ascii=False)
 
         return context

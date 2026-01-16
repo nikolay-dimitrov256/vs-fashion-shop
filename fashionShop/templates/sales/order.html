@@ -23,12 +23,21 @@
 </div>
 
 <script>
+    // Meta Pixel tracking
     fbq('track', 'Purchase', {
                 content_ids: {{ content_ids|safe }},
                 num_items: {{ num_items }},
                 currency: "EUR", 
                 value: {{ object.total|unlocalize }}
                 });
+
+    // GA4 tracking
+    window.dataLayer.push({
+        currency: 'EUR',
+        value: {{ object.total|unlocalize }},
+        transaction_id: '{{ object.order_code }}',
+        items: {{ ga4_items|safe }}
+    });
 </script>
 
 {% endblock %}

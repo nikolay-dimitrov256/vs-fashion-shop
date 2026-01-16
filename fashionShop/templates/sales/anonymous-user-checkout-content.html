@@ -33,10 +33,19 @@
 </div>
 
 <script>
+    // Meta Pixel tracking
     fbq('track', 'InitiateCheckout', {
                 content_ids: {{ content_ids|safe }},
                 num_items: {{ num_items }},
                 currency: "EUR", 
                 value: {{ cart_total|unlocalize }}
                 });
+
+    // GA4 tracking
+    window.dataLayer.push({
+        event: 'begin_checkout',
+        currency: 'EUR',
+        value: {{ cart_total|unlocalize }},
+        items: {{ ga4_items|safe }}
+    });
 </script>
