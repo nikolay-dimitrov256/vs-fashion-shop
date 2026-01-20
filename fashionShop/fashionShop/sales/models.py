@@ -134,6 +134,13 @@ class OnlineOrder(models.Model):
         default=True,
     )
 
+    ip = models.ForeignKey(
+        to='accounts.IpAddress',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+
     class Meta:
         verbose_name = _('Online Order')
         verbose_name_plural = _('Online Orders')
@@ -196,6 +203,14 @@ class OnlineOrder(models.Model):
             return cleaned_phone
 
         return ''
+
+    @property
+    def ip_is_suspicious(self):
+        return self.ip.is_suspicious
+
+    @property
+    def ip_is_banned(self):
+        return self.ip.is_banned
 
     def __str__(self):
         return f'Order number {self.pk}'

@@ -21,7 +21,7 @@ class OnlineOrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline]
     readonly_fields = ['order_code', 'full_name', 'phone', 'user', 'email',
                        'shipping_method', 'office', 'town', 'address', 'total',
-                       'created_at', 'updated_at']
+                       'ip_is_suspicious', 'ip_is_banned', 'created_at', 'updated_at']
     search_fields = ['pk', 'order_code', 'first_name', 'last_name', 'comment', 'phone', 'email']
     list_filter = ['status', 'created_at']
     list_display = ['pk', 'order_code', 'full_name', 'status', 'total', 'bisoft_report_sent']

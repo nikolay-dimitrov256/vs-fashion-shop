@@ -74,3 +74,32 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.full_name.strip() or self.user.email
+
+
+class IpAddress(models.Model):
+    ip = models.GenericIPAddressField(
+        protocol='both',
+        unpack_ipv4=True,
+        unique=True,
+    )
+
+    is_suspicious = models.BooleanField(
+        default=False,
+    )
+
+    is_banned = models.BooleanField(
+        default=False,
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    notes = models.TextField()
+
+    def __str__(self):
+        return self.ip

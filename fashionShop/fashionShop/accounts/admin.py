@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 
 from fashionShop.accounts.forms import AppUserChangeForm, AppUserCreateForm
-from fashionShop.accounts.models import Profile
+from fashionShop.accounts.models import Profile, IpAddress
 
 UserModel = get_user_model()
 
@@ -46,3 +46,9 @@ class UserModelAdmin(admin.ModelAdmin):
 
     form = AppUserChangeForm
     add_form = AppUserCreateForm
+
+
+@admin.register(IpAddress)
+class IpAddressAdmin(admin.ModelAdmin):
+    list_display = ['ip', 'is_suspicious', 'is_banned', 'created_at']
+    readonly_fields = ['ip', 'created_at', 'updated_at']

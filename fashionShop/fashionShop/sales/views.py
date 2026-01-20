@@ -11,8 +11,10 @@ from django.utils.translation import gettext as _
 from django.views.generic import View, CreateView, TemplateView
 from django.views.generic import DetailView
 
+from fashionShop.accounts.models import IpAddress
 from fashionShop.common.forms import AddressForm
 from fashionShop.common.globals import EURO_RATE
+from fashionShop.common.utils import get_client_ip
 from fashionShop.items.models import CartItem, Item, Size
 from fashionShop.sales.forms import PhoneOrderForm, ShippingOrderForm
 from fashionShop.sales.models import Cart, OnlineOrder
@@ -293,6 +295,10 @@ class CheckoutView(View):
                     order.user = request.user
                     order.email = request.user.email
 
+                ip_address = get_client_ip(request)
+                ip, created = IpAddress.objects.get_or_create(ip=ip_address)
+                order.ip = ip
+
                 order.save()
 
                 order.refresh_from_db()
@@ -312,6 +318,11 @@ class CheckoutView(View):
 
                 order.user = request.user if request.user.is_authenticated else None
                 order.email = request.user.email if request.user.is_authenticated else None
+
+                ip_address = get_client_ip(request)
+                ip, created = IpAddress.objects.get_or_create(ip=ip_address)
+                order.ip = ip
+
                 order.save()
 
                 order.refresh_from_db()
