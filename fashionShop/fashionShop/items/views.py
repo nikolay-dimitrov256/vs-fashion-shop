@@ -366,3 +366,27 @@ class MaxSizeListView(ItemsListView):
         items = items.filter(query)
 
         return items
+
+
+class FallWinterListView(ItemsListView):
+    template_name = 'items/fall-winter.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        query = Q(collection__name='есен/зима') | Q(collection__name='пролет/есен')
+        items = items.filter(query)
+
+        return items
+
+
+class SpringSummerListView(ItemsListView):
+    template_name = 'items/spring-summer.html'
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        query = Q(collection__name='пролет/лято') | Q(collection__name='пролет/есен') | Q(collection__name='лято')
+        items = items.filter(query)
+
+        return items
