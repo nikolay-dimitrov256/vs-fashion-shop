@@ -70,7 +70,6 @@ def send_bisoft_report(order_id, save=True):
 
 @shared_task
 def send_sms(to: str, message: str | None) -> dict | None:
-    return None
     if not to or not message:
         return None
 
