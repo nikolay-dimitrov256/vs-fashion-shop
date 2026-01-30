@@ -33,6 +33,7 @@
 
     // GA4 tracking
     window.dataLayer.push({
+        event: 'purchase',
         currency: 'EUR',
         value: {{ object.total|unlocalize }},
         transaction_id: '{{ object.order_code }}',
