@@ -8,8 +8,14 @@
 {% endblock %}
 
 {% block meta %}
-<meta name="title" content="Дамски дрехи - Онлайн Цени | Вили Стил">
-<meta name="description" content="Дамски дрехи от българския производител Вили Стил подходящи за всякакви случаи. Разнообразие от цветове и размери. За запитвания и поръчки - 0886531811">
+	{% if request.META.QUERY_STRING %}
+		<meta name="robots" content="noindex, nofollow">
+	{% else %}
+		{% block meta_tags %}
+		<meta name="title" content="Дамски дрехи - Онлайн Цени | Вили Стил">
+		<meta name="description" content="Дамски дрехи от българския производител Вили Стил подходящи за всякакви случаи. Разнообразие от цветове и размери. За запитвания и поръчки - 0886531811">
+		{% endblock %}
+	{% endif %}
 {% endblock %}
 
 {% block styles %}
