@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block meta %}
+	<link rel="canonical" href="{{ canonical_url }}">
 	{% if request.META.QUERY_STRING %}
 		<meta name="robots" content="noindex, nofollow">
 	{% else %}

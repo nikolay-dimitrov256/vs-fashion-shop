@@ -5,6 +5,7 @@ from django.db.models.functions import Coalesce
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 
+from fashionShop.common.utils import get_absolute_url
 from fashionShop.items.models import Item, ColorGroup, Stock, Size, SubCategory
 from fashionShop.pictures.forms import ReviewPictureFormSet
 from fashionShop.pictures.models import Picture
@@ -75,6 +76,7 @@ class ItemDetailView(DetailView):
 class ItemsListView(ListView):
     model = Item
     template_name = 'items/category.html'
+    view_name = 'all-items'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
@@ -87,6 +89,7 @@ class ItemsListView(ListView):
         if 'page' in query_params:
             del query_params['page']
         context['query_params'] = query_params
+        context['canonical_url'] = get_absolute_url(self.view_name)
 
         return context
 
@@ -125,6 +128,7 @@ class ItemsListView(ListView):
 
 class PantsListView(ItemsListView):
     template_name = 'items/pants.html'
+    view_name = 'pants'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -136,6 +140,7 @@ class PantsListView(ItemsListView):
 
 class SkirtsListView(ItemsListView):
     template_name = 'items/skirts.html'
+    view_name = 'skirts'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -147,6 +152,7 @@ class SkirtsListView(ItemsListView):
 
 class DressesListView(ItemsListView):
     template_name = 'items/dresses.html'
+    view_name = 'dresses'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -158,6 +164,7 @@ class DressesListView(ItemsListView):
 
 class ShirtsListView(ItemsListView):
     template_name = 'items/shirts.html'
+    view_name = 'shirts'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -169,6 +176,7 @@ class ShirtsListView(ItemsListView):
 
 class BlousesListView(ItemsListView):
     template_name = 'items/blouses.html'
+    view_name = 'blouses'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -180,6 +188,7 @@ class BlousesListView(ItemsListView):
 
 class TunicsListView(ItemsListView):
     template_name = 'items/tunics.html'
+    view_name = 'tunics'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -191,6 +200,7 @@ class TunicsListView(ItemsListView):
 
 class BlazersListView(ItemsListView):
     template_name = 'items/blazers.html'
+    view_name = 'blazers'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -202,6 +212,7 @@ class BlazersListView(ItemsListView):
 
 class SuitsListView(ItemsListView):
     template_name = 'items/suits.html'
+    view_name = 'suits'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -213,6 +224,7 @@ class SuitsListView(ItemsListView):
 
 class JacketsListView(ItemsListView):
     template_name = 'items/jackets.html'
+    view_name = 'jackets'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -224,6 +236,7 @@ class JacketsListView(ItemsListView):
 
 class CoatsListView(ItemsListView):
     template_name = 'items/coats.html'
+    view_name = 'coats'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -235,6 +248,7 @@ class CoatsListView(ItemsListView):
 
 class VestsListView(ItemsListView):
     template_name = 'items/vests.html'
+    view_name = 'vests'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -246,6 +260,7 @@ class VestsListView(ItemsListView):
 
 class TankTopsListView(ItemsListView):
     template_name = 'items/tank-tops.html'
+    view_name = 'underwear'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -257,6 +272,7 @@ class TankTopsListView(ItemsListView):
 
 class SetsListView(ItemsListView):
     template_name = 'items/sets.html'
+    view_name = 'classic'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -268,6 +284,7 @@ class SetsListView(ItemsListView):
 
 class CardigansListView(ItemsListView):
     template_name = 'items/tank-tops.html'
+    view_name = 'cardigans'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -279,6 +296,7 @@ class CardigansListView(ItemsListView):
 
 class ElegantListView(ItemsListView):
     template_name = 'items/elegant.html'
+    view_name = 'elegant'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -290,6 +308,7 @@ class ElegantListView(ItemsListView):
 
 class OfficeListView(ItemsListView):
     template_name = 'items/office.html'
+    view_name = 'office'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -301,6 +320,7 @@ class OfficeListView(ItemsListView):
 
 class OfficialListView(ItemsListView):
     template_name = 'items/official.html'
+    view_name = 'official'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -312,6 +332,7 @@ class OfficialListView(ItemsListView):
 
 class SearchView(ItemsListView):
     template_name = 'items/search.html'
+    view_name = 'search'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -330,6 +351,7 @@ class SearchView(ItemsListView):
 
 class BestsellersListView(ItemsListView):
     template_name = 'items/bestsellers.html'
+    view_name = 'bestsellers'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -341,6 +363,7 @@ class BestsellersListView(ItemsListView):
 
 class NewItemsListView(ItemsListView):
     template_name = 'items/new.html'
+    view_name = 'new'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -352,6 +375,7 @@ class NewItemsListView(ItemsListView):
 
 class MaxSizeListView(ItemsListView):
     template_name = 'items/max-size.html'
+    view_name = 'max-size'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -370,6 +394,7 @@ class MaxSizeListView(ItemsListView):
 
 class FallWinterListView(ItemsListView):
     template_name = 'items/fall-winter.html'
+    view_name = 'fall-winter'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -382,6 +407,7 @@ class FallWinterListView(ItemsListView):
 
 class SpringSummerListView(ItemsListView):
     template_name = 'items/spring-summer.html'
+    view_name = 'spring-summer'
 
     def get_queryset(self):
         items = super().get_queryset()
