@@ -90,6 +90,8 @@ class ItemsListView(ListView):
             del query_params['page']
         context['query_params'] = query_params
         context['canonical_url'] = get_absolute_url(self.view_name)
+        context['meta_title'] = self.meta_title
+        context['meta_description'] = self.meta_description
 
         return context
 
@@ -125,6 +127,15 @@ class ItemsListView(ListView):
 
         return paginate_by
 
+    @property
+    def meta_title(self):
+        return 'Дамски дрехи - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Дамски дрехи от българския производител Вили Стил подходящи за всякакви случаи. '
+                'Разнообразие от цветове и размери. За запитвания и поръчки - 0886531811')
+
 
 class PantsListView(ItemsListView):
     template_name = 'items/pants.html'
@@ -136,6 +147,15 @@ class PantsListView(ItemsListView):
         items = items.filter(category__name_en='pants')
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Дамски панталони спортно елегантни - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Вземете си панталон от Вили Стил, за да се чувствате комфортно навсякъде. Голямо разнообразие '
+                'от цветове и размери. За запитвания и поръчки - 0886531811')
 
 
 class SkirtsListView(ItemsListView):
@@ -149,6 +169,14 @@ class SkirtsListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Дамски поли - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return 'Разгледайте дамски поли от българския производител Вили Стил. За запитвания и поръчки - 0886531811'
+
 
 class DressesListView(ItemsListView):
     template_name = 'items/dresses.html'
@@ -160,6 +188,15 @@ class DressesListView(ItemsListView):
         items = items.filter(category__name_en='dresses')
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Стилни дамски рокли - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте дамски рокли от българския производител Вили Стил. Подходящи за ежедневни разходки, '
+                'офис, специални случаи. За запитвания и поръчки - 0886531811')
 
 
 class ShirtsListView(ItemsListView):
@@ -173,6 +210,15 @@ class ShirtsListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Дамски ризи спортно елегантни и официални Онлайн Цени Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте дамски ризи от българския производител Вили Стил. Имаме голямо разнообразие от '
+                'цветове и размери за всякакви поводи. За поръчки - 0886531811')
+
 
 class BlousesListView(ItemsListView):
     template_name = 'items/blouses.html'
@@ -184,6 +230,15 @@ class BlousesListView(ItemsListView):
         items = items.filter(category__name_en='blouses')
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Стилни дамски блузи - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте предложенията за блузи от българския производител Вили Стил. Имаме голямо разнообразие '
+                'от цветове и размери за всякакви поводи. За поръчки - 0886531811')
 
 
 class TunicsListView(ItemsListView):
@@ -197,6 +252,14 @@ class TunicsListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Дамски туники спортно-елегантни - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return 'Разгледайте дамски туники от българския производител Вили Стил. За запитвания и поръчки - 0886531811'
+
 
 class BlazersListView(ItemsListView):
     template_name = 'items/blazers.html'
@@ -208,6 +271,15 @@ class BlazersListView(ItemsListView):
         items = items.filter(category__name_en='blazers')
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Стилни дамски сака - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте дамски сака и блейзъри от българския производител Вили Стил. Имаме голямо разнообразие '
+                'от цветове и размери. За запитвания и поръчки - 0886531811')
 
 
 class SuitsListView(ItemsListView):
@@ -221,6 +293,14 @@ class SuitsListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Дамски костюми - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return 'Разгледайте дамски костюми от българския производител Вили Стил. За запитвания и поръчки - 0886531811'
+
 
 class JacketsListView(ItemsListView):
     template_name = 'items/jackets.html'
@@ -232,6 +312,15 @@ class JacketsListView(ItemsListView):
         items = items.filter(category__name_en='jackets')
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Стилни дамски якета - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте дамски якета от българския производител Вили Стил. Имаме голямо разнообразие от '
+                'цветове и размери. За запитвания и поръчки - 0886531811')
 
 
 class CoatsListView(ItemsListView):
@@ -245,6 +334,15 @@ class CoatsListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Стилни дамски манта - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте дамски манта от българския производител Вили Стил. Имаме голямо разнообразие от цветове '
+                'и размери. За запитвания и поръчки - 0886531811')
+
 
 class VestsListView(ItemsListView):
     template_name = 'items/vests.html'
@@ -256,6 +354,14 @@ class VestsListView(ItemsListView):
         items = items.filter(category__name_en='vests')
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Стилни дамски елеци - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return 'Разгледайте дамски елеци от българския производител Вили Стил. За запитвания и поръчки - 0886531811'
 
 
 class TankTopsListView(ItemsListView):
@@ -269,6 +375,14 @@ class TankTopsListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Дамски потници - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return 'Разгледайте дамски потници от българския производител Вили Стил. За запитвания и поръчки - 0886531811'
+
 
 class SetsListView(ItemsListView):
     template_name = 'items/sets.html'
@@ -280,6 +394,15 @@ class SetsListView(ItemsListView):
         items = items.filter(category__name_en='classic')
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Дамски комплекти спортно елегантни - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Вземете си комплект от Вили Стил, за да се чувствате комфортно навсякъде. Голямо разнообразие от '
+                'цветове и размери. За запитвания и поръчки - 0886531811')
 
 
 class CardigansListView(ItemsListView):
@@ -293,6 +416,15 @@ class CardigansListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Дамски жилетки - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте дамски жилетки от българския производител Вили Стил. Имаме голямо разнообразие от '
+                'цветове и размери. За запитвания и поръчки - 0886531811')
+
 
 class ElegantListView(ItemsListView):
     template_name = 'items/elegant.html'
@@ -304,6 +436,15 @@ class ElegantListView(ItemsListView):
         items = items.filter(style__name__iexact='elegant')
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Спортно елегантни дамски дрехи - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте спортно елегантни дрехи от Вили Стил. Имаме голямо разнообразие от цветове и размери '
+                'за всякакви поводи. За поръчки - 0886531811')
 
 
 class OfficeListView(ItemsListView):
@@ -317,6 +458,15 @@ class OfficeListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Дамски офис дрехи - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Работата е удоволствие, когато се върши със стил. Разгледайте офис тоалетите ни за жени, за да '
+                'покажете стила си на работното място. За поръчки - 0886531811')
+
 
 class OfficialListView(ItemsListView):
     template_name = 'items/official.html'
@@ -328,6 +478,15 @@ class OfficialListView(ItemsListView):
         items = items.filter(style__name__iexact='official')
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Официални дрехи за жени - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Възползвайте се от предложенията ни за официални дамски дрехи, за да сияете на предстоящото събитие. '
+                'За въпроси и поръчки - 0886531811')
 
 
 class SearchView(ItemsListView):
@@ -360,6 +519,14 @@ class BestsellersListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Най-продавани дрехи | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return 'Най-продаваните ни изделия. За запитвания и поръчки - 0886531811'
+
 
 class NewItemsListView(ItemsListView):
     template_name = 'items/new.html'
@@ -371,6 +538,15 @@ class NewItemsListView(ItemsListView):
         items = items.filter(is_new=True)
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Нови предложения - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте новите предложения на българския производител Вили Стил. За запитвания и поръчки - '
+                '0886531811')
 
 
 class MaxSizeListView(ItemsListView):
@@ -391,6 +567,15 @@ class MaxSizeListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Дамски дрехи големи размери - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Стилни дамски дрехи в големи размери – открий своя модел и се почувствай уверено. Бърза доставка '
+                'и коректно обслужване.')
+
 
 class FallWinterListView(ItemsListView):
     template_name = 'items/fall-winter.html'
@@ -404,6 +589,15 @@ class FallWinterListView(ItemsListView):
 
         return items
 
+    @property
+    def meta_title(self):
+        return 'Колекция есен/зима - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте предложенията за сезон есен/зима на българския производител на дамски дрехи Вили Стил. '
+                'За запитвания и поръчки - 0886531811')
+
 
 class SpringSummerListView(ItemsListView):
     template_name = 'items/spring-summer.html'
@@ -416,3 +610,12 @@ class SpringSummerListView(ItemsListView):
         items = items.filter(query)
 
         return items
+
+    @property
+    def meta_title(self):
+        return 'Колекция пролет/лято - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return ('Разгледайте предложенията за сезон пролет/лято на българския производител на дамски дрехи Вили Стил. '
+                'За запитвания и поръчки - 0886531811')

@@ -1,6 +1,8 @@
 from django.contrib.sites.models import Site
 from django.urls import reverse_lazy
 
+from fashionShop.common.globals import SITE_DOMAIN
+
 CYRILLIC_TO_LATIN = {
     "а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "yo", "ж": "zh",
     "з": "z", "и": "i", "й": "y", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o",
@@ -26,6 +28,7 @@ def get_client_ip(request):
 
 def get_absolute_url(viewname, args=None, kwargs=None, scheme="https"):
     path = reverse_lazy(viewname, args=args, kwargs=kwargs)
-    domain = Site.objects.get_current().domain
+    # domain = Site.objects.get_current().domain
+    domain = SITE_DOMAIN
 
     return f"{scheme}://{domain}{path}"
