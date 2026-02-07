@@ -10,6 +10,8 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v4
