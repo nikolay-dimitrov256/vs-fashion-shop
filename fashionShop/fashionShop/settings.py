@@ -295,9 +295,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 BISOFT_API_KEY = 'lol_key'
 
 cloudinary.config(
-    cloud_name=config('CLOUDINARY_CLOUD_NAME'),
-    api_key=config('CLOUDINARY_API_KEY'),
-    api_secret=config('CLOUDINARY_API_SECRET'),
+    cloud_name='abc', #config('CLOUDINARY_CLOUD_NAME'),
+    api_key='abc', #config('CLOUDINARY_API_KEY'),
+    api_secret='abc', #config('CLOUDINARY_API_SECRET'),
     secure=True,  # Ensures image urls are https
 )
 # MEDIA_URL = '/media/'

@@ -21,6 +21,18 @@ jobs:
       CSRF_TRUSTED_ORIGINS: ${{ secrets.CSRF_TRUSTED_ORIGINS }}
       ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
       ADMIN_URL: ${{ secrets.ADMIN_URL }}
+      CELERY_BROKER_URL: ${{ secrets.CELERY_BROKER_URL }}
+      CELERY_RESULT_BACKEND: ${{ secrets.CELERY_RESULT_BACKEND }}
+      CLOUDFLARE_R2_BUCKET: ${{ secrets.CLOUDFLARE_R2_BUCKET }}
+      CLOUDFLARE_R2_ACCESS_TOKEN_VALUE: ${{ secrets.CLOUDFLARE_R2_ACCESS_TOKEN_VALUE }}
+      CLOUDFLARE_R2_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY }}
+      CLOUDFLARE_R2_SECRET_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_KEY }}
+      CLOUDFLARE_R2_BUCKET_ENDPOINT: ${{ secrets.CLOUDFLARE_R2_BUCKET_ENDPOINT }}
+      SPEEDY_USERNAME: ${{ secrets.SPEEDY_USERNAME }}
+      SPEEDY_PASSWORD: ${{ secrets.SPEEDY_PASSWORD }}
+      ECONT_USERNAME: ${{ secrets.ECONT_USERNAME }}
+      INFOBIP_URL: ${{ secrets.INFOBIP_URL }}
+      INFOBIP_API_KEY: ${{ secrets.INFOBIP_API_KEY }}
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v4
