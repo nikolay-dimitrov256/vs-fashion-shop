@@ -32,6 +32,7 @@ jobs:
       SPEEDY_USERNAME: ${{ secrets.SPEEDY_USERNAME }}
       SPEEDY_PASSWORD: ${{ secrets.SPEEDY_PASSWORD }}
       ECONT_USERNAME: ${{ secrets.ECONT_USERNAME }}
+      ECONT_PASSWORD: ${{ secrets.ECONT_PASSWORD }}
       INFOBIP_URL: ${{ secrets.INFOBIP_URL }}
       INFOBIP_API_KEY: ${{ secrets.INFOBIP_API_KEY }}
     steps:
