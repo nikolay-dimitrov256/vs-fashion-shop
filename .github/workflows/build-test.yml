@@ -16,6 +16,8 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: 3.13
+    - name: Change directory
+      run: cd fashionShop
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
