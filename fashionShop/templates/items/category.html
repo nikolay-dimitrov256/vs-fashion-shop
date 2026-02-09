@@ -8,8 +8,20 @@
 {% endblock %}
 
 {% block meta %}
-<meta name="title" content="Дамски дрехи - Онлайн Цени | Вили Стил">
-<meta name="description" content="Дамски дрехи от българския производител Вили Стил подходящи за всякакви случаи. Разнообразие от цветове и размери. За запитвания и поръчки - 0886531811">
+	{% if request.GET.page and request.GET|length == 1 and request.GET.page != '1' %}
+		<link rel="canonical" href="{{ canonical_url }}?page={{ request.GET.page }}">
+		<meta name="robots" content="index, follow">
+		<meta name="title" content="{{ meta_title }} | Страница {{ request.GET.page }}">
+		<meta name="description" content="{{ meta_description }} Страница {{ request.GET.page }}">
+	{% elif request.GET %}
+		<link rel="canonical" href="{{ canonical_url }}">
+		<meta name="robots" content="noindex, follow">
+	{% else %}
+		<link rel="canonical" href="{{ canonical_url }}">
+		<meta name="robots" content="index, follow">
+		<meta name="title" content="{{ meta_title }}">
+		<meta name="description" content="{{ meta_description }}">
+	{% endif %}
 {% endblock %}
 
 {% block styles %}
@@ -298,6 +310,15 @@
 <!-- Benefit -->
 
 {% include 'common/benefit.html' %}
+
+{% if not request.GET.page %}
+	<div class="container bottom-article">
+	{% block seo_text %}
+	{% endblock %}
+	{% include 'items/pagination.html' %}
+	</div>
+{% endif %}
+
 
 {% endblock %}
 

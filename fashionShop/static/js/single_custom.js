@@ -223,6 +223,7 @@ jQuery(document).ready(function($)
 	function initThumbnail() {
 		const thumbnails = document.querySelectorAll('.single_product_thumbnails ul li');
 		const focusImage = document.querySelector('.single_product_image img');
+		const focusImageAElement = document.querySelector('.single_product_image a');
 		
 		if (!thumbnails.length) {
 			return;
@@ -232,6 +233,7 @@ jQuery(document).ready(function($)
 			thumbnails.forEach(thumbnail => thumbnail.classList.remove('active'));
 			thumb.classList.add('active');
 			focusImage.src = thumb.querySelector('img').src;
+			focusImageAElement.href = thumb.querySelector('img').src;
 		}));
 	}
 
