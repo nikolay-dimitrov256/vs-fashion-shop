@@ -311,6 +311,15 @@
 
 {% include 'common/benefit.html' %}
 
+{% if not request.GET.page %}
+	<div class="container bottom-article">
+	{% block seo_text %}
+	{% endblock %}
+	{% include 'items/pagination.html' %}
+	</div>
+{% endif %}
+
+
 {% endblock %}
 
 {% block scripts %}
