@@ -11,6 +11,8 @@
 {% block meta %}
 <meta name="title" content="{{ object.name }} | Вили Стил">
 <meta name="description" content="{{ object.description.0 }}">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta name="robots" content="index, follow">
 {% endblock %}
 
 {% block styles %}
