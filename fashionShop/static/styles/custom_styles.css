@@ -212,4 +212,12 @@
 .bottom-article h3 {
     font-size: 26px;
 }
+
+.bottom-article ol {
+    list-style-position: inside;
+}
+
+.bottom-article ol li {
+    margin-bottom: 0.8em;
+}
 /* Bottom article */

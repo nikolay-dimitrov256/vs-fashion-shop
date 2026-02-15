@@ -69,6 +69,7 @@ class ItemDetailView(DetailView):
         context['review_avg'] = round(self.object.review_avg or 0)
         context['review_form'] = ReviewCreateForm(self.request.POST or None)
         context['formset'] = ReviewPictureFormSet(self.request.POST or None, self.request.FILES or None)
+        context['canonical_url'] = get_absolute_url('item-details', kwargs={'slug': self.object.slug})
 
         return context
 
