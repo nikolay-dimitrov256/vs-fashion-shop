@@ -90,11 +90,11 @@ class Address(models.Model):
     )
 
     def __str__(self):
-        text = f'{self.postal_code} {self.city} - {self.province}\n{self.street} {self.number}\n'
+        text = f'{self.postal_code or ''} {self.city} - {self.province}\n{self.street or ''} {self.number or ''}\n'
         if self.block:
-            text += f'квартал {self.block}'
+            text += f'квартал {self.block or ''}\n'
         if any([self.building, self.entrance, self.apartment]):
-            text += f'бл.{self.building}, вх.{self.entrance}, ап.{self.apartment}'
+            text += f'бл.{self.building or ''}, вх.{self.entrance or ''}, ап.{self.apartment or ''}'
 
         return text
 

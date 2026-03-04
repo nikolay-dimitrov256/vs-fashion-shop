@@ -7,6 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
+from fashionShop.common.globals import FREE_DELIVERY_THRESHOLD
 from fashionShop.common.utils import get_absolute_url
 from fashionShop.sales.choices import ShippingChoices, StatusChoices
 
@@ -211,6 +212,36 @@ class OnlineOrder(models.Model):
     @property
     def ip_is_banned(self):
         return self.ip.is_banned
+
+    @property
+    def admin_notification_message(self):
+        order_string_as_list = ['Нова поръчка:']
+        order_string_as_list += [
+            f'{oi.item.pk} - {oi.item.name} - {oi.size.size} - {oi.quantity}бр. x {oi.at_price}€'
+            for oi in self.order_items.all()
+        ]
+        order_string_as_list.append(f'Общо: {self.total}€')
+
+        if self.total > FREE_DELIVERY_THRESHOLD.get('EUR'):
+            order_string_as_list.append('За наша сметка')
+
+        order_string_as_list.append(self.phone)
+
+        if self.full_name:
+            order_string_as_list.append(self.full_name)
+
+        if self.shipping_method:
+            order_string_as_list.append(self.get_shipping_method_display())
+
+        office_choices = [ShippingChoices.SPEEDY_OFFICE, ShippingChoices.ECONT_OFFICE]
+        address_choices = [ShippingChoices.SPEEDY_ADDRESS, ShippingChoices.ECONT_ADDRESS]
+
+        if self.shipping_method in office_choices:
+            order_string_as_list.append(self.office)
+        elif self.shipping_method in address_choices:
+            order_string_as_list.append(str(self.address))
+
+        return '\n'.join(order_string_as_list)
 
     def __str__(self):
         return f'Order number {self.pk}'

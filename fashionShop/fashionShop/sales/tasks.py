@@ -4,7 +4,7 @@ from celery import shared_task
 from fashionShop.common.templatetags.shipping import is_free_shipping
 from fashionShop.sales.choices import ShippingChoices
 from fashionShop.sales.models import OnlineOrder
-from fashionShop.settings import INFOBIP_API_KEY, INFOBIP_URL
+from fashionShop.settings import INFOBIP_API_KEY, INFOBIP_URL, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
 
 @shared_task
@@ -110,3 +110,23 @@ def send_sms(to: str, message: str | None) -> dict | None:
 
     except Exception:
         return None
+
+
+@shared_task
+def notify_admin(order_pk: int) -> None:
+    order = OnlineOrder.objects.filter(pk=order_pk).first()
+
+    if not order:
+        return
+
+    url = f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage'
+
+    params = {
+        'chat_id': TELEGRAM_CHAT_ID,
+        'text': order.admin_notification_message
+    }
+
+    try:
+        requests.post(url, json=params)
+    except:
+        pass
