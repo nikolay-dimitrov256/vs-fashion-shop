@@ -121,7 +121,7 @@ class ItemsListView(ListView):
                 stock__quantity__gt=0,
             )
 
-        return items.order_by('collection__position', '-created_at').distinct()
+        return items.order_by('-is_new', 'collection__position', '-created_at').distinct()
 
     def get_paginate_by(self, queryset):
         paginate_by = self.request.GET.get('show', 12)
