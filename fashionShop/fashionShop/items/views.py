@@ -38,7 +38,9 @@ class ItemDetailView(DetailView):
             if len(item.description) == 1:
                 item.description = item.description[0].split('\n')
 
-        item.additional_info = item.additional_info.split(';') if item.additional_info else []
+        item.additional_info = item.additional_info.split('\n') if item.additional_info else []
+        if len(item.additional_info) == 1:
+            item.additional_info = item.additional_info[0].split(';')
 
         # item.data_layer = {
         #     'value': item.price_eur,
