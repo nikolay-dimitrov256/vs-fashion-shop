@@ -35,6 +35,8 @@ jobs:
       ECONT_PASSWORD: ${{ secrets.ECONT_PASSWORD }}
       INFOBIP_URL: ${{ secrets.INFOBIP_URL }}
       INFOBIP_API_KEY: ${{ secrets.INFOBIP_API_KEY }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v4
