@@ -141,5 +141,11 @@ class ContactMessage(models.Model):
         auto_now_add=True,
     )
 
+    @property
+    def admin_message(self):
+        message = f'Съобщение от {self.name}:\n{self.message}'
+
+        return message
+
     def __str__(self):
         return self.name

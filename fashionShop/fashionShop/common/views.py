@@ -14,6 +14,7 @@ from fashionShop.common.forms import ContactForm
 from fashionShop.common.models import Feedback, ContactMessage
 from fashionShop.items.models import Item
 from fashionShop.pictures.models import Picture
+from fashionShop.sales.tasks import notify_admin
 
 
 def set_currency(request):
@@ -87,8 +88,10 @@ class ContactMessageView(CreateView):
         return redirect('contact')
 
     def form_valid(self, form):
-        form.save()
+        contact_message = form.save()
         messages.success(self.request, _('Thank you for your message, we will contact you as soon as possible.'))
+
+        notify_admin.delay(contact_message.admin_message)
 
         return HttpResponseRedirect(self.success_url)
 

@@ -113,17 +113,13 @@ def send_sms(to: str, message: str | None) -> dict | None:
 
 
 @shared_task
-def notify_admin(order_pk: int) -> None:
-    order = OnlineOrder.objects.filter(pk=order_pk).first()
-
-    if not order:
-        return
+def notify_admin(message: str) -> None:
 
     url = f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage'
 
     params = {
         'chat_id': TELEGRAM_CHAT_ID,
-        'text': order.admin_notification_message
+        'text': message
     }
 
     try:

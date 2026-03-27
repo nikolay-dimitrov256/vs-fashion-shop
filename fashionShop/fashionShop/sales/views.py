@@ -304,7 +304,7 @@ class CheckoutView(View):
                 order.refresh_from_db()
                 send_bisoft_report.delay(order.pk)
                 send_sms.delay(order.infobip_phone, order.status_message)
-                notify_admin.delay(order.pk)
+                notify_admin.delay(order.admin_notification_message)
 
                 return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 
@@ -329,7 +329,7 @@ class CheckoutView(View):
                 order.refresh_from_db()
                 send_bisoft_report.delay(order.pk)
                 send_sms.delay(order.infobip_phone, order.status_message)
-                notify_admin.delay(order.pk)
+                notify_admin.delay(order.admin_notification_message)
 
                 return redirect(reverse_lazy('order', kwargs={'pk': order.pk}))
 
