@@ -163,9 +163,11 @@ class Item(models.Model):
         super().save(*args, **kwargs)
 
     def get_available_sizes(self):
-        available_sizes = Size.objects.filter(stock__item=self, stock__quantity__gt=0)
+        # available_sizes = Size.objects.filter(stock__item=self, stock__quantity__gt=0)
+        stocks = Stock.objects.filter(item=self, quantity__gt=0)
+        available_sizes = [s.effective_size for s in stocks]
 
-        return available_sizes.distinct()
+        return available_sizes
 
     @property
     def is_discounted(self) -> bool:

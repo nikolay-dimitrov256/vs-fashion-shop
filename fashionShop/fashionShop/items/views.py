@@ -42,14 +42,6 @@ class ItemDetailView(DetailView):
         if len(item.additional_info) == 1:
             item.additional_info = item.additional_info[0].split(';')
 
-        # item.data_layer = {
-        #     'value': item.price_eur,
-        #     'item_id': item.pk,
-        #     'item_name': item.name,
-        #     'item_category': item.category.name,
-        #     'price': item.price_eur,
-        # }
-
         return item
 
     def get_context_data(self, **kwargs):
