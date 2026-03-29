@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
 from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
@@ -91,7 +92,7 @@ class FormsAndViewsTests(TestCase):
         }
         form = AppUserCreateForm(data=data)
         self.assertFalse(form.is_valid())
-        self.assertIn('You cannot register without agreeing to our Privacy Policy.', str(form.non_field_errors()))
+        self.assertIn(_('You cannot register without agreeing to our Privacy Policy.'), str(form.non_field_errors()))
 
     def test_appuser_create_form_saves_flags_and_dates(self):
         data = {

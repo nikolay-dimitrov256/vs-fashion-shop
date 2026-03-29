@@ -206,6 +206,8 @@ class Item(models.Model):
 
     @property
     def discount_price_bgn(self) -> Decimal:
+        if self.discount_price is None:
+            return None
         return (self.discount_price * Decimal(EURO_RATE)).quantize(Decimal('.01'))
 
     @property
