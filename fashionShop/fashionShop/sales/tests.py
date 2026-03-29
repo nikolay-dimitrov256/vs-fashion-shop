@@ -12,6 +12,7 @@ from django.utils.translation import gettext as _
 from fashionShop.accounts.models import IpAddress
 from fashionShop.common.choices import CountryChoices
 from fashionShop.common.forms import AddressForm
+from fashionShop.common.utils import get_absolute_url
 from fashionShop.items.models.item import Item
 from fashionShop.items.models.online_items import CartItem, OrderItem
 from fashionShop.items.models.size import Size
@@ -82,9 +83,10 @@ class OnlineOrderModelTests(TestCase):
             at_price=Decimal('10.00'),
             total_price=Decimal('10.00'),
         )
+        absolute_url = get_absolute_url('item-details', kwargs={'slug': item.slug})
 
         self.assertIn('Вили Стил:', order.status_message)
-        self.assertIn('https://example.com', order.status_message)
+        self.assertIn(absolute_url, order.status_message)
         self.assertIn('test-product', order.status_message)
 
     def test_infobip_phone_normalizes_international_and_local_numbers(self):
