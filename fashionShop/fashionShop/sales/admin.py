@@ -22,7 +22,9 @@ class OnlineOrderAdmin(admin.ModelAdmin):
     readonly_fields = ['order_code', 'full_name', 'phone', 'user', 'email',
                        'shipping_method', 'office', 'town', 'address', 'total', 'ip',
                        'ip_is_suspicious', 'ip_is_banned', 'created_at', 'updated_at']
-    search_fields = ['pk', 'order_code', 'first_name', 'last_name', 'comment', 'phone', 'email']
+    search_fields = [
+        'pk', 'order_code', 'first_name', 'last_name', 'comment', 'phone', 'email', 'address__city', 'town'
+    ]
     list_filter = ['status', 'created_at']
     list_display = ['pk', 'order_code', 'full_name', 'status', 'total', 'bisoft_report_sent']
     change_list_template = 'admin/orders_changelist.html'

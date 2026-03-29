@@ -11,6 +11,8 @@
 {% block meta %}
 <meta name="title" content="{{ object.name }} | Вили Стил">
 <meta name="description" content="{{ object.description.0 }}">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta name="robots" content="index, follow">
 {% endblock %}
 
 {% block styles %}
@@ -410,7 +412,7 @@
 {% include 'common/benefit.html' %}
 
 <!-- Other Colors -->
-
+{% if other_colors.count %}
 <div class="other_colors">
     <div class="container">
         <div class="row">
@@ -441,6 +443,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% comment %}
 <div class="container">
     <div class="size-guide">
@@ -479,9 +482,11 @@
 
                 <div id="tab_1" class="tab_container active">
                     <div >
+                        {% if object.detail_pictures.count %}
                         <div class="tab_title">
                             <h4>{% trans 'Details' %}</h4>
                         </div>
+                        {% endif %}
                     {% for detail_picture in object.detail_pictures.all %}
                     {% if forloop.counter|divisibleby:2 %}
                         <div class="desc_col desc-reversed">
@@ -647,7 +652,7 @@
 </div>
 
 <!-- Linked Items -->
-
+{% if object.linked_items.count %}
 <div class="linked_items">
     <div class="container">
         <div class="row">
@@ -678,6 +683,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 {% endblock %}
 
@@ -816,5 +822,5 @@
 </script>
 
 <script src="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
-<script src="{% static 'js/single_custom.js' %}?v=4"></script>
+<script src="{% static 'js/single_custom.js' %}?v=5"></script>
 {% endblock %}

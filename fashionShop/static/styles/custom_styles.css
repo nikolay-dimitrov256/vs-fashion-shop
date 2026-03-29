@@ -194,3 +194,30 @@
     }
 }
 /* Fixes the positioning on the main banner elements */
+
+/* Bottom article */
+.bottom-article{
+    margin-top: 3em;
+    margin-bottom: 5em;
+}
+
+.bottom-article * {
+    color: #444;
+}
+
+.bottom-article h2 {
+    font-size: 32px;
+}
+
+.bottom-article h3 {
+    font-size: 26px;
+}
+
+.bottom-article ol {
+    list-style-position: inside;
+}
+
+.bottom-article ol li {
+    margin-bottom: 0.8em;
+}
+/* Bottom article */

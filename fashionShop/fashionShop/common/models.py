@@ -90,11 +90,11 @@ class Address(models.Model):
     )
 
     def __str__(self):
-        text = f'{self.postal_code} {self.city} - {self.province}\n{self.street} {self.number}\n'
+        text = f'{self.postal_code or ''} {self.city} - {self.province}\n{self.street or ''} {self.number or ''}\n'
         if self.block:
-            text += f'квартал {self.block}'
+            text += f'квартал {self.block or ''}\n'
         if any([self.building, self.entrance, self.apartment]):
-            text += f'бл.{self.building}, вх.{self.entrance}, ап.{self.apartment}'
+            text += f'бл.{self.building or ''}, вх.{self.entrance or ''}, ап.{self.apartment or ''}'
 
         return text
 
@@ -140,6 +140,12 @@ class ContactMessage(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True,
     )
+
+    @property
+    def admin_message(self):
+        message = f'Съобщение от {self.name}:\n{self.message}'
+
+        return message
 
     def __str__(self):
         return self.name
