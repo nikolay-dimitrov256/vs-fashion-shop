@@ -12,10 +12,9 @@ class PictureAdmin(admin.ModelAdmin):
 
     def image_preview(self, obj):
         if obj.image_r2 or obj.image:
-            return format_html(f'<img src="{obj.image_url}" width="100" height="auto"/>')
+            return format_html('<img src="{}" width="100" style="height:auto;"/>', obj.image_url)
         return 'No image'
 
-    image_preview.allow_tags = True
     image_preview.short_description = 'Preview'
 
     def r2_status(self, obj):
@@ -33,8 +32,7 @@ class PictureInline(admin.TabularInline):
 
     def image_preview(self, obj):
         if obj.image_r2 or obj.image:
-            return format_html(f'<img src="{obj.image_url}" width="100" height="auto"/>')
+            return format_html('<img src="{}" width="100" style="height:auto;"/>', obj.image_url)
         return 'No image'
 
-    image_preview.allow_tags = True
     image_preview.short_description = 'Preview'
