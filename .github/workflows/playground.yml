@@ -14,4 +14,4 @@ jobs:
           username: ${{ secrets.DROPLET_USERNAME }}
           password: ${{ secrets.DROPLET_PASSWORD }}
           port: ${{ secrets.DROPLET_PORT }}
-          script: pwd > hello.txt
+          script: ./scripts/deploy.sh
