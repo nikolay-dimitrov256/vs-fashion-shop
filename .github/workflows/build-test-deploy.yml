@@ -71,6 +71,7 @@ jobs:
       
   deploy:
     name: Deploy
+    needs: build-test
     runs-on: ubuntu-latest
     steps:
       - name: Deploy changes to production
