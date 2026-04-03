@@ -14,4 +14,6 @@ jobs:
           username: ${{ secrets.DROPLET_USERNAME }}
           password: ${{ secrets.DROPLET_PASSWORD }}
           port: ${{ secrets.DROPLET_PORT }}
-          script: whoami > /tmp/hello.txt
+          script: |
+                  cd ${{ secrets.DROPLET_REPO_PATH }}
+                  pwd > hello.txt
