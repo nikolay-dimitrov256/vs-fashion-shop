@@ -14,4 +14,4 @@ jobs:
           username: ${{ secrets.DROPLET_USERNAME }}
           password: ${{ secrets.DROPLET_PASSWORD }}
           port: ${{ secrets.DROPLET_PORT }}
-          script: echo 'Hello from GitHub Actions' > /home/${{ secrets.DROPLET_HOST }}/hello.txt
+          script: whoami > /tmp/hello.txt
