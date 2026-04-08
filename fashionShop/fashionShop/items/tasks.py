@@ -83,8 +83,8 @@ def load_items_from_bisoft():
             # existing_item.slug = slugify(f"{item['item_number']}-{transliterate(item['name_bg'])}")
             existing_item.description_bg = item['description_bg'] if '=' not in item['description_bg'] else ''
             existing_item.description_en = item['description_en'] if '=' not in item['description_en'] else ''
-            existing_item.price = (Decimal(item['price']) / Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
-            existing_item.discount_price = (Decimal(item['sale_price']) / Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+            existing_item.price = Decimal(item['price'])
+            existing_item.discount_price = Decimal(item['sale_price'])
             existing_item.content_bg = item['content_bg']
             existing_item.content_en = item['content_en']
 
@@ -99,8 +99,8 @@ def load_items_from_bisoft():
                 'slug': slugify(f"{item['item_number']}-{transliterate(item['name_bg'])}"),
                 'description_bg': item['description_bg'] if '=' not in item['description_bg'] else '',
                 'description_en': item['description_en'] if '=' not in item['description_en'] else '',
-                'price': (Decimal(item['price']) / Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP),
-                'discount_price': (Decimal(item['sale_price']) / Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP),
+                'price': Decimal(item['price']),
+                'discount_price': Decimal(item['sale_price']),
                 'content_bg': item['content_bg'],
                 'content_en': item['content_en'],
             }
