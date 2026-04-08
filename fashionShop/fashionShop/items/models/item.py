@@ -134,8 +134,9 @@ class Item(models.Model):
 
     linked_items = models.ManyToManyField(
         verbose_name=_('linked items'),
-        to='Item',
+        to='self',
         blank=True,
+        symmetrical=True,
     )
 
     style = models.ManyToManyField(

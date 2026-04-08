@@ -160,7 +160,7 @@ def load_items_from_bisoft():
             # linked_items = all_items.filter(item_number__in=linked_item_ids)
             linked_items = [items_map.get(item, None) for item in linked_item_ids if items_map.get(item, None)]
             item_to_link = items_map.get(item['item_number'])
-            item_to_link.linked_items.set(linked_items)
+            item_to_link.linked_items.add(*linked_items)
 
     # Update existing stocks
     Stock.objects.bulk_update(list(existing_stocks), ['quantity'])

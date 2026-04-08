@@ -43,13 +43,14 @@ def send_bisoft_report(order_id, save=True):
     report['user']['total_quantity'] = total_quantity
 
     # url = f'https://vilistil.com/get_sale.php?order={order.order_code}&lic=license'
-    url = f'https://vilistil.com/order/{order.order_code}/licence'
+    url = f'https://vilistil.com/order/{order.order_code}/lic'
     headers = {
         'Content-Type': 'application/json'
     }
 
     try:
         # print('Sending report for:', order.order_code)
+        # print('Sending report to url:', url)
         # print('Payload:', report)
         response = requests.post(url, json=report, headers=headers)
         # print('Status:', response.status_code)
