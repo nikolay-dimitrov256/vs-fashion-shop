@@ -1,0 +1,3 @@
+- Remove flag icons from header. Replace them with text.
+
+- Remove Poppins font. I'm using system-ui anyway.
