@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Prefetch, Q
+from django.db.models import Prefetch, Q, Sum
 from fashionShop.pictures.models import Picture
 
 class ItemQuerySet(models.QuerySet):
@@ -44,3 +44,20 @@ class ItemQuerySet(models.QuerySet):
 
             return self.filter(query)
         return self
+
+    def bestsellers(self):
+        return self.annotate(sales=Sum('order_items__quantity')).filter(sales__gte=5).order_by('-sales')
+
+    def max_sizes(self):
+        max_sizes = ['52', '54', '56', '58', '60', '62', '64', '66', '68', '70']
+
+        query = (
+            Q(stock__translated_size__size__in=max_sizes) |
+            Q(stock__translated_size__size__isnull=True, stock__size__size__in=max_sizes)
+        ) & Q(stock__quantity__gt=0)
+
+        return self.filter(query)
+
+
+class ItemManager(models.Manager.from_queryset(ItemQuerySet)):
+    pass

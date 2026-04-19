@@ -1,8 +1,10 @@
+import json
 from datetime import datetime, timedelta
 
 from django.db.models import OuterRef, Subquery, Prefetch, Q, Avg, Sum
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 
 from fashionShop.common.utils import get_absolute_url
@@ -72,6 +74,7 @@ class ItemsListView(ListView):
     model = Item
     template_name = 'items/category.html'
     view_name = 'all-items'
+    endpoint = reverse_lazy('items')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
@@ -87,34 +90,34 @@ class ItemsListView(ListView):
         context['canonical_url'] = get_absolute_url(self.view_name)
         context['meta_title'] = self.meta_title
         context['meta_description'] = self.meta_description
-        context['view_name'] = self.view_name
+        context['fetch_params'] = {
+            'endpoint': str(self.endpoint)
+        }
 
         return context
 
     def get_queryset(self):
         items = (
             Item.objects
-            .prefetch_related(
-                Prefetch(
-                    'pictures',
-                    queryset=Picture.objects.all()[:1],  # Only fetch the first image
-                    to_attr='main_picture_list'
-                )
-            )
-            .exclude(deleted=True)
+            .active()
+            .with_main_picture()
+            # .prefetch_related(
+            #     Prefetch(
+            #         'pictures',
+            #         queryset=Picture.objects.all()[:1],  # Only fetch the first image
+            #         to_attr='main_picture_list'
+            #     )
+            # )
+            # .exclude(deleted=True)
         )
 
         selected_colors = self.request.GET.getlist('color')
         if selected_colors:
-            items = items.filter(color_group__name_en__in=selected_colors)
+            items = items.filter_colors(selected_colors)
 
         selected_sizes = self.request.GET.getlist('size')
         if selected_sizes:
-            items = items.filter(
-                Q(stock__translated_size__size__in=selected_sizes) |
-                Q(stock__translated_size__isnull=True, stock__size__size__in=selected_sizes),
-                stock__quantity__gt=0,
-            )
+            items = items.filter_sizes(selected_sizes)
 
         return items.order_by('-is_new', 'collection__position', '-created_at').distinct()
 
@@ -511,7 +514,7 @@ class BestsellersListView(ItemsListView):
     def get_queryset(self):
         items = super().get_queryset()
 
-        items = items.annotate(sales=Sum('order_items__quantity')).filter(sales__gte=5).order_by('-sales')
+        items = items.bestsellers()
 
         return items
 
@@ -552,14 +555,7 @@ class MaxSizeListView(ItemsListView):
     def get_queryset(self):
         items = super().get_queryset()
 
-        max_sizes = ['52', '54', '56', '58', '60', '62', '64', '66', '68', '70']
-
-        query = (
-            Q(stock__translated_size__size__in=max_sizes) |
-            Q(stock__translated_size__size__isnull=True, stock__size__size__in=max_sizes)
-        ) & Q(stock__quantity__gt=0)
-
-        items = items.filter(query)
+        items = items.max_sizes()
 
         return items
 
