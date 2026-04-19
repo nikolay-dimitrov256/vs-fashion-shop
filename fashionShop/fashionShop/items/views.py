@@ -87,6 +87,7 @@ class ItemsListView(ListView):
         context['canonical_url'] = get_absolute_url(self.view_name)
         context['meta_title'] = self.meta_title
         context['meta_description'] = self.meta_description
+        context['view_name'] = self.view_name
 
         return context
 

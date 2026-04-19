@@ -13,5 +13,6 @@ urlpatterns = [
             path('offices/', views.EcontOfficeView.as_view(), name='econt-offices'),
         ]))
     ])),
-    path('facebook/', views.products_feed, name='facebook-catalog')
+    path('facebook/', views.products_feed, name='facebook-catalog'),
+    path('items/', views.ItemsListView.as_view(), name='items'),
 ]

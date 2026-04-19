@@ -323,6 +323,9 @@
 {% endblock %}
 
 {% block scripts %}
+<script>
+	const viewName = '{{ view_name }}';
+</script>
 <script src="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
 <script src="{% static 'js/categories_custom.js' %}?v=2"></script>
 {% endblock %}
