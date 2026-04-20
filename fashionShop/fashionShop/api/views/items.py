@@ -32,3 +32,48 @@ class ItemsListView(ListAPIView):
             items = items.search(search)
 
         return items.order_by('-is_new', 'collection__position', '-created_at').distinct()
+
+
+class BestsellersListView(ItemsListView):
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.bestsellers()
+
+        return items
+
+
+class NewItemsListView(ItemsListView):
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.filter(is_new=True)
+
+        return items
+
+
+class MaxSizeListView(ItemsListView):
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.max_sizes()
+
+        return items
+
+
+class FallWinterListView(ItemsListView):
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.fall_winter()
+
+        return items
+
+
+class SpringSummerListView(ItemsListView):
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.spring_summer()
+
+        return items

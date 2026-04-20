@@ -58,6 +58,16 @@ class ItemQuerySet(models.QuerySet):
 
         return self.filter(query)
 
+    def fall_winter(self):
+        query = Q(collection__name='есен/зима') | Q(collection__name='пролет/есен')
+
+        return self.filter(query)
+
+    def spring_summer(self):
+        query = Q(collection__name='пролет/лято') | Q(collection__name='пролет/есен') | Q(collection__name='лято')
+
+        return self.filter(query)
+
 
 class ItemManager(models.Manager.from_queryset(ItemQuerySet)):
     pass

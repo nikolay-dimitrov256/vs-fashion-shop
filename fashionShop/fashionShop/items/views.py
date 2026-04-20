@@ -74,7 +74,9 @@ class ItemsListView(ListView):
     model = Item
     template_name = 'items/category.html'
     view_name = 'all-items'
-    endpoint = reverse_lazy('items')
+    endpoint = reverse_lazy('api-items')
+    category = None
+    style = None
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
@@ -91,7 +93,9 @@ class ItemsListView(ListView):
         context['meta_title'] = self.meta_title
         context['meta_description'] = self.meta_description
         context['fetch_params'] = {
-            'endpoint': str(self.endpoint)
+            'endpoint': self.endpoint,
+            'category': self.category,
+            'style': self.style,
         }
 
         return context
@@ -139,6 +143,7 @@ class ItemsListView(ListView):
 class PantsListView(ItemsListView):
     template_name = 'items/pants.html'
     view_name = 'pants'
+    category = 'pants'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -160,6 +165,7 @@ class PantsListView(ItemsListView):
 class SkirtsListView(ItemsListView):
     template_name = 'items/skirts.html'
     view_name = 'skirts'
+    category = 'skirts'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -180,6 +186,7 @@ class SkirtsListView(ItemsListView):
 class DressesListView(ItemsListView):
     template_name = 'items/dresses.html'
     view_name = 'dresses'
+    category = 'dresses'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -201,6 +208,7 @@ class DressesListView(ItemsListView):
 class ShirtsListView(ItemsListView):
     template_name = 'items/shirts.html'
     view_name = 'shirts'
+    category = 'shirts'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -222,6 +230,7 @@ class ShirtsListView(ItemsListView):
 class BlousesListView(ItemsListView):
     template_name = 'items/blouses.html'
     view_name = 'blouses'
+    category = 'blouses'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -243,6 +252,7 @@ class BlousesListView(ItemsListView):
 class TunicsListView(ItemsListView):
     template_name = 'items/tunics.html'
     view_name = 'tunics'
+    category = 'tunics'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -263,6 +273,7 @@ class TunicsListView(ItemsListView):
 class BlazersListView(ItemsListView):
     template_name = 'items/blazers.html'
     view_name = 'blazers'
+    category = 'blazers'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -284,6 +295,7 @@ class BlazersListView(ItemsListView):
 class SuitsListView(ItemsListView):
     template_name = 'items/suits.html'
     view_name = 'suits'
+    category = 'suits'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -304,6 +316,7 @@ class SuitsListView(ItemsListView):
 class JacketsListView(ItemsListView):
     template_name = 'items/jackets.html'
     view_name = 'jackets'
+    category = 'jackets'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -325,6 +338,7 @@ class JacketsListView(ItemsListView):
 class CoatsListView(ItemsListView):
     template_name = 'items/coats.html'
     view_name = 'coats'
+    category = 'coats'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -346,6 +360,7 @@ class CoatsListView(ItemsListView):
 class VestsListView(ItemsListView):
     template_name = 'items/vests.html'
     view_name = 'vests'
+    category = 'vests'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -366,6 +381,7 @@ class VestsListView(ItemsListView):
 class TankTopsListView(ItemsListView):
     template_name = 'items/tank-tops.html'
     view_name = 'underwear'
+    category = 'underwear'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -386,6 +402,7 @@ class TankTopsListView(ItemsListView):
 class SetsListView(ItemsListView):
     template_name = 'items/sets.html'
     view_name = 'classic'
+    category = 'classic'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -407,6 +424,7 @@ class SetsListView(ItemsListView):
 class CardigansListView(ItemsListView):
     template_name = 'items/tank-tops.html'
     view_name = 'cardigans'
+    category = 'cardigans'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -428,6 +446,7 @@ class CardigansListView(ItemsListView):
 class ElegantListView(ItemsListView):
     template_name = 'items/elegant.html'
     view_name = 'elegant'
+    style = 'elegant'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -449,6 +468,7 @@ class ElegantListView(ItemsListView):
 class OfficeListView(ItemsListView):
     template_name = 'items/office.html'
     view_name = 'office'
+    style = 'office'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -470,6 +490,7 @@ class OfficeListView(ItemsListView):
 class OfficialListView(ItemsListView):
     template_name = 'items/official.html'
     view_name = 'official'
+    style = 'official'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -496,13 +517,8 @@ class SearchView(ItemsListView):
         items = super().get_queryset()
 
         search = self.request.GET.get('search', '').strip()
-        query = (Q(name__icontains=search) | Q(name_en__icontains=search)
-                 | Q(description__icontains=search) | Q(description_en__icontains=search))
 
-        if search.isdigit():
-            query |= Q(pk=search)
-
-        items = items.filter(query)
+        items = items.search(search)
 
         return items
 
@@ -510,6 +526,7 @@ class SearchView(ItemsListView):
 class BestsellersListView(ItemsListView):
     template_name = 'items/bestsellers.html'
     view_name = 'bestsellers'
+    endpoint = reverse_lazy('api-bestsellers')
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -530,6 +547,7 @@ class BestsellersListView(ItemsListView):
 class NewItemsListView(ItemsListView):
     template_name = 'items/new.html'
     view_name = 'new'
+    endpoint = reverse_lazy('api-new')
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -551,6 +569,7 @@ class NewItemsListView(ItemsListView):
 class MaxSizeListView(ItemsListView):
     template_name = 'items/max-size.html'
     view_name = 'max-size'
+    endpoint = reverse_lazy('api-max')
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -572,12 +591,12 @@ class MaxSizeListView(ItemsListView):
 class FallWinterListView(ItemsListView):
     template_name = 'items/fall-winter.html'
     view_name = 'fall-winter'
+    endpoint = reverse_lazy('api-fall-winter')
 
     def get_queryset(self):
         items = super().get_queryset()
 
-        query = Q(collection__name='есен/зима') | Q(collection__name='пролет/есен')
-        items = items.filter(query)
+        items = items.fall_winter()
 
         return items
 
@@ -594,12 +613,12 @@ class FallWinterListView(ItemsListView):
 class SpringSummerListView(ItemsListView):
     template_name = 'items/spring-summer.html'
     view_name = 'spring-summer'
+    endpoint = reverse_lazy('api-spring-summer')
 
     def get_queryset(self):
         items = super().get_queryset()
 
-        query = Q(collection__name='пролет/лято') | Q(collection__name='пролет/есен') | Q(collection__name='лято')
-        items = items.filter(query)
+        items = items.spring_summer()
 
         return items
 
