@@ -35,6 +35,10 @@ jQuery(document).ready(function($)
 	var menuActive = false;
 	var hamburgerClose = $('.hamburger_close');
 	var fsOverlay = $('.fs_menu_overlay');
+	const fetchParams = JSON.parse(document.getElementById('fetch-params').textContent);
+	const translations = JSON.parse(document.getElementById('translations').textContent);
+	let allContentIsLoaded = !fetchParams.next;
+	let isLoading = false;
 
 	setHeader();
 
@@ -49,6 +53,12 @@ jQuery(document).ready(function($)
 	$(document).on('scroll', function()
 	{
 		setHeader();
+
+		const loadItems = evaluatePosition();
+		
+		if (loadItems && !allContentIsLoaded && !isLoading) {
+			loadContent();
+		}
 	});
 
 	//rearangeSidebar();
@@ -530,5 +540,169 @@ jQuery(document).ready(function($)
 		const filterDivElement = element.nextElementSibling;
 		filterDivElement.style.display = 'block';
 		element.style.display = 'none';
+	}
+
+	function evaluatePosition() {
+		// Get scroll values
+		const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+		// Get elements
+		const footerElement = document.querySelector('footer.footer');
+		const bottomArticleElement = document.querySelector('.bottom-article');
+		const benefitElement = document.querySelector('.benefit');
+		const itemCardElement = document.querySelector('.product-item');
+
+		// Get elements heights
+		const footerHeight = getElementHeight(footerElement);
+		const bottomArticleHeight = getElementHeight(bottomArticleElement);
+		const benefitHeight = getElementHeight(benefitElement);
+		const itemCardHeight = getElementHeight(itemCardElement);
+		
+		// The bottom of the screen is two rows away from the end of content
+		return scrollTop + clientHeight >= scrollHeight - (footerHeight + bottomArticleHeight + benefitHeight + itemCardHeight * 2);
+	}
+
+	function getElementHeight(element) {
+		if (!element) {
+			return 0;
+		}
+		const styles = getComputedStyle(element)
+		const height = element.getBoundingClientRect().height + parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
+
+		return height;
+	}
+
+	function loadContent() {
+		isLoading = true;
+		
+		// Fetch data
+		fetch(fetchParams.next)
+		.then(res => res.json())
+		.then(data => {
+			renderItems(data.results);
+			fetchParams.next = data.next;
+			fetchParams.previous = data.previous;
+
+			if (!data.next) {
+				allContentIsLoaded = true;
+			}
+		})
+		.catch(error => console.error(error))
+		.finally(() => { isLoading = false; })
+	}
+
+	function renderItems(items) {
+		const productGridElement = document.querySelector('.product-grid');
+		const cards = [];
+
+		for (const item of items) {
+			const card = makeCard(item);
+			cards.push(card);
+		}
+
+		productGridElement.append(...cards);
+	}
+
+	function makeCard(item) {
+		const baseUrl = window.location.origin;
+
+		// Create elements
+		const cardElement = document.createElement('div');
+		cardElement.classList.add('product-item');
+
+		const productFilterElement = document.createElement('div');
+		productFilterElement.classList.add('product', 'product_filter');
+		if (item['is_discounted']) {
+			productFilterElement.classList.add('discount');
+		}
+
+		const wrapperAElement = document.createElement('a');
+		wrapperAElement.classList.add('product_image');
+		wrapperAElement.href = `${baseUrl}items/${item.slug}/`;
+
+		const imgElement = document.createElement('img');
+		imgElement.loading = 'lazy';
+		const picture = item.pictures[0];
+		if (picture) {
+			imgElement.src = picture['image_url'];
+			imgElement.alt = 'продуктово изображение';
+		} else {
+			imgElement.src = `${baseUrl}static/images/item.jpg`;
+			imgElement.alt = 'no image';
+		}
+
+		const heartElement = document.createElement('div');
+		if (item['is_discounted']) {
+			heartElement.classList.add('favorite', 'favorite_left');
+		} else {
+			heartElement.classList.add('favorite');
+		}
+		
+		let tagElement = null;
+		let innerTagElement = null;
+		if (item['is_discounted']) {
+			let tagElement = document.createElement('div');
+			tagElement.classList.add('product_bubble', 'product_bubble_right', 'product_bubble_red', 'd-flex', 'flex-column', 'align-items-center');
+			let innerTagElement = document.createElement('span');
+			innerTagElement.textContent = `-${Number.parseInt(item.discount)}€`;
+		} else if (item['is_new']) {
+			let tagElement = document.createElement('div');
+			tagElement.classList.add('product_bubble', 'product_bubble_left', 'product_bubble_green', 'd-flex', 'flex-column', 'align-items-center');
+			let innerTagElement = document.createElement('span');
+			innerTagElement.textContent = translations.new;
+		}
+
+		const productInfoElement = document.createElement('div');
+		productInfoElement.classList.add('product_info');
+
+		const productNameElement = document.createElement('p');
+		productNameElement.classList.add('product_name');
+
+		const nameAElement = document.createElement('a');
+		nameAElement.href = `${baseUrl}items/${item.slug}`;
+		nameAElement.textContent = item.name;
+
+		const priceElement = document.createElement('div');
+		priceElement.classList.add('product_price');
+		if (item['is_discounted']) {
+			priceElement.textContent = `${item['discount_price']} €`;
+		} else {
+			priceElement.textContent = `${item.price} €`;
+		}
+
+		const secondaryPriceElement = document.createElement('span');
+		secondaryPriceElement.classList.add('price_eur');
+		if (item['is_discounted']) {
+			secondaryPriceElement.textContent = `/${item['discount_price_bgn']} ${translations.lv}`;
+		} else {
+			secondaryPriceElement.textContent = `/${item['price_bgn']} ${translations.lv}`;
+		}
+
+		const buyDivElement = document.createElement('div');
+		buyDivElement.classList.add('red_button', 'add_to_cart_button');
+
+		const buyAElement = document.createElement('a');
+		buyAElement.href = `${baseUrl}items/${item.slug}`;
+		buyAElement.textContent = translations.get;
+
+		// Assemble card
+		cardElement.append(productFilterElement);
+		productFilterElement.append(wrapperAElement);
+		wrapperAElement.append(imgElement);
+		productFilterElement.append(heartElement);
+
+		if (tagElement && innerTagElement) {
+			productFilterElement.append(tagElement);
+			tagElement.append(innerTagElement);
+		}
+		
+		productFilterElement.append(productInfoElement);
+		productInfoElement.append(productNameElement);
+		productNameElement.append(nameAElement);
+		productInfoElement.append(priceElement);
+		priceElement.append(secondaryPriceElement);
+		cardElement.append(buyDivElement);
+		buyDivElement.append(buyAElement);
+
+		return cardElement;
 	}
 });

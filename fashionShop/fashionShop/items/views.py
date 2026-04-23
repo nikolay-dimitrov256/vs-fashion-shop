@@ -6,6 +6,7 @@ from django.db.models.functions import Coalesce
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
+from django.utils.translation import gettext as _
 
 from fashionShop.common.utils import get_absolute_url
 from fashionShop.items.models import Item, ColorGroup, Stock, Size, SubCategory
@@ -92,10 +93,33 @@ class ItemsListView(ListView):
         context['canonical_url'] = get_absolute_url(self.view_name)
         context['meta_title'] = self.meta_title
         context['meta_description'] = self.meta_description
+
+        filter_query_params = self.request.GET.copy()
+
+        if self.category:
+            filter_query_params['category'] = self.category
+        if self.style:
+            filter_query_params['style'] = self.style
+
+        page_obj = context.get('page_obj')
+        next_url = None
+
+        if page_obj and page_obj.has_next():
+            filter_query_params['page'] = page_obj.next_page_number()
+            next_url = f'{self.endpoint}?{filter_query_params.urlencode()}'
+
         context['fetch_params'] = {
-            'endpoint': self.endpoint,
-            'category': self.category,
-            'style': self.style,
+            # 'endpoint': self.endpoint,
+            # 'category': self.category,
+            # 'style': self.style,
+            'current_page': page_obj.number if page_obj else 1,
+            'next': next_url,
+            'previous': None,
+        }
+        context['translations'] = {
+            'new': _('new'),
+            'lv': _('lv'),
+            'get': _('get'),
         }
 
         return context
@@ -126,7 +150,8 @@ class ItemsListView(ListView):
         return items.order_by('-is_new', 'collection__position', '-created_at').distinct()
 
     def get_paginate_by(self, queryset):
-        paginate_by = self.request.GET.get('show', 12)
+        # paginate_by = self.request.GET.get('show', 12)
+        paginate_by = 24
 
         return paginate_by
 
