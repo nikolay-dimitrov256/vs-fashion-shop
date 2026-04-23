@@ -74,6 +74,7 @@ class ItemDetailView(DetailView):
 class ItemsListView(ListView):
     model = Item
     template_name = 'items/category.html'
+    paginate_by = 24
     view_name = 'all-items'
     endpoint = reverse_lazy('api-items')
     category = None
@@ -84,7 +85,7 @@ class ItemsListView(ListView):
 
         context['colors'] = ColorGroup.objects.all()
         context['sizes'] = Stock.objects.values_list('size', flat=True).order_by('size').distinct()
-        context['paginate_by'] = self.get_paginate_by(self.queryset)
+        # context['paginate_by'] = self.paginate_by
 
         query_params = self.request.GET.copy()
         if 'page' in query_params:
@@ -149,11 +150,11 @@ class ItemsListView(ListView):
 
         return items.order_by('-is_new', 'collection__position', '-created_at').distinct()
 
-    def get_paginate_by(self, queryset):
-        # paginate_by = self.request.GET.get('show', 12)
-        paginate_by = 24
-
-        return paginate_by
+    # def get_paginate_by(self, queryset):
+    #     # paginate_by = self.request.GET.get('show', 12)
+    #     paginate_by = 24
+    #
+    #     return paginate_by
 
     @property
     def meta_title(self):

@@ -183,19 +183,18 @@ class ItemsListViewTests(TestCase):
         return view, qs, context
 
     def test_context_contains_expected_keys_and_query_params_without_page(self):
-        view, qs, context = self._get_view_and_response({"page": "2", "color": ["red", "blue"], "show": "1"})
+        view, qs, context = self._get_view_and_response({"page": "1", "color": ["red", "blue"]})
 
         self.assertIn("colors", context)
         self.assertIn("sizes", context)
-        self.assertIn("paginate_by", context)
         self.assertIn("query_params", context)
+        self.assertIn("fetch_params", context)
+        self.assertIn("translations", context)
 
         # page removed from query_params
         self.assertNotIn("page", context["query_params"])
         self.assertEqual(context["query_params"].getlist("color"), ["red", "blue"])
-
-        # paginate_by comes from GET['show'] (note: your method returns a string)
-        self.assertEqual(context["paginate_by"], "1")
+        self.assertEqual(context["paginator"].per_page, 24)
 
     def test_context_sizes_are_distinct_and_ordered(self):
         _, _, context = self._get_view_and_response()
