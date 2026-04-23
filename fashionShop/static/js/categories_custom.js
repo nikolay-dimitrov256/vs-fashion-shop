@@ -617,7 +617,7 @@ jQuery(document).ready(function($)
 
 		const wrapperAElement = document.createElement('a');
 		wrapperAElement.classList.add('product_image');
-		wrapperAElement.href = `${baseUrl}items/${item.slug}/`;
+		wrapperAElement.href = `/items/${item.slug}/`;
 
 		const imgElement = document.createElement('img');
 		imgElement.loading = 'lazy';
@@ -637,17 +637,13 @@ jQuery(document).ready(function($)
 			heartElement.classList.add('favorite');
 		}
 		
-		let tagElement = null;
-		let innerTagElement = null;
+		const tagElement = document.createElement('div');
+		const innerTagElement = document.createElement('span');
 		if (item['is_discounted']) {
-			let tagElement = document.createElement('div');
 			tagElement.classList.add('product_bubble', 'product_bubble_right', 'product_bubble_red', 'd-flex', 'flex-column', 'align-items-center');
-			let innerTagElement = document.createElement('span');
 			innerTagElement.textContent = `-${Number.parseInt(item.discount)}€`;
 		} else if (item['is_new']) {
-			let tagElement = document.createElement('div');
 			tagElement.classList.add('product_bubble', 'product_bubble_left', 'product_bubble_green', 'd-flex', 'flex-column', 'align-items-center');
-			let innerTagElement = document.createElement('span');
 			innerTagElement.textContent = translations.new;
 		}
 
@@ -681,7 +677,7 @@ jQuery(document).ready(function($)
 		buyDivElement.classList.add('red_button', 'add_to_cart_button');
 
 		const buyAElement = document.createElement('a');
-		buyAElement.href = `${baseUrl}items/${item.slug}`;
+		buyAElement.href = `/items/${item.slug}`;
 		buyAElement.textContent = translations.get;
 
 		// Assemble card
@@ -690,7 +686,7 @@ jQuery(document).ready(function($)
 		wrapperAElement.append(imgElement);
 		productFilterElement.append(heartElement);
 
-		if (tagElement && innerTagElement) {
+		if (item['is_discounted'] || item['is_new']) {
 			productFilterElement.append(tagElement);
 			tagElement.append(innerTagElement);
 		}

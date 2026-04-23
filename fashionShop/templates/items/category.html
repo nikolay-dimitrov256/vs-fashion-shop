@@ -181,10 +181,10 @@
 						<div class="col">
 
 							<!-- Product Sorting -->
-
+							{% comment %}
 							<div class="product_sorting_container product_sorting_container_top">
 								<ul class="product_sorting">
-									{% comment %}
+									
 									<li>
 										<span class="type_sorting_text">Default Sorting</span>
 										<i class="fa fa-angle-down"></i>
@@ -194,7 +194,7 @@
 											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Product Name</span></li>
 										</ul>
 									</li>
-									{% endcomment %}
+									
 									<li>
 										<span>{% trans 'Show' %}</span>
 										<span class="num_sorting_text">{{ paginate_by }}</span>
@@ -217,9 +217,8 @@
 									</li>
 								</ul>
 
-								{% include 'items/pagination.html' %}
-
 							</div>
+							{% endcomment %}
 
 							<!-- Product Grid -->
 
@@ -326,5 +325,5 @@
 {{ translations|json_script:'translations' }}
 
 <script src="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
-<script src="{% static 'js/categories_custom.js' %}?v=2"></script>
+<script src="{% static 'js/categories_custom.js' %}?v=3"></script>
 {% endblock %}
