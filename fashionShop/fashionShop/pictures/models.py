@@ -7,7 +7,6 @@ from django.core.files.base import ContentFile
 import os
 
 from fashionShop.common.globals import SITE_DOMAIN
-from fashionShop.items.models import Item
 from fashionShop.pictures.utils.cloudflare import image_file_upload_handler, review_image_upload_handler
 
 
@@ -40,7 +39,7 @@ class Picture(models.Model):
 
     item = models.ForeignKey(
         verbose_name=_('item'),
-        to=Item,
+        to='items.Item',
         on_delete=models.CASCADE,
         related_name='pictures'
     )

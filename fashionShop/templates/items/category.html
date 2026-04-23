@@ -181,10 +181,10 @@
 						<div class="col">
 
 							<!-- Product Sorting -->
-
+							{% comment %}
 							<div class="product_sorting_container product_sorting_container_top">
 								<ul class="product_sorting">
-									{% comment %}
+									
 									<li>
 										<span class="type_sorting_text">Default Sorting</span>
 										<i class="fa fa-angle-down"></i>
@@ -194,7 +194,7 @@
 											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Product Name</span></li>
 										</ul>
 									</li>
-									{% endcomment %}
+									
 									<li>
 										<span>{% trans 'Show' %}</span>
 										<span class="num_sorting_text">{{ paginate_by }}</span>
@@ -217,9 +217,8 @@
 									</li>
 								</ul>
 
-								{% include 'items/pagination.html' %}
-
 							</div>
+							{% endcomment %}
 
 							<!-- Product Grid -->
 
@@ -256,7 +255,7 @@
 										{% elif item.is_discounted %}
 											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }}€</span></div>
 										{% elif item.is_new %}
-											<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+											<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>{% trans 'new' %}</span></div>
 										{% endif %}
 										<div class="product_info">
 											<p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name|truncatewords:4 }}</a></p>
@@ -293,9 +292,7 @@
 									</li>
 								</ul>
 								{% endcomment %}
-								<span class="showing_results">{% trans 'Showing' %} {{ page_obj.start_index }}–{{ page_obj.end_index }} {% trans 'of' %} {{ paginator.count }} {% trans 'results' %}</span>
-
-								{% include 'items/pagination.html' %}
+								{# <span class="showing_results">{% trans 'Showing' %} {{ page_obj.start_index }}–{{ page_obj.end_index }} {% trans 'of' %} {{ paginator.count }} {% trans 'results' %}</span> #}
 
 							</div>
 
@@ -315,7 +312,6 @@
 	<div class="container bottom-article">
 	{% block seo_text %}
 	{% endblock %}
-	{% include 'items/pagination.html' %}
 	</div>
 {% endif %}
 
@@ -323,9 +319,11 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-	const viewName = '{{ view_name }}';
-</script>
+
+{{ fetch_params|json_script:'fetch-params' }}
+
+{{ translations|json_script:'translations' }}
+
 <script src="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
-<script src="{% static 'js/categories_custom.js' %}?v=2"></script>
+<script src="{% static 'js/categories_custom.js' %}?v=3"></script>
 {% endblock %}

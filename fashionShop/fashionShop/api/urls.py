@@ -14,5 +14,12 @@ urlpatterns = [
         ]))
     ])),
     path('facebook/', views.products_feed, name='facebook-catalog'),
-    path('items/', views.ItemsListView.as_view(), name='items'),
+    path('items/', include([
+        path('', views.ItemsListView.as_view(), name='api-items'),
+        path('bestsellers/', views.BestsellersListView.as_view(), name='api-bestsellers'),
+        path('new/', views.NewItemsListView.as_view(), name='api-new'),
+        path('max/', views.MaxSizeListView.as_view(), name='api-max'),
+        path('fall-winter/', views.FallWinterListView.as_view(), name='api-fall-winter'),
+        path('spring-summer/', views.SpringSummerListView.as_view(), name='api-spring-summer'),
+    ])),
 ]

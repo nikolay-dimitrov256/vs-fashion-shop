@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 from fashionShop.common.globals import EURO_RATE, black_friday_discount_percent, is_black_friday
 from fashionShop.common.utils import transliterate
+from fashionShop.items.managers import ItemQuerySet, ItemManager
 from fashionShop.items.models import ItemCollection
 from fashionShop.items.models.categories import Category, SubCategory
 from fashionShop.items.models.colors import ColorGroup
@@ -148,6 +149,8 @@ class Item(models.Model):
     deleted = models.BooleanField(
         default=False,
     )
+
+    objects = ItemManager()
 
     class Meta:
         verbose_name = _('item')

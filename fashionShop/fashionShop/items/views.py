@@ -1,9 +1,12 @@
+import json
 from datetime import datetime, timedelta
 
 from django.db.models import OuterRef, Subquery, Prefetch, Q, Avg, Sum
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
+from django.utils.translation import gettext as _
 
 from fashionShop.common.utils import get_absolute_url
 from fashionShop.items.models import Item, ColorGroup, Stock, Size, SubCategory
@@ -71,14 +74,18 @@ class ItemDetailView(DetailView):
 class ItemsListView(ListView):
     model = Item
     template_name = 'items/category.html'
+    paginate_by = 24
     view_name = 'all-items'
+    endpoint = reverse_lazy('api-items')
+    category = None
+    style = None
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
 
         context['colors'] = ColorGroup.objects.all()
         context['sizes'] = Stock.objects.values_list('size', flat=True).order_by('size').distinct()
-        context['paginate_by'] = self.get_paginate_by(self.queryset)
+        # context['paginate_by'] = self.paginate_by
 
         query_params = self.request.GET.copy()
         if 'page' in query_params:
@@ -87,41 +94,67 @@ class ItemsListView(ListView):
         context['canonical_url'] = get_absolute_url(self.view_name)
         context['meta_title'] = self.meta_title
         context['meta_description'] = self.meta_description
-        context['view_name'] = self.view_name
+
+        filter_query_params = self.request.GET.copy()
+
+        if self.category:
+            filter_query_params['category'] = self.category
+        if self.style:
+            filter_query_params['style'] = self.style
+
+        page_obj = context.get('page_obj')
+        next_url = None
+
+        if page_obj and page_obj.has_next():
+            filter_query_params['page'] = page_obj.next_page_number()
+            next_url = f'{self.endpoint}?{filter_query_params.urlencode()}'
+
+        context['fetch_params'] = {
+            # 'endpoint': self.endpoint,
+            # 'category': self.category,
+            # 'style': self.style,
+            'current_page': page_obj.number if page_obj else 1,
+            'next': next_url,
+            'previous': None,
+        }
+        context['translations'] = {
+            'new': _('new'),
+            'lv': _('lv'),
+            'get': _('get'),
+        }
 
         return context
 
     def get_queryset(self):
         items = (
             Item.objects
-            .prefetch_related(
-                Prefetch(
-                    'pictures',
-                    queryset=Picture.objects.all()[:1],  # Only fetch the first image
-                    to_attr='main_picture_list'
-                )
-            )
-            .exclude(deleted=True)
+            .active()
+            .with_main_picture()
+            # .prefetch_related(
+            #     Prefetch(
+            #         'pictures',
+            #         queryset=Picture.objects.all()[:1],  # Only fetch the first image
+            #         to_attr='main_picture_list'
+            #     )
+            # )
+            # .exclude(deleted=True)
         )
 
         selected_colors = self.request.GET.getlist('color')
         if selected_colors:
-            items = items.filter(color_group__name_en__in=selected_colors)
+            items = items.filter_colors(selected_colors)
 
         selected_sizes = self.request.GET.getlist('size')
         if selected_sizes:
-            items = items.filter(
-                Q(stock__translated_size__size__in=selected_sizes) |
-                Q(stock__translated_size__isnull=True, stock__size__size__in=selected_sizes),
-                stock__quantity__gt=0,
-            )
+            items = items.filter_sizes(selected_sizes)
 
         return items.order_by('-is_new', 'collection__position', '-created_at').distinct()
 
-    def get_paginate_by(self, queryset):
-        paginate_by = self.request.GET.get('show', 12)
-
-        return paginate_by
+    # def get_paginate_by(self, queryset):
+    #     # paginate_by = self.request.GET.get('show', 12)
+    #     paginate_by = 24
+    #
+    #     return paginate_by
 
     @property
     def meta_title(self):
@@ -136,6 +169,7 @@ class ItemsListView(ListView):
 class PantsListView(ItemsListView):
     template_name = 'items/pants.html'
     view_name = 'pants'
+    category = 'pants'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -157,6 +191,7 @@ class PantsListView(ItemsListView):
 class SkirtsListView(ItemsListView):
     template_name = 'items/skirts.html'
     view_name = 'skirts'
+    category = 'skirts'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -177,6 +212,7 @@ class SkirtsListView(ItemsListView):
 class DressesListView(ItemsListView):
     template_name = 'items/dresses.html'
     view_name = 'dresses'
+    category = 'dresses'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -198,6 +234,7 @@ class DressesListView(ItemsListView):
 class ShirtsListView(ItemsListView):
     template_name = 'items/shirts.html'
     view_name = 'shirts'
+    category = 'shirts'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -219,6 +256,7 @@ class ShirtsListView(ItemsListView):
 class BlousesListView(ItemsListView):
     template_name = 'items/blouses.html'
     view_name = 'blouses'
+    category = 'blouses'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -240,6 +278,7 @@ class BlousesListView(ItemsListView):
 class TunicsListView(ItemsListView):
     template_name = 'items/tunics.html'
     view_name = 'tunics'
+    category = 'tunics'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -260,6 +299,7 @@ class TunicsListView(ItemsListView):
 class BlazersListView(ItemsListView):
     template_name = 'items/blazers.html'
     view_name = 'blazers'
+    category = 'blazers'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -281,6 +321,7 @@ class BlazersListView(ItemsListView):
 class SuitsListView(ItemsListView):
     template_name = 'items/suits.html'
     view_name = 'suits'
+    category = 'suits'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -301,6 +342,7 @@ class SuitsListView(ItemsListView):
 class JacketsListView(ItemsListView):
     template_name = 'items/jackets.html'
     view_name = 'jackets'
+    category = 'jackets'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -322,6 +364,7 @@ class JacketsListView(ItemsListView):
 class CoatsListView(ItemsListView):
     template_name = 'items/coats.html'
     view_name = 'coats'
+    category = 'coats'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -343,6 +386,7 @@ class CoatsListView(ItemsListView):
 class VestsListView(ItemsListView):
     template_name = 'items/vests.html'
     view_name = 'vests'
+    category = 'vests'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -363,6 +407,7 @@ class VestsListView(ItemsListView):
 class TankTopsListView(ItemsListView):
     template_name = 'items/tank-tops.html'
     view_name = 'underwear'
+    category = 'underwear'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -383,6 +428,7 @@ class TankTopsListView(ItemsListView):
 class SetsListView(ItemsListView):
     template_name = 'items/sets.html'
     view_name = 'classic'
+    category = 'classic'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -404,6 +450,7 @@ class SetsListView(ItemsListView):
 class CardigansListView(ItemsListView):
     template_name = 'items/tank-tops.html'
     view_name = 'cardigans'
+    category = 'cardigans'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -425,6 +472,7 @@ class CardigansListView(ItemsListView):
 class ElegantListView(ItemsListView):
     template_name = 'items/elegant.html'
     view_name = 'elegant'
+    style = 'elegant'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -446,6 +494,7 @@ class ElegantListView(ItemsListView):
 class OfficeListView(ItemsListView):
     template_name = 'items/office.html'
     view_name = 'office'
+    style = 'office'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -467,6 +516,7 @@ class OfficeListView(ItemsListView):
 class OfficialListView(ItemsListView):
     template_name = 'items/official.html'
     view_name = 'official'
+    style = 'official'
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -493,13 +543,8 @@ class SearchView(ItemsListView):
         items = super().get_queryset()
 
         search = self.request.GET.get('search', '').strip()
-        query = (Q(name__icontains=search) | Q(name_en__icontains=search)
-                 | Q(description__icontains=search) | Q(description_en__icontains=search))
 
-        if search.isdigit():
-            query |= Q(pk=search)
-
-        items = items.filter(query)
+        items = items.search(search)
 
         return items
 
@@ -507,11 +552,12 @@ class SearchView(ItemsListView):
 class BestsellersListView(ItemsListView):
     template_name = 'items/bestsellers.html'
     view_name = 'bestsellers'
+    endpoint = reverse_lazy('api-bestsellers')
 
     def get_queryset(self):
         items = super().get_queryset()
 
-        items = items.annotate(sales=Sum('order_items__quantity')).filter(sales__gte=5).order_by('-sales')
+        items = items.bestsellers()
 
         return items
 
@@ -527,6 +573,7 @@ class BestsellersListView(ItemsListView):
 class NewItemsListView(ItemsListView):
     template_name = 'items/new.html'
     view_name = 'new'
+    endpoint = reverse_lazy('api-new')
 
     def get_queryset(self):
         items = super().get_queryset()
@@ -548,18 +595,12 @@ class NewItemsListView(ItemsListView):
 class MaxSizeListView(ItemsListView):
     template_name = 'items/max-size.html'
     view_name = 'max-size'
+    endpoint = reverse_lazy('api-max')
 
     def get_queryset(self):
         items = super().get_queryset()
 
-        max_sizes = ['52', '54', '56', '58', '60', '62', '64', '66', '68', '70']
-
-        query = (
-            Q(stock__translated_size__size__in=max_sizes) |
-            Q(stock__translated_size__size__isnull=True, stock__size__size__in=max_sizes)
-        ) & Q(stock__quantity__gt=0)
-
-        items = items.filter(query)
+        items = items.max_sizes()
 
         return items
 
@@ -576,12 +617,12 @@ class MaxSizeListView(ItemsListView):
 class FallWinterListView(ItemsListView):
     template_name = 'items/fall-winter.html'
     view_name = 'fall-winter'
+    endpoint = reverse_lazy('api-fall-winter')
 
     def get_queryset(self):
         items = super().get_queryset()
 
-        query = Q(collection__name='есен/зима') | Q(collection__name='пролет/есен')
-        items = items.filter(query)
+        items = items.fall_winter()
 
         return items
 
@@ -598,12 +639,12 @@ class FallWinterListView(ItemsListView):
 class SpringSummerListView(ItemsListView):
     template_name = 'items/spring-summer.html'
     view_name = 'spring-summer'
+    endpoint = reverse_lazy('api-spring-summer')
 
     def get_queryset(self):
         items = super().get_queryset()
 
-        query = Q(collection__name='пролет/лято') | Q(collection__name='пролет/есен') | Q(collection__name='лято')
-        items = items.filter(query)
+        items = items.spring_summer()
 
         return items
 
