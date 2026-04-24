@@ -258,7 +258,7 @@
 											<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>{% trans 'new' %}</span></div>
 										{% endif %}
 										<div class="product_info">
-											<p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name|truncatewords:4 }}</a></p>
+											<p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></p>
 											{% if is_black_friday %}
 												<div class="product_price">{{ item.black_price }} €<span class="price_eur">/{{ item.black_price_bgn }} {% trans 'lv' %}</span></div>
 											{% elif item.is_discounted %}
