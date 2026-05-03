@@ -79,6 +79,6 @@ jobs:
         with:
           host: ${{ secrets.DROPLET_HOST }}
           username: ${{ secrets.DROPLET_USERNAME }}
-          password: ${{ secrets.DROPLET_PASSWORD }}
+          key: ${{ secrets.DROPLET_KEY }}
           port: ${{ secrets.DROPLET_PORT }}
           script: ./scripts/deploy.sh
