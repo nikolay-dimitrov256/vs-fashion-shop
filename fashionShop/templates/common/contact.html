@@ -40,8 +40,8 @@
     <div class="row">
         <div class="col">
             <div id="google_map">
-                <div class="map_container">
-                    <div id="map" style="width:100%; height:600px;"></div>
+                <div class="mapframe">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2958.396778214362!2d24.543576599999998!3d42.14179540000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14acc7e1e7e5ce57%3A0x75080b72b165f0e1!2z0JLQmNCb0Jgg0KHQotCY0Jsg0J7QntCU!5e0!3m2!1sbg!2sbg!4v1777892522746!5m2!1sbg!2sbg" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -120,31 +120,4 @@
 {% block scripts %}
 <script src="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
 <script src="{% static 'js/contact_custom.js' %}?v=1"></script>
-<script>
-  function initGoogleMap() {
-    const myLatlng = { lat: 42.14184304174352, lng: 24.54358717498793 };
-
-    const map = new google.maps.Map(document.getElementById("map"), {
-      center: myLatlng,
-      zoom: 16,
-      draggable: true,
-      scrollwheel: true,
-      zoomControl: true,
-      mapTypeControl: false,
-      streetViewControl: false,
-      fullscreenControl: true,
-      scaleControl: true,
-      zoomControlOptions: {
-        position: google.maps.ControlPosition.RIGHT_CENTER,
-        },
-    });
-
-    new google.maps.Marker({
-      position: myLatlng,
-      map,
-      icon: "{% static 'images/map_marker.png' %}",
-    });
-  }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCKFnNjOhOuujvzT_YQAonCLb4ksOOIXd8&callback=initGoogleMap" async defer></script>
 {% endblock %}
