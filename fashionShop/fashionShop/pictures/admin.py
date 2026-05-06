@@ -8,6 +8,7 @@ from fashionShop.pictures.utils.cloudflare import migrate_image_to_r2
 @admin.register(Picture)
 class PictureAdmin(admin.ModelAdmin):
     list_display = ['item__item_number', 'image_preview', 'r2_status']
+    search_fields = ['item__item_number']
     actions = [migrate_image_to_r2]
 
     def image_preview(self, obj):
