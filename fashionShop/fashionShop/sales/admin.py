@@ -5,8 +5,8 @@ from django.db.models.functions import TruncMonth
 from fashionShop.items.models import OrderItem
 from fashionShop.sales.choices import StatusChoices
 from fashionShop.sales.models import OnlineOrder
-from fashionShop.sales.tasks import send_sms
-from fashionShop.sales.utils import refresh_orders, send_bisoft_reports
+from fashionShop.sales.tasks import send_sms, send_bisoft_report
+from fashionShop.sales.admin_actions import refresh_orders, send_bisoft_reports
 
 
 class OrderItemInline(admin.TabularInline):

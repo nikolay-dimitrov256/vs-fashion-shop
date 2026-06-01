@@ -1,0 +1,55 @@
+{'user':
+	{'name': 'Николай Димитров', 'doc_num': '2605490001', 'total': '120.00', 'date': '2026-05-30', 'delivery': 0, 'phone': '0886531811', 'address': 'СПИДИ до офис', 'total_quantity': 1},
+'basket':
+	{'70234':
+		{'sizes': {'48': 1}, 'price': '120.00'}
+	}
+}
+
+{'user':
+    {'name': 'Николай Димитров', 'doc_num': '2605490002', 'total': '120.00', 'date': '2026-05-30', 'delivery': 0, 'phone': '0886531811', 'address': 'СПИДИ до офис', 'total_quantity': 1},
+'basket':
+    {'70233':
+        {'sizes': {5: 1}, 'price': '120.00'} # поръчан размер 48 allow_sizes=40
+    }
+}
+
+{'user':
+    {'name': 'Николай Димитров', 'doc_num': '2605490003', 'total': '49.00', 'date': '2026-05-30', 'delivery': 5.99, 'phone': '0886531811', 'address': 'ЕКОНТ до офис', 'total_quantity': 1},
+'basket':
+    {'50115':
+        {'sizes': {3: 1}, 'price': '49.00'} # поръчан размер 50 allow_sizes=c46
+    }
+}
+
+{'user':
+    {'name': 'Николай Димитров', 'doc_num': '2605490006', 'total': '38.35', 'date': '2026-05-30', 'delivery': 5.99, 'phone': '0886531811', 'address': 'ЕКОНТ до офис', 'total_quantity': 1},
+'basket':
+    {'30171':
+        {'sizes': {4: 1}, 'price': '38.35'} # поръчан размер 56 allow_sizes=48
+    }
+}
+
+{'user':
+    {'name': 'Николай Димитров', 'doc_num': '2605490007', 'total': '38.35', 'date': '2026-05-30', 'delivery': 5.99, 'phone': '0886531811', 'address': 'СПИДИ до офис', 'total_quantity': 1},
+'basket':
+    {'30170':
+        {'sizes': {1: 1}, 'price': '38.35'} # поръчан размер 50 allow_sizes=50
+    }
+}
+
+{'user':
+    {'name': 'Николай Димитров', 'doc_num': '2605490004', 'total': '48.57', 'date': '2026-05-30', 'delivery': 5.99, 'phone': '0886531811', 'address': 'СПИДИ до офис', 'total_quantity': 1},
+'basket':
+    {'50005':
+        {'sizes': {1: 1}, 'price': '48.57'} # поръчан размер 60 allow_sizes=40
+    }
+}
+
+{'user':
+    {'name': 'Николай Димитров', 'doc_num': '2605490005', 'total': '79.00', 'date': '2026-05-30', 'delivery': 5.99, 'phone': '0886531811', 'address': 'ЕКОНТ до офис', 'total_quantity': 1},
+'basket':
+    {'50170':
+        {'sizes': {0: 1}, 'price': '79.00'} # поръчан размер 38 allow_sizes=40
+    }
+}

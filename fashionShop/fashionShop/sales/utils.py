@@ -1,7 +1,15 @@
-from fashionShop.items.models import OrderItem, Size, Item, CartItem
-from fashionShop.sales.models import Cart, OnlineOrder
-from fashionShop.sales.tasks import send_bisoft_report
-from django.utils.translation import gettext as _
+from fashionShop.items.models import OrderItem, Size, Item, CartItem, Stock
+from fashionShop.sales.models import Cart
+
+BISOFT_SIZE_RANGES_MAP = {
+    '40': {'40': 1, '42': 2, '44': 3, '46': 4, '48': 5, '50': 6, '52': 7, '54': 8, '56': 9, '58': 0},
+    'c46': {'46': 1, '48': 2, '50': 3, '52': 4, '54': 5, '56': 6, '58': 7, '60': 8, '62': 9, '64': 0},
+    '48': {'50': 1, '52': 2, '54': 3, '56': 4, '58': 5, '60': 6, '62': 7, '64': 8, '66': 9, '48': 0},
+    '50': {'50': 1, '52': 2, '54': 3, '56': 4, '58': 5, '60': 6, '62': 7, '64': 8, '66': 9, '68': 0},
+    's': {'S': 1, 'M': 2, 'L': 3, 'XL': 4, '2XL': 5, '3XL': 6, '4XL': 7, '5XL': 8, '6XL': 9, '7XL': 0},
+    'xs': {'S': 1, 'M': 2, 'L': 3, 'XL': 4, '2XL': 5, '3XL': 6, '4XL': 7, '5XL': 8, '6XL': 9, 'XS': 0},
+    '-1': {'40': 1, '42': 2, '44': 3, '46': 4, '48': 5, '50': 6, '52': 7, '54': 8, '56': 9, '58': 0},
+}
 
 
 def fill_order_from_cart_empty_cart(request, order):
@@ -44,25 +52,20 @@ def fill_order_from_cart_empty_cart(request, order):
     return OrderItem.objects.bulk_create(order_items)
 
 
-def refresh_orders(modeladmin, request, queryset):
-    for order in queryset:
-        for item in order.order_items.all():
-            item.save()
+def get_bisoft_column(size: Size, item: Item) -> int:
+    # get starting size
+    starting_size = item.starting_size
 
-        order.save()
+    # get size range
+    size_range = BISOFT_SIZE_RANGES_MAP.get(starting_size, BISOFT_SIZE_RANGES_MAP['40'])
 
+    # check if size is translated
+    stock = Stock.objects.filter(item=item, translated_size=size, translated_size__isnull=False).first()
+    actual_size = size.size
+    if stock is not None:
+        actual_size = stock.size.size
 
-refresh_orders.short_description = 'Refresh orders'
+    # get bisoft column
+    bisoft_column = size_range.get(actual_size, 1)
 
-
-def send_bisoft_reports(modeladmin, request, queryset):
-    orders = list(queryset)
-    for order in orders:
-        # if not order.bisoft_report_sent:
-        success = send_bisoft_report(order.pk, save=False)
-        order.bisoft_report_sent = success
-
-    OnlineOrder.objects.bulk_update(orders, ['bisoft_report_sent'])
-
-
-send_bisoft_reports.short_description = _('Send BiSOFT reports')
+    return bisoft_column

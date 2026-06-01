@@ -4,6 +4,7 @@ from celery import shared_task
 from fashionShop.common.templatetags.shipping import is_free_shipping
 from fashionShop.sales.choices import ShippingChoices
 from fashionShop.sales.models import OnlineOrder
+from fashionShop.sales.utils import get_bisoft_column
 from fashionShop.settings import INFOBIP_API_KEY, INFOBIP_URL, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
 
@@ -30,14 +31,16 @@ def send_bisoft_report(order_id, save=True):
     total_quantity = 0
 
     for order_item in order.order_items.all():
-        item_number = str(order_item.item.pk)
+        item = order_item.item
+        item_number = str(item.pk)
         size = order_item.size.size
         total_quantity += order_item.quantity
+        bisoft_column = get_bisoft_column(order_item.size, item)
 
         if item_number not in report['basket']:
             report['basket'][item_number] = {}
             report['basket'][item_number]['sizes'] = {}
-        report['basket'][item_number]['sizes'][size] = order_item.quantity
+        report['basket'][item_number]['sizes'][bisoft_column] = order_item.quantity
         report['basket'][item_number]['price'] = str(order_item.at_price)
 
     report['user']['total_quantity'] = total_quantity

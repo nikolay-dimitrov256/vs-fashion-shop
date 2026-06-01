@@ -72,8 +72,10 @@ class Item(models.Model):
         blank=True,
     )
 
-    is_bestseller = models.BooleanField(
-        default=False,
+    # This is for BiSoft integration and reports. It's not used for any internal logic.
+    starting_size = models.CharField(
+        max_length=5,
+        default='40'
     )
 
     is_new = models.BooleanField(

@@ -20,8 +20,7 @@ from fashionShop.sales.choices import ShippingChoices, StatusChoices
 from fashionShop.sales.forms import ShippingOrderForm
 from fashionShop.sales.models import Cart, OnlineOrder
 from fashionShop.sales.tasks import send_bisoft_report, send_sms
-from fashionShop.sales.utils import fill_order_from_cart_empty_cart
-
+from fashionShop.sales.utils import fill_order_from_cart_empty_cart, get_bisoft_column
 
 UserModel = get_user_model()
 
@@ -312,7 +311,7 @@ class SalesTasksTests(TestCase):
         self.assertTrue(self.order.bisoft_report_sent)
         posted_json = mock_post.call_args[1]['json']
         self.assertEqual(posted_json['user']['doc_num'], self.order.order_code)
-        self.assertEqual(posted_json['basket'][str(self.item.pk)]['sizes'][self.size.size], 2)
+        self.assertEqual(posted_json['basket'][str(self.item.pk)]['sizes'][get_bisoft_column(self.size, self.item)], 2)
 
     @patch('fashionShop.sales.tasks.requests.post')
     def test_send_bisoft_report_returns_false_on_request_exception(self, mock_post):
