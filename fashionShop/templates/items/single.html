@@ -573,7 +573,7 @@
                                     </div>
                                     <div class="user_name">{{ review.author }}</div>
                                     {% if review.title %}<h5>{{ review.title }}</h5>{% endif %}
-                                    <p>{{ review.content }}</p>
+                                    <p>{{ review.content|linebreaks }}</p>
                                     {% if review.pictures.all.exists %}
                                     <div class="review-gallery">
                                         <ul>
