@@ -56,12 +56,169 @@ class ItemAdmin(ExtraButtonsMixin, admin.ModelAdmin):
     @button(visible=lambda self: self.context["request"].user.is_superuser,
             change_form=True,
             html_attrs={'style': 'background-color:#88FF88;color:black'})
-    def _update_prices_and_stock(self, request):
+    def load_pants(self, request):
+        start = time.time()
 
-        # update_prices_and_stock()
+        load_items_from_bisoft(category='pants')
 
-        self.message_user(request, 'Function not available yet.')
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
 
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_skirts(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='skirts')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_shirts(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='shirts')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_blouses(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='blouses')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_blazers(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='blazers')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_dresses(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='dresses')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_vests(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='vests')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_tunics(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='tunics')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_coats(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='coats')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_jackets(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='jackets')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_suits(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='suits')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
+        return HttpResponseRedirectToReferrer(request)
+
+    @button(visible=lambda self: self.context["request"].user.is_superuser,
+            change_form=True,
+            html_attrs={'style': 'background-color:#88FF88;color:black'})
+    def load_underwear(self, request):
+        start = time.time()
+
+        load_items_from_bisoft(category='underwear')
+
+        end = time.time()
+        self.message_user(request, f'The operation took {end - start} seconds')
+
+        # Optional: returns HttpResponse
         return HttpResponseRedirectToReferrer(request)
 
 

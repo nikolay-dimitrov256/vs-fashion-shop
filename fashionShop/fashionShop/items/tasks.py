@@ -12,9 +12,9 @@ from fashionShop.stores.models import Store
 
 
 @shared_task
-def load_items_from_bisoft() -> None:
+def load_items_from_bisoft(category='all') -> None:
     # Fetch data from API
-    url = f'{BISOFT_API_URL}cat/all'
+    url = f'{BISOFT_API_URL}cat/{category}'
     response = requests.get(url)
     data = response.json()
 
