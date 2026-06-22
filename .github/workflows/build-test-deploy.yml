@@ -49,22 +49,25 @@ jobs:
       INFOBIP_API_KEY: ${{ secrets.INFOBIP_API_KEY }}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      UV_SYSTEM_PYTHON: 1
     steps:
     - name: Checkout the repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     - name: Set up Python 3.13
       uses: actions/setup-python@v5
       with:
         python-version: 3.13
+    - name: Install uv
+      uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b
+      with:
+        enable-cache: true
     - name: Install system deps for xmlsec
       run: |
           sudo apt-get update
           sudo apt-get install -y pkg-config libxml2-dev libxmlsec1-dev libxmlsec1-openssl
     - name: Install Dependencies
       working-directory: fashionShop
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      run: uv pip install -r requirements.txt
     - name: Run Tests
       working-directory: fashionShop
       run: python manage.py test
