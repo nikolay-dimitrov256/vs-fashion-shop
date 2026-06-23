@@ -7,12 +7,6 @@ from fashionShop.pictures.models import Picture, ReviewPicture
 
 @receiver(pre_delete, sender=Picture)
 def delete_picture_files(sender, instance: Picture, **kwargs):
-    if instance.image:
-        public_id = instance.image.public_id
-
-        if public_id:
-            uploader.destroy(public_id)
-
     if instance.image_r2:
         instance.image_r2.delete(save=False)
 

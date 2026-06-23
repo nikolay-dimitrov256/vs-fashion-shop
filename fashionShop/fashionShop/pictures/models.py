@@ -1,18 +1,14 @@
-from cloudinary.models import CloudinaryField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
-import os
 
 from fashionShop.common.globals import SITE_DOMAIN
 from fashionShop.pictures.utils.cloudflare import image_file_upload_handler, review_image_upload_handler
 
 
 class Picture(models.Model):
-    image = CloudinaryField('image')
-
     image_r2 = models.ImageField(
         upload_to=image_file_upload_handler,
         null=True,
@@ -49,11 +45,7 @@ class Picture(models.Model):
 
     @property
     def image_url(self):
-        if self.image_r2:
-            return f'https://media.{SITE_DOMAIN}/{self.image_r2.name}'
-        elif self.image:
-            return self.image.url
-        return ''
+        return f'https://media.{SITE_DOMAIN}/{self.image_r2.name}'
 
     def save(self, *args, **kwargs):
         if self.is_main:
