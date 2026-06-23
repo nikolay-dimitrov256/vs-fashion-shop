@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from fashionShop.pictures.models import Picture
-from fashionShop.pictures.utils.cloudflare import migrate_image_to_r2
 
 
 @admin.register(Picture)
