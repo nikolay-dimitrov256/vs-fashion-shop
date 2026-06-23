@@ -15,9 +15,6 @@ from pathlib import Path
 from decouple import config
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,8 +70,6 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
     'modeltranslation',
     'admin_extra_buttons',
-    'cloudinary',
-    'cloudinary_storage',
     'rest_framework',
     'storages',
     'axes',
@@ -296,12 +291,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 BISOFT_API_KEY = 'lol_key'
 
-cloudinary.config(
-    cloud_name='abc', #config('CLOUDINARY_CLOUD_NAME'),
-    api_key='abc', #config('CLOUDINARY_API_KEY'),
-    api_secret='abc', #config('CLOUDINARY_API_SECRET'),
-    secure=True,  # Ensures image urls are https
-)
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR / 'media'
 
