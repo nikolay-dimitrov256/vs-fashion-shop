@@ -56,7 +56,11 @@ class OnlineOrderAdmin(admin.ModelAdmin):
                 vazov=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Вазов')),
                 vazov_refunded=Sum('total', filter=Q(status=StatusChoices.REFUNDED) & Q(comment__icontains='Изпратена от Вазов')),
                 centar=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Център')),
+                centar_veneta=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Център - Венета')),
+                centar_vili=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Център - Вили')),
                 centar_refunded=Sum('total', filter=Q(status=StatusChoices.REFUNDED) & Q(comment__icontains='Изпратена от Център')),
+                centar_refunded_veneta=Sum('total', filter=Q(status=StatusChoices.REFUNDED) & Q(comment__icontains='Изпратена от Център - Венета')),
+                centar_refunded_vili=Sum('total', filter=Q(status=StatusChoices.REFUNDED) & Q(comment__icontains='Изпратена от Център - Вили')),
                 stara_zagora=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Стара Загора')),
                 asenovgrad=Sum('total', filter=Q(status=StatusChoices.COMPLETED) & Q(comment__icontains='Изпратена от Асеновград')),
             )

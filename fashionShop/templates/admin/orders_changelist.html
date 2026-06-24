@@ -24,7 +24,11 @@
     <th>Вазов</th>
     <th>върната Вазов</th>
     <th>Център</th>
+    <th>Център - Венета</th>
+    <th>Център - Вили</th>
     <th>върната Център</th>
+    <th>върната Център - Венета</th>
+    <th>върната Център - Вили</th>
     <th>Стара Загора</th>
   </tr>
   {% for row in monthly_data %}
@@ -47,7 +51,11 @@
     <td>{{ row.vazov }}</td>
     <td>{{ row.vazov_refunded }}</td>
     <td>{{ row.centar }}</td>
+    <td>{{ row.centar_veneta }}</td>
+    <td>{{ row.centar_vili }}</td>
     <td>{{ row.centar_refunded }}</td>
+    <td>{{ row.centar_refunded_veneta }}</td>
+    <td>{{ row.centar_refunded_vili }}</td>
     <td>{{ row.stara_zagora }}</td>
   </tr>
   {% endfor %}
