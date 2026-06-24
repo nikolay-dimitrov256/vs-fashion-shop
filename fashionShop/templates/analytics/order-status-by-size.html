@@ -1,0 +1,63 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Успеваемост на поръчки по размери</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        table th {
+            border: 2px solid #000;
+            font-weight: bold;
+            padding: 5px;
+        }
+        table td {
+            border: 1px solid #000;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container first-container">
+    <a href="{% url 'home' %}">Начало</a>
+    <h1 style="text-align: center;">Успеваемост на поръчки по размери</h1>
+    <table style="margin: 0 auto;">
+        <thead>
+            <tr>
+                <th>Размер</th>
+                <th>Общо поръчки</th>
+                <th>Успешни поръчки</th>
+                <th>Неуспешни поръчки</th>
+                <th>Незавършени</th>
+                <th>% Успешни</th>
+                <th>% Неуспешни</th>
+                <th>Оборот</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for size in sizes %}
+            <tr>
+                <td>{{ size.size }}</td>
+                <td>{{ size.total_orders }}</td>
+                <td>{{ size.successful }}</td>
+                <td>{{ size.failed }}</td>
+                <td>{{ size.not_completed }}</td>
+                <td>{{ size.percent_successful|floatformat:2 }} %</td>
+                <td>{{ size.percent_failed|floatformat:2 }} %</td>
+                <td>{{ size.revenue }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+</body>
+</html>
