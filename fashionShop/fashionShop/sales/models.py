@@ -143,7 +143,7 @@ class OnlineOrder(models.Model):
     )
 
     class Meta:
-        ordering = ['-pk']
+        ordering = ['-pk'] # TODO: This causes problems in the order_code generation
         verbose_name = _('Online Order')
         verbose_name_plural = _('Online Orders')
 
@@ -154,7 +154,7 @@ class OnlineOrder(models.Model):
             month = now.strftime('%m')
             transaction_type = '49'
             start_of_month = timezone.make_aware(datetime.datetime(now.year, now.month, 1))
-            last_order_this_month = OnlineOrder.objects.filter(created_at__gte=start_of_month).last()
+            last_order_this_month = OnlineOrder.objects.filter(created_at__gte=start_of_month).order_by('pk').last()
 
             if last_order_this_month and last_order_this_month.order_code:
                 sequence = int(str(last_order_this_month.order_code[-4:])) + 1
