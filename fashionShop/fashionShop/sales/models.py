@@ -9,7 +9,7 @@ from django.utils import timezone
 
 from fashionShop.common.globals import FREE_DELIVERY_THRESHOLD
 from fashionShop.common.utils import get_absolute_url
-from fashionShop.sales.choices import ShippingChoices, StatusChoices
+from fashionShop.sales.choices import ShippingChoices, StatusChoices, RefundStatusChoices
 
 UserModel = get_user_model()
 
@@ -143,6 +143,7 @@ class OnlineOrder(models.Model):
     )
 
     class Meta:
+        ordering = ['-pk']
         verbose_name = _('Online Order')
         verbose_name_plural = _('Online Orders')
 
@@ -245,3 +246,44 @@ class OnlineOrder(models.Model):
 
     def __str__(self):
         return f'Order number {self.pk}'
+
+
+class OnlineRefund(models.Model):
+    order = models.ForeignKey(
+        to=OnlineOrder,
+        related_name='refunds',
+        on_delete=models.CASCADE,
+    )
+
+    status = models.CharField(
+        max_length=3,
+        choices=RefundStatusChoices.choices,
+        default=RefundStatusChoices.PENDING,
+    )
+
+    total = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=True,
+    )
+
+    refund_all = models.BooleanField(
+        _('refund_all'),
+        default=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        verbose_name = _('Online Refund')
+        verbose_name_plural = _('Online Refunds')
+
+    def __str__(self):
+        return f'{_('Refund for order')} {self.order.pk}'

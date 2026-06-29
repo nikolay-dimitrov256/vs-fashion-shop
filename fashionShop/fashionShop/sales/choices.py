@@ -35,3 +35,10 @@ class StatusChoices(TextChoices):
     COMPLETED = 'cmp', _('completed')
     REPLACED = 'rpl', _('replaced')
     REFUNDED = 'rfn', _('refunded')
+
+
+class   RefundStatusChoices(TextChoices):
+    PENDING = 'pnd', _('pending')
+    RECEIVED = 'rcv', _('received')
+    PAID_OUT = 'pid', _('paid out')
+    CANCELED = 'cnl', _('canceled')

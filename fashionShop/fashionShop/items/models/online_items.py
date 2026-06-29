@@ -90,3 +90,32 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return self.item.name
+
+
+class OrderRefundItem(models.Model):
+    order_item = models.ForeignKey(
+        to=OrderItem,
+        on_delete=models.CASCADE,
+        related_name='refund_items',
+    )
+
+    refund = models.ForeignKey(
+        to='sales.OnlineRefund',
+        on_delete=models.CASCADE,
+        related_name='items',
+    )
+
+    quantity = models.PositiveIntegerField(
+        verbose_name=_('quantity'),
+        default=1,
+    )
+
+    total_price = models.DecimalField(
+        verbose_name=_('total price'),
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
+
+    def __str__(self):
+        return self.order_item.item.name

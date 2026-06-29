@@ -2,9 +2,9 @@ from django.contrib import admin
 from django.db.models import Count, Avg, Sum, Q
 from django.db.models.functions import TruncMonth
 
-from fashionShop.items.models import OrderItem
+from fashionShop.items.models import OrderItem, OrderRefundItem
 from fashionShop.sales.choices import StatusChoices
-from fashionShop.sales.models import OnlineOrder
+from fashionShop.sales.models import OnlineOrder, OnlineRefund
 from fashionShop.sales.tasks import send_sms, send_bisoft_report
 from fashionShop.sales.admin_actions import refresh_orders, send_bisoft_reports
 
@@ -16,9 +16,36 @@ class OrderItemInline(admin.TabularInline):
     readonly_fields = ['item', 'quantity', 'at_price', 'total_price']
 
 
+class RefundItemInline(admin.TabularInline):
+    model = OrderRefundItem
+    extra = 0
+    can_delete = True
+
+    def formfield_for_foreignkey(
+        self, db_field, request, **kwargs
+    ):
+        if db_field.name == 'order_item':
+            object_id = request.resolver_match.kwargs.get('object_id')
+
+            if object_id:
+                refund = OnlineRefund.objects.select_related('order').get(pk=object_id)
+                kwargs['queryset'] = OrderItem.objects.filter(order=refund.order).select_related('item', 'size')
+
+            else:
+                kwargs['queryset'] = OrderItem.objects.none()
+
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
+class RefundInline(admin.TabularInline):
+    model = OnlineRefund
+    extra = 0
+    can_delete = True
+
+
 @admin.register(OnlineOrder)
 class OnlineOrderAdmin(admin.ModelAdmin):
-    inlines = [OrderItemInline]
+    inlines = [OrderItemInline, RefundInline]
     readonly_fields = ['order_code', 'full_name', 'phone', 'user', 'email',
                        'shipping_method', 'office', 'town', 'address', 'total', 'ip',
                        'ip_is_suspicious', 'ip_is_banned', 'created_at', 'updated_at']
@@ -107,3 +134,13 @@ class OnlineOrderAdmin(admin.ModelAdmin):
         # For updates, check if status actually changed
         if old_status != obj.status and obj.send_message:
             send_sms(obj.infobip_phone, obj.status_message)
+
+
+@admin.register(OnlineRefund)
+class OnlineRefundAdmin(admin.ModelAdmin):
+    inlines = [RefundItemInline]
+    list_display = ['__str__', 'full_name', 'status', 'total']
+    readonly_fields = ['created_at', 'updated_at']
+
+    def full_name(self, obj):
+        return obj.order.full_name
