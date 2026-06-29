@@ -82,3 +82,17 @@ def calculate_refund_after_item_delete(sender, instance, **kwargs):
 
     if total != refund.total:
         OnlineRefund.objects.filter(pk=refund.pk).update(total=total)
+
+
+@receiver(post_save, sender=OrderRefundItem)
+def calculate_refund_after_item_save(sender, instance, created, **kwargs):
+    if created:
+        instance.total_price = instance.order_item.at_price * instance.quantity
+        OrderRefundItem.objects.bulk_update([instance], ['total_price'])
+
+    refund = instance.refund
+
+    total = sum(item.total_price for item in refund.items.all())
+
+    if total != refund.total:
+        OnlineRefund.objects.filter(pk=refund.pk).update(total=total)

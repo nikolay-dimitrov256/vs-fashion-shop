@@ -117,12 +117,5 @@ class OrderRefundItem(models.Model):
         default=0,
     )
 
-
-
-    def save(self, *args, **kwargs):
-        self.total_price = self.order_item.at_price * self.quantity
-
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return self.order_item.item.name
