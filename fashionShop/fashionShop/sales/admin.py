@@ -53,7 +53,7 @@ class OnlineOrderAdmin(admin.ModelAdmin):
         'pk', 'order_code', 'first_name', 'last_name', 'comment', 'phone', 'email', 'address__city', 'town'
     ]
     list_filter = ['status', 'created_at', 'updated_at']
-    list_display = ['pk', 'order_code', 'full_name', 'status', 'total', 'bisoft_report_sent']
+    list_display = ['pk', 'order_code', 'full_name', 'phone', 'status', 'total', 'bisoft_report_sent']
     change_list_template = 'admin/orders_changelist.html'
     actions = [refresh_orders, send_bisoft_reports]
 
