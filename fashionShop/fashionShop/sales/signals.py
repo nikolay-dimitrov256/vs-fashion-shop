@@ -4,6 +4,7 @@ from django.dispatch import receiver
 
 from fashionShop.items.models import Item, Size, CartItem, OrderRefundItem
 from fashionShop.sales.models import Cart, OnlineOrder, OnlineRefund
+from fashionShop.sales.utils import update_order_total
 
 
 # UserModel = get_user_model()
@@ -44,10 +45,7 @@ def sync_session_cart(sender, user, request, **kwargs):
 
 @receiver(post_save, sender=OnlineOrder)
 def calculate_total(sender, instance, **kwargs):
-    total = sum(item.total_price for item in instance.order_items.all())
-
-    if total != instance.total:
-        OnlineOrder.objects.filter(pk=instance.pk).update(total=total)
+    update_order_total(instance)
 
 
 @receiver(post_save, sender=OnlineRefund)

@@ -83,6 +83,11 @@ class OrderItem(models.Model):
         default=0,
     )
 
+    is_canceled = models.BooleanField(
+        verbose_name=_('canceled'),
+        default=False
+    )
+
     def save(self, *args, **kwargs):
         self.total_price = self.at_price * self.quantity
 

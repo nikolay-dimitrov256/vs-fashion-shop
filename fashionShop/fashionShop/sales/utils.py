@@ -1,5 +1,5 @@
 from fashionShop.items.models import OrderItem, Size, Item, CartItem, Stock
-from fashionShop.sales.models import Cart
+from fashionShop.sales.models import Cart, OnlineOrder
 
 BISOFT_SIZE_RANGES_MAP = {
     '40': {'40': 1, '42': 2, '44': 3, '46': 4, '48': 5, '50': 6, '52': 7, '54': 8, '56': 9, '58': 0},
@@ -69,3 +69,10 @@ def get_bisoft_column(size: Size, item: Item) -> int:
     bisoft_column = size_range.get(actual_size, 1)
 
     return bisoft_column
+
+
+def update_order_total(order):
+    total = sum(item.total_price for item in order.order_items.filter(is_canceled=False))
+
+    if total != order.total:
+        OnlineOrder.objects.filter(pk=order.pk).update(total=total)

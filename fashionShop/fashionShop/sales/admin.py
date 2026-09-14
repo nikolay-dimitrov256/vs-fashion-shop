@@ -13,7 +13,7 @@ class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
     can_delete = False
-    readonly_fields = ['item', 'quantity', 'at_price', 'total_price']
+    readonly_fields = ['item', 'at_price', 'total_price']
 
 
 class RefundItemInline(admin.TabularInline):
