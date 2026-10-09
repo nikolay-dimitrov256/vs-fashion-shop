@@ -33,11 +33,9 @@ function initShippingMethod() {
     // Clear fields
     const townInputElement = document.getElementById('id_town');
     const officeSelectElement = document.getElementById('id_office');
-    const hiddenInputElement = document.getElementById('town_id');
     townInputElement.value = '';
     officeSelectElement.innerHTML = '';
     officeSelectElement.value = '';
-    hiddenInputElement.value = '';
 
     // Get elements
     const shippingMethodSelectElement = document.getElementById('id_shipping_method');
@@ -112,7 +110,6 @@ function initTownField(query) {
         suggestionsUlElement.innerHTML = '';
         suggestionsUlElement.style.display = 'none';
         document.getElementById('id_office').innerHTML = '';
-        document.getElementById('town_id').value = '';
         return;
     }
 
@@ -143,13 +140,20 @@ function fetchSpeedyTowns(query) {
         }
     )
     .then(response => response.json())
-    .then(data => makeSpeedyTownLiElements(data))
+    .then(data => {
+        makeSpeedyTownLiElements(data.sites);
+        populateSpeedyOfficeOptions(data.sites.map(town => town.id));
+    })
     .catch(error => console.error(error));
 }
 
 function fetchEcontTowns(query) {
+    const params = new URLSearchParams({
+        name: query
+    });
+
     const baseUrl = window.location.origin;
-    const url = `${baseUrl}/api/proxy/econt/towns/?name=${query}`;
+    const url = `${baseUrl}/api/proxy/econt/towns/?${params}`;
 
     fetch(
         url,
@@ -159,15 +163,22 @@ function fetchEcontTowns(query) {
         }
     )
     .then(response => response.json())
-    .then(data => makeEcontTownLiElements(data))
+    .then(data => {
+        const normalizedQuery = query.trim().toLowerCase();
+        const exactTowns = data.filter(town => town.name.trim().toLowerCase() === normalizedQuery);
+        
+        if (exactTowns.length) {
+            populateEcontOfficeOptions(exactTowns.map(town => town.id));
+        }
+
+        makeEcontTownLiElements(data);
+    })
     .catch(error => console.error(error));
 }
 
-function makeSpeedyTownLiElements(data) {
-    const towns = data.sites;
+function makeSpeedyTownLiElements(towns) {
     const suggestionsUlElement = document.getElementById('town-suggestions');
     const townInputElement = document.getElementById('id_town');
-    const hiddenInputElement = document.getElementById('town_id');
 
     suggestionsUlElement.innerHTML = '';
     suggestionsUlElement.style.display = 'block';
@@ -178,8 +189,7 @@ function makeSpeedyTownLiElements(data) {
         liElement.style.cursor = 'pointer';
         liElement.addEventListener('click', () => {
             townInputElement.value = `${town.postCode}-${town.name}`;
-            hiddenInputElement.value = town.id;
-            populateSpeedyOfficeOptions();
+            populateSpeedyOfficeOptions([town.id]);
             suggestionsUlElement.innerHTML = '';
             suggestionsUlElement.style.display = 'none';
             townInputElement.dispatchEvent(new Event('change'));
@@ -194,7 +204,6 @@ function makeSpeedyTownLiElements(data) {
 function makeEcontTownLiElements(data) {
     const suggestionsUlElement = document.getElementById('town-suggestions');
     const townInputElement = document.getElementById('id_town');
-    const hiddenInputElement = document.getElementById('town_id');
 
     suggestionsUlElement.innerHTML = '';
     suggestionsUlElement.style.display = 'block';
@@ -205,8 +214,7 @@ function makeEcontTownLiElements(data) {
         liElement.style.cursor = 'pointer';
         liElement.addEventListener('click', () => {
             townInputElement.value = `${town.postCode}-${town.name}`;
-            hiddenInputElement.value = town.id;
-            populateEcontOfficeOptions();
+            populateEcontOfficeOptions([town.id]);
             suggestionsUlElement.innerHTML = '';
             suggestionsUlElement.style.display = 'none';
             townInputElement.dispatchEvent(new Event('change'));
@@ -218,65 +226,89 @@ function makeEcontTownLiElements(data) {
     suggestionsUlElement.append(...liElements);
 }
 
-function populateSpeedyOfficeOptions() {
-    const hiddenInputElement = document.getElementById('town_id');
-    const siteId = hiddenInputElement.value;
+function populateSpeedyOfficeOptions(townIds) {
+    const officeSelectElement = document.getElementById('id_office');
+    officeSelectElement.innerHTML = '';
     
-    if(!siteId) {
+    if(townIds.length === 0) {
         return;
     }
     
     const baseUrl = window.location.origin;
     const url = `${baseUrl}/api/proxy/speedy/offices/`;
 
-    const params = {
-        'language': 'BG',
-        'countryId': '100',  // Bulgaria
-        'siteId': siteId,
-    };
+    for (let townId of townIds) {
+        const params = {
+            'language': 'BG',
+            'countryId': '100',  // Bulgaria
+            'siteId': townId,
+        };
 
-    fetch(
-        url,
-        {
-            method: 'POST',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify(params)
-        }
-    )
-    .then(response => response.json())
-    .then(data => makeSpeedyOfficeOptions(data))
-    .catch(error => console.error(error));
+        fetch(
+            url,
+            {
+                method: 'POST',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify(params)
+            }
+        )
+        .then(response => response.json())
+        .then(data => makeSpeedyOfficeOptions(data))
+        .catch(error => console.error(error));
+    }
+    
 }
 
-function populateEcontOfficeOptions() {
-    const hiddenInputElement = document.getElementById('town_id');
-    const townId = hiddenInputElement.value;
+function populateEcontOfficeOptions(townIds) {
+    const officeSelectElement = document.getElementById('id_office');
+    officeSelectElement.innerHTML = '';
     
-    if(!townId) {
+    if(townIds.length === 0) {
         return;
     }
     
     const baseUrl = window.location.origin;
     const url = `${baseUrl}/api/proxy/econt/offices/`;
 
-    const params = {
-        'cityID': townId,
-    };
+    const requests = townIds.map(townId => {
+        const params = {
+            'cityID': townId,
+        };
 
-    fetch(
-        url,
-        {
-            method: 'POST',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify(params)
-        }
-    )
-    .then(response => response.json())
-    .then(data => makeEcontOfficeOptions(data))
+        return fetch(
+            url,
+            {
+                method: 'POST',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify(params)
+            }
+        )
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+
+            return response.json();
+        })
+    });
+
+    Promise.allSettled(requests)
+    .then(results => {
+        const offices = results
+                            .filter(result => result.status === 'fulfilled')
+                            .flatMap(result => result.value)
+                            .flatMap(town => town.offices);
+        console.log(offices)
+        makeEcontOfficeOptions(offices);
+    })
     .catch(error => console.error(error));
 }
 
 function makeSpeedyOfficeOptions(data) {
+    if (data.offices.length === 0) {
+        return;
+    }
+    
     const officeSelectElement = document.getElementById('id_office');
 
     const officeOptionElements = data.offices.map(office => {
@@ -288,14 +320,17 @@ function makeSpeedyOfficeOptions(data) {
         return optionElement;
     });
 
-    officeSelectElement.innerHTML = '';
     officeSelectElement.append(...officeOptionElements);
 }
 
-function makeEcontOfficeOptions(data) {
+function makeEcontOfficeOptions(offices) {
+    if (offices.length === 0) {
+        return;
+    }
+
     const officeSelectElement = document.getElementById('id_office');
 
-    const officeOptionElements = data.offices.map(office => {
+    const officeOptionElements = offices.map(office => {
         const optionElement = document.createElement('option');
         const optionText = `${office.id}, ${office.name}, ${office.address.fullAddress}`;
         optionElement.textContent = optionText;
@@ -304,6 +339,5 @@ function makeEcontOfficeOptions(data) {
         return optionElement;
     });
 
-    officeSelectElement.innerHTML = '';
     officeSelectElement.append(...officeOptionElements);
 }

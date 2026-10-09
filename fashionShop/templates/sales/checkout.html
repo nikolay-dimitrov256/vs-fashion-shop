@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/custom_styles.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/checkout_styles.css' %}?v=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/checkout_styles.css' %}?v=2">
 {% endblock %}
 
 {% block content %}
@@ -36,7 +36,6 @@
                 <form method="post" id="shipping-form" novalidate>
                     {% csrf_token %}
                     <input type="hidden" name="form_type" value="shipping">
-                    <input type="hidden" id="town_id" value="">
 
                     {% if shipping_form.non_field_errors %}
                         <div class="alert alert-danger">
@@ -84,5 +83,5 @@
 
 {% block scripts %}
 <script src="{% static 'js/cart.js' %}"></script>
-<script src="{% static 'js/checkout.js' %}?v=2"></script>
+<script src="{% static 'js/checkout.js' %}?v=3"></script>
 {% endblock %}

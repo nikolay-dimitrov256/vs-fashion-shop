@@ -6,8 +6,11 @@ import requests
 import http.client
 import json
 
+from fashionShop.api.utils import get_econt_cities_data
+from fashionShop.common.globals import SPEEDY_API_URL
 from fashionShop.common.templatetags.shipping import is_free_shipping
-from fashionShop.settings import INFOBIP_URL, INFOBIP_API_KEY
+from fashionShop.settings import INFOBIP_URL, INFOBIP_API_KEY, SPEEDY_USERNAME, SPEEDY_PASSWORD, ECONT_USERNAME, \
+    ECONT_PASSWORD
 
 
 def send_bisoft_request():
@@ -96,3 +99,52 @@ def send_sms(to, message):
     response = requests.post(f'{INFOBIP_URL}/sms/3/messages', headers=headers, json=payload)
 
     print(response.json())
+
+
+def find_speedy_office():
+    site_id = '100'
+    name = 'Стамболийски'
+
+    url = f'{SPEEDY_API_URL}/location/site'
+    headers = {
+        'Content-Type': 'application/json',
+        'charset': 'utf-8',
+    }
+    params = {
+        'userName': SPEEDY_USERNAME,
+        'password': SPEEDY_PASSWORD,
+        'language': 'BG',
+        'countryId': '100',  # Bulgaria
+        # 'siteId': site_id,
+        'name': name,
+    }
+
+    response = requests.post(
+        url=url,
+        headers=headers,
+        json=params,
+    )
+
+    data = response.json()
+
+    pprint(data)
+
+
+def find_econt_town():
+    query = 'Stamboliyski'
+    data = get_econt_cities_data()
+
+    cities = [
+        {
+            'id': city['id'],
+            'postCode': city['postCode'],
+            'name': city['name'],
+            'regionName': city['regionName'],
+            # 'servingOffices': {of["officeCode"] for of in city['servingOffices']},
+        }
+        for city in data['cities']
+        if city.get('name', '').lower().startswith(query.lower())
+           or city.get('nameEn', '').lower().startswith(query.lower())
+    ]
+
+    pprint(cities)
