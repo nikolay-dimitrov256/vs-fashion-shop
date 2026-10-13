@@ -84,4 +84,6 @@ jobs:
           username: ${{ secrets.DROPLET_USERNAME }}
           key: ${{ secrets.DROPLET_KEY }}
           port: ${{ secrets.DROPLET_PORT }}
-          script: $HOME/webapps/vs-fashion-shop/fashionShop/scripts/deploy.sh
+          script: |
+                  chmod 744 ~/webapps/vs-fashion-shop/fashionShop/scripts/deploy.sh
+                  $HOME/webapps/vs-fashion-shop/fashionShop/scripts/deploy.sh
