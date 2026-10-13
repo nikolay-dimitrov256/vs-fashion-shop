@@ -255,7 +255,7 @@ AXES_SENSITIVE_PARAMETERS = ['email']
 
 LANGUAGE_CODE = 'bg'
 
-TIME_ZONE = 'EET'
+TIME_ZONE = 'Europe/Sofia'
 
 USE_I18N = True
 
