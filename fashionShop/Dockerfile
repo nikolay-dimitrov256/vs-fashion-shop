@@ -30,7 +30,7 @@ RUN chown -R appuser:appuser /app
 # Switch to non-root user
 # USER appuser
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/app/scripts/entrypoint.sh"]
 
 EXPOSE 8000
 
