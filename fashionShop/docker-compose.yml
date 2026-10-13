@@ -1,22 +1,17 @@
-version: '3.8'
-
 services:
   app:
-    build: .
-    image: fashion-shop-image
-    command: gunicorn fashionShop.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120 --keep-alive 5
+    image: stryker256/fashion-shop:1.0.0
     container_name: fashion-shop-container
-    ports:
-      - '8000:8000'
     volumes:
       - staticfiles_volume:/app/staticfiles
       - media_volume:/media
     env_file:
       - .env
     depends_on:
-      - db
-      - redis
-      - celery
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
     restart: always
 
   nginx:
@@ -28,7 +23,7 @@ services:
     volumes:
       - staticfiles_volume:/app/staticfiles
       - media_volume:/media
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
     depends_on:
@@ -38,14 +33,18 @@ services:
   db:
     image: postgres:16
     container_name: vs-postgres-container
-    ports:
-      - '127.0.0.1:5432:5432'
     env_file:
       - .env
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -56,15 +55,16 @@ services:
     restart: always
 
   celery:
-    build: .
-    image: fashion-shop-image
+    image: stryker256/fashion-shop:1.0.0
     container_name: celery-worker
     command: celery -A fashionShop worker --loglevel=info
     env_file:
       - .env
     depends_on:
-      - redis
-      - db
+      redis:
+        condition: service_started
+      db:
+        condition: service_healthy
     restart: always
 
 volumes:
