@@ -24,3 +24,5 @@ media/
 # Local database (optional if SQLite)
 *.db
 *.sqlite3
+
+docker-compose.override.yml
