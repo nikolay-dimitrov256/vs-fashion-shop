@@ -16,4 +16,4 @@ docker compose pull app
 
 docker compose up -d
 
-# docker exec nginx-container nginx -s reload
+docker exec nginx-container nginx -s reload
