@@ -1,6 +1,6 @@
 services:
   app:
-    image: stryker256/fashion-shop:1.0.0
+    image: stryker256/fashion-shop:1.0.1
     container_name: fashion-shop-container
     volumes:
       - staticfiles_volume:/app/staticfiles
@@ -55,7 +55,7 @@ services:
     restart: always
 
   celery:
-    image: stryker256/fashion-shop:1.0.0
+    image: stryker256/fashion-shop:1.0.1
     container_name: celery-worker
     command: celery -A fashionShop worker --loglevel=info
     env_file:
