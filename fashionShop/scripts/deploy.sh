@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-cd /home/stryker/webapps/vs-fashion-shop
+cd $HOME/webapps/vs-fashion-shop
 
 git fetch origin
 
@@ -12,6 +12,8 @@ git reset --hard origin/main
 
 cd fashionShop
 
-docker compose up -d --build
+docker compose pull app
 
-docker exec nginx-container nginx -s reload
+docker compose up -d
+
+# docker exec nginx-container nginx -s reload
