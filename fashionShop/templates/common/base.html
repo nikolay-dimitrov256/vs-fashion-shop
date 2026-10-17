@@ -34,7 +34,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-signin-client_id" content="539523849969-fthgo153mul7ieb8o9l2ij0rici43lcr.apps.googleusercontent.com">
-<meta property="og:image" content="{% static 'images/favicon.ico' %}" />
+
+{% block open_graph %}
+<meta property="og:title" content="Онлайн магазин за дамска мода Вили Стил" />
+<meta property="og:image" content="{{ SITE_ADDRESS }}{% static 'images/logo.png' %}" />
+<meta property="og:url" content="{{ SITE_ADDRESS }}{% url 'home' %}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Вили Стил" />
+<meta property="og:locale" content="bg_BG" />
+{% endblock %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
 <link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
