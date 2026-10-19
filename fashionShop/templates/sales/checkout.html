@@ -11,27 +11,14 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/custom_styles.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/checkout_styles.css' %}?v=2">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/checkout_styles.css' %}?v=3">
 {% endblock %}
 
 {% block content %}
 <div class="container first-container">
     <div class="row">
         <div class="col-lg-7 order-2 order-lg-1">
-            <div class="row order-option">
-                <form method="post" class="d-flex gap-2 align-items-end">
-                    {% csrf_token %}
-                    <input type="hidden" name="form_type" value="phone">
-                    <div class="form-floating flex-grow-1">
-                        {{ phone_order_form.phone|as_crispy_field }}
-                    </div>
-                    <button type="submit" class="btn btn-success form-group button">
-                        <i class="fa fa-phone" aria-hidden="true"></i>
-                        {% trans 'Order with phone' %}
-                    </button>
-                </form>
-                <p>{% trans 'Leave your phone number and we will contact you about the details.' %}</p>
-            </div>
+            
             <div class="row order-option">
                 <form method="post" id="shipping-form" novalidate>
                     {% csrf_token %}
@@ -69,6 +56,22 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row order-option">
+                <form method="post" class="phone-order-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="phone">
+                    <div class="form-floating flex-grow-1">
+                        {{ phone_order_form.phone|as_crispy_field }}
+                    </div>
+                    <button type="submit" class="btn btn-success form-group button">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        {% trans 'Order with phone' %}
+                    </button>
+                </form>
+                <p>{% trans 'Leave your phone number and we will contact you about the details.' %}</p>
+            </div>
+
         </div>
         <div class="col-lg-4 order-1 order-lg-2 order-info">
             {% if request.user.is_authenticated %}

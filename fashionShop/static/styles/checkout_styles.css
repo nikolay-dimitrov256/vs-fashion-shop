@@ -92,6 +92,17 @@
     width: 100%;
 }
 
+.phone-order-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5em;
+}
+
+.phone-order-form .btn {
+    align-self: end;
+}
+
 @media only screen and (max-width: 991px) {
     .order-info {
         margin-left: 0;
@@ -105,6 +116,12 @@
     }
     p {
         margin-bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 429px) {
+    .phone-order-form {
+        grid-template-columns: 100%;
     }
 }
 

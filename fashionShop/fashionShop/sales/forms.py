@@ -6,6 +6,17 @@ from fashionShop.sales.models import OnlineOrder
 
 
 class PhoneOrderForm(forms.ModelForm):
+    phone = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'id': 'phone_form_phone',
+                'type': 'tel',
+                'inputmode': 'tel'
+            }
+        ),
+        label=_('phone')
+    )
+
     class Meta:
         model = OnlineOrder
         fields = ['phone']
@@ -31,6 +42,16 @@ class ShippingOrderForm(forms.ModelForm):
         label=_('Office*'),
         widget=forms.Select(),
         required=False,
+    )
+
+    phone = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'type': 'tel',
+                'inputmode': 'tel'
+            }
+        ),
+        label=_('phone')
     )
 
     def __init__(self, *args, **kwargs):
