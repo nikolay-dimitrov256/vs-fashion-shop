@@ -22,9 +22,9 @@ class ItemModelTests(TestCase):
         self.assertEqual(item.price_bgn.quantize(Decimal('.01')), (Decimal('100.00') * Decimal('1.95583')).quantize(Decimal('.01')))
 
     def test_black_price_calculation(self):
-        item = Item.objects.create(item_number=2, price=Decimal('100.00'), discount_price=Decimal('90.00'), name='BF')
+        item = Item.objects.create(item_number=2, price=Decimal('100.00'), discount_price=Decimal('90.00'), name='BF', black_percent=5)
         # black_price reduces the (discount_price if discounted else price) by 10%
-        expected = (Decimal('90.00') - (Decimal('90.00') * Decimal('0.10'))).quantize(Decimal('.01'))
+        expected = (Decimal('90.00') - (Decimal('90.00') * Decimal('0.05'))).quantize(Decimal('.01'))
         self.assertEqual(item.black_price, expected)
 
     def test_stock_effective_size_and_available_sizes(self):
