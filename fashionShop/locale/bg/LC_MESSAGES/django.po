@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-29 08:40+0300\n"
+"POT-Creation-Date: 2026-10-20 14:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,12 +69,12 @@ msgstr "потребител"
 msgid "users"
 msgstr "потребители"
 
-#: fashionShop/accounts/models.py:54 fashionShop/sales/forms.py:16
+#: fashionShop/accounts/models.py:54 fashionShop/sales/forms.py:27
 #: fashionShop/sales/models.py:40
 msgid "first name"
 msgstr "име"
 
-#: fashionShop/accounts/models.py:61 fashionShop/sales/forms.py:21
+#: fashionShop/accounts/models.py:61 fashionShop/sales/forms.py:32
 #: fashionShop/sales/models.py:47
 msgid "last name"
 msgstr "фамилия"
@@ -112,14 +112,9 @@ msgid "Search"
 msgstr "Търси"
 
 #: fashionShop/common/globals.py:8 fashionShop/items/views.py:122
-#: templates/items/category.html:261 templates/items/category.html:263
-#: templates/items/category.html:265 templates/items/grid-item-card.html:34
-#: templates/items/grid-item-card.html:36
-#: templates/items/grid-item-card.html:38 templates/items/item-card.html:38
-#: templates/items/item-card.html:40 templates/items/item-card.html:42
-#: templates/items/single.html:106 templates/items/single.html:108
-#: templates/items/single.html:111 templates/items/single.html:113
-#: templates/items/single.html:116
+#: templates/items/single.html:118 templates/items/single.html:120
+#: templates/items/single.html:123 templates/items/single.html:125
+#: templates/items/single.html:128
 #: templates/sales/anonymous-user-checkout-content.html:14
 #: templates/sales/anonymous-user-checkout-content.html:25
 #: templates/sales/anonymous-user-content.html:20
@@ -195,7 +190,8 @@ msgstr "име"
 msgid "email"
 msgstr "имейл"
 
-#: fashionShop/common/models.py:130 fashionShop/sales/models.py:54
+#: fashionShop/common/models.py:130 fashionShop/sales/forms.py:17
+#: fashionShop/sales/forms.py:54 fashionShop/sales/models.py:54
 msgid "phone"
 msgstr "телефон"
 
@@ -210,7 +206,7 @@ msgstr ""
 
 #: fashionShop/items/models/categories.py:13
 #: fashionShop/items/models/categories.py:29
-#: fashionShop/items/models/item.py:86
+#: fashionShop/items/models/item.py:91
 msgid "category"
 msgstr "категория"
 
@@ -219,7 +215,7 @@ msgid "categories"
 msgstr "категории"
 
 #: fashionShop/items/models/categories.py:36
-#: fashionShop/items/models/item.py:95
+#: fashionShop/items/models/item.py:100
 msgid "subcategory"
 msgstr "подкатегория"
 
@@ -227,7 +223,7 @@ msgstr "подкатегория"
 msgid "subcategories"
 msgstr "подкатегории"
 
-#: fashionShop/items/models/colors.py:17 fashionShop/items/models/item.py:113
+#: fashionShop/items/models/colors.py:17 fashionShop/items/models/item.py:118
 msgid "color group"
 msgstr "цветова група"
 
@@ -255,44 +251,48 @@ msgstr "цена"
 msgid "discount price"
 msgstr "промо цена"
 
-#: fashionShop/items/models/item.py:69
+#: fashionShop/items/models/item.py:65
+msgid "black percent"
+msgstr "черен процент"
+
+#: fashionShop/items/models/item.py:74
 msgid "content"
 msgstr "състав"
 
-#: fashionShop/items/models/item.py:104 fashionShop/items/models/pattern.py:13
+#: fashionShop/items/models/item.py:109 fashionShop/items/models/pattern.py:13
 msgid "pattern"
 msgstr "кройка"
 
-#: fashionShop/items/models/item.py:122
+#: fashionShop/items/models/item.py:127
 #: fashionShop/items/models/item_collection.py:18
 msgid "collection"
 msgstr "колекция"
 
-#: fashionShop/items/models/item.py:131 fashionShop/items/models/size.py:17
-#: templates/items/category.html:104
+#: fashionShop/items/models/item.py:136 fashionShop/items/models/size.py:17
+#: templates/items/category.html:114
 msgid "sizes"
 msgstr "размери"
 
-#: fashionShop/items/models/item.py:139
+#: fashionShop/items/models/item.py:144
 msgid "linked items"
 msgstr "свързани продукти"
 
-#: fashionShop/items/models/item.py:146 fashionShop/items/models/style.py:12
+#: fashionShop/items/models/item.py:151 fashionShop/items/models/style.py:12
 msgid "style"
 msgstr "стил"
 
-#: fashionShop/items/models/item.py:158
+#: fashionShop/items/models/item.py:163
 #: fashionShop/items/models/online_items.py:12
 #: fashionShop/items/models/online_items.py:48
 #: fashionShop/pictures/models.py:37
 msgid "item"
 msgstr "продукт"
 
-#: fashionShop/items/models/item.py:159
+#: fashionShop/items/models/item.py:164
 msgid "items"
 msgstr "продукти"
 
-#: fashionShop/items/models/item.py:278 fashionShop/items/models/item.py:279
+#: fashionShop/items/models/item.py:283 fashionShop/items/models/item.py:284
 msgid "stock"
 msgstr "наличност"
 
@@ -312,7 +312,7 @@ msgstr "размер"
 
 #: fashionShop/items/models/online_items.py:33
 #: fashionShop/items/models/online_items.py:69
-#: fashionShop/items/models/online_items.py:109
+#: fashionShop/items/models/online_items.py:114
 msgid "quantity"
 msgstr "количество"
 
@@ -321,9 +321,14 @@ msgid "at price"
 msgstr "на цена"
 
 #: fashionShop/items/models/online_items.py:80
-#: fashionShop/items/models/online_items.py:114
+#: fashionShop/items/models/online_items.py:119
 msgid "total price"
 msgstr "обща цена"
+
+#: fashionShop/items/models/online_items.py:87 fashionShop/sales/choices.py:31
+#: fashionShop/sales/choices.py:44 templates/admin/orders_changelist.html:15
+msgid "canceled"
+msgstr "отменена"
 
 #: fashionShop/items/models/pattern.py:14
 msgid "patterns"
@@ -342,12 +347,12 @@ msgid "Set collection to"
 msgstr "Задай колекция"
 
 #: fashionShop/items/views.py:121 templates/common/header.html:102
-#: templates/common/header.html:183 templates/items/category.html:256
+#: templates/common/header.html:183 templates/items/category.html:266
 #: templates/items/grid-item-card.html:29 templates/items/new.html:18
 msgid "new"
 msgstr "ново"
 
-#: fashionShop/items/views.py:123 templates/items/category.html:269
+#: fashionShop/items/views.py:123 templates/items/category.html:279
 #: templates/items/grid-item-card.html:43
 msgid "get"
 msgstr "вземи"
@@ -396,8 +401,8 @@ msgstr "Моля, напишете вашият отзив."
 msgid "Review"
 msgstr "Отзив"
 
-#: fashionShop/reviews/models.py:52 templates/items/single.html:120
-#: templates/items/single.html:476 templates/items/single.html:545
+#: fashionShop/reviews/models.py:52 templates/items/single.html:132
+#: templates/items/single.html:488 templates/items/single.html:557
 msgid "Reviews"
 msgstr "Отзиви"
 
@@ -438,11 +443,6 @@ msgstr "изчакваща"
 msgid "confirmed"
 msgstr "потвърдена"
 
-#: fashionShop/sales/choices.py:31 fashionShop/sales/choices.py:44
-#: templates/admin/orders_changelist.html:15
-msgid "canceled"
-msgstr "отменена"
-
 #: fashionShop/sales/choices.py:32 templates/admin/orders_changelist.html:16
 msgid "sent"
 msgstr "изпратена"
@@ -475,19 +475,19 @@ msgstr "получено"
 msgid "paid out"
 msgstr "изплатено"
 
-#: fashionShop/sales/forms.py:26
+#: fashionShop/sales/forms.py:37
 msgid "Town*"
 msgstr "Град/село*"
 
-#: fashionShop/sales/forms.py:31
+#: fashionShop/sales/forms.py:42
 msgid "Office*"
 msgstr "Офис*"
 
-#: fashionShop/sales/forms.py:59 fashionShop/sales/tests.py:133
+#: fashionShop/sales/forms.py:80 fashionShop/sales/tests.py:133
 msgid "Please select a shipping method."
 msgstr "Моля изберете метод на доставка."
 
-#: fashionShop/sales/forms.py:64 fashionShop/sales/tests.py:150
+#: fashionShop/sales/forms.py:85 fashionShop/sales/tests.py:150
 msgid "Please provide both town and office for office delivery."
 msgstr "Моля въведете град и офис за доставка до офис."
 
@@ -582,7 +582,7 @@ msgstr "или:"
 msgid "Sign in with Google"
 msgstr "Влез с Google"
 
-#: templates/accounts/register.html:18 templates/sales/checkout.html:47
+#: templates/accounts/register.html:18 templates/sales/checkout.html:33
 msgid "The fields marked with * are required"
 msgstr "Полетата маркирани със * са задължителни"
 
@@ -662,7 +662,7 @@ msgstr "Поръчка с телефонен номер"
 msgid "You can order with just your phone number. No registration necessary."
 msgstr "Може да поръчате с телефонен номер. Регистрацията не е задължителна."
 
-#: templates/common/contact.html:30 templates/items/single.html:35
+#: templates/common/contact.html:30 templates/items/single.html:47
 msgid "Home"
 msgstr "Начало"
 
@@ -773,7 +773,7 @@ msgstr "Вход"
 #: templates/common/header.html:101 templates/common/header.html:182
 #: templates/items/bestsellers.html:16 templates/items/blazers.html:16
 #: templates/items/blouses.html:16 templates/items/cardigans.html:15
-#: templates/items/category.html:38 templates/items/coats.html:16
+#: templates/items/category.html:48 templates/items/coats.html:16
 #: templates/items/dresses.html:16 templates/items/elegant.html:15
 #: templates/items/fall-winter.html:15 templates/items/jackets.html:16
 #: templates/items/max-size.html:15 templates/items/new.html:16
@@ -876,12 +876,12 @@ msgid "all clothes"
 msgstr "всички дрехи"
 
 #: templates/common/header.html:171
-msgid "Christmas sale!"
-msgstr "Коледно намаление!"
+msgid "Black Friday!"
+msgstr "Черен Петък!"
 
 #: templates/common/header.html:171
-msgid "on everything!"
-msgstr "на всичко!"
+msgid "Discounts up to"
+msgstr "Отстъпки до"
 
 #: templates/common/home.html:29
 msgid "Check out our new arrivals"
@@ -913,14 +913,14 @@ msgstr "Най-продавани"
 
 #: templates/items/bestsellers.html:17 templates/items/blazers.html:17
 #: templates/items/blouses.html:17 templates/items/cardigans.html:16
-#: templates/items/category.html:39 templates/items/coats.html:17
+#: templates/items/category.html:49 templates/items/coats.html:17
 #: templates/items/dresses.html:17 templates/items/elegant.html:16
 #: templates/items/fall-winter.html:16 templates/items/jackets.html:17
 #: templates/items/max-size.html:16 templates/items/new.html:17
 #: templates/items/office.html:16 templates/items/official.html:16
 #: templates/items/pants.html:17 templates/items/search.html:16
 #: templates/items/sets.html:17 templates/items/shirts.html:17
-#: templates/items/single.html:36 templates/items/skirts.html:17
+#: templates/items/single.html:48 templates/items/skirts.html:17
 #: templates/items/spring-summer.html:16 templates/items/suits.html:17
 #: templates/items/tank-tops.html:20 templates/items/tunics.html:17
 #: templates/items/vests.html:17
@@ -947,31 +947,31 @@ msgstr "жилетки"
 msgid "Women's cardigans"
 msgstr "Дамски жилетки"
 
-#: templates/items/category.html:45
+#: templates/items/category.html:55
 msgid "Women's clothes"
 msgstr "Дамски дрехи"
 
-#: templates/items/category.html:101
+#: templates/items/category.html:111
 msgid "Filter Sizes"
 msgstr "Филтрирай Размери"
 
-#: templates/items/category.html:125 templates/items/category.html:160
+#: templates/items/category.html:135 templates/items/category.html:170
 msgid "Show More"
 msgstr "Покажи повече"
 
-#: templates/items/category.html:127 templates/items/category.html:162
+#: templates/items/category.html:137 templates/items/category.html:172
 msgid "filter"
 msgstr "филтрирай"
 
-#: templates/items/category.html:129 templates/items/category.html:164
+#: templates/items/category.html:139 templates/items/category.html:174
 msgid "Show Less"
 msgstr "Покажи по-малко"
 
-#: templates/items/category.html:135
+#: templates/items/category.html:145
 msgid "Filter Colors"
 msgstr "Филтрирай Цветове"
 
-#: templates/items/category.html:138
+#: templates/items/category.html:148
 msgid "colors"
 msgstr "цветове"
 
@@ -1043,79 +1043,79 @@ msgstr "Дамски комплекти"
 msgid "Women's shirts"
 msgstr "Дамски ризи"
 
-#: templates/items/single.html:146
+#: templates/items/single.html:158
 msgid "Size Guide"
 msgstr "Размерна таблица"
 
-#: templates/items/single.html:151
+#: templates/items/single.html:163
 msgid "Sizes"
 msgstr "Размери"
 
-#: templates/items/single.html:161 templates/items/single.html:182
-#: templates/items/single.html:203 templates/items/single.html:224
-#: templates/items/single.html:245 templates/items/single.html:266
-#: templates/items/single.html:287 templates/items/single.html:308
-#: templates/items/single.html:329 templates/items/single.html:350
-#: templates/items/single.html:371
+#: templates/items/single.html:173 templates/items/single.html:194
+#: templates/items/single.html:215 templates/items/single.html:236
+#: templates/items/single.html:257 templates/items/single.html:278
+#: templates/items/single.html:299 templates/items/single.html:320
+#: templates/items/single.html:341 templates/items/single.html:362
+#: templates/items/single.html:383
 msgid "Chest"
 msgstr "Гръдна обиколка"
 
-#: templates/items/single.html:165 templates/items/single.html:186
-#: templates/items/single.html:207 templates/items/single.html:228
-#: templates/items/single.html:249 templates/items/single.html:270
-#: templates/items/single.html:291 templates/items/single.html:312
-#: templates/items/single.html:333 templates/items/single.html:354
-#: templates/items/single.html:375
+#: templates/items/single.html:177 templates/items/single.html:198
+#: templates/items/single.html:219 templates/items/single.html:240
+#: templates/items/single.html:261 templates/items/single.html:282
+#: templates/items/single.html:303 templates/items/single.html:324
+#: templates/items/single.html:345 templates/items/single.html:366
+#: templates/items/single.html:387
 msgid "Waist"
 msgstr "Обиколка Талия"
 
-#: templates/items/single.html:169 templates/items/single.html:190
-#: templates/items/single.html:211 templates/items/single.html:232
-#: templates/items/single.html:253 templates/items/single.html:274
-#: templates/items/single.html:295 templates/items/single.html:316
-#: templates/items/single.html:337 templates/items/single.html:358
-#: templates/items/single.html:379
+#: templates/items/single.html:181 templates/items/single.html:202
+#: templates/items/single.html:223 templates/items/single.html:244
+#: templates/items/single.html:265 templates/items/single.html:286
+#: templates/items/single.html:307 templates/items/single.html:328
+#: templates/items/single.html:349 templates/items/single.html:370
+#: templates/items/single.html:391
 msgid "Hips"
 msgstr "Обиколка Ханш"
 
-#: templates/items/single.html:404
+#: templates/items/single.html:416
 msgid "add to cart"
 msgstr "добави в количка"
 
-#: templates/items/single.html:424
+#: templates/items/single.html:436
 msgid "This model in other colors:"
 msgstr "Други цветове от този модел:"
 
-#: templates/items/single.html:474 templates/items/single.html:490
+#: templates/items/single.html:486 templates/items/single.html:502
 msgid "Details"
 msgstr "Детайли"
 
-#: templates/items/single.html:475 templates/items/single.html:523
+#: templates/items/single.html:487 templates/items/single.html:535
 msgid "Additional Information"
 msgstr "Допълнителна информация"
 
-#: templates/items/single.html:593
+#: templates/items/single.html:605
 msgid ""
 "There are no reviews for this product yet, but you can write the first one."
 msgstr "Все още няма отзиви за този продукт, но можете да напишете първия."
 
-#: templates/items/single.html:616
+#: templates/items/single.html:628
 msgid "Your Rating:"
 msgstr "Вашата оценка:"
 
-#: templates/items/single.html:626
+#: templates/items/single.html:638
 msgid "Add Review"
 msgstr "Напишете отзив"
 
-#: templates/items/single.html:634
+#: templates/items/single.html:646
 msgid "Upload photos"
 msgstr "Качете снимки"
 
-#: templates/items/single.html:644
+#: templates/items/single.html:656
 msgid "submit"
 msgstr "изпрати"
 
-#: templates/items/single.html:665
+#: templates/items/single.html:677
 msgid "Complete your vision:"
 msgstr "Подходящи съчетания:"
 
@@ -1187,17 +1187,17 @@ msgstr "към поръчка"
 msgid "continue shopping"
 msgstr "продължи с пазаруването"
 
-#: templates/sales/checkout.html:30
+#: templates/sales/checkout.html:50
+msgid "Send Order"
+msgstr "Изпрати Поръчка"
+
+#: templates/sales/checkout.html:69
 msgid "Order with phone"
 msgstr "Поръчка с телефон"
 
-#: templates/sales/checkout.html:33
+#: templates/sales/checkout.html:72
 msgid "Leave your phone number and we will contact you about the details."
 msgstr "Оставете телефонния си номер и ние ще се свържем с Вас."
-
-#: templates/sales/checkout.html:64
-msgid "Send Order"
-msgstr "Изпрати Поръчка"
 
 #: templates/sales/order.html:19
 msgid "Thank you for your order"
@@ -1215,6 +1215,12 @@ msgstr "Номерът на Вашата поръчка е:"
 msgid "We will contact you as soon as possible."
 msgstr "Ще се свържем с Вас при първа възможност."
 
+#~ msgid "on everything!"
+#~ msgstr "на всичко!"
+
+#~ msgid "Christmas sale!"
+#~ msgstr "Коледно намаление!"
+
 #~ msgid "Show"
 #~ msgstr "Покажи"
 
@@ -1229,9 +1235,6 @@ msgstr "Ще се свържем с Вас при първа възможнос�
 
 #~ msgid "underwear"
 #~ msgstr "потници"
-
-#~ msgid "Black Friday!"
-#~ msgstr "Черен Петък!"
 
 #~ msgid "Check our dresses for the summer"
 #~ msgstr "Разгледайте нашите рокли за лятото"

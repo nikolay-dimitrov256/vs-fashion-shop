@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-from fashionShop.common.globals import EURO_RATE, black_friday_discount_percent, is_black_friday
+from fashionShop.common.globals import EURO_RATE, is_black_friday
 from fashionShop.common.utils import transliterate
 from fashionShop.items.managers import ItemQuerySet, ItemManager
 from fashionShop.items.models import ItemCollection
@@ -59,6 +59,11 @@ class Item(models.Model):
         decimal_places=2,
         null=True,
         blank=True,
+    )
+
+    black_percent = models.SmallIntegerField(
+        _('black percent'),
+        default=5,
     )
 
     created_at = models.DateTimeField(
@@ -229,7 +234,7 @@ class Item(models.Model):
     @property
     def black_price(self) -> Decimal:
         price = self.discount_price if self.is_discounted else self.price
-        discount = Decimal(black_friday_discount_percent / 100) * price
+        discount = Decimal(self.black_percent / 100) * price
         black_price = price - discount
 
         return black_price.quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
