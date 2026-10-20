@@ -35,11 +35,11 @@
                 <p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></p>
                 <div class="product_price">
                     {% if is_black_friday %}
-                    {{ item.black_price }} €<span class="price_eur">/ {{ item.black_price_bgn }} {% trans 'lv' %}</span>
+                    {{ item.black_price }} €<span>{{ item.price }} €</span>
                     {% elif item.is_discounted %}
-                    {{ item.discount_price }} €<span class="price_eur">/ {{ item.discount_price_bgn }} {% trans 'lv' %}</span>
+                    {{ item.discount_price }} €<span>{{ item.price }} €</span>
                     {% else %}
-                    {{ item.price }} €<span class="price_eur">/ {{ item.price_bgn }} {% trans 'lv' %}</span>
+                    {{ item.price }} €
                     {% endif %}
                 </div>
             </div>
