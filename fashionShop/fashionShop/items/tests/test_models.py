@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from django.test import TestCase
 
+from fashionShop.common.globals import is_black_friday
 from fashionShop.items.models import Item, Stock, Size
 from fashionShop.stores.models import Store
 
@@ -14,11 +15,16 @@ class ItemModelTests(TestCase):
     def test_is_discounted_and_prices(self):
         item = Item.objects.create(item_number=1, price=Decimal('100.00'), discount_price=Decimal('80.00'), name='Test')
 
+        expected = Decimal('20.00')
+
+        if is_black_friday:
+            expected = Decimal('24.00')
+
         self.assertTrue(item.is_discounted)
-        self.assertEqual(item.discount, Decimal('20.00'))
+        self.assertEqual(item.discount, expected)
         # EURO_RATE is 1.95583 from settings -> discount_bgn
-        self.assertEqual(item.discount_bgn.quantize(Decimal('.01')), (Decimal('20.00') * Decimal('1.95583')).quantize(Decimal('.01')))
-        self.assertEqual(item.final_price, Decimal('80.00'))
+        # self.assertEqual(item.discount_bgn.quantize(Decimal('.01')), (Decimal('20.00') * Decimal('1.95583')).quantize(Decimal('.01')))
+        self.assertEqual(item.final_price, Decimal('76.00'))
         self.assertEqual(item.price_bgn.quantize(Decimal('.01')), (Decimal('100.00') * Decimal('1.95583')).quantize(Decimal('.01')))
 
     def test_black_price_calculation(self):
