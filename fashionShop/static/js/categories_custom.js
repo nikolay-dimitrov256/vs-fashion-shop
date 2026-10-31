@@ -37,6 +37,7 @@ jQuery(document).ready(function($)
 	var fsOverlay = $('.fs_menu_overlay');
 	const fetchParams = JSON.parse(document.getElementById('fetch-params').textContent);
 	const translations = JSON.parse(document.getElementById('translations').textContent);
+	const globals = JSON.parse(document.getElementById('globals').textContent);
 	let allContentIsLoaded = !fetchParams.next;
 	let isLoading = false;
 
@@ -604,6 +605,7 @@ jQuery(document).ready(function($)
 
 	function makeCard(item) {
 		const baseUrl = window.location.origin;
+		const isBlackFriday = globals['is_black_friday'];
 
 		// Create elements
 		const cardElement = document.createElement('div');
@@ -641,7 +643,10 @@ jQuery(document).ready(function($)
 		const innerTagElement = document.createElement('span');
 		if (item['is_discounted']) {
 			tagElement.classList.add('product_bubble', 'product_bubble_right', 'product_bubble_red', 'd-flex', 'flex-column', 'align-items-center');
-			innerTagElement.textContent = `-${Number.parseInt(item.discount)}€`;
+			innerTagElement.textContent = `-${item.discount}€`;
+		} else if (isBlackFriday) {
+			tagElement.classList.add('product_bubble', 'product_bubble_right', 'product_bubble_black', 'd-flex', 'flex-column', 'align-items-center');
+			innerTagElement.textContent = `-${item.discount}€`;
 		} else if (item['is_new']) {
 			tagElement.classList.add('product_bubble', 'product_bubble_left', 'product_bubble_green', 'd-flex', 'flex-column', 'align-items-center');
 			innerTagElement.textContent = translations.new;
@@ -661,17 +666,24 @@ jQuery(document).ready(function($)
 		priceElement.classList.add('product_price');
 		if (item['is_discounted']) {
 			priceElement.textContent = `${item['discount_price']} €`;
-		} else {
+		} else if (isBlackFriday) {
+			priceElement.textContent = `${item['black_price']} €`;
+		}
+		else {
 			priceElement.textContent = `${item.price} €`;
 		}
-
+		
+		
 		const secondaryPriceElement = document.createElement('span');
-		secondaryPriceElement.classList.add('price_eur');
-		if (item['is_discounted']) {
-			secondaryPriceElement.textContent = `/${item['discount_price_bgn']} ${translations.lv}`;
-		} else {
-			secondaryPriceElement.textContent = `/${item['price_bgn']} ${translations.lv}`;
+		// secondaryPriceElement.classList.add('price_eur');
+		if (item['is_discounted'] || isBlackFriday) {
+			secondaryPriceElement.textContent = `${item.price} €`;
 		}
+		// if (item['is_discounted']) {
+		// 	secondaryPriceElement.textContent = `${item.price} €`;
+		// } else if (isBlackFriday) {
+		// 	secondaryPriceElement.textContent = `/${item['price_bgn']} ${translations.lv}`;
+		// }
 
 		const buyDivElement = document.createElement('div');
 		buyDivElement.classList.add('red_button', 'add_to_cart_button');
@@ -686,7 +698,7 @@ jQuery(document).ready(function($)
 		wrapperAElement.append(imgElement);
 		productFilterElement.append(heartElement);
 
-		if (item['is_discounted'] || item['is_new']) {
+		if (item['is_discounted'] || isBlackFriday || item['is_new']) {
 			productFilterElement.append(tagElement);
 			tagElement.append(innerTagElement);
 		}

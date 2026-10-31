@@ -195,11 +195,11 @@ class Item(models.Model):
         if not self.is_discounted:
             return Decimal(0)
 
-        return (self.price - self.discount_price).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+        return (self.price - self.discount_price).quantize(Decimal('.01'))
 
     @property
     def discount_bgn(self) -> Decimal:
-        return (self.discount * Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+        return (self.discount * Decimal(EURO_RATE)).quantize(Decimal('.01'))
 
     @property
     def final_price(self) -> Decimal:
@@ -237,11 +237,11 @@ class Item(models.Model):
         discount = Decimal(self.black_percent / 100) * price
         black_price = price - discount
 
-        return black_price.quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+        return black_price.quantize(Decimal('.01'))
 
     @property
     def black_price_bgn(self) -> Decimal:
-        return (self.black_price * Decimal(EURO_RATE)).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
+        return (self.black_price * Decimal(EURO_RATE)).quantize(Decimal('.01'))
 
 
 

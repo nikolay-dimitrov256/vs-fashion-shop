@@ -17,5 +17,5 @@ class ItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = [
             'pk', 'name', 'slug', 'price', 'price_bgn', 'discount_price', 'discount_price_bgn', 'is_new', 'discount',
-            'pictures', 'is_discounted'
+            'pictures', 'is_discounted', 'black_price'
         ]

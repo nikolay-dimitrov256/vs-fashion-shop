@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.utils.translation import gettext as _
 
+from fashionShop.common.globals import is_black_friday
 from fashionShop.common.utils import get_absolute_url
 from fashionShop.items.models import Item, ColorGroup, Stock, Size, SubCategory
 from fashionShop.pictures.forms import ReviewPictureFormSet
@@ -121,6 +122,9 @@ class ItemsListView(ListView):
             'new': _('new'),
             'lv': _('lv'),
             'get': _('get'),
+        }
+        context['globals'] = {
+            'is_black_friday': is_black_friday,
         }
 
         return context
