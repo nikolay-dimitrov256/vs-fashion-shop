@@ -197,11 +197,19 @@
 @media (max-width: 479px) {
     .main_slider {
     background-position-x: 63%;
-    /* background-position-y: 10%; */
+    margin-top: 20px;
     }
 
     .main_slider_content {
         width: 60%;
+    }
+
+    .shop_now_button {
+        width: 110px;
+    }
+
+    .shop_now_button a {
+        font-size: 14px;
     }
 }
 /* Fixes the positioning on the main banner elements */
