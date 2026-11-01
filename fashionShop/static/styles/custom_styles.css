@@ -193,6 +193,17 @@
         width: 100%;
     }
 } */
+
+@media (max-width: 479px) {
+    .main_slider {
+    background-position-x: 63%;
+    /* background-position-y: 10%; */
+    }
+
+    .main_slider_content {
+        width: 60%;
+    }
+}
 /* Fixes the positioning on the main banner elements */
 
 /* Bottom article */

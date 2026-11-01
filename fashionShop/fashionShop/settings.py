@@ -13,6 +13,7 @@ import os
 import logging
 from pathlib import Path
 from decouple import config
+from django.conf.global_settings import ALLOWED_HOSTS
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
@@ -29,7 +30,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG') == 'True'
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = []
 CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS').split(',')
 
 CSRF_COOKIE_SECURE = True

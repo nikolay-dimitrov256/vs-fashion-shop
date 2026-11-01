@@ -873,7 +873,7 @@ msgstr "Отстъпки до"
 
 #: templates/common/home.html:29
 msgid "Check out our biggest discounts"
-msgstr "Вижте най-големите ни отстъпки"
+msgstr "Виж най-големите ни отстъпки"
 
 #: templates/common/home.html:30
 msgid "shop now"
@@ -1234,7 +1234,7 @@ msgstr "Ще се свържем с Вас при първа възможнос�
 #~ msgstr "потници"
 
 #~ msgid "Check our dresses for the summer"
-#~ msgstr "Разгледайте нашите рокли за лятото"
+#~ msgstr "Разгледай нашите рокли за лятото"
 
 #~ msgid "town"
 #~ msgstr "град/село"
