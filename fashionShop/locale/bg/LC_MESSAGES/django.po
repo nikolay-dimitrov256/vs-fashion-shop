@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 14:59+0300\n"
+"POT-Creation-Date: 2026-11-01 18:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,7 +111,7 @@ msgstr "Напишете ни нещо."
 msgid "Search"
 msgstr "Търси"
 
-#: fashionShop/common/globals.py:8 fashionShop/items/views.py:122
+#: fashionShop/common/globals.py:8 fashionShop/items/views.py:123
 #: templates/items/single.html:118 templates/items/single.html:120
 #: templates/items/single.html:123 templates/items/single.html:125
 #: templates/items/single.html:128
@@ -338,21 +338,13 @@ msgstr "кройки"
 msgid "styles"
 msgstr "стилове"
 
-#: fashionShop/items/utils.py:257
-msgid "items were set to collection"
-msgstr "артикула бяха зададени към колекция"
-
-#: fashionShop/items/utils.py:260
-msgid "Set collection to"
-msgstr "Задай колекция"
-
-#: fashionShop/items/views.py:121 templates/common/header.html:102
+#: fashionShop/items/views.py:122 templates/common/header.html:102
 #: templates/common/header.html:183 templates/items/category.html:266
 #: templates/items/grid-item-card.html:29 templates/items/new.html:18
 msgid "new"
 msgstr "ново"
 
-#: fashionShop/items/views.py:123 templates/items/category.html:279
+#: fashionShop/items/views.py:124 templates/items/category.html:279
 #: templates/items/grid-item-card.html:43
 msgid "get"
 msgstr "вземи"
@@ -522,10 +514,6 @@ msgstr "Онлайн Връщане"
 #: fashionShop/sales/models.py:286
 msgid "Online Refunds"
 msgstr "Онлайн Връщания"
-
-#: fashionShop/sales/models.py:289
-msgid "Refund for order"
-msgstr "Връщане към поръчка"
 
 #: fashionShop/sales/views.py:31
 msgid "The item was not found."
@@ -884,8 +872,8 @@ msgid "Discounts up to"
 msgstr "Отстъпки до"
 
 #: templates/common/home.html:29
-msgid "Check out our new arrivals"
-msgstr "Разгледайте новите ни предложения"
+msgid "Check out our biggest discounts"
+msgstr "Вижте най-големите ни отстъпки"
 
 #: templates/common/home.html:30
 msgid "shop now"
@@ -1214,6 +1202,15 @@ msgstr "Номерът на Вашата поръчка е:"
 #: templates/sales/order.html:22
 msgid "We will contact you as soon as possible."
 msgstr "Ще се свържем с Вас при първа възможност."
+
+#~ msgid "items were set to collection"
+#~ msgstr "артикула бяха зададени към колекция"
+
+#~ msgid "Set collection to"
+#~ msgstr "Задай колекция"
+
+#~ msgid "Refund for order"
+#~ msgstr "Връщане към поръчка"
 
 #~ msgid "on everything!"
 #~ msgstr "на всичко!"
