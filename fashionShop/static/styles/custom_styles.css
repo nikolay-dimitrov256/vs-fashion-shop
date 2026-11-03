@@ -194,6 +194,12 @@
     }
 } */
 
+@media (max-width: 991px) {
+    .main_slider_content {
+        width: 80%;
+    }
+}
+
 @media (max-width: 479px) {
     .main_slider {
     background-position-x: 63%;

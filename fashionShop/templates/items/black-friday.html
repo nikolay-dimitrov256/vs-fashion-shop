@@ -1,0 +1,26 @@
+{% extends 'items/category.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+Оферти за Черен Петък
+{% endblock %}
+
+{% comment %}
+<meta name="title" content="Черен петък - Онлайн Цени | Вили Стил">
+<meta name="description" content="Вижте нашите оферти за Черен петък. За запитвания и поръчки - 0886531811">
+{% endcomment %}
+
+{% block breadcrumbs %}
+<li><a href="{% url 'home' %}">{% trans 'home'|capfirst %}</a></li>
+<li><a href="{% url 'all-items' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'clothes'|capfirst %}</a></li>
+<li class="active"><a href="{% url 'black-friday' %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{% trans 'black friday'|capfirst %}</a></li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "Black Friday offers" %}</h1>
+{% endblock %}
+
+{% block categories %}
+
+{% endblock %}
