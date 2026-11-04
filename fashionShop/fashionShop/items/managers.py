@@ -70,7 +70,7 @@ class ItemQuerySet(models.QuerySet):
 
     def black_friday(self):
 
-        return self.order_by('-black_percent')
+        return self.order_by('-black_percent', 'price')
 
 
 class ItemManager(models.Manager.from_queryset(ItemQuerySet)):
