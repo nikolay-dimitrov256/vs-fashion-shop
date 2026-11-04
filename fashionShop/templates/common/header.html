@@ -98,6 +98,9 @@
 							</li>
 							{% endif %}
 							<li><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
+							{% if is_black_friday %}
+							<li><a href="{% url 'black-friday' %}">{% trans 'black friday' %}</a></li>
+							{% endif %}
 							<li><a href="{% url 'new' %}">{% trans 'new' %}</a></li>
 							<li><a href="{% url 'dresses' %}">{% trans 'dresses' %}</a></li>
 							<li><a href="{% url 'blazers' %}">{% trans 'blazers' %}</a></li>
@@ -178,6 +181,9 @@
 		<nav class="mobile_nav">
 			<ul class="menu_top_nav">
 				<li class="menu_item"><a href="{% url 'home' %}">{% trans 'home' %}</a></li>
+				{% if is_black_friday %}
+				<li class="menu_item"><a href="{% url 'black-friday' %}">{% trans 'black friday' %}</a></li>
+				{% endif %}
 				<li class="menu_item"><a href="{% url 'new' %}">{% trans 'new' %}</a></li>
 				<li class="menu_item"><a href="{% url 'fall-winter' %}">{% trans 'fall/winter' %}</a></li>
 				<li class="menu_item"><a href="{% url 'spring-summer' %}">{% trans 'spring/summer' %}</a></li>

@@ -68,6 +68,10 @@ class ItemQuerySet(models.QuerySet):
 
         return self.filter(query)
 
+    def black_friday(self):
+
+        return self.order_by('-black_percent', 'price')
+
 
 class ItemManager(models.Manager.from_queryset(ItemQuerySet)):
     pass

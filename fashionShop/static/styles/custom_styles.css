@@ -149,7 +149,7 @@
 }
 
 /* Fixes the positioning on the main banner elements */
-.main_slider_content {
+/* .main_slider_content {
     text-align: right;
     width: 100%;
 }
@@ -191,6 +191,31 @@
 @media (max-width: 399px) {
     .main_slider_content .promo-text {
         width: 100%;
+    }
+} */
+
+@media (max-width: 991px) {
+    .main_slider_content {
+        width: 80%;
+    }
+}
+
+@media (max-width: 479px) {
+    .main_slider {
+    background-position-x: 63%;
+    margin-top: 20px;
+    }
+
+    .main_slider_content {
+        width: 60%;
+    }
+
+    .shop_now_button {
+        width: 110px;
+    }
+
+    .shop_now_button a {
+        font-size: 14px;
     }
 }
 /* Fixes the positioning on the main banner elements */

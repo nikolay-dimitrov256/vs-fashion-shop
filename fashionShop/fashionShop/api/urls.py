@@ -21,5 +21,6 @@ urlpatterns = [
         path('max/', views.MaxSizeListView.as_view(), name='api-max'),
         path('fall-winter/', views.FallWinterListView.as_view(), name='api-fall-winter'),
         path('spring-summer/', views.SpringSummerListView.as_view(), name='api-spring-summer'),
+        path('black-friday/', views.BlackFridayListView.as_view(), name='api-black-friday'),
     ])),
 ]

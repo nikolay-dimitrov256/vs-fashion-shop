@@ -13,21 +13,21 @@
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}?v=2">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}?v=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}?v=3">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}?v=2">
 {% endblock %}
 
 {% block content %}
 <!-- Slider -->
 
-<div class="main_slider" style="background-image:url({% static 'images/slider_1.jpg' %}?v=2)">
+<div class="main_slider" style="background-image:url({% static 'images/slider_1.jpg' %}?v=3)">
     <div class="container fill_height">
         <div class="row align-items-center fill_height">
             <div class="col">
                 <div class="main_slider_content">
                     {# <h6>Spring / Summer Collection 2017</h6> #}
-                    <p class="promo-text">{% trans 'Check out our new arrivals' %}</p>
-                    <div class="red_button shop_now_button"><a href="{% url 'new' %}">{% trans 'shop now' %}</a></div>
+                    <p class="promo-text">{% trans 'Check out our biggest discounts' %}</p>
+                    <div class="red_button shop_now_button"><a href="{% url 'black-friday' %}">{% trans 'shop now' %}</a></div>
                 </div>
             </div>
         </div>

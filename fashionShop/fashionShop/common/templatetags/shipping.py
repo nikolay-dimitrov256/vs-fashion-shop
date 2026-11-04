@@ -8,7 +8,7 @@ register = template.Library()
 @register.simple_tag
 def free_shipping(request):
     # currency = request.session.get('currency', 'bgn')
-    currency = 'bgn'
+    currency = 'eur'
 
     return FREE_DELIVERY_THRESHOLD.get(currency.upper())
 

@@ -27,6 +27,7 @@ urlpatterns = [
     path('max/', views.MaxSizeListView.as_view(), name='max-size'),
     path('fall-winter/', views.FallWinterListView.as_view(), name='fall-winter'),
     path('spring-summer/', views.SpringSummerListView.as_view(), name='spring-summer'),
+    path('black-friday', views.BlackFridayListView.as_view(), name='black-friday'),
     path('<slug:slug>/', include([
         path('', views.ItemDetailView.as_view(), name='item-details'),
     ]))

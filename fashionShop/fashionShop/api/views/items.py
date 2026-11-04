@@ -77,3 +77,12 @@ class SpringSummerListView(ItemsListView):
         items = items.spring_summer()
 
         return items
+
+
+class BlackFridayListView(ItemsListView):
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.black_friday()
+
+        return items

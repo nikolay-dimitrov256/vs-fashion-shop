@@ -832,7 +832,7 @@ section
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
-	margin-top: 150px;
+	margin-top: 130px;
 }
 .main_slider_content
 {
@@ -849,8 +849,8 @@ section
 	font-size: 72px;
 	font-weight: 400;
 	line-height: 1;
-	/* color: #282828; */
-	color: #fff;
+	color: #282828;
+	/* color: #fff; */
 }
 .red_button
 {

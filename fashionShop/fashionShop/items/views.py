@@ -660,3 +660,24 @@ class SpringSummerListView(ItemsListView):
     def meta_description(self):
         return ('Разгледайте предложенията за сезон пролет/лято на българския производител на дамски дрехи Вили Стил. '
                 'За запитвания и поръчки - 0886531811')
+
+
+class BlackFridayListView(ItemsListView):
+    template_name = 'items/black-friday.html'
+    view_name = 'black-friday'
+    endpoint = reverse_lazy('api-black-friday')
+
+    def get_queryset(self):
+        items = super().get_queryset()
+
+        items = items.black_friday()
+
+        return items
+
+    @property
+    def meta_title(self):
+        return 'Черен петък - Онлайн Цени | Вили Стил'
+
+    @property
+    def meta_description(self):
+        return 'Вижте нашите оферти за Черен петък. За запитвания и поръчки - 0886531811'
