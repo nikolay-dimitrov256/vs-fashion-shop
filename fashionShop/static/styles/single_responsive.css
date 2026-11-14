@@ -194,6 +194,10 @@
 	.desc-reversed .tab_text_block {
 		margin-left: 0;
 	}
+
+	.product_slider_container {
+		grid-template-columns: repeat(4, 1fr);
+	}
 }
 
 /************
@@ -276,6 +280,10 @@
 	.review-picture-overlay img {
 		height: auto;
 		width: 100%;
+	}
+
+	.product_slider_container {
+		grid-template-columns: repeat(3, 1fr);
 	}
 }
 
@@ -554,6 +562,10 @@
 	{
 		margin-top: 5px;
 		margin-bottom: 30px;
+	}
+
+	.product_slider_container {
+		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
