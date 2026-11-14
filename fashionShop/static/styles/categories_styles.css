@@ -1328,7 +1328,7 @@ section
 {
 	width: 25%;
 	/* height: 380px; */
-	height: 30em;
+	/* height: 30em; */
 	cursor: pointer;
 	padding-bottom: 4em;
 }
@@ -1403,11 +1403,16 @@ section
 	font-size: 16px;
 	color: #fe4c50;
 	font-weight: 600;
+
+	display: flex;
+		flex-wrap: wrap;
+		gap: 0.2em;
+		justify-content: space-evenly;
 }
 .product_price span
 {
 	font-size: 12px;
-	margin-left: 10px;
+	/* margin-left: 10px; */
 	color: #b5aec4;
 	text-decoration: line-through;
 }
