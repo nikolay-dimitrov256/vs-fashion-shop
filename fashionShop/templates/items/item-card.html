@@ -1,48 +1,48 @@
 {% load static %}
 {% load i18n %}
 
-<div class="owl-item product_slider_item">
-    <div class="product-item">
+<!-- <div class="owl-item product_slider_item"> -->
+<div class="product-item">
+    <div
+        {% if item.is_discounted %}
+        class="product discount"
+        {% else %}
+        class="product"
+        {% endif %}
+    >
+        <a href="{% url 'item-details' item.slug %}" class="product_image">
+            {% if item.pictures.all.first.image_url %}
+            <img src="{{ item.pictures.all.first.image_url }}" alt="продуктово изображение" title="{{ item.name }} | Вили Стил" loading="lazy">
+            {% else %}
+            <img src="{% static 'images/item.jpg' %}" alt="no image">
+            {% endif %}
+        </a>
         <div
             {% if item.is_discounted %}
-            class="product discount"
+            class="favorite favorite_left"
             {% else %}
-            class="product"
+            class="favorite"
             {% endif %}
-        >
-            <a href="{% url 'item-details' item.slug %}" class="product_image">
-                {% if item.pictures.all.first.image_url %}
-                <img src="{{ item.pictures.all.first.image_url }}" alt="продуктово изображение" title="{{ item.name }} | Вили Стил" loading="lazy">
+        ></div>
+        {% if is_black_friday %}
+        <div class="product_bubble product_bubble_right product_bubble_black d-flex flex-column align-items-center"><span>-{{ item.discount }} €</span></div>
+        {% elif item.is_discounted %}
+        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }} €</span></div>
+        {% elif item.is_new %}
+        <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+        {% endif %}
+        <div class="product_info">
+            <p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></p>
+            <div class="product_price">
+                {% if is_black_friday %}
+                {{ item.black_price }} €<span>{{ item.price }} €</span>
+                {% elif item.is_discounted %}
+                {{ item.discount_price }} €<span>{{ item.price }} €</span>
                 {% else %}
-                <img src="{% static 'images/item.jpg' %}" alt="no image">
+                {{ item.price }} €
                 {% endif %}
-            </a>
-            <div
-                {% if item.is_discounted %}
-                class="favorite favorite_left"
-                {% else %}
-                class="favorite"
-                {% endif %}
-            ></div>
-            {% if is_black_friday %}
-            <div class="product_bubble product_bubble_right product_bubble_black d-flex flex-column align-items-center"><span>-{{ item.discount }} €</span></div>
-            {% elif item.is_discounted %}
-            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-{{ item.discount }} €</span></div>
-            {% elif item.is_new %}
-            <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
-            {% endif %}
-            <div class="product_info">
-                <p class="product_name"><a href="{% url 'item-details' item.slug %}">{{ item.name }}</a></p>
-                <div class="product_price">
-                    {% if is_black_friday %}
-                    {{ item.black_price }} €<span>{{ item.price }} €</span>
-                    {% elif item.is_discounted %}
-                    {{ item.discount_price }} €<span>{{ item.price }} €</span>
-                    {% else %}
-                    {{ item.price }} €
-                    {% endif %}
-                </div>
             </div>
         </div>
     </div>
 </div>
+<!-- </div> -->

@@ -45,6 +45,7 @@
 
 #search-form.expand {
     display: flex;
+    z-index: 1;
 }
 
 #search-form input {

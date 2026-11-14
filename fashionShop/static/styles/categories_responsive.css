@@ -133,7 +133,7 @@
 	{
 		/* width: 33.33333333%; */
 		height: auto;
-		padding-bottom: 2em;
+		/* padding-bottom: 2em; */
 	}
 	.benefit_col
 	{
@@ -316,7 +316,7 @@
 	{
 		/* width: 50%; */
 		/* height: 420px; */
-		height: 34em;
+		/* height: 34em; */
 	}
 	.product
 	{
@@ -528,10 +528,6 @@
 	{
 		margin-top: 5px;
 		margin-bottom: 30px;
-	}
-
-	.product-grid {
-		grid-template-columns: 1fr;
 	}
 }
 

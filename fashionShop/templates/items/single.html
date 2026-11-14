@@ -31,8 +31,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}"> <!-- Added for carousel-->
 <link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/single_styles.css' %}?v=4">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/single_responsive.css' %}?v=2">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/single_styles.css' %}?v=5">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/single_responsive.css' %}?v=3">
 {% endblock %}
 
 {% block content %}
@@ -423,54 +423,6 @@
 
 {% include 'common/benefit.html' %}
 
-<!-- Other Colors -->
-{% if other_colors.count %}
-<div class="other_colors">
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <div class="section_title new_arrivals_title">
-                    <h2>{% trans 'This model in other colors:' %}</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="product_slider_container">
-                    <div class="owl-carousel owl-theme product_slider">
-                        {% for item in other_colors %}
-                            {% include 'items/item-card.html' with item=item %}
-                        {% endfor %}
-                    </div>
-                    <!-- Slider Navigation -->
-
-                    <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
-                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                    </div>
-                    <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
-                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
-{% comment %}
-<div class="container">
-    <div class="size-guide">
-        <img
-        {% if request.LANGUAGE_CODE == 'bg' %}
-        src="{% static 'images/size_guide_bg.jpg' %}"
-        {% elif request.LANGUAGE_CODE == 'en' %}
-        src="{% static 'images/size_guide_en.jpg' %}"
-        {% else %}
-        src="{% static 'images/size_guide_bg.jpg' %}"
-        {% endif %}
-        >
-    </div>
-</div>
-{% endcomment %}
 <!-- Tabs -->
 
 <div class="tabs_section_container">
@@ -512,7 +464,7 @@
                     {% else %}
                         <div class="desc_col">
                             <div class="tab_text_block">
-                                <p>{{ detail_picture.description }}</p>
+                                <p>{% if detail_picture.description %}{{ detail_picture.description }}{% endif %}</p>
                             </div>
                             <div class="tab_image">
                                 <img src="{{ detail_picture.image_url }}" alt="{{ object.name }}" title="{{ object.name }} | Вили Стил" loading="lazy">
@@ -663,6 +615,32 @@
 
 </div>
 
+<!-- Other Colors -->
+{% if other_colors.count %}
+<div class="other_colors">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>{% trans 'This model in other colors:' %}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product_slider_container">
+
+                {% for item in other_colors %}
+                    {% include 'items/item-card.html' with item=item %}
+                {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <!-- Linked Items -->
 {% if object.linked_items.count %}
 <div class="linked_items">
@@ -677,19 +655,11 @@
         <div class="row">
             <div class="col">
                 <div class="product_slider_container">
-                    <div class="owl-carousel owl-theme product_slider">
-                        {% for item in object.linked_items.all %}
-                            {% include 'items/item-card.html' with item=item %}
-                        {% endfor %}
-                    </div>
-                    <!-- Slider Navigation -->
 
-                    <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
-                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                    </div>
-                    <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
-                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                    </div>
+                {% for item in object.linked_items.all %}
+                    {% include 'items/item-card.html' with item=item %}
+                {% endfor %}
+
                 </div>
             </div>
         </div>

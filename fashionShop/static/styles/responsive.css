@@ -24,7 +24,14 @@
 
 @media only screen and (max-width: 1600px)
 {
-	
+	.product_price {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.2em;
+		& span {
+			margin-left: 0;
+		}
+	}
 }
 
 /************
@@ -707,10 +714,6 @@
 	{
 		margin-top: 5px;
 		margin-bottom: 30px;
-	}
-
-	.product-grid {
-		grid-template-columns: 1fr;
 	}
 }
 
