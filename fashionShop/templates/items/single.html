@@ -512,7 +512,7 @@
                     {% else %}
                         <div class="desc_col">
                             <div class="tab_text_block">
-                                <p>{{ detail_picture.description }}</p>
+                                <p>{% if detail_picture.description %}{{ detail_picture.description }}{% endif %}</p>
                             </div>
                             <div class="tab_image">
                                 <img src="{{ detail_picture.image_url }}" alt="{{ object.name }}" title="{{ object.name }} | Вили Стил" loading="lazy">
